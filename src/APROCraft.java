@@ -38,7 +38,7 @@ public class APROCraft {
             long timeNow = System.nanoTime();
             double elapsed = timeNow - timePrev;
 
-            while(elapsed < ns) {
+            if (elapsed > ns) {
                 game.update();
                 timePrev += ns;
             }
@@ -46,7 +46,11 @@ public class APROCraft {
             game.render();
             frames ++;
 
-            
+            if (System.currentTimeMillis() - timer > 1000) {
+                System.out.println("FPS: " + frames);
+                frames = 0;
+                timer += 1000;
+            }
 
             Display.update();
         }
