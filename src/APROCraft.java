@@ -20,7 +20,7 @@ public class APROCraft {
     Game game;
 
     public APROCraft() {
-
+        game = new Game();
     }
 
     public void update() {
@@ -85,6 +85,8 @@ public class APROCraft {
             } else {
                 aprocraft.render();
                 frames++;
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glfwSwapBuffers(window);
             }
 
             if (System.currentTimeMillis() - timer > 1000) {
@@ -94,11 +96,7 @@ public class APROCraft {
                 timer += 1000;
             }
 
-            //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            //glfwSwapBuffers(window);
-
-            //glfwPollEvents();
+            glfwPollEvents();
         }
 
         glfwFreeCallbacks(window);
