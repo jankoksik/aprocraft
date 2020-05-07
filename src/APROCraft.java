@@ -33,6 +33,7 @@ public class APROCraft {
         double ns = 1_000_000_000 / FPS;
 
         int frames = 0;
+        int ticks = 0;
 
         while(!Display.isCloseRequested()) {
             long timeNow = System.nanoTime();
@@ -40,15 +41,17 @@ public class APROCraft {
 
             if (elapsed > ns) {
                 game.update();
+                ticks ++;
                 timePrev += ns;
+            } else {
+                game.render();
+                frames++;
             }
 
-            game.render();
-            frames ++;
-
             if (System.currentTimeMillis() - timer > 1000) {
-                System.out.println("FPS: " + frames);
+                System.out.println("FPS: " + frames + " UPS: " + ticks);
                 frames = 0;
+                ticks = 0;
                 timer += 1000;
             }
 
