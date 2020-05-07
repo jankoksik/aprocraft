@@ -12,13 +12,20 @@ public class Chunk {
     public static final int SIZE = 16;
     public static final int HEIGHT = 128;
 
+    private int x, y;
+
     private static FloatBuffer fb;
     private int vbo;
+    private int fbSize;
 
     private List<Block> blocks;
 
-    public Chunk() {
+    public Chunk(int x, int y) {
+        this.x = x;
+        this.y = y;
+
         blocks = new ArrayList<Block>();
+
         generate();
         createBuffer();
     }
@@ -31,7 +38,11 @@ public class Chunk {
                 for(int k = 0; k < HEIGHT; k ++) {
                     Block b = Block.GRASS;
                     blocks.add(b);
+
+
+
                     fb.put(b.getData(i, j, k));
+                    fbSize += 6*4;
                 }
 
         fb.flip();
@@ -50,5 +61,15 @@ public class Chunk {
 
     public void render() {
         glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 7 * 4, 0);
+        glVertexAttribPointer(1, 4, GL_FLOAT, false, 7 * 4, 12);
+
+        glDrawArrays(GL_QUADS, 0, fbSize);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
     }
 }

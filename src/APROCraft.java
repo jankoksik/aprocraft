@@ -28,6 +28,14 @@ public class APROCraft {
     }
 
     public void render() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+
         game.render();
     }
 
@@ -85,7 +93,6 @@ public class APROCraft {
             } else {
                 aprocraft.render();
                 frames++;
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 glfwSwapBuffers(window);
             }
 
