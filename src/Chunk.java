@@ -1,3 +1,7 @@
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -29,10 +33,15 @@ public class Chunk {
                     blocks.add(b);
                     fb.put(b.getData(i, j, k));
                 }
+
+        fb.flip();
     }
 
     private void createBuffer() {
+        vbo = glGenBuffers();
 
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, fb, GL_STATIC_DRAW);
     }
 
     public void update() {
@@ -40,6 +49,6 @@ public class Chunk {
     }
 
     public void render() {
-
+        glEnableVertexAttribArray(0);
     }
 }

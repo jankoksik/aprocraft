@@ -1,6 +1,14 @@
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryStack;
+
+import java.nio.IntBuffer;
+
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class APROCraft {
     public static final String VERSION = "0.0.1";
@@ -26,13 +34,38 @@ public class APROCraft {
     public static void main(String[] args) {
         APROCraft aprocraft = new APROCraft();
 
-        try {
-            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-            Display.setTitle("APROCraft v" + VERSION);
-            Display.create();
-        } catch (LWJGLException e) {
-            e.printStackTrace();
+        if ( !glfwInit() )
+            throw new IllegalStateException("Unable to initialize GLFW");
+
+        glfwDefaultWindowHints();
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+        long window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+        if ( window == NULL )
+            throw new RuntimeException("Failed to create the GLFW window");
+
+        try ( MemoryStack stack = stackPush() ) {
+            IntBuffer pWidth = stack.mallocInt(1);
+            IntBuffer pHeight = stack.mallocInt(1);
+
+            glfwGetWindowSize(window, pWidth, pHeight);
+
+            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+            glfwSetWindowPos(
+                    window,
+                    (vidmode.width() - pWidth.get(0)) / 2,
+                    (vidmode.height() - pHeight.get(0)) / 2
+            );
         }
+
+        glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
+
+        glfwShowWindow(window);
+
+        GL.createCapabilities();
 
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -41,7 +74,7 @@ public class APROCraft {
         int frames = 0;
         int ticks = 0;
 
-        while(!Display.isCloseRequested()) {
+        while(!glfwWindowShouldClose(window)) {
             long timeNow = System.nanoTime();
             double elapsed = timeNow - timePrev;
 
@@ -61,10 +94,19 @@ public class APROCraft {
                 timer += 1000;
             }
 
-            Display.update();
+            //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            //glfwSwapBuffers(window);
+
+            //glfwPollEvents();
         }
 
-        Display.destroy();
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
+
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
+
         System.exit(0);
     }
 }
