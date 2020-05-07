@@ -1,4 +1,6 @@
 public abstract class Block {
+    public static final Block GRASS = new BlockGrass();
+
     private RGB color;
     private float size;
 
