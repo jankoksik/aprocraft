@@ -1,5 +1,5 @@
-public class Game {
-    public Game() {
+public class World {
+    public World() {
 
     }
 
