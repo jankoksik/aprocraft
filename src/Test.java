@@ -3,7 +3,13 @@ import  static  org.lwjgl.opengl.GL11.*;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.json.simple.parser.ParseException;
 import org.lwjgl.opengl.GL;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Test {
 
@@ -16,6 +22,52 @@ public class Test {
         final int HEIGHT = 480;
         final int WIDTH = 640;
         long win = glfwCreateWindow(WIDTH, HEIGHT, "Minecraft v.0.0.1", 0,0);
+
+        /* DEFAULT SETTINGS
+        //MOUSE
+        Controls.setAttack(GLFW_MOUSE_BUTTON_1);
+        Controls.setPlace(GLFW_MOUSE_BUTTON_3);
+        //FLY
+        Controls.setDown(GLFW_KEY_DOWN);
+        Controls.setUp(GLFW_KEY_UP);
+        //W S A D
+        Controls.setForward(GLFW_KEY_W);
+        Controls.setBackward(GLFW_KEY_S);
+        Controls.setLeft(GLFW_KEY_A);
+        Controls.setRight(GLFW_KEY_D);
+        //JUMP
+        Controls.setJump(GLFW_KEY_SPACE);
+        // OTHER
+        Controls.setDrop(GLFW_KEY_Q);
+        Controls.setUse(GLFW_KEY_E);
+        Controls.setCrouch(GLFW_KEY_LEFT_CONTROL);
+
+
+
+
+        SAVE SETTINGS
+        try {
+            SaveNReadJson.SaveControls("Controls");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         */
+        try {
+            HashMap<String, Integer>  cntrl = SaveNReadJson.readControls("Controls");
+            for(Map.Entry<String, Integer> entry : cntrl.entrySet()) {
+                String key = entry.getKey();
+                Integer value = entry.getValue();
+                System.out.println(key + " : " + value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         glfwShowWindow(win);
         glfwMakeContextCurrent(win);
