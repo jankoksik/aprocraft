@@ -1,4 +1,5 @@
 import org.lwjgl.BufferUtils;
+import static org.lwjgl.opengl.GL13.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -73,8 +74,11 @@ public class Texture {
 
     }
 
-    public void bind(){
-        glBindTexture(GL_TEXTURE_2D,id);
+    public void bind(int sampler){
+        if(sampler >= 0 && sampler <= 31) {
+            glActiveTexture(GL_TEXTURE0 + sampler);
+            glBindTexture(GL_TEXTURE_2D, id);
+        }
     }
     public int getWidth() {
         return width;
