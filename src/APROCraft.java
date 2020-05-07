@@ -9,16 +9,22 @@ public class APROCraft {
     public static final int HEIGHT = 480;
     public static final float FPS = 60.0f;
 
-    public void update() {
+    Game game;
 
+    public APROCraft() {
+
+    }
+
+    public void update() {
+        game.update();
     }
 
     public void render() {
-
+        game.render();
     }
 
     public static void main(String[] args) {
-        APROCraft game = new APROCraft();
+        APROCraft aprocraft = new APROCraft();
 
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -40,11 +46,11 @@ public class APROCraft {
             double elapsed = timeNow - timePrev;
 
             if (elapsed > ns) {
-                game.update();
+                aprocraft.update();
                 ticks ++;
                 timePrev += ns;
             } else {
-                game.render();
+                aprocraft.render();
                 frames++;
             }
 
