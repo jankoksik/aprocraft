@@ -22,8 +22,8 @@ public class Test {
             System.exit(1);
         }
 
-        final int HEIGHT = 480;
-        final int WIDTH = 640;
+        final int HEIGHT = 480*3;
+        final int WIDTH = 640*3;
         long win = glfwCreateWindow(WIDTH, HEIGHT, "Minecraft v.0.0.1", 0,0);
 
         /* DEFAULT SETTINGS
@@ -116,6 +116,7 @@ public class Test {
         float Xcam = 0;
         float Ycam = 0;
         float Zcam = 0;
+        float rotatey = 0;
         while(glfwWindowShouldClose(win) != true)
         {
             target = scale;
@@ -125,29 +126,44 @@ public class Test {
             }
             if(glfwGetKey(win, Controls.getUp())==GL_TRUE)
             {
-                Ycam -= 0.01f;
+                Ycam -= 0.0001f;
             }
             if(glfwGetKey(win, Controls.getDown())==GL_TRUE)
             {
-                Ycam += 0.01f;
+                Ycam += 0.0001f;
             }
             if(glfwGetKey(win, Controls.getRight())==GL_TRUE)
             {
-                Xcam -= 0.01f;
+                Xcam -= 0.0001f;
             }
             if(glfwGetKey(win,Controls.getLeft())==GL_TRUE)
             {
-                Xcam += 0.01f;
+                Xcam += 0.0001f;
             }
             if(glfwGetKey(win, Controls.getBackward())==GL_TRUE)
             {
-               // Zcam -= 0.01f;
+                Zcam -= 0.0001f;
             }
             if(glfwGetKey(win, Controls.getForward())==GL_TRUE)
             {
-               // Zcam += 0.01f;
+                Zcam += 0.0001f;
             }
+            if(glfwGetKey(win, GLFW_KEY_LEFT)==GL_TRUE)
+            {
+                camera.addRotation(0,-0.001f, 0);
+            }
+            if(glfwGetKey(win, GLFW_KEY_RIGHT)==GL_TRUE)
+            {
+               camera.addRotation(0,0.001f, 0);
+            }
+            if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
+            {
+                camera.setPosition(new Vector3f(Xcam, Ycam, Zcam));
+                camera.setRotation(new Vector3f(0,rotatey + 90,0));
+            }
+
             camera.setPosition(new Vector3f(Xcam, Ycam, Zcam));
+            camera.setRotation(new Vector3f(0,rotatey,0));
 
 
 
@@ -166,7 +182,7 @@ public class Test {
 
             shader.bind();
             shader.setUniform("sampler", 0);
-            shader.setUniform("projection", camera.getProjection().mul(target));
+            shader.setUniform("projection", camera.getViewMatrix());
             dirt.bind(0);
             model.render();
             stefan.render();
