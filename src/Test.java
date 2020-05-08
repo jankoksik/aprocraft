@@ -86,6 +86,9 @@ public class Test {
 
         //Texture dirt = new Texture("./resources/DirtGrassSide.png");
 
+
+        glEnable(GL_DEPTH_TEST);
+
         stefan = new Chunk(0,0);
         angle = 0;
 
@@ -128,39 +131,39 @@ public class Test {
             }
             if(glfwGetKey(win, Controls.getUp())==GL_TRUE)
             {
-                Ycam -= 0.001f;
+                Ycam -= 0.01f;
             }
             if(glfwGetKey(win, Controls.getDown())==GL_TRUE)
             {
-                Ycam += 0.001f;
+                Ycam += 0.01f;
             }
             if(glfwGetKey(win, Controls.getRight())==GL_TRUE)
             {
-                Xcam -= 0.001f;
+                Xcam -= 0.01f;
                 //yRot -= 0.01f;
             }
             if(glfwGetKey(win,Controls.getLeft())==GL_TRUE)
             {
-                Xcam += 0.001f;
+                Xcam += 0.01f;
                 //yRot -= 0.01f;
             }
             if(glfwGetKey(win, Controls.getBackward())==GL_TRUE)
             {
-                Zcam -= 0.001f;
+                Zcam -= 0.01f;
             }
             if(glfwGetKey(win, Controls.getForward())==GL_TRUE)
             {
-                Zcam += 0.001f;
+                Zcam += 0.01f;
             }
             if(glfwGetKey(win, GLFW_KEY_LEFT)==GL_TRUE)
             {
                 camera.addRotation(0,-0.001f, 0);
-                yRot -= 0.01f;
+                yRot -= 0.1f;
             }
             if(glfwGetKey(win, GLFW_KEY_RIGHT)==GL_TRUE)
             {
                camera.addRotation(0,0.001f, 0);
-                yRot += 0.01f;
+                yRot += 0.1f;
             }
             if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
             {
