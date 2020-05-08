@@ -1,10 +1,18 @@
-#version 330
+#version 120
+attribute vec3 vertices;
+attribute vec2 textures;
 
-layout (location = 0) in vec3 in_position;
-layout (location = 1) in vec4 in_color;
+varying vec2 tex_coords;
 
-out vec4 color;
+uniform mat4 projection;
 
-void main() {
-    color = in_color;
+varying vec4 fragPos;
+varying vec4 view;
+
+void main(){
+    tex_coords = textures;
+    gl_Position = projection * vec4(vertices, 1);
+    fragPos = gl_Vertex;
+    view = gl_ModelViewMatrix * fragPos;
+    gl_Position = ftransform();
 }

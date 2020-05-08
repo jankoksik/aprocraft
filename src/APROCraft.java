@@ -17,30 +17,13 @@ public class APROCraft {
     public static final int HEIGHT = 480;
     public static final float FPS = 60.0f;
 
-    Game game;
+    //Game game;
+    Chunk c;
+
+    static long window;
 
     public APROCraft() {
-        game = new Game();
-    }
-
-    public void update() {
-        game.update();
-    }
-
-    public void render() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-
-
-        game.render();
-    }
-
-    public static void main(String[] args) {
-        APROCraft aprocraft = new APROCraft();
+        //game = new Game();
 
         if ( !glfwInit() )
             throw new IllegalStateException("Unable to initialize GLFW");
@@ -49,24 +32,9 @@ public class APROCraft {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-        long window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
-
-        try ( MemoryStack stack = stackPush() ) {
-            IntBuffer pWidth = stack.mallocInt(1);
-            IntBuffer pHeight = stack.mallocInt(1);
-
-            glfwGetWindowSize(window, pWidth, pHeight);
-
-            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-            glfwSetWindowPos(
-                    window,
-                    (vidmode.width() - pWidth.get(0)) / 2,
-                    (vidmode.height() - pHeight.get(0)) / 2
-            );
-        }
 
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
@@ -74,6 +42,42 @@ public class APROCraft {
         glfwShowWindow(window);
 
         GL.createCapabilities();
+
+        c = new Chunk(0, 0);
+
+
+    }
+
+    public void update() {
+        //game.update();
+
+    }
+
+    public static void setPerspective(float fovy, float aspect, float near, float far) {
+        float bottom = -near * (float) Math.tan(fovy / 2);
+        float top = -bottom;
+        float left = aspect * bottom;
+        float right = -left;
+        glFrustum(left, right, bottom, top, near, far);
+    }
+
+    public void render() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.1f, 0.2f, 0.7f, 1);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        setPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.1f, 1000.0f);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        c.render();
+
+        //game.render();
+    }
+
+    public static void main(String[] args) {
+        APROCraft aprocraft = new APROCraft();
 
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
