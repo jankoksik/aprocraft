@@ -1,15 +1,10 @@
-#version 120
-attribute vec3 vertices;
-attribute vec2 textures;
+#version 330
 
-varying vec2 tex_coords;
+layout (location = 0) in vec3 in_position;
+layout (location = 1) in vec4 in_color;
 
-uniform mat4 projection;
+out vec4 color;
 
-void main(){
-    tex_coords = textures;
-    gl_Position = projection * vec4(vertices, 1);
-
-
+void main() {
+    color = in_color;
 }
-
