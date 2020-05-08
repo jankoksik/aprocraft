@@ -180,7 +180,7 @@ public class Test {
 
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            gluPerspective(70.0f, (float)(WIDTH/HEIGHT), 0.1f, 1000.0f);
+            gluPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.1f, 1000.0f);
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
 
