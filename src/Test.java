@@ -14,6 +14,7 @@ import java.util.Map;
 public class Test {
 
     Chunk stefan;
+    float angle;
 
     public Test(){
         if (glfwInit() != true){
@@ -85,6 +86,7 @@ public class Test {
         Texture dirt = new Texture("./resources/DirtGrassSide.png");
 
         stefan = new Chunk(0,0);
+        angle = 0;
 
         float[] vertices =  new float[]{
                 -0.5f, 0.5f, 0, // gora lewo 0
@@ -152,7 +154,16 @@ public class Test {
 
             glfwPollEvents();
 
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+
+            glRotatef(angle, 0, 1, 0);
+            angle++;
+
             shader.bind();
             shader.setUniform("sampler", 0);
             shader.setUniform("projection", camera.getProjection().mul(target));

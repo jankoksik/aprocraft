@@ -31,7 +31,7 @@ public class Chunk {
     }
 
     private void generate() {
-        fb = BufferUtils.createFloatBuffer(SIZE*SIZE*HEIGHT*6*4*3);
+        fb = BufferUtils.createFloatBuffer(SIZE*SIZE*HEIGHT*6*4*7);
 
         for(int i = 0; i < SIZE; i ++)
             for(int j = 0; j < SIZE; j ++)
