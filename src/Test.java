@@ -57,6 +57,7 @@ public class Test {
          */
         try {
             HashMap<String, Integer>  cntrl = SaveNReadJson.readControls("Controls");
+            SaveNReadJson.applyCOntrols(cntrl);
             for(Map.Entry<String, Integer> entry : cntrl.entrySet()) {
                 String key = entry.getKey();
                 Integer value = entry.getValue();
@@ -67,6 +68,7 @@ public class Test {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
 
 
         glfwShowWindow(win);
@@ -116,27 +118,27 @@ public class Test {
             {
                 glfwSetWindowShouldClose(win, true);
             }
-            if(glfwGetKey(win, GLFW_KEY_SPACE)==GL_TRUE)
+            if(glfwGetKey(win, Controls.getUp())==GL_TRUE)
             {
                 Ycam -= 0.01f;
             }
-            if(glfwGetKey(win, GLFW_KEY_LEFT_SHIFT)==GL_TRUE)
+            if(glfwGetKey(win, Controls.getDown())==GL_TRUE)
             {
                 Ycam += 0.01f;
             }
-            if(glfwGetKey(win, GLFW_KEY_D)==GL_TRUE)
+            if(glfwGetKey(win, Controls.getRight())==GL_TRUE)
             {
                 Xcam -= 0.01f;
             }
-            if(glfwGetKey(win, GLFW_KEY_A)==GL_TRUE)
+            if(glfwGetKey(win,Controls.getLeft())==GL_TRUE)
             {
                 Xcam += 0.01f;
             }
-            if(glfwGetKey(win, GLFW_KEY_S)==GL_TRUE)
+            if(glfwGetKey(win, Controls.getBackward())==GL_TRUE)
             {
                // Zcam -= 0.01f;
             }
-            if(glfwGetKey(win, GLFW_KEY_W)==GL_TRUE)
+            if(glfwGetKey(win, Controls.getForward())==GL_TRUE)
             {
                // Zcam += 0.01f;
             }

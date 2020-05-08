@@ -42,6 +42,26 @@ public class SaveNReadJson {
         }
         return  controls;
     }
+
+    public static void applyCOntrols(HashMap<String, Integer> ControlsMap){
+        Controls.setUse(ControlsMap.get("use"));
+        Controls.setDrop(ControlsMap.get("drop"));
+        Controls.setForward(ControlsMap.get("forward"));
+        Controls.setSprint(ControlsMap.get("sprint"));
+        Controls.setDestroy(ControlsMap.get("destroy"));
+        Controls.setRight(ControlsMap.get("right"));
+        Controls.setInventory(ControlsMap.get("inventory"));
+        Controls.setDown(ControlsMap.get("down"));
+        Controls.setNextItemInInventory(ControlsMap.get("NextItemInInventory"));
+        Controls.setPrevItemInInventory(ControlsMap.get("PrevItemInInventory"));
+        Controls.setCrouch(ControlsMap.get("crouch"));
+        Controls.setLeft(ControlsMap.get("left"));
+        Controls.setAttack(ControlsMap.get("attack"));
+        Controls.setBackward(ControlsMap.get("backward"));
+        Controls.setUp(ControlsMap.get("up"));
+        Controls.setPlace(ControlsMap.get("place"));
+        Controls.setJump(ControlsMap.get("jump"));
+    }
     public static void SaveControls(String filename) throws IllegalAccessException, FileNotFoundException {
         JSONObject jo = new JSONObject();
         Field fld[] = Controls.class.getDeclaredFields();
