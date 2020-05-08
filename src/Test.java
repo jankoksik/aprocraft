@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class Test {
 
+    Chunk stefan;
+
     public Test(){
         if (glfwInit() != true){
             System.err.println("GLFW sie zepsul");
@@ -82,6 +84,7 @@ public class Test {
 
         Texture dirt = new Texture("./resources/DirtGrassSide.png");
 
+        stefan = new Chunk(0,0);
 
         float[] vertices =  new float[]{
                 -0.5f, 0.5f, 0, // gora lewo 0
@@ -155,6 +158,7 @@ public class Test {
             shader.setUniform("projection", camera.getProjection().mul(target));
             dirt.bind(0);
             model.render();
+            stefan.render();
 
 
             glfwSwapBuffers(win);

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk {
-    public static final int SIZE = 16;
-    public static final int HEIGHT = 128;
+    public static final int SIZE = 32;
+    public static final int HEIGHT = 32;
 
     private int x, y;
 
