@@ -2,6 +2,9 @@ public abstract class Blocks {
     public static final Block GRASS = new GrassBlock();
     public static final Block DIRT = new DirtBlock();
     public static final Block STONE = new StoneBlock();
+    public static final Block LOG = new LogBlock();
+    public static final Block LEAVES = new LeavesBlock();
+    public static final Block BEDROCK = new BedrockBlock();
 }
 
 class GrassBlock extends Block {
@@ -31,5 +34,11 @@ class LogBlock extends Block {
 class LeavesBlock extends Block {
     public LeavesBlock() {
         super(new RGB(0.0f, 0.4f, 0.0f));
+    }
+}
+
+class BedrockBlock extends Block {
+    public BedrockBlock() {
+        super(new RGB(0.1f, 0.1f, 0.1f));
     }
 }

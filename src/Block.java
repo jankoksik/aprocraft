@@ -1,9 +1,10 @@
 public abstract class Block {
     private static int CURRENT_ID = 0;
 
+    private int id;
     private RGB color;
     private float size;
-    private int id;
+    private float durability;
 
     private float[] colorData;
 
@@ -13,6 +14,7 @@ public abstract class Block {
 
         this.color = color;
         size = 1f;
+        durability = 1f;
 
         colorData = new float[] {
                 //back
