@@ -8,7 +8,7 @@ public class World {
     private Chunk[][] chunks;
 
     public World() {
-        generator = new Generator(new Random().nextLong(), 16, 8);
+        generator = new Generator(new Random().nextLong(), 24, 12);
 
         chunks = new Chunk[SIZE][SIZE];
 

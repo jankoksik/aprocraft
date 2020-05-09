@@ -1,6 +1,7 @@
 import static org.lwjgl.glfw.GLFW.*;
-import  static  org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.*;
 
+import org.joml.Math;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.json.simple.parser.ParseException;
@@ -15,15 +16,15 @@ import java.util.Random;
 public class Test {
 
     public Test() {
-        if (glfwInit() != true){
+        if (glfwInit() != true) {
             System.err.println("GLFW sie zepsul");
             System.exit(1);
         }
 
-        final int WIDTH = 640*2;
-        final int HEIGHT = 480*2;
+        final int WIDTH = 640 * 2;
+        final int HEIGHT = 480 * 2;
 
-        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + APROCraft.VERSION, 0,0);
+        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + APROCraft.VERSION, 0, 0);
 
         /* DEFAULT SETTINGS
         //MOUSE
@@ -58,10 +59,14 @@ public class Test {
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");
         Inventory eqi = new Inventory(3, 10);
-        if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        if (eqi.addItem(0)) {
+            System.out.println("dodano pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-         //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
@@ -69,22 +74,25 @@ public class Test {
         // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
 
         TestLogLabel("Eq add many");
-        if(eqi.addItem(0, 7, true)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        if (eqi.addItem(0, 7, true)) {
+            System.out.println("dodano pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
 
 
         // testowe wypisanie eq
 
         TestLogLabel("Eq content");
-        for(Item i : eqi.getEq())
-        {
+        for (Item i : eqi.getEq()) {
             System.out.println(i.getId() + " : " + i.getSize());
         }
         TestLogLabel("Controls read");
 
         try {
-            HashMap<String, Integer>  cntrl = SaveNReadJson.readControls("Controls");
+            HashMap<String, Integer> cntrl = SaveNReadJson.readControls("Controls");
             SaveNReadJson.applyCOntrols(cntrl);
-            for(Map.Entry<String, Integer> entry : cntrl.entrySet()) {
+            for (Map.Entry<String, Integer> entry : cntrl.entrySet()) {
                 String key = entry.getKey();
                 Integer value = entry.getValue();
                 System.out.println(key + " : " + value);
@@ -109,7 +117,7 @@ public class Test {
         //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
         World stefan = new World();
 
-        float[] vertices =  new float[]{
+        /*float[] vertices =  new float[]{
                 -0.5f, 0.5f, 0, // gora lewo 0
                 0.5f, 0.5f, 0,  //gora prawo 1
                 0.5f, -0.5f, 0, //dol prawo  2
@@ -125,7 +133,7 @@ public class Test {
         int[] indices = new int[] {
                 0,1,2,
                 2,3,0
-        };
+        };*/
 
         //Model model = new Model(vertices, texture, indices);
         //Shader shader = new Shader("shaderTest");
@@ -133,10 +141,10 @@ public class Test {
 
         Matrix4f target = new Matrix4f();
 
-       // glClearColor(0,0,0,0);
-        float Xcam = 0;
-        float Ycam = 0;
-        float Zcam = -5;
+        // glClearColor(0,0,0,0);
+        float xCam = 0;
+        float yCam = 0;
+        float zCam = -5;
         float rotatey = 0;
         float yRot = 0;
         float camSpeed = 0.1f;
@@ -151,64 +159,58 @@ public class Test {
 
         glEnable(GL_DEPTH_TEST);
 
-        while(glfwWindowShouldClose(win) != true)
-        {
+        while (glfwWindowShouldClose(win) != true) {
             glfwPollEvents();
 
             long timeNow = System.nanoTime();
             double elapsed = timeNow - timePrev;
 
             if (elapsed > ns) {
-                if(glfwGetKey(win, GLFW_KEY_ESCAPE)==GL_TRUE)
-                {
+                if (glfwGetKey(win, GLFW_KEY_ESCAPE) == GL_TRUE)
                     glfwSetWindowShouldClose(win, true);
+
+                if (glfwGetKey(win, Controls.getUp()) == GL_TRUE)
+                    yCam -= camSpeed;
+
+                if (glfwGetKey(win, Controls.getDown()) == GL_TRUE)
+                    yCam += camSpeed;
+
+                if (glfwGetKey(win, Controls.getRight()) == GL_TRUE) {
+                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot + 90));
+                    zCam += camSpeed * Math.cos(Math.toRadians(yRot + 90));
                 }
-                if(glfwGetKey(win, Controls.getUp())==GL_TRUE)
-                {
-                    Ycam -= camSpeed;
+
+                if (glfwGetKey(win, Controls.getLeft()) == GL_TRUE) {
+                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot - 90));
+                    zCam += camSpeed * Math.cos(Math.toRadians(yRot - 90));
                 }
-                if(glfwGetKey(win, Controls.getDown())==GL_TRUE)
-                {
-                    Ycam += camSpeed;
+
+                if (glfwGetKey(win, Controls.getForward()) == GL_TRUE) {
+                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot));
+                    zCam += camSpeed * Math.cos(Math.toRadians(yRot));
                 }
-                if(glfwGetKey(win, Controls.getRight())==GL_TRUE)
-                {
-                    Xcam -= camSpeed;
-                    //yRot -= 0.01f;
+
+                if (glfwGetKey(win, Controls.getBackward()) == GL_TRUE) {
+                    xCam += camSpeed * Math.sin(Math.toRadians(yRot));
+                    zCam -= camSpeed * Math.cos(Math.toRadians(yRot));
                 }
-                if(glfwGetKey(win,Controls.getLeft())==GL_TRUE)
+
+                if (glfwGetKey(win, GLFW_KEY_LEFT) == GL_TRUE)
+                    yRot -= 8 * camSpeed;
+
+                if (glfwGetKey(win, GLFW_KEY_RIGHT) == GL_TRUE)
+                    yRot += 8 * camSpeed;
+
+                /*if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
                 {
-                    Xcam += camSpeed;
-                    //yRot -= 0.01f;
-                }
-                if(glfwGetKey(win, Controls.getBackward())==GL_TRUE)
-                {
-                    Zcam -= camSpeed;
-                }
-                if(glfwGetKey(win, Controls.getForward())==GL_TRUE)
-                {
-                    Zcam += camSpeed;
-                }
-                if(glfwGetKey(win, GLFW_KEY_LEFT)==GL_TRUE)
-                {
-                    camera.addRotation(0,-0.001f, 0);
-                    yRot += 4*camSpeed;
-                }
-                if(glfwGetKey(win, GLFW_KEY_RIGHT)==GL_TRUE)
-                {
-                    camera.addRotation(0,0.001f, 0);
-                    yRot -= 4*camSpeed;
-                }
-                if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
-                {
-                    camera.setPosition(new Vector3f(Xcam, Ycam, Zcam));
+                    camera.setPosition(new Vector3f(xCam, yCam, zCam));
                     camera.setRotation(new Vector3f(0,rotatey + 90,0));
                 }
 
-                camera.setPosition(new Vector3f(Xcam, Ycam, Zcam));
-                camera.setRotation(new Vector3f(0,rotatey,0));
+                camera.setPosition(new Vector3f(xCam, yCam, zCam));
+                camera.setRotation(new Vector3f(0,rotatey,0));*/
 
-                ticks ++;
+                ticks++;
                 timePrev += ns;
             } else {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -216,12 +218,12 @@ public class Test {
 
                 glMatrixMode(GL_PROJECTION);
                 glLoadIdentity();
-                gluPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.3f, 1000.0f);
+                gluPerspective(70.0f, ((float) WIDTH / (float) HEIGHT), 0.3f, 1000.0f);
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
 
-                glTranslatef(Xcam, Ycam, Zcam);
                 glRotatef(yRot, 0, 1, 0);
+                glTranslatef(xCam, yCam, zCam);
 
                 //shader.bind();
                 //shader.setUniform("sampler", 0);
@@ -239,44 +241,6 @@ public class Test {
                 ticks = 0;
                 timer += 1000;
             }
-
-
-            /*glColor3f(0.5f,0.5f,1.0f);
-
-            glBegin(GL_QUADS);
-            glColor3f(1.0f,1.0f,0.0f);
-            glVertex3f( 1.0f, 1.0f,-1.0f);
-            glVertex3f(-1.0f, 1.0f,-1.0f);
-            glVertex3f(-1.0f, 1.0f, 1.0f);
-            glVertex3f( 1.0f, 1.0f, 1.0f);
-            glColor3f(1.0f,0.5f,0.0f);
-            glVertex3f( 1.0f,-1.0f, 1.0f);
-            glVertex3f(-1.0f,-1.0f, 1.0f);
-            glVertex3f(-1.0f,-1.0f,-1.0f);
-            glVertex3f( 1.0f,-1.0f,-1.0f);
-            glColor3f(1.0f,0.0f,0.0f);
-            glVertex3f( 1.0f, 1.0f, 1.0f);
-            glVertex3f(-1.0f, 1.0f, 1.0f);
-            glVertex3f(-1.0f,-1.0f, 1.0f);
-            glVertex3f( 1.0f,-1.0f, 1.0f);
-            glColor3f(1.0f,1.0f,0.0f);
-            glVertex3f( 1.0f,-1.0f,-1.0f);
-            glVertex3f(-1.0f,-1.0f,-1.0f);
-            glVertex3f(-1.0f, 1.0f,-1.0f);
-            glVertex3f( 1.0f, 1.0f,-1.0f);
-            glColor3f(0.0f,0.0f,1.0f);
-            glVertex3f(-1.0f, 1.0f, 1.0f);
-            glVertex3f(-1.0f, 1.0f,-1.0f);
-            glVertex3f(-1.0f,-1.0f,-1.0f);
-            glVertex3f(-1.0f,-1.0f, 1.0f);
-            glColor3f(1.0f,0.0f,1.0f);
-            glVertex3f( 1.0f, 1.0f,-1.0f);
-            glVertex3f( 1.0f, 1.0f, 1.0f);
-            glVertex3f( 1.0f,-1.0f, 1.0f);
-            glVertex3f( 1.0f,-1.0f,-1.0f);
-            glEnd();*/
-
-            //glfwSwapBuffers(win);
         }
         glfwTerminate();
 
@@ -290,8 +254,7 @@ public class Test {
         glFrustum(left, right, bottom, top, near, far);
     }
 
-    public static void TestLogLabel(String Tested)
-    {
+    public static void TestLogLabel(String Tested) {
         System.out.println();
         System.out.println("+---------------------------------------------");
         System.out.println("| Test : " + Tested);
@@ -300,10 +263,9 @@ public class Test {
 
     }
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
         new Test();
     }
-
 
 
 }
