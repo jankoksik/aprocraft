@@ -39,8 +39,15 @@ public class Chunk {
                     int xw = SIZE*x+i;
                     int yw = j;
                     int zw = SIZE*z+k;
-                    if(j-8 < generator.getHeight(xw, zw)) {
-                        Block b = Block.GRASS;
+                    int h = (int)generator.getHeight(xw, zw);
+                    if(j < h+8) {
+                        Block b = Blocks.STONE;
+                        blocks[i][j][k] = b;
+                    } else if(j < h+11) {
+                        Block b = Blocks.DIRT;
+                        blocks[i][j][k] = b;
+                    } else if(j < h+12) {
+                        Block b = Blocks.GRASS;
                         blocks[i][j][k] = b;
                     }
                 }
