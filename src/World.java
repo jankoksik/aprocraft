@@ -1,14 +1,14 @@
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 8;
+    public static final int SIZE = 4;
 
     private Generator generator;
 
     private Chunk[][] chunks;
 
     public World() {
-        generator = new Generator(new Random().nextLong(), 10, 3);
+        generator = new Generator(new Random().nextLong(), 16, 8);
 
         chunks = new Chunk[SIZE][SIZE];
 
@@ -22,7 +22,10 @@ public class World {
     }
 
     public Block getBlock(int x, int y, int z) {
-        Chunk c = chunks[x / Chunk.SIZE][z / Chunk.SIZE];
+        int xx = x / Chunk.SIZE;
+        int zz = z / Chunk.SIZE;
+        if(xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
+        Chunk c = chunks[xx][zz];
         return c.getBlock(x % Chunk.SIZE, y, z % Chunk.SIZE);
     }
 

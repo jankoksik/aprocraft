@@ -5,7 +5,6 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
-import java.util.ArrayList;
 
 public class Chunk {
     public static final int SIZE = 32;
@@ -71,19 +70,23 @@ public class Chunk {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
-                    boolean up = getBlock(i, j+1, k) == null;
-                    boolean down = getBlock(i, j-1, k) == null;
-                    boolean left = getBlock(i-1, j, k) == null;
-                    boolean right = getBlock(i+1, j, k) == null;
-                    boolean front = getBlock(i, j, k-1) == null;
-                    boolean back = getBlock(i, j, k+1) == null;
+                    int xw = SIZE*x+i;
+                    int yw = j;
+                    int zw = SIZE*z+k;
+
+                    boolean up = world.getBlock(xw, yw+1, zw) == null;
+                    boolean down = world.getBlock(xw, yw-1, zw) == null;
+                    boolean left = world.getBlock(xw-1, yw, zw) == null;
+                    boolean right = world.getBlock(xw+1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw-1) == null;
+                    boolean back = world.getBlock(xw, yw, zw+1) == null;
 
                     if(!up && !down && !left && !right && !front && ! back) continue;
                     if(blocks[i][j][k] == null) continue;
 
                     Block b = blocks[i][j][k];
 
-                    fb.put(b.getData(SIZE*x+i, j, SIZE*z+k));
+                    fb.put(b.getData(xw, yw, zw));
                     cb.put(b.getColorData());
                     fbsize += 6*4;
 
