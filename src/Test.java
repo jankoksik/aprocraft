@@ -6,6 +6,7 @@ import org.joml.Vector3f;
 import org.json.simple.parser.ParseException;
 import org.lwjgl.opengl.GL;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +55,32 @@ public class Test {
         }
 
          */
+        //Przykladowy ekwipunek z proba przeciazenia
+        TestLogLabel("Eq add test");
+        Inventory eqi = new Inventory(3, 10);
+        if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+         //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+
+        TestLogLabel("Eq add many");
+        if(eqi.addItem(0, 7, true)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+
+
+        // testowe wypisanie eq
+
+        TestLogLabel("Eq content");
+        for(Item i : eqi.getEq())
+        {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+        TestLogLabel("Controls read");
+
         try {
             HashMap<String, Integer>  cntrl = SaveNReadJson.readControls("Controls");
             SaveNReadJson.applyCOntrols(cntrl);
@@ -261,6 +288,16 @@ public class Test {
         float left = aspect * bottom;
         float right = -left;
         glFrustum(left, right, bottom, top, near, far);
+    }
+
+    public static void TestLogLabel(String Tested)
+    {
+        System.out.println();
+        System.out.println("+---------------------------------------------");
+        System.out.println("| Test : " + Tested);
+        System.out.println("+---------------------------------------------");
+        System.out.println();
+
     }
 
     public static void main(String [] args){
