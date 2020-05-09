@@ -1,10 +1,16 @@
 public abstract class Block {
+    private static int CURRENT_ID = 0;
+
     private RGB color;
     private float size;
+    private int id;
 
     private float[] colorData;
 
     public Block(RGB color) {
+        id = CURRENT_ID;
+        CURRENT_ID ++;
+
         this.color = color;
         size = 1f;
 

@@ -21,3 +21,15 @@ class StoneBlock extends Block {
         super(new RGB(0.3f, 0.3f, 0.3f));
     }
 }
+
+class LogBlock extends Block {
+    public LogBlock() {
+        super(new RGB(0.3f, 0.2f, 0.0f));
+    }
+}
+
+class LeavesBlock extends Block {
+    public LeavesBlock() {
+        super(new RGB(0.0f, 0.4f, 0.0f));
+    }
+}
