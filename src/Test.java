@@ -9,10 +9,9 @@ import org.lwjgl.opengl.GL;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Test {
-
-    Chunk stefan;
 
     public Test() {
         if (glfwInit() != true){
@@ -80,7 +79,8 @@ public class Test {
 
         //Texture dirt = new Texture("./resources/DirtGrassSide.png");
 
-        stefan = new Chunk(0,0);
+        //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
+        World stefan = new World();
 
         float[] vertices =  new float[]{
                 -0.5f, 0.5f, 0, // gora lewo 0
@@ -112,6 +112,7 @@ public class Test {
         float Zcam = -5;
         float rotatey = 0;
         float yRot = 0;
+        float camSpeed = 0.1f;
 
 
         long timePrev = System.nanoTime();
@@ -137,39 +138,39 @@ public class Test {
                 }
                 if(glfwGetKey(win, Controls.getUp())==GL_TRUE)
                 {
-                    Ycam -= 0.01f;
+                    Ycam -= camSpeed;
                 }
                 if(glfwGetKey(win, Controls.getDown())==GL_TRUE)
                 {
-                    Ycam += 0.01f;
+                    Ycam += camSpeed;
                 }
                 if(glfwGetKey(win, Controls.getRight())==GL_TRUE)
                 {
-                    Xcam -= 0.01f;
+                    Xcam -= camSpeed;
                     //yRot -= 0.01f;
                 }
                 if(glfwGetKey(win,Controls.getLeft())==GL_TRUE)
                 {
-                    Xcam += 0.01f;
+                    Xcam += camSpeed;
                     //yRot -= 0.01f;
                 }
                 if(glfwGetKey(win, Controls.getBackward())==GL_TRUE)
                 {
-                    Zcam -= 0.01f;
+                    Zcam -= camSpeed;
                 }
                 if(glfwGetKey(win, Controls.getForward())==GL_TRUE)
                 {
-                    Zcam += 0.01f;
+                    Zcam += camSpeed;
                 }
                 if(glfwGetKey(win, GLFW_KEY_LEFT)==GL_TRUE)
                 {
                     camera.addRotation(0,-0.001f, 0);
-                    yRot += 0.5f;
+                    yRot += 4*camSpeed;
                 }
                 if(glfwGetKey(win, GLFW_KEY_RIGHT)==GL_TRUE)
                 {
                     camera.addRotation(0,0.001f, 0);
-                    yRot -= 0.5f;
+                    yRot -= 4*camSpeed;
                 }
                 if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
                 {
@@ -188,7 +189,7 @@ public class Test {
 
                 glMatrixMode(GL_PROJECTION);
                 glLoadIdentity();
-                gluPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.1f, 1000.0f);
+                gluPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.3f, 1000.0f);
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
 

@@ -43,7 +43,7 @@ public class APROCraft {
 
         GL.createCapabilities();
 
-        c = new Chunk(0, 0);
+        //c = new Chunk(0, 0);
 
 
     }
