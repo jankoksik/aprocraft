@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 4;
+    public static final int SIZE = 8;
 
     private Generator generator;
 
