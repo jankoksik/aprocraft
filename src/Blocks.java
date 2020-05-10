@@ -1,4 +1,5 @@
 public abstract class Blocks {
+    public static final Block AIR = null;
     public static final Block GRASS = new GrassBlock();
     public static final Block DIRT = new DirtBlock();
     public static final Block STONE = new StoneBlock();

@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class Chunk {
     public static final int SIZE = 32;
@@ -33,6 +34,7 @@ public class Chunk {
     }
 
     private void generate() {
+        Random r = new Random();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
@@ -53,6 +55,9 @@ public class Chunk {
                     } else if(j < h+12) {
                         Block b = Blocks.GRASS;
                         blocks[i][j][k] = b;
+
+                        if(r.nextInt(300) == 1)
+                            Structures.OAK_TREE.spawn(this.blocks, i, j+1, k);
                     }
                 }
     }
