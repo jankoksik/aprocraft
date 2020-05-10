@@ -1,5 +1,6 @@
 import org.joml.Matrix4d;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import java.io.BufferedReader;
@@ -63,6 +64,10 @@ public class Shader {
             glUniformMatrix4fv(location, false, buffer);
         }
 
+    }
+
+    public void setUniform(String name, Vector3f vec) {
+        glUniform3f(glGetUniformLocation(program, name), vec.x, vec.y, vec.z);
     }
 
     public void bind(){

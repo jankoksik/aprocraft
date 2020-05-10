@@ -2,66 +2,128 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import org.joml.Math;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.json.simple.parser.ParseException;
-import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
-public class APROCraft {
-    public static final String VERSION = "0.2.4 alpha";
+public class Test {
 
-    public static final int WIDTH = 1280;
-    public static final int HEIGHT = 960;
-    public static final float FPS = 60.0f;
-
-    public APROCraft() {
+    public Test() {
         if (glfwInit() != true) {
             System.err.println("GLFW sie zepsul");
             System.exit(1);
         }
 
-        glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        final int WIDTH = 640 * 2;
+        final int HEIGHT = 480 * 2;
 
-        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, 0, 0);
+        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + APROCraft.VERSION, 0, 0);
 
-        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        glfwSetWindowPos(win, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
+        /* DEFAULT SETTINGS
+        //MOUSE
+        Controls.setAttack(GLFW_MOUSE_BUTTON_1);
+        Controls.setPlace(GLFW_MOUSE_BUTTON_3);
+        //FLY
+        Controls.setDown(GLFW_KEY_DOWN);
+        Controls.setUp(GLFW_KEY_UP);
+        //W S A D
+        Controls.setForward(GLFW_KEY_W);
+        Controls.setBackward(GLFW_KEY_S);
+        Controls.setLeft(GLFW_KEY_A);
+        Controls.setRight(GLFW_KEY_D);
+        //JUMP
+        Controls.setJump(GLFW_KEY_SPACE);
+        // OTHER
+        Controls.setDrop(GLFW_KEY_Q);
+        Controls.setUse(GLFW_KEY_E);
+        Controls.setCrouch(GLFW_KEY_LEFT_CONTROL);
 
+
+        SAVE SETTINGS
+        try {
+            SaveNReadJson.SaveControls("Controls");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         */
         //Przykladowy ekwipunek z proba przeciazenia
-        TestLogLabel("Eq add test");
+        //TestLogLabel("Eq add test");
         Inventory eqi = new Inventory(3, 10);
-        if (eqi.addItem(0)) {
+        if (eqi.addItem(1)) {
             System.out.println("dodano pomyslnie item");
         } else {
             System.out.println("blad");
         }
+        TestLogLabel("Eq content");
+        for (Item i : eqi.getEq()) {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+//
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+         if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-
+//
         TestLogLabel("Eq add many");
-        if (eqi.addItem(0, 7, true)) {
+        if (eqi.addItem(1, 7, true)) {
             System.out.println("dodano pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
+        TestLogLabel("Eq content");
+        for (Item i : eqi.getEq()) {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+//
+        // TestLogLabel("save eq");
+        //eqi.saveEq("Inventory");
+        TestLogLabel("Test carft");
+        Crafting craft = new Crafting(3,3,"");
+        craft.PlaceItemInCrafting(2,2, 1, eqi );
+        craft.PlaceItemInCrafting(1,1, 1, eqi );
+        //craft.PlaceItemInCrafting(2,0, 1, eqi );
+        //craft.PlaceItemInCrafting(0,0, 1, eqi );
+      //  craft.PlaceItemInCrafting(2,2, 1, eqi );
+        System.out.println(craft.GetCurrDim().toString());
+        int [] tab = craft.getSeperated();
+
+
+
+
+
+        TestLogLabel("Eq del many");
+        if (eqi.remove(0, 4, true)) {
+            System.out.println("usunieto pomyslnie item");
         } else {
             System.out.println("blad");
         }
 
         // testowe wypisanie eq
+       // TestLogLabel("Read eq");
+        //eqi.readEq("Inventory");
+
 
         TestLogLabel("Eq content");
         for (Item i : eqi.getEq()) {
             System.out.println(i.getId() + " : " + i.getSize());
         }
+
+
+
         TestLogLabel("Controls read");
 
         try {
@@ -85,12 +147,45 @@ public class APROCraft {
 
         GL.createCapabilities();
 
+        Camera camera = new Camera(WIDTH, HEIGHT);
+
+        //glEnable(GL_TEXTURE_2D);
+        // tworzyc obiekty i tekstury pod tym
+
+        //Texture dirt = new Texture("./resources/DirtGrassSide.png");
+
+        //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
         World stefan = new World();
         Player player = new Player(win, stefan);
 
+        /*float[] vertices =  new float[]{
+                -0.5f, 0.5f, 0, // gora lewo 0
+                0.5f, 0.5f, 0,  //gora prawo 1
+                0.5f, -0.5f, 0, //dol prawo  2
+                -0.5f, -0.5f, 0 //dol  lewo  3
+
+        };
+        float[] texture = new float[]{
+          0,0,
+          1,0,
+          1,1,
+          0, 1
+        };
+        int[] indices = new int[] {
+                0,1,2,
+                2,3,0
+        };*/
+
+        //Model model = new Model(vertices, texture, indices);
+        //Shader shader = new Shader("shaderTest");
+        Matrix4f scale = new Matrix4f().scale(64);
+
+        Matrix4f target = new Matrix4f();
+
+
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
-        double ns = 1_000_000_000 / FPS;
+        double ns = 1_000_000_000 / 60.0;
 
         int frames = 0;
         int ticks = 0;
@@ -123,8 +218,15 @@ public class APROCraft {
 
                 player.updateCamera();
 
+                /*glRotatef(yRot, 0, 1, 0);
+                glTranslatef(xCam, yCam, zCam);*/
+
                 //shader.bind();
-                stefan.render(player);
+                //shader.setUniform("sampler", 0);
+                //shader.setUniform("projection", camera.getViewMatrix());
+                //dirt.bind(0);
+                //model.render();
+                stefan.render();
                 frames++;
                 glfwSwapBuffers(win);
             }
@@ -136,12 +238,12 @@ public class APROCraft {
                 timer += 1000;
             }
         }
-
         glfwTerminate();
+
     }
 
     public static void setPerspective(float fovy, float aspect, float near, float far) {
-        float bottom = -near * Math.tan(fovy / 2);
+        float bottom = -near * (float) Math.tan(fovy / 2);
         float top = -bottom;
         float left = aspect * bottom;
         float right = -left;
@@ -158,6 +260,8 @@ public class APROCraft {
     }
 
     public static void main(String[] args) {
-        new APROCraft();
+        new Test();
     }
+
+
 }

@@ -5,62 +5,186 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Chunk {
     public static final int SIZE = 32;
-    public static final int HEIGHT = 32;
 
-    private int x, y;
+    private Generator generator;
+    private int x, z;
 
-    private static FloatBuffer fb;
-    private int vbo;
-    private int fbSize;
+    private static FloatBuffer fb, cb;
+    private int vbo, col;
+    int fbsize;
 
-    private List<Block> blocks;
+    private Block[][][] blocks;
 
-    public Chunk(int x, int y) {
+    public Chunk(int x, int z, Generator generator) {
+        this.generator = generator;
+
         this.x = x;
-        this.y = y;
+        this.z = z;
 
-        blocks = new ArrayList<Block>();
+        blocks = new Block[SIZE][SIZE][SIZE];
 
-        generate();
-        createBuffer();
+        fbsize = 0;
+
+        generate(12);
     }
 
-    private void generate() {
-        fb = BufferUtils.createFloatBuffer(SIZE*SIZE*HEIGHT*6*4*7);
+    private void generate(int height) {
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                for (int k = 0; k < SIZE; k++) {
+                    int xw = SIZE*x+i;
+                    int yw = j;
+                    int zw = SIZE*z+k;
+                    int h = (int)generator.getHeight(xw, zw);
 
-        for(int i = 0; i < SIZE; i ++)
-            for(int j = 0; j < SIZE; j ++)
-                for(int k = 0; k < HEIGHT; k ++) {
-                    Block b = Block.GRASS;
-                    blocks.add(b);
-
-
-
-                    fb.put(b.getData(i, j, k));
-                    fbSize += 6*4;
+                    if(j == 0) {
+                        Block b = Blocks.BEDROCK;
+                        blocks[i][j][k] = b;
+                    } else if(j < h+height-4) {
+                        Block b = Blocks.STONE;
+                        blocks[i][j][k] = b;
+                    } else if(j < h+height-1) {
+                        Block b = Blocks.DIRT;
+                        blocks[i][j][k] = b;
+                    } else if(j < h+height) {
+                        Block b = Blocks.GRASS;
+                        blocks[i][j][k] = b;
+                    }
                 }
+    }
 
-        fb.flip();
+    public int getMaxHeight(int x, int z) {
+        for(int i = SIZE-1; i >= 0; i --)
+            if (getBlock(x, i, z) != null)
+                return i;
+
+        return 0;
     }
 
     private void createBuffer() {
         vbo = glGenBuffers();
-
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferData(GL_ARRAY_BUFFER, fb, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        col = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, col);
+        glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
-    public void update() {
+    private void updateBuffer() {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, fb);
+        //glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+        glBindBuffer(GL_ARRAY_BUFFER, col);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
+        //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    public Block getBlock(int x, int y, int z) {
+        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
+        return blocks[x][y][z];
+    }
+
+    public void setBlock(int x, int y, int z, Block block, World world) {
+        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
+        blocks[x][y][z] = block;
+
+        if(fb != null)
+            updateChunk(world);
+    }
+
+    public void create(World world) {
+        fb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 3);
+        cb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 4);
+
+        fbsize = 0;
+
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                for (int k = 0; k < SIZE; k++) {
+                    int xw = SIZE*x+i;
+                    int yw = j;
+                    int zw = SIZE*z+k;
+
+                    boolean up = world.getBlock(xw, yw+1, zw) == null;
+                    boolean down = world.getBlock(xw, yw-1, zw) == null;
+                    boolean left = world.getBlock(xw-1, yw, zw) == null;
+                    boolean right = world.getBlock(xw+1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw-1) == null;
+                    boolean back = world.getBlock(xw, yw, zw+1) == null;
+
+                    if(!up && !down && !left && !right && !front && ! back) continue;
+                    if(blocks[i][j][k] == null) continue;
+
+                    Block b = blocks[i][j][k];
+
+                    fb.put(b.getData(xw, yw, zw));
+                    cb.put(b.getColorData());
+                    fbsize += 6*4;
+
+                }
+
+        fb.flip();
+        cb.flip();
+        createBuffer();
+    }
+
+    public void updateChunk(World world) {
+        fbsize = 0;
+        fb.clear();
+        cb.clear();
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                for (int k = 0; k < SIZE; k++) {
+                    int xw = SIZE*x+i;
+                    int yw = j;
+                    int zw = SIZE*z+k;
+
+                    boolean up = world.getBlock(xw, yw+1, zw) == null;
+                    boolean down = world.getBlock(xw, yw-1, zw) == null;
+                    boolean left = world.getBlock(xw-1, yw, zw) == null;
+                    boolean right = world.getBlock(xw+1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw-1) == null;
+                    boolean back = world.getBlock(xw, yw, zw+1) == null;
+
+                    if(!up && !down && !left && !right && !front && ! back) continue;
+                    if(blocks[i][j][k] == null) continue;
+
+                    Block b = blocks[i][j][k];
+
+                    fb.put(b.getData(xw, yw, zw));
+                    cb.put(b.getColorData());
+                    fbsize += 6*4;
+
+                }
+
+        fb.flip();
+        cb.flip();
+        updateBuffer();
     }
 
     public void render() {
-        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glVertexPointer(3, GL_FLOAT, 0, 0L);
+
+        glBindBuffer(GL_ARRAY_BUFFER, col);
+        glColorPointer(4, GL_FLOAT, 0, 0L);
+
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
+
+        glDrawArrays(GL_QUADS, 0, fbsize);//SIZE * SIZE * SIZE * 6 * 4 * 4
+
+        glDisableClientState(GL_COLOR_ARRAY);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
+        /*glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -70,6 +194,6 @@ public class Chunk {
         glDrawArrays(GL_QUADS, 0, fbSize);
 
         glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(1);*/
     }
 }
