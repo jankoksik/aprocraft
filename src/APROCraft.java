@@ -130,7 +130,8 @@ public class APROCraft {
             }
 
             if (System.currentTimeMillis() - timer > 1000) {
-                System.out.println("FPS: " + frames + " UPS: " + ticks);
+                //System.out.println("FPS: " + frames + " UPS: " + ticks);
+                glfwSetWindowTitle(win, "APROCraft v" + VERSION + "     FPS: " + frames);
                 frames = 0;
                 ticks = 0;
                 timer += 1000;
