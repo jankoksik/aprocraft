@@ -6,11 +6,12 @@ public abstract class Blocks {
     public static final Block LOG = new LogBlock();
     public static final Block LEAVES = new LeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
+    public static final Block CLOUD = new CloudBlock();
 }
 
 class GrassBlock extends Block {
     public GrassBlock() {
-        super(new RGB(0.2f, 1f, 0.2f));
+        super(new RGB(0.35f, 1f, 0.15f));
     }
 }
 
@@ -34,12 +35,18 @@ class LogBlock extends Block {
 
 class LeavesBlock extends Block {
     public LeavesBlock() {
-        super(new RGB(0.0f, 0.4f, 0.0f));
+        super(new RGB(0.0f, 0.5f, 0.0f));
     }
 }
 
 class BedrockBlock extends Block {
     public BedrockBlock() {
         super(new RGB(0.1f, 0.1f, 0.1f));
+    }
+}
+
+class CloudBlock extends Block {
+    public CloudBlock() {
+        super(new RGB(1f, 1f, 1f));
     }
 }

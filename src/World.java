@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 6;
+    public static final int SIZE = 4;
 
     private Generator generator;
 
@@ -16,7 +16,8 @@ public class World {
             for (int j = 0; j < SIZE; j++)
                 chunks[i][j] = new Chunk(i, j, generator);
 
-        generateTrees(50);
+        generateTrees(70);
+        generateClouds(50);
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -36,6 +37,19 @@ public class World {
 
             if(getBlock(x, y, z) == Blocks.GRASS)
                 Structures.OAK_TREE.spawn(this, x, y, z);
+        }
+    }
+
+    public void generateClouds(int n) {
+        Random r = new Random();
+        for(int i = 0; i < n; i ++) {
+            int x = r.nextInt(SIZE*Chunk.SIZE);
+            int z = r.nextInt(SIZE*Chunk.SIZE);
+            int y = Chunk.SIZE-2;
+
+            for(int j = 0; j < 6; j ++) {
+                Structures.CLOUD.spawn(this, x+r.nextInt(5)-2, y+r.nextInt(2)-1, z+r.nextInt(5)-2);
+            }
         }
     }
 

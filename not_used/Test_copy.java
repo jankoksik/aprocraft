@@ -15,18 +15,47 @@ import java.util.Random;
 
 public class Test {
 
-    public static final int WIDTH = 640 * 2;
-    public static final int HEIGHT = 480 * 2;
-    public static final float FPS = 60.0f;
-
     public Test() {
         if (glfwInit() != true) {
             System.err.println("GLFW sie zepsul");
             System.exit(1);
         }
 
+        final int WIDTH = 640 * 2;
+        final int HEIGHT = 480 * 2;
+
         long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + APROCraft.VERSION, 0, 0);
 
+        /* DEFAULT SETTINGS
+        //MOUSE
+        Controls.setAttack(GLFW_MOUSE_BUTTON_1);
+        Controls.setPlace(GLFW_MOUSE_BUTTON_3);
+        //FLY
+        Controls.setDown(GLFW_KEY_DOWN);
+        Controls.setUp(GLFW_KEY_UP);
+        //W S A D
+        Controls.setForward(GLFW_KEY_W);
+        Controls.setBackward(GLFW_KEY_S);
+        Controls.setLeft(GLFW_KEY_A);
+        Controls.setRight(GLFW_KEY_D);
+        //JUMP
+        Controls.setJump(GLFW_KEY_SPACE);
+        // OTHER
+        Controls.setDrop(GLFW_KEY_Q);
+        Controls.setUse(GLFW_KEY_E);
+        Controls.setCrouch(GLFW_KEY_LEFT_CONTROL);
+
+
+        SAVE SETTINGS
+        try {
+            SaveNReadJson.SaveControls("Controls");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         */
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");
         Inventory eqi = new Inventory(3, 10);
@@ -81,12 +110,41 @@ public class Test {
 
         GL.createCapabilities();
 
+        Camera camera = new Camera(WIDTH, HEIGHT);
+
+        //glEnable(GL_TEXTURE_2D);
+        // tworzyc obiekty i tekstury pod tym
+
+        //Texture dirt = new Texture("./resources/DirtGrassSide.png");
+
+        //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
         World stefan = new World();
         Player player = new Player(win, stefan);
 
+        /*float[] vertices =  new float[]{
+                -0.5f, 0.5f, 0, // gora lewo 0
+                0.5f, 0.5f, 0,  //gora prawo 1
+                0.5f, -0.5f, 0, //dol prawo  2
+                -0.5f, -0.5f, 0 //dol  lewo  3
+
+        };
+        float[] texture = new float[]{
+          0,0,
+          1,0,
+          1,1,
+          0, 1
+        };
+        int[] indices = new int[] {
+                0,1,2,
+                2,3,0
+        };*/
+
+        //Model model = new Model(vertices, texture, indices);
+        //Shader shader = new Shader("shaderTest");
         Matrix4f scale = new Matrix4f().scale(64);
 
         Matrix4f target = new Matrix4f();
+
 
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -123,7 +181,14 @@ public class Test {
 
                 player.updateCamera();
 
+                /*glRotatef(yRot, 0, 1, 0);
+                glTranslatef(xCam, yCam, zCam);*/
+
                 //shader.bind();
+                //shader.setUniform("sampler", 0);
+                //shader.setUniform("projection", camera.getViewMatrix());
+                //dirt.bind(0);
+                //model.render();
                 stefan.render();
                 frames++;
                 glfwSwapBuffers(win);

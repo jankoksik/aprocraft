@@ -8,7 +8,7 @@ import java.nio.FloatBuffer;
 import java.util.Random;
 
 public class Chunk {
-    public static final int SIZE = 32;
+    public static final int SIZE = 64;
 
     private Generator generator;
     private int x, z;
@@ -29,10 +29,10 @@ public class Chunk {
 
         fbsize = 0;
 
-        generate();
+        generate(16);
     }
 
-    private void generate() {
+    private void generate(int height) {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
@@ -44,13 +44,13 @@ public class Chunk {
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
-                    } else if(j < h+8) {
+                    } else if(j < h+height-4) {
                         Block b = Blocks.STONE;
                         blocks[i][j][k] = b;
-                    } else if(j < h+11) {
+                    } else if(j < h+height-1) {
                         Block b = Blocks.DIRT;
                         blocks[i][j][k] = b;
-                    } else if(j < h+12) {
+                    } else if(j < h+height) {
                         Block b = Blocks.GRASS;
                         blocks[i][j][k] = b;
                     }
