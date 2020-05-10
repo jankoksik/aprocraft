@@ -30,11 +30,9 @@ public class Chunk {
         fbsize = 0;
 
         generate();
-
     }
 
     private void generate() {
-        Random r = new Random();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
@@ -55,11 +53,16 @@ public class Chunk {
                     } else if(j < h+12) {
                         Block b = Blocks.GRASS;
                         blocks[i][j][k] = b;
-
-                        if(r.nextInt(300) == 1)
-                            Structures.OAK_TREE.spawn(this.blocks, i, j+1, k);
                     }
                 }
+    }
+
+    public int getMaxHeight(int x, int z) {
+        for(int i = SIZE-1; i >= 0; i --)
+            if (getBlock(x, i, z) != null)
+                return i;
+
+        return 0;
     }
 
     private void createBuffer() {
@@ -77,6 +80,11 @@ public class Chunk {
     public Block getBlock(int x, int y, int z) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
         return blocks[x][y][z];
+    }
+
+    public void setBlock(int x, int y, int z, Block block) {
+        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
+        blocks[x][y][z] = block;
     }
 
     public void create(World world) {

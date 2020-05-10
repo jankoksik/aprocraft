@@ -1,22 +1,22 @@
 
 public abstract class Controls {
-    static int forward =0;
-    static int backward =0;
-    static int left = 0;
-    static int right=0;
-    static int up=0;
-    static int down=0;
-    static int jump=0;
-    static int crouch=0;
-    static int inventory=0;
-    static int sprint=0;
-    static int drop=0;
-    static int attack=0;
-    static int destroy=0;
-    static int place=0;
-    static int use=0;
-    static int NextItemInInventory=0;
-    static int PrevItemInInventory=0;
+    private static int forward =0;
+    private static int backward =0;
+    private static int left = 0;
+    private static int right=0;
+    private static int up=0;
+    private static int down=0;
+    private static int jump=0;
+    private static int crouch=0;
+    private static int inventory=0;
+    private static int sprint=0;
+    private static int drop=0;
+    private static int attack=0;
+    private static int destroy=0;
+    private static int place=0;
+    private static int use=0;
+    private static int NextItemInInventory=0;
+    private static int PrevItemInInventory=0;
 
     public static int getForward() {
         return forward;

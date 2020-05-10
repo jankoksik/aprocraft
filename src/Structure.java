@@ -24,7 +24,7 @@ public abstract class Structure {
         sizeZ = this.blocks[0][0].length;
     }
 
-    public void spawn(Block[][][] blocks, int x, int y, int z) {
+    public void spawn(World world, int x, int y, int z) {
         for(int i = 0; i < sizeX; i ++)
             for(int j = 0; j < sizeY; j ++)
                 for(int k = 0; k < sizeZ; k ++) {
@@ -32,8 +32,9 @@ public abstract class Structure {
                     int yy = y + j; //- (int)(sizeY / 2);
                     int zz = z + k - (int)(sizeZ / 2);
                     if(this.blocks[i][j][k] != null)
-                        if(xx >= 0 && yy >= 0 && zz >= 0 && xx < blocks.length && yy < blocks[0].length && zz < blocks[0][0].length)
-                            blocks[xx][yy][zz] = this.blocks[i][j][k];
+                        world.setBlock(xx, yy, zz, blocks[i][j][k]);
+                        /*if(xx >= 0 && yy >= 0 && zz >= 0 && xx < blocks.length && yy < blocks[0].length && zz < blocks[0][0].length)
+                            blocks[xx][yy][zz] = this.blocks[i][j][k];*/
                 }
     }
 }

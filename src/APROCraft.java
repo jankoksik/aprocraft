@@ -11,7 +11,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class APROCraft {
-    public static final String VERSION = "0.0.2 alpha";
+    public static final String VERSION = "0.1.2 alpha";
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = 480;
