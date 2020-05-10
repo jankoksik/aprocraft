@@ -1,3 +1,15 @@
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +57,14 @@ public class Inventory {
         }
         return false;
     }
+    private boolean contain(int id){
+        for(Item k : map)
+        {
+            if(k.getId() == id)
+                return true;
+        }
+        return false;
+    }
     private Item get(Item n){
         for(Item k : map)
         {
@@ -53,6 +73,7 @@ public class Inventory {
         }
         return null;
     }
+
     private Item get(int id){
         for(Item k : map)
         {
@@ -61,7 +82,7 @@ public class Inventory {
         }
         return null;
     }
-    private boolean remove(Item i){
+    private boolean removeStack(Item i){
         for(Item k : map)
         {
             if(k.getId() == i.getId()) {
@@ -71,7 +92,7 @@ public class Inventory {
         }
         return false;
     }
-    private boolean remove(int id){
+    private boolean removeStack(int id){
         for(Item k : map)
         {
             if(k.getId() == id) {
@@ -79,6 +100,41 @@ public class Inventory {
                 return true;
             }
         }
+        return false;
+    }
+    private boolean removeStackEq(int id){
+        for(Item k : eq)
+        {
+            if(k.getId() == id) {
+                eq.remove(k);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean removeOne(int id){
+        for(Item k : map)
+        {
+            if(k.getId() == id) {
+                int nmbr = k.getSize()-1;
+                if(nmbr ==0)
+                    map.remove(k);
+                else
+                    k.setSize(nmbr);
+                return true;
+            }
+        }
+        for(Item k : eq)
+        {
+            if(k.getId() == id) {
+                eq.remove(k);
+                Item n = new Item(id);
+                n.setSize(stack-1);
+                map.add(n);
+                return true;
+            }
+        }
+
         return false;
     }
     private Item getEq(int id){
@@ -90,6 +146,49 @@ public class Inventory {
         return null;
     }
 
+    public  int getNmbrOfItems(int id){
+        int nmbr = 0;
+        for(Item i : eq) {
+            if(i.getId() == id){
+                nmbr += stack;
+            }
+        }
+        for(Item i : map) {
+            if(i.getId() == id){
+                nmbr += i.getSize();
+            }
+        }
+
+        return  nmbr;
+    }
+
+    // force -> true - usun tyle ile sie da /  false - nie usunie itemow jesli niema wystarczajacej ilosci
+    public boolean remove(int id, int nmbr, boolean force){
+        if(nmbr>getNmbrOfItems(id) && !force)
+            return false;
+        int br = nmbr/stack;
+        int del=0;
+        for(;br>0; br--, del++)
+        {
+            if(!removeStackEq(id))
+                break;
+        }
+        int left = nmbr - del*stack;
+        if(contain(id) && left>0)
+        {
+            int v = get(id).getSize() - left;
+            if(v<=0)
+            {
+                map.remove(get(id));
+            }
+            else{
+                get(id).setSize(v);
+            }
+        }
+        return  true;
+    }
+
+
     public boolean addItem(int itemId){
         Item n = new Item(itemId);
         if(!map.isEmpty() && contain(n))
@@ -99,7 +198,7 @@ public class Inventory {
                 {
                     eq.add(n);
                     eq.get(eq.indexOf(n)).setSize(stack);
-                   remove(n.getId());
+                   removeStack(n.getId());
                 }
         return true;
         }
@@ -151,11 +250,74 @@ public class Inventory {
             map.add(k);
             return true;
         }
+        return  true;
+    }
+
+    //przekaz itemy do innego eq
+    public boolean passItem(Inventory other, int id, int nmbr)
+    {
+        if(remove(id,nmbr, false)){
+        if (other.addItem(id, nmbr, false)) {
+            return true;
+        }
+        else{
+            addItem(id,nmbr, false);
+            return false;
+        }
+        }
         return  false;
     }
 
 
+    public boolean saveEq(String filename){
+        try {
+            Gson gson = new Gson();
+        PrintWriter pw = null;
 
+            pw = new PrintWriter("./data/"+filename+".json");
+
+        pw.write(gson.toJson(getEq()));
+
+        pw.flush();
+        pw.close();
+        return  true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return  false;
+        }
+
+
+
+
+    }
+
+    public void readEq(String filename){
+        try {
+            Gson gson = new Gson();
+            FileReader obj = new FileReader("./data/"+filename+".json");
+            Type type = new TypeToken<ArrayList<Item>>(){}.getType();
+            ArrayList<Item> lista = gson.fromJson(obj, type);
+
+            for(Item i : lista){
+                if(i.getSize() == stack)
+                {
+                    eq.add(i);
+                }
+                else{
+                    map.add(i);
+                }
+            }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
 
 
 }

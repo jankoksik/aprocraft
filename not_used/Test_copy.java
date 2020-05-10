@@ -57,36 +57,73 @@ public class Test {
 
          */
         //Przykladowy ekwipunek z proba przeciazenia
-        TestLogLabel("Eq add test");
+        //TestLogLabel("Eq add test");
         Inventory eqi = new Inventory(3, 10);
-        if (eqi.addItem(0)) {
+        if (eqi.addItem(1)) {
             System.out.println("dodano pomyslnie item");
         } else {
             System.out.println("blad");
         }
+        TestLogLabel("Eq content");
+        for (Item i : eqi.getEq()) {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+//
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+         if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
         // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-
+//
         TestLogLabel("Eq add many");
-        if (eqi.addItem(0, 7, true)) {
+        if (eqi.addItem(1, 7, true)) {
             System.out.println("dodano pomyslnie item");
         } else {
             System.out.println("blad");
         }
+        TestLogLabel("Eq content");
+        for (Item i : eqi.getEq()) {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+//
+        // TestLogLabel("save eq");
+        //eqi.saveEq("Inventory");
+        TestLogLabel("Test carft");
+        Crafting craft = new Crafting(3,3,"");
+        craft.PlaceItemInCrafting(2,2, 1, eqi );
+        craft.PlaceItemInCrafting(1,1, 1, eqi );
+        //craft.PlaceItemInCrafting(2,0, 1, eqi );
+        //craft.PlaceItemInCrafting(0,0, 1, eqi );
+      //  craft.PlaceItemInCrafting(2,2, 1, eqi );
+        System.out.println(craft.GetCurrDim().toString());
+        int [] tab = craft.getSeperated();
 
+
+
+
+
+        TestLogLabel("Eq del many");
+        if (eqi.remove(0, 4, true)) {
+            System.out.println("usunieto pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
 
         // testowe wypisanie eq
+       // TestLogLabel("Read eq");
+        //eqi.readEq("Inventory");
+
 
         TestLogLabel("Eq content");
         for (Item i : eqi.getEq()) {
             System.out.println(i.getId() + " : " + i.getSize());
         }
+
+
+
         TestLogLabel("Controls read");
 
         try {
