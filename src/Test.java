@@ -116,6 +116,7 @@ public class Test {
 
         //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
         World stefan = new World();
+        Player player = new Player(win, stefan);
 
         /*float[] vertices =  new float[]{
                 -0.5f, 0.5f, 0, // gora lewo 0
@@ -141,14 +142,6 @@ public class Test {
 
         Matrix4f target = new Matrix4f();
 
-        // glClearColor(0,0,0,0);
-        float xCam = 0;
-        float yCam = 0;
-        float zCam = -5;
-        float rotatey = 0;
-        float yRot = 0;
-        float camSpeed = 0.1f;
-
 
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -169,46 +162,7 @@ public class Test {
                 if (glfwGetKey(win, GLFW_KEY_ESCAPE) == GL_TRUE)
                     glfwSetWindowShouldClose(win, true);
 
-                if (glfwGetKey(win, Controls.getUp()) == GL_TRUE)
-                    yCam -= camSpeed;
-
-                if (glfwGetKey(win, Controls.getDown()) == GL_TRUE)
-                    yCam += camSpeed;
-
-                if (glfwGetKey(win, Controls.getRight()) == GL_TRUE) {
-                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot + 90));
-                    zCam += camSpeed * Math.cos(Math.toRadians(yRot + 90));
-                }
-
-                if (glfwGetKey(win, Controls.getLeft()) == GL_TRUE) {
-                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot - 90));
-                    zCam += camSpeed * Math.cos(Math.toRadians(yRot - 90));
-                }
-
-                if (glfwGetKey(win, Controls.getForward()) == GL_TRUE) {
-                    xCam -= camSpeed * Math.sin(Math.toRadians(yRot));
-                    zCam += camSpeed * Math.cos(Math.toRadians(yRot));
-                }
-
-                if (glfwGetKey(win, Controls.getBackward()) == GL_TRUE) {
-                    xCam += camSpeed * Math.sin(Math.toRadians(yRot));
-                    zCam -= camSpeed * Math.cos(Math.toRadians(yRot));
-                }
-
-                if (glfwGetKey(win, GLFW_KEY_LEFT) == GL_TRUE)
-                    yRot -= 8 * camSpeed;
-
-                if (glfwGetKey(win, GLFW_KEY_RIGHT) == GL_TRUE)
-                    yRot += 8 * camSpeed;
-
-                /*if(glfwGetKey(win, GLFW_KEY_R)==GL_TRUE)
-                {
-                    camera.setPosition(new Vector3f(xCam, yCam, zCam));
-                    camera.setRotation(new Vector3f(0,rotatey + 90,0));
-                }
-
-                camera.setPosition(new Vector3f(xCam, yCam, zCam));
-                camera.setRotation(new Vector3f(0,rotatey,0));*/
+                player.update();
 
                 ticks++;
                 timePrev += ns;
@@ -222,8 +176,10 @@ public class Test {
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
 
-                glRotatef(yRot, 0, 1, 0);
-                glTranslatef(xCam, yCam, zCam);
+                player.updateCamera();
+
+                /*glRotatef(yRot, 0, 1, 0);
+                glTranslatef(xCam, yCam, zCam);*/
 
                 //shader.bind();
                 //shader.setUniform("sampler", 0);

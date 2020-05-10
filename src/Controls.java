@@ -1,5 +1,5 @@
 
-public class Controls {
+public abstract class Controls {
     static int forward =0;
     static int backward =0;
     static int left = 0;
