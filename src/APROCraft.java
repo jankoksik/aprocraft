@@ -50,7 +50,7 @@ public class APROCraft {
         // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
 
         TestLogLabel("Eq add many");
-        if (eqi.addItem(0, 7, true)) {
+        if (eqi.addItem(1, 7, true)) {
             System.out.println("dodano pomyslnie item");
         } else {
             System.out.println("blad");
@@ -77,6 +77,23 @@ public class APROCraft {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        TestLogLabel("recipe");
+        Crafting craftingTable = new Crafting(3,3, "TestRecip");
+        craftingTable.LoadRecipes();
+        craftingTable.PlaceItemInCrafting(0,0, 1, eqi);
+        craftingTable.PlaceItemInCrafting(0,1, 1, eqi);
+        int res = craftingTable.ShowPatternMatchinResult();
+        if(res != -1)
+        {
+            craftingTable.Craft(eqi);
+            System.out.println("zcraftowano : " + res);
+            System.out.println("zcraftowales patyk z ziemi :-/ ");
+        }
+        else{
+            System.out.println("nie znaleziono craftingu ");
+        }
+
 
         glfwShowWindow(win);
         glfwMakeContextCurrent(win);
