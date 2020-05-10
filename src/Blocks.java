@@ -35,7 +35,7 @@ class LogBlock extends Block {
 
 class LeavesBlock extends Block {
     public LeavesBlock() {
-        super(new RGB(0.0f, 0.5f, 0.0f));
+        super(new RGB(0.1f, 0.6f, 0.1f));
     }
 }
 

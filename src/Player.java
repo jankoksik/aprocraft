@@ -1,4 +1,7 @@
 import org.joml.Math;
+import org.lwjgl.BufferUtils;
+
+import java.nio.DoubleBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -8,9 +11,11 @@ public class Player {
     private float xSpeed, ySpeed, zSpeed;
     private float friction;
     private float gravity;
-    private float yRot;
+    private float yRot, xRot;
     private float camSpeed, rotSpeed, jumpSpeed;
     private boolean flying;
+
+    private boolean mouseLocked;
 
     private long window;
     private World world;
@@ -28,18 +33,23 @@ public class Player {
 
         gravity = 0.04f;
         camSpeed = 0.2f;
-        rotSpeed = 1.0f;
+        rotSpeed = 0.2f;
         jumpSpeed = 1.0f;
 
         yRot = 135;
+        xRot = 0;
 
         flying = false;
+
+        mouseLocked = false;
 
         this.window = window;
         this.world = world;
     }
 
     public void update() {
+        mouseUpdate();
+
         if (glfwGetKey(window, Controls.getJump()) == GL_TRUE) {
             if (isStanding())
                 ySpeed = -jumpSpeed;
@@ -73,12 +83,6 @@ public class Player {
             zCam -= camSpeed * Math.cos(Math.toRadians(yRot));
         }
 
-        if (glfwGetKey(window, GLFW_KEY_LEFT) == GL_TRUE)
-            yRot -= rotSpeed;
-
-        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GL_TRUE)
-            yRot += rotSpeed;
-
         if(!isStanding())
             ySpeed += gravity;
         else
@@ -91,11 +95,44 @@ public class Player {
         //world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, Blocks.AIR);
     }
 
+    private void mouseUpdate() {
+        double newX = 0, newY = 0, prevX = 0, prevY = 0;
+
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+            glfwSetCursorPos(window, APROCraft.WIDTH/2, APROCraft.HEIGHT/2);
+            mouseLocked = !mouseLocked;
+        }
+
+        if (mouseLocked){
+            DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
+            DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
+
+            glfwGetCursorPos(window, x, y);
+            x.rewind();
+            y.rewind();
+
+            newX = x.get();
+            newY = y.get();
+
+            double deltaX = newX - APROCraft.WIDTH/2;
+            double deltaY = newY - APROCraft.HEIGHT/2;
+
+            prevX = newX;
+            prevY = newY;
+
+            xRot += deltaY*0.2f;
+            yRot += deltaX*0.2f;
+
+            glfwSetCursorPos(window, APROCraft.WIDTH/2, APROCraft.HEIGHT/2);
+        }
+    }
+
     public boolean isStanding() {
         return world.getBlock((int)-xCam, (int)-yCam-2, (int)-zCam) != null;
     }
 
     public void updateCamera() {
+        glRotatef(xRot, 1, 0, 0);
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(xCam, yCam, zCam);
     }

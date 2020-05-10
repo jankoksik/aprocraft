@@ -3,6 +3,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.joml.Math;
 import org.json.simple.parser.ParseException;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 import java.io.IOException;
@@ -10,10 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class APROCraft {
-    public static final String VERSION = "0.2.1 alpha";
+    public static final String VERSION = "0.2.4 alpha";
 
     public static final int WIDTH = 1280;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 960;
     public static final float FPS = 60.0f;
 
     public APROCraft() {
@@ -27,6 +28,9 @@ public class APROCraft {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
         long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, 0, 0);
+
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        glfwSetWindowPos(win, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
 
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");

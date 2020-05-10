@@ -46,7 +46,7 @@ public class World {
             int y = getMaxHeight(x, z);
 
             if(getBlock(x, y, z) == Blocks.GRASS)
-                Structures.OAK_TREE.spawn(this, x, y, z);
+                Structures.OAK_TREE.spawn(this, x, y+1, z);
         }
     }
 
