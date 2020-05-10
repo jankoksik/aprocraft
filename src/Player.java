@@ -88,6 +88,7 @@ public class Player {
 
         yCam += ySpeed;
         //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
+        //world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, Blocks.AIR);
     }
 
     public boolean isStanding() {
@@ -97,5 +98,17 @@ public class Player {
     public void updateCamera() {
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(xCam, yCam, zCam);
+    }
+
+    public float getX() {
+        return xCam;
+    }
+
+    public float getY() {
+        return yCam;
+    }
+
+    public float getZ() {
+        return zCam;
     }
 }

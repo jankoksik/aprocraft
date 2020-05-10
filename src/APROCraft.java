@@ -1,83 +1,88 @@
-import org.lwjgl.glfw.GLFWVidMode;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.system.MemoryStack;
-
-import java.nio.IntBuffer;
-
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
+
+import org.joml.Math;
+import org.json.simple.parser.ParseException;
+import org.lwjgl.opengl.GL;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class APROCraft {
-    public static final String VERSION = "0.1.2 alpha";
+    public static final String VERSION = "0.2.1 alpha";
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 800;
     public static final float FPS = 60.0f;
 
-    //Game game;
-    Chunk c;
-
-    static long window;
-
     public APROCraft() {
-        //game = new Game();
-
-        if ( !glfwInit() )
-            throw new IllegalStateException("Unable to initialize GLFW");
+        if (glfwInit() != true) {
+            System.err.println("GLFW sie zepsul");
+            System.exit(1);
+        }
 
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-        window = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, NULL, NULL);
-        if ( window == NULL )
-            throw new RuntimeException("Failed to create the GLFW window");
+        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, 0, 0);
 
-        glfwMakeContextCurrent(window);
-        glfwSwapInterval(1);
+        //Przykladowy ekwipunek z proba przeciazenia
+        TestLogLabel("Eq add test");
+        Inventory eqi = new Inventory(3, 10);
+        if (eqi.addItem(0)) {
+            System.out.println("dodano pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
+        // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
 
-        glfwShowWindow(window);
+        TestLogLabel("Eq add many");
+        if (eqi.addItem(0, 7, true)) {
+            System.out.println("dodano pomyslnie item");
+        } else {
+            System.out.println("blad");
+        }
+
+        // testowe wypisanie eq
+
+        TestLogLabel("Eq content");
+        for (Item i : eqi.getEq()) {
+            System.out.println(i.getId() + " : " + i.getSize());
+        }
+        TestLogLabel("Controls read");
+
+        try {
+            HashMap<String, Integer> cntrl = SaveNReadJson.readControls("Controls");
+            SaveNReadJson.applyCOntrols(cntrl);
+            for (Map.Entry<String, Integer> entry : cntrl.entrySet()) {
+                String key = entry.getKey();
+                Integer value = entry.getValue();
+                System.out.println(key + " : " + value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        glfwShowWindow(win);
+        glfwMakeContextCurrent(win);
+
+        glfwSwapInterval(1); //limit 60fps
 
         GL.createCapabilities();
 
-        //c = new Chunk(0, 0);
-
-
-    }
-
-    public void update() {
-        //game.update();
-
-    }
-
-    public static void setPerspective(float fovy, float aspect, float near, float far) {
-        float bottom = -near * (float) Math.tan(fovy / 2);
-        float top = -bottom;
-        float left = aspect * bottom;
-        float right = -left;
-        glFrustum(left, right, bottom, top, near, far);
-    }
-
-    public void render() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.1f, 0.2f, 0.7f, 1);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        setPerspective(70.0f, ((float)WIDTH/(float)HEIGHT), 0.1f, 1000.0f);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-
-        c.render();
-
-        //game.render();
-    }
-
-    public static void main(String[] args) {
-        APROCraft aprocraft = new APROCraft();
+        World stefan = new World();
+        Player player = new Player(win, stefan);
 
         long timePrev = System.nanoTime();
         long timer = System.currentTimeMillis();
@@ -86,18 +91,38 @@ public class APROCraft {
         int frames = 0;
         int ticks = 0;
 
-        while(!glfwWindowShouldClose(window)) {
+        glEnable(GL_DEPTH_TEST);
+
+        while (glfwWindowShouldClose(win) != true) {
+            glfwPollEvents();
+
             long timeNow = System.nanoTime();
             double elapsed = timeNow - timePrev;
 
             if (elapsed > ns) {
-                aprocraft.update();
-                ticks ++;
+                if (glfwGetKey(win, GLFW_KEY_ESCAPE) == GL_TRUE)
+                    glfwSetWindowShouldClose(win, true);
+
+                player.update();
+
+                ticks++;
                 timePrev += ns;
             } else {
-                aprocraft.render();
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glClearColor(0.25f, 0.4f, 0.8f, 1);
+
+                glMatrixMode(GL_PROJECTION);
+                glLoadIdentity();
+                setPerspective(70.0f, ((float) WIDTH / (float) HEIGHT), 0.3f, 1000.0f);
+                glMatrixMode(GL_MODELVIEW);
+                glLoadIdentity();
+
+                player.updateCamera();
+
+                //shader.bind();
+                stefan.render(player);
                 frames++;
-                glfwSwapBuffers(window);
+                glfwSwapBuffers(win);
             }
 
             if (System.currentTimeMillis() - timer > 1000) {
@@ -106,16 +131,29 @@ public class APROCraft {
                 ticks = 0;
                 timer += 1000;
             }
-
-            glfwPollEvents();
         }
 
-        glfwFreeCallbacks(window);
-        glfwDestroyWindow(window);
-
         glfwTerminate();
-        glfwSetErrorCallback(null).free();
+    }
 
-        System.exit(0);
+    public static void setPerspective(float fovy, float aspect, float near, float far) {
+        float bottom = -near * Math.tan(fovy / 2);
+        float top = -bottom;
+        float left = aspect * bottom;
+        float right = -left;
+        glFrustum(left, right, bottom, top, near, far);
+    }
+
+    public static void TestLogLabel(String Tested) {
+        System.out.println();
+        System.out.println("+---------------------------------------------");
+        System.out.println("| Test : " + Tested);
+        System.out.println("+---------------------------------------------");
+        System.out.println();
+
+    }
+
+    public static void main(String[] args) {
+        new APROCraft();
     }
 }

@@ -1,9 +1,19 @@
+import org.joml.Vector2f;
+
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 4;
+    public static final int SIZE = 16;
 
     private Generator generator;
+
+    //TODO: Poziomy chunkow
+
+    public static final int HELL = 0;
+    public static final int CAVES = 1;
+    public static final int LAND = 2;
+    public static final int CLOUDS = 3;
+    public static final int SPACE = 4;
 
     private Chunk[][] chunks;
 
@@ -16,8 +26,8 @@ public class World {
             for (int j = 0; j < SIZE; j++)
                 chunks[i][j] = new Chunk(i, j, generator);
 
-        generateTrees(70);
-        generateClouds(50);
+        generateTrees(6*SIZE*SIZE);
+        generateClouds(1*SIZE*SIZE);
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -74,16 +84,20 @@ public class World {
         int zz = z / Chunk.SIZE;
         if(xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return;
         Chunk c = chunks[xx][zz];
-        c.setBlock(x % Chunk.SIZE, y, z % Chunk.SIZE, block);
+        c.setBlock(x % Chunk.SIZE, y, z % Chunk.SIZE, block, this);
     }
 
     public void update() {
 
     }
 
-    public void render() {
+    public void render(Player player) {
         for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < SIZE; j++)
-                chunks[i][j].render();
+            for (int j = 0; j < SIZE; j++) {
+                float dist = Vector2f.distance(-player.getX(), -player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
+                //System.out.println(dist);
+                if (dist <= 128)
+                    chunks[i][j].render();
+            }
     }
 }

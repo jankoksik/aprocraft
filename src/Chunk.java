@@ -5,10 +5,9 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
-import java.util.Random;
 
 public class Chunk {
-    public static final int SIZE = 64;
+    public static final int SIZE = 32;
 
     private Generator generator;
     private int x, z;
@@ -29,7 +28,7 @@ public class Chunk {
 
         fbsize = 0;
 
-        generate(16);
+        generate(12);
     }
 
     private void generate(int height) {
@@ -77,19 +76,34 @@ public class Chunk {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    private void updateBuffer() {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, fb);
+        //glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, col);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
+        //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
     public Block getBlock(int x, int y, int z) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
         return blocks[x][y][z];
     }
 
-    public void setBlock(int x, int y, int z, Block block) {
+    public void setBlock(int x, int y, int z, Block block, World world) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
+
+        if(fb != null)
+            updateChunk(world);
     }
 
     public void create(World world) {
         fb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 3);
         cb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 4);
+
+        fbsize = 0;
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -121,8 +135,38 @@ public class Chunk {
         createBuffer();
     }
 
-    public void update() {
+    public void updateChunk(World world) {
+        fbsize = 0;
+        fb.clear();
+        cb.clear();
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                for (int k = 0; k < SIZE; k++) {
+                    int xw = SIZE*x+i;
+                    int yw = j;
+                    int zw = SIZE*z+k;
 
+                    boolean up = world.getBlock(xw, yw+1, zw) == null;
+                    boolean down = world.getBlock(xw, yw-1, zw) == null;
+                    boolean left = world.getBlock(xw-1, yw, zw) == null;
+                    boolean right = world.getBlock(xw+1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw-1) == null;
+                    boolean back = world.getBlock(xw, yw, zw+1) == null;
+
+                    if(!up && !down && !left && !right && !front && ! back) continue;
+                    if(blocks[i][j][k] == null) continue;
+
+                    Block b = blocks[i][j][k];
+
+                    fb.put(b.getData(xw, yw, zw));
+                    cb.put(b.getColorData());
+                    fbsize += 6*4;
+
+                }
+
+        fb.flip();
+        cb.flip();
+        updateBuffer();
     }
 
     public void render() {
