@@ -55,8 +55,6 @@ public class Model {
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-
-
     }
 
     private FloatBuffer createBuffer(float[] data){
