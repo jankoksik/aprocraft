@@ -82,7 +82,7 @@ public class Player {
         if(!isStanding())
             ySpeed += gravity;
         else
-            ySpeed -= 0.8*gravity;
+            ySpeed -= 0.9f*gravity;
 
         ySpeed *= friction;
 
