@@ -101,6 +101,11 @@ public class Player {
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
             glfwSetCursorPos(window, APROCraft.WIDTH/2, APROCraft.HEIGHT/2);
             mouseLocked = !mouseLocked;
+            if(mouseLocked)
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            else
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
         }
 
         if (mouseLocked){
@@ -125,6 +130,7 @@ public class Player {
 
             glfwSetCursorPos(window, APROCraft.WIDTH/2, APROCraft.HEIGHT/2);
         }
+
     }
 
     public boolean isStanding() {
