@@ -6,12 +6,13 @@ import static org.lwjgl.opengl.GL11.*;
 public class GUI {
     //Quick Action Bar
     private static Texture Grid = new Texture("./resources/Grid2.png");
-    private static float QABsize = 50;
+    private static int magicNMBR = 20;
+    private static float QABsize = APROCraft.HEIGHT/magicNMBR;
     private static float CurrMul = 1.1f;
     private static int SizeOfQAB = 8;
     private static int currChoosed=0;
     private static int QABsx = (int) (APROCraft.HEIGHT - ((SizeOfQAB-1) * (QABsize)) -QABsize*CurrMul - SizeOfQAB+1);
-    private static int QABsy = APROCraft.HEIGHT/ 30;
+    private static int QABsy = APROCraft.HEIGHT/ magicNMBR;
 
 
     public static void setCurr(int curr){
