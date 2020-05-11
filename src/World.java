@@ -17,10 +17,18 @@ public class World {
 
     private Chunk[][] chunks;
 
+    private int time;
+    private int skyTime;
+    private int skyTimeDir;
+
     public World() {
         generator = new Generator(new Random().nextLong(), 24, 12);
 
         chunks = new Chunk[SIZE][SIZE];
+
+        time = 0;
+        skyTime = 0;
+        skyTimeDir = 1;
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -88,7 +96,14 @@ public class World {
     }
 
     public void update() {
+        time ++;
+        skyTime += skyTimeDir;
 
+        if(time >= 7200)
+            time = 0;
+
+        if(skyTime == 3600 || skyTime == 0)
+            skyTimeDir *= -1;
     }
 
     public void render(Player player) {
@@ -99,5 +114,13 @@ public class World {
                 if (dist <= 128)
                     chunks[i][j].render();
             }
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public float getSkyColorMultiplier() {
+        return ((float)skyTime/3600f);
     }
 }
