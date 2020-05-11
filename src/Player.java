@@ -87,16 +87,18 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
+        if (glfwGetKey(window, GLFW_KEY_B) == GL_TRUE)
+            GUI.setCurr(GUI.GetCurr()+1);
 
         GLFWScrollCallback scrollCallback;
         glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
-                    if(xoffset > 0)
-                    {
-                        GUI.setCurr(GUI.GetCurr()+1);
-                    }
-                    else if(xoffset < 0)
+                    if(yoffset > 0)
                     {
                         GUI.setCurr(GUI.GetCurr()-1);
+                    }
+                    else if(yoffset < 0)
+                    {
+                        GUI.setCurr(GUI.GetCurr()+1);
                     }
                     GUI.RenderQAB();
         }));

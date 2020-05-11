@@ -18,9 +18,9 @@ public class GUI {
         currChoosed =  curr;
         if(currChoosed < 0)
         {
-            currChoosed = SizeOfQAB;
+            currChoosed = SizeOfQAB-1;
         }
-        if(currChoosed > SizeOfQAB){
+        if(currChoosed > SizeOfQAB-1){
             currChoosed = 0;
         }
 
