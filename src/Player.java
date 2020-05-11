@@ -34,12 +34,12 @@ public class Player {
         ySpeed = 0;
         zSpeed = 0;
 
-        friction = 0.88f;
+        friction = 0.96f;
 
         gravity = 0.04f;
         camSpeed = 0.2f;
         rotSpeed = 0.2f;
-        jumpSpeed = 1.0f;
+        jumpSpeed = 1f;
 
         yRot = 135;
         xRot = 0;
