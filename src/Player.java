@@ -87,8 +87,14 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
-        if (glfwGetKey(window, GLFW_KEY_B) == GL_TRUE)
-            GUI.setCurr(GUI.GetCurr()+1);
+        int h = 20;
+        if (glfwGetKey(window, GLFW_KEY_B) == GL_TRUE){
+            h--;
+
+            GUI.RenderHealth(h);
+
+        }
+
 
         GLFWScrollCallback scrollCallback;
         glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
@@ -102,6 +108,7 @@ public class Player {
                     }
                     GUI.RenderQAB();
         }));
+
 
 
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));

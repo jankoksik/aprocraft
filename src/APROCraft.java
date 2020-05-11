@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class APROCraft {
     public static final String VERSION = "0.2.4 alpha";
-
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;
@@ -22,6 +21,7 @@ public class APROCraft {
             System.err.println("GLFW sie zepsul");
             System.exit(1);
         }
+
 
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -157,6 +157,7 @@ public class APROCraft {
 
                 //GUI.Test();
                 GUI.RenderQAB();
+                GUI.RenderHealth(15);
                 //glColor3f(1f, .5f, 1f);
 
                 /*glBegin(GL_QUADS);
