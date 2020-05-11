@@ -63,7 +63,7 @@ public class Player {
         if (glfwGetKey(window, Controls.getJump()) == GL_TRUE) {
             if (isStanding) {
                 ySpeed = jumpSpeed;
-                System.out.println("jump");
+               // System.out.println("jump");
             }
         }
 
@@ -161,9 +161,15 @@ public class Player {
 
             prevX = newX;
             prevY = newY;
+           // System.out.println(xRot);
 
             xRot += deltaY * 0.2f;
             yRot += deltaX * 0.2f;
+
+            if(xRot < -90)
+                xRot = -90;
+            if(xRot > 90)
+                xRot = 90;
 
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
         }
