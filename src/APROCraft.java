@@ -114,6 +114,7 @@ public class APROCraft {
 
         glEnable(GL_DEPTH_TEST);
 
+
         while (glfwWindowShouldClose(win) != true) {
             glfwPollEvents();
 
@@ -130,6 +131,8 @@ public class APROCraft {
                 timePrev += ns;
             } else {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
                 glClearColor(0.25f, 0.4f, 0.8f, 1);
 
                 glMatrixMode(GL_PROJECTION);
@@ -139,7 +142,7 @@ public class APROCraft {
                 glLoadIdentity();
 
                 player.updateCamera();
-
+                GUI.Test();
                 //shader.bind();
                 stefan.render(player);
                 frames++;
