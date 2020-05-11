@@ -37,7 +37,7 @@ public class Player {
 
         friction = 0.96f;
 
-        gravity = 0.03f;
+        gravity = 0.02f;
         camSpeed = 0.2f;
         rotSpeed = 0.2f;
         jumpSpeed = 0.3f;
