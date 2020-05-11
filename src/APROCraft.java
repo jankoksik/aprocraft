@@ -135,6 +135,7 @@ public class APROCraft {
 
                 glClearColor(0.25f, 0.4f, 0.8f, 1);
 
+
                 glMatrixMode(GL_PROJECTION);
                 glLoadIdentity();
                 setPerspective(70.0f, ((float) WIDTH / (float) HEIGHT), 0.3f, 1000.0f);
@@ -142,9 +143,39 @@ public class APROCraft {
                 glLoadIdentity();
 
                 player.updateCamera();
-                GUI.Test();
+
                 //shader.bind();
                 stefan.render(player);
+
+                glDisable(GL_DEPTH_TEST);
+                glMatrixMode(GL_PROJECTION);
+                glPushMatrix();
+                glLoadIdentity();
+                glOrtho(0, WIDTH, 0, HEIGHT, -1, 1);
+                glMatrixMode(GL_MODELVIEW);
+                glPushMatrix();
+                glLoadIdentity();
+
+                GUI.Test();
+                glColor3f(1f, .5f, 1f);
+// draw quad
+                glBegin(GL_QUADS);
+                glVertex2f(100, 100);
+                glVertex2f(100 + 200, 100);
+                glVertex2f(100 + 200, 100 + 200);
+                glVertex2f(100, 100 + 200);
+                //glVertex2f(0, 0);
+                //glVertex2f(1, 0);
+                //glVertex2f(1, 1);
+                //glVertex2f(0, 1);
+                glEnd();
+
+                glMatrixMode(GL_PROJECTION);
+                glPopMatrix();
+                glMatrixMode(GL_MODELVIEW);
+                glPopMatrix();
+                glEnable(GL_DEPTH_TEST);
+
                 frames++;
                 glfwSwapBuffers(win);
             }

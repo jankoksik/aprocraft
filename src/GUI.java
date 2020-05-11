@@ -16,13 +16,13 @@ public class GUI {
          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
          glBegin(GL_QUADS);
          glTexCoord2f(0,0);
-         glVertex2f(-0.5f, 0.5f);
+         glVertex2f(-50f, 50f);
          glTexCoord2f(0,1);
-         glVertex2f(0.5f, 0.5f);
+         glVertex2f(50f, 50f);
          glTexCoord2f(1,1);
-         glVertex2f(0.5f, -0.5f);
+         glVertex2f(50f, -50f);
          glTexCoord2f(1,0);
-         glVertex2f(-0.5f, -0.5f);
+         glVertex2f(-50f, -50f);
          glEnd();
          glDisable(GL_BLEND);
          glDisable(GL_TEXTURE_2D);
