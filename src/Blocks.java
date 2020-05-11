@@ -11,42 +11,42 @@ public abstract class Blocks {
 
 class GrassBlock extends Block {
     public GrassBlock() {
-        super(new RGB(0.35f, 1f, 0.15f));
+        super("Grass", new RGB(0.35f, 1f, 0.15f));
     }
 }
 
 class DirtBlock extends Block {
     public DirtBlock() {
-        super(new RGB(0.4f, 0.3f, 0.1f));
+        super("Dirt", new RGB(0.4f, 0.3f, 0.1f));
     }
 }
 
 class StoneBlock extends Block {
     public StoneBlock() {
-        super(new RGB(0.3f, 0.3f, 0.3f));
+        super("Stone", new RGB(0.3f, 0.3f, 0.3f));
     }
 }
 
 class LogBlock extends Block {
     public LogBlock() {
-        super(new RGB(0.3f, 0.2f, 0.0f));
+        super("Oak Log", new RGB(0.3f, 0.2f, 0.0f));
     }
 }
 
 class LeavesBlock extends Block {
     public LeavesBlock() {
-        super(new RGB(0.1f, 0.6f, 0.1f));
+        super("Oak Leaves", new RGB(0.1f, 0.6f, 0.1f));
     }
 }
 
 class BedrockBlock extends Block {
     public BedrockBlock() {
-        super(new RGB(0.1f, 0.1f, 0.1f));
+        super("Bedrock", new RGB(0.1f, 0.1f, 0.1f));
     }
 }
 
 class CloudBlock extends Block {
     public CloudBlock() {
-        super(new RGB(1f, 1f, 1f));
+        super("Cloud", new RGB(1f, 1f, 1f));
     }
 }

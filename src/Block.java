@@ -2,15 +2,18 @@ public abstract class Block {
     private static int CURRENT_ID = 0;
 
     private int id;
+    private String name;
     private RGB color;
     private float size;
     private float durability;
 
     private float[] colorData;
 
-    public Block(RGB color) {
+    public Block(String name, RGB color) {
         id = CURRENT_ID;
         CURRENT_ID ++;
+
+        this.name = name;
 
         this.color = color;
         size = 1f;
