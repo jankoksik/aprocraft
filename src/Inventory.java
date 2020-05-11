@@ -23,12 +23,14 @@ public class Inventory {
     private  ArrayList<Item> eq = new ArrayList<>();
     private int stack;
     private int space;
+    private int w;
     private ArrayList<Item> map= new ArrayList<>();
 
 
-    public Inventory(int stack, int space) {
+    public Inventory(int stack, int w, int h) {
         this.stack = stack;
-        this.space = space;
+        this.space = w*h;
+        this.w = w;
     }
 
     //malo optymalne
@@ -74,6 +76,12 @@ public class Inventory {
         return null;
     }
 
+    public int GetSpace(){
+        return space;
+    }
+    public int GetW(){
+        return w;
+    }
     private Item get(int id){
         for(Item k : map)
         {

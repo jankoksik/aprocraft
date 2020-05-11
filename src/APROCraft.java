@@ -34,7 +34,7 @@ public class APROCraft {
 
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");
-        Inventory eqi = new Inventory(3, 10);
+        Inventory eqi = new Inventory(3, 10,1);
         if (eqi.addItem(0)) {
             System.out.println("dodano pomyslnie item");
         } else {
@@ -154,10 +154,9 @@ public class APROCraft {
                 glMatrixMode(GL_MODELVIEW);
                 glPushMatrix();
                 glLoadIdentity();
-
+                player.getGui().RenderHealth(player.getHp());
+                player.getGui().RenderQAB();
                 //GUI.Test();
-                GUI.RenderQAB();
-                GUI.RenderHealth(15);
                 //glColor3f(1f, .5f, 1f);
 
                 /*glBegin(GL_QUADS);

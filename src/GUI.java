@@ -5,17 +5,25 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
     //Quick Action Bar
+
+
+
+    private int height = 0;
     private static Texture Grid = new Texture("./resources/Grid2.png");
     private static int magicNMBR = 20;
     private static float QABsize = APROCraft.HEIGHT/magicNMBR;
     private static float CurrMul = 1.1f;
-    private static int SizeOfQAB = 8;
-    private static int currChoosed=0;
-    private static int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1 );//(APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
-    private static int QABsy = APROCraft.HEIGHT/ magicNMBR;
+    private  int SizeOfQAB = 8;
+    private  int currChoosed=0;
+    private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1 );//(APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
+    private int QABsy = APROCraft.HEIGHT/ magicNMBR;
 
+    public GUI(Inventory i) {
+        SizeOfQAB = i.GetW();
+        height = i.GetSpace()/i.GetW();
+    }
 
-    public static void setCurr(int curr){
+    public  void setCurr(int curr){
         currChoosed =  curr;
         if(currChoosed < 0)
         {
@@ -26,11 +34,11 @@ public class GUI {
         }
 
     }
-    public static int GetCurr(){
+    public  int GetCurr(){
         return currChoosed;
     }
 
-    public static void RenderQAB(){
+    public void RenderQAB(){
         glEnable(GL_TEXTURE_2D);
         Grid.bind(0);
         glEnable(GL_BLEND);
@@ -66,7 +74,7 @@ public class GUI {
 
 
     }
-    public static void RenderHealth(int health){
+    public  void RenderHealth(int health){
         int maxH = 20;
         if(maxH < health)
             health = maxH;
@@ -119,6 +127,14 @@ public class GUI {
 
         glDisable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
+
+
+    }
+
+
+    public static void RenderEq(){
+
+
 
 
     }

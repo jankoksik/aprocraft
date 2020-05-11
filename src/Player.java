@@ -16,11 +16,30 @@ public class Player {
     private float yRot, xRot;
     private float camSpeed, rotSpeed, jumpSpeed;
     private boolean flying;
-    public Inventory eq = new Inventory(64, 32);
+    private  int hp = 20;
+    public Inventory eq = new Inventory(64, 8, 5);
+    private GUI gui = new GUI(eq);
     private boolean mouseLocked;
     private boolean isStanding;
 
     private long window;
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public GUI getGui() {
+        return gui;
+    }
+
+    public void setGui(GUI gui) {
+        this.gui = gui;
+    }
+
     private World world;
 
     public Player(long window, World world) {
@@ -88,25 +107,17 @@ public class Player {
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
         int h = 20;
-        if (glfwGetKey(window, GLFW_KEY_B) == GL_TRUE){
-            h--;
-
-            GUI.RenderHealth(h);
-
-        }
-
 
         GLFWScrollCallback scrollCallback;
         glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
                     if(yoffset > 0)
                     {
-                        GUI.setCurr(GUI.GetCurr()-1);
+                        gui.setCurr(gui.GetCurr()-1);
                     }
                     else if(yoffset < 0)
                     {
-                        GUI.setCurr(GUI.GetCurr()+1);
+                        gui.setCurr(gui.GetCurr()+1);
                     }
-                    GUI.RenderQAB();
         }));
 
 
