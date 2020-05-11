@@ -3,7 +3,7 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 16;
+    public static final int SIZE = 4;
 
     private Generator generator;
 
@@ -94,7 +94,7 @@ public class World {
     public void render(Player player) {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
-                float dist = Vector2f.distance(-player.getX(), -player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
+                float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
                 //System.out.println(dist);
                 if (dist <= 128)
                     chunks[i][j].render();
