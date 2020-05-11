@@ -1,4 +1,5 @@
 import org.lwjgl.BufferUtils;
+
 import static org.lwjgl.opengl.GL13.*;
 
 import javax.imageio.ImageIO;
@@ -20,23 +21,22 @@ public class Texture {
 
     public Texture(String filename) {
         BufferedImage bi;
-        try{
+        try {
             bi = ImageIO.read(new File(filename));
             width = bi.getWidth();
             height = bi.getHeight();
-            int[] pixel_raw = new int[width*height];
-            pixel_raw = bi.getRGB(0,0,width, height, null, 0, width);
+            int[] pixel_raw = new int[width * height];
+            pixel_raw = bi.getRGB(0, 0, width, height, null, 0, width);
 
-            ByteBuffer pixels = BufferUtils.createByteBuffer(width*height*4);
+            ByteBuffer pixels = BufferUtils.createByteBuffer(width * height * 4);
 
-            for (int i=0; i< height; i++){
-                for(int g =0; g< width ; g++)
-                {
-                    int pixel = pixel_raw[i*width+g];
-                    pixels.put((byte)((pixel >> 16) & 0xFF)); // czerwony
-                    pixels.put((byte)((pixel >> 8) & 0xFF)); // zielony
-                    pixels.put((byte)(pixel & 0xFF)); // niebieski
-                    pixels.put((byte)((pixel >> 24) & 0xFF)); //alpha
+            for (int i = 0; i < height; i++) {
+                for (int g = 0; g < width; g++) {
+                    int pixel = pixel_raw[i * width + g];
+                    pixels.put((byte) ((pixel >> 16) & 0xFF)); // czerwony
+                    pixels.put((byte) ((pixel >> 8) & 0xFF)); // zielony
+                    pixels.put((byte) (pixel & 0xFF)); // niebieski
+                    pixels.put((byte) ((pixel >> 24) & 0xFF)); //alpha
                 }
 
             }
@@ -50,7 +50,7 @@ public class Texture {
 
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         //this.id = id;
@@ -74,12 +74,13 @@ public class Texture {
 
     }
 
-    public void bind(int sampler){
-        if(sampler >= 0 && sampler <= 31) {
+    public void bind(int sampler) {
+        if (sampler >= 0 && sampler <= 31) {
             glActiveTexture(GL_TEXTURE0 + sampler);
             glBindTexture(GL_TEXTURE_2D, id);
         }
     }
+
     public int getWidth() {
         return width;
     }

@@ -64,7 +64,7 @@ public class Player {
         if (glfwGetKey(window, Controls.getJump()) == GL_TRUE) {
             if (isStanding()) {
                 ySpeed = jumpSpeed;
-               // System.out.println("jump");
+                // System.out.println("jump");
             }
         }
 
@@ -107,7 +107,7 @@ public class Player {
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
 
-        if(!isStanding())
+        if (!isStanding())
             ySpeed -= gravity;
 
         xSpeed *= friction;
@@ -178,14 +178,14 @@ public class Player {
 
             prevX = newX;
             prevY = newY;
-           // System.out.println(xRot);
+            // System.out.println(xRot);
 
             xRot += deltaY * 0.2f;
             yRot += deltaX * 0.2f;
 
-            if(xRot < -90)
+            if (xRot < -90)
                 xRot = -90;
-            if(xRot > 90)
+            if (xRot > 90)
                 xRot = 90;
 
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
@@ -202,13 +202,13 @@ public class Player {
         int x0 = (int) (xCam + x + radius);
         int x1 = (int) (xCam + x - radius);
 
-        int y0 = (int) (yCam + y + radius);
-        int y1 = (int) (yCam + y - radius);
+        int y0 = (int) (yCam - 1 + y + radius);
+        int y1 = (int) (yCam - 1 + y - radius);
 
         int z0 = (int) (zCam + z + radius);
         int z1 = (int) (zCam + z - radius);
 
-        if (world.getBlock((int) (xCam + x), (int)(yCam + y - radius - 1), (int) (zCam + z)) == null)
+        if (world.getBlock((int) (xCam + x), (int) (yCam - 1 + y - radius - 1), (int) (zCam + z)) == null)
             isStanding = false;
         else
             isStanding = true;

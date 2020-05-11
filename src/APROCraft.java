@@ -13,8 +13,8 @@ import java.util.Map;
 public class APROCraft {
     public static final String VERSION = "0.2.4 alpha";
 
-    public static final int WIDTH = 1920;
-    public static final int HEIGHT = 1080;
+    public static final int WIDTH = 1600;
+    public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;
 
     public APROCraft() {
@@ -79,18 +79,16 @@ public class APROCraft {
         }
 
         TestLogLabel("recipe");
-        Crafting craftingTable = new Crafting(3,3, "TestRecip");
+        Crafting craftingTable = new Crafting(3, 3, "TestRecip");
         craftingTable.LoadRecipes();
-        craftingTable.PlaceItemInCrafting(0,0, 1, eqi);
-        craftingTable.PlaceItemInCrafting(0,1, 1, eqi);
+        craftingTable.PlaceItemInCrafting(0, 0, 1, eqi);
+        craftingTable.PlaceItemInCrafting(0, 1, 1, eqi);
         int res = craftingTable.ShowPatternMatchinResult();
-        if(res != -1)
-        {
+        if (res != -1) {
             craftingTable.Craft(eqi);
             System.out.println("zcraftowano : " + res);
             System.out.println("zcraftowales patyk z ziemi :-/ ");
-        }
-        else{
+        } else {
             System.out.println("nie znaleziono craftingu ");
         }
 
