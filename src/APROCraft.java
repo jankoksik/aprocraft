@@ -157,18 +157,14 @@ public class APROCraft {
                 glLoadIdentity();
 
                 GUI.Test();
-                glColor3f(1f, .5f, 1f);
-// draw quad
-                glBegin(GL_QUADS);
+                //glColor3f(1f, .5f, 1f);
+
+                /*glBegin(GL_QUADS);
                 glVertex2f(100, 100);
                 glVertex2f(100 + 200, 100);
                 glVertex2f(100 + 200, 100 + 200);
                 glVertex2f(100, 100 + 200);
-                //glVertex2f(0, 0);
-                //glVertex2f(1, 0);
-                //glVertex2f(1, 1);
-                //glVertex2f(0, 1);
-                glEnd();
+                glEnd();*/
 
                 glMatrixMode(GL_PROJECTION);
                 glPopMatrix();

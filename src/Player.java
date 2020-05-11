@@ -24,7 +24,7 @@ public class Player {
 
     public Player(long window, World world) {
         xCam = 10;
-        yCam = 30;
+        yCam = 34;
         zCam = 10;
 
         forward = 0;
@@ -61,7 +61,7 @@ public class Player {
         left = 0;
 
         if (glfwGetKey(window, Controls.getJump()) == GL_TRUE) {
-            if (isStanding) {
+            if (isStanding()) {
                 ySpeed = jumpSpeed;
                // System.out.println("jump");
             }
@@ -90,7 +90,7 @@ public class Player {
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
 
-        if(!isStanding)
+        if(!isStanding())
             ySpeed -= gravity;
 
         xSpeed *= friction;
@@ -105,11 +105,11 @@ public class Player {
     }
 
     private void move(float x, float y, float z) {
-        /*if (!checkCollision(x, 0, 0)) xCam += x;
+        if (!checkCollision(x, 0, 0)) xCam += x;
         if (!checkCollision(0, y, 0)) yCam += y;
-        if (!checkCollision(0, 0, z)) zCam += z;*/
+        if (!checkCollision(0, 0, z)) zCam += z;
 
-        int xs = (int)Math.abs(x*100);
+        /*int xs = (int)Math.abs(x*100);
         int ys = (int)Math.abs(y*100);
         int zs = (int)Math.abs(z*100);
 
@@ -129,7 +129,7 @@ public class Player {
             if(!checkCollision(0, 0, z/zs))
                 zCam += z/zs;
             else
-                z = 0;
+                z = 0;*/
     }
 
     private void mouseUpdate() {
@@ -175,9 +175,9 @@ public class Player {
         }
     }
 
-    /*public boolean isStanding() {
-        return world.getBlock((int)xCam, (int)yCam-1, (int)zCam) != null;
-    }*/
+    public boolean isStanding() {
+        return isStanding;//world.getBlock((int)xCam, (int)yCam-2, (int)zCam) != null;
+    }
 
     public boolean checkCollision(float x, float y, float z) {
         float radius = 0.4f;
@@ -185,13 +185,13 @@ public class Player {
         int x0 = (int) (xCam + x + radius);
         int x1 = (int) (xCam + x - radius);
 
-        int y0 = (int) (yCam - 1 + y + radius);
-        int y1 = (int) (yCam - 1 + y - radius);
+        int y0 = (int) (yCam + y + radius);
+        int y1 = (int) (yCam + y - radius);
 
         int z0 = (int) (zCam + z + radius);
         int z1 = (int) (zCam + z - radius);
 
-        if (world.getBlock((int) (xCam + x), y1 - 1, (int) (zCam + z)) == null)
+        if (world.getBlock((int) (xCam + x), (int)(yCam + y - radius - 1), (int) (zCam + z)) == null)
             isStanding = false;
         else
             isStanding = true;
@@ -201,6 +201,7 @@ public class Player {
         if (world.getBlock(x1, y0, z0) != null) return true;
         if (world.getBlock(x1, y1, z0) != null) return true;
         if (world.getBlock(x0, y1, z0) != null) return true;
+
         if (world.getBlock(x0, y0, z1) != null) return true;
         if (world.getBlock(x1, y0, z1) != null) return true;
         if (world.getBlock(x1, y1, z1) != null) return true;
