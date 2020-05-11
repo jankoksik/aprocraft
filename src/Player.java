@@ -1,5 +1,6 @@
 import org.joml.Math;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWScrollCallback;
 
 import java.nio.DoubleBuffer;
 
@@ -86,6 +87,20 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
+
+        GLFWScrollCallback scrollCallback;
+        glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
+                    if(xoffset > 0)
+                    {
+                        GUI.setCurr(GUI.GetCurr()+1);
+                    }
+                    else if(xoffset < 0)
+                    {
+                        GUI.setCurr(GUI.GetCurr()-1);
+                    }
+                    GUI.RenderQAB();
+        }));
+
 
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
