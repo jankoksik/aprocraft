@@ -36,10 +36,10 @@ public class Player {
 
         friction = 0.96f;
 
-        gravity = 0.04f;
+        gravity = 0.03f;
         camSpeed = 0.2f;
         rotSpeed = 0.2f;
-        jumpSpeed = 1f;
+        jumpSpeed = 0.3f;
 
         yRot = 135;
         xRot = 0;
@@ -75,43 +75,23 @@ public class Player {
                 yCam -= camSpeed;
         }
 
-        if (glfwGetKey(window, Controls.getRight()) == GL_TRUE) {
-            //xSpeed = camSpeed * Math.sin(Math.toRadians(yRot + 90));
-            //zSpeed = -camSpeed * Math.cos(Math.toRadians(yRot + 90));
+        if (glfwGetKey(window, Controls.getRight()) == GL_TRUE)
             left = -1;
-        }
 
-        if (glfwGetKey(window, Controls.getLeft()) == GL_TRUE) {
-            //xSpeed = camSpeed * Math.sin(Math.toRadians(yRot - 90));
-            //zSpeed = -camSpeed * Math.cos(Math.toRadians(yRot - 90));
+        if (glfwGetKey(window, Controls.getLeft()) == GL_TRUE)
             left = 1;
-        }
 
-        if (glfwGetKey(window, Controls.getForward()) == GL_TRUE) {
-            //xCam -= camSpeed * Math.sin(Math.toRadians(yRot));
-            //zCam += camSpeed * Math.cos(Math.toRadians(yRot));
-            //xSpeed = camSpeed * Math.sin(Math.toRadians(yRot));
-            //zSpeed = -camSpeed * Math.cos(Math.toRadians(yRot));
+        if (glfwGetKey(window, Controls.getForward()) == GL_TRUE)
             forward = 1;
-        }
 
-        if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE) {
-            //xSpeed = -camSpeed * Math.sin(Math.toRadians(yRot));
-            //zSpeed = camSpeed * Math.cos(Math.toRadians(yRot));
+        if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
-        }
 
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
 
-        //if(!isStanding)
-        //ySpeed -= gravity;
-        //else
-        //ySpeed += 0.9f*gravity;
-
-        //yCam += ySpeed;
-
-        ySpeed -= gravity;
+        if(!isStanding)
+            ySpeed -= gravity;
 
         xSpeed *= friction;
         ySpeed *= friction;
@@ -125,10 +105,6 @@ public class Player {
     }
 
     private void move(float x, float y, float z) {
-        /*xCam += x;
-        yCam += y;
-        zCam += z;*/
-
         /*if (!checkCollision(x, 0, 0)) xCam += x;
         if (!checkCollision(0, y, 0)) yCam += y;
         if (!checkCollision(0, 0, z)) zCam += z;*/
