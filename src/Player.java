@@ -14,7 +14,7 @@ public class Player {
     private float yRot, xRot;
     private float camSpeed, rotSpeed, jumpSpeed;
     private boolean flying;
-
+    public Inventory eq = new Inventory(64, 32);
     private boolean mouseLocked;
 
     private long window;
