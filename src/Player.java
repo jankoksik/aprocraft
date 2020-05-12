@@ -109,8 +109,15 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
+        if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
+            hp += -1;
+        if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
+            hp +=1;
 
-        int h = 20;
+        if(hp<0)
+            hp=0;
+        if(hp>20)
+            hp=20;
 
         GLFWScrollCallback scrollCallback;
         glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
