@@ -16,7 +16,7 @@ public class Player {
     private float yRot, xRot;
     private float camSpeed, rotSpeed, jumpSpeed;
     private boolean flying;
-    private  int hp = 20;
+    private int hp = 20;
     public Inventory eq = new Inventory(64, 8, 5);
     private GUI gui = new GUI(eq);
     private boolean mouseLocked;
@@ -112,23 +112,20 @@ public class Player {
         if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
             hp += -1;
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
-            hp +=1;
+            hp += 1;
 
-        if(hp<0)
-            hp=0;
-        if(hp>20)
-            hp=20;
+        if (hp < 0)
+            hp = 0;
+        if (hp > 20)
+            hp = 20;
 
         GLFWScrollCallback scrollCallback;
         glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
-                    if(yoffset > 0)
-                    {
-                        gui.setCurr(gui.GetCurr()-1);
-                    }
-                    else if(yoffset < 0)
-                    {
-                        gui.setCurr(gui.GetCurr()+1);
-                    }
+            if (yoffset > 0) {
+                gui.setCurr(gui.GetCurr() - 1);
+            } else if (yoffset < 0) {
+                gui.setCurr(gui.GetCurr() + 1);
+            }
         }));
 
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
@@ -137,8 +134,8 @@ public class Player {
         if (!isStanding())
             ySpeed -= gravity;
         else {
-            Block b = world.getBlock((int)xCam, (int)(yCam-2f), (int)zCam);
-            if(b != null)
+            Block b = world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam);
+            if (b != null)
                 if (b.getMaterial() == Block.BOUNCY) {
                     ySpeed += 0.8f;
                 } else if (b.getMaterial() == Block.STICKY) {
@@ -201,7 +198,7 @@ public class Player {
     private void mouseUpdate() {
         double newX = 0, newY = 0, prevX = 0, prevY = 0;
 
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
             mouseLocked = !mouseLocked;
             if (mouseLocked)
@@ -242,7 +239,7 @@ public class Player {
     }
 
     public boolean isStanding() {
-        return world.getBlock((int)xCam, (int)(yCam-2f), (int)zCam) != null;//isStanding;//
+        return world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam) != null;//isStanding;//
     }
 
     public boolean checkCollision(float x, float y, float z) {
@@ -272,24 +269,66 @@ public class Player {
         if (world.getBlock(x1, y1, z1) != null) return true;
         if (world.getBlock(x0, y1, z1) != null) return true;
 
-        if (world.getBlock(x0, y0+1, z0) != null) return true;
-        if (world.getBlock(x1, y0+1, z0) != null) return true;
-        if (world.getBlock(x1, y1+1, z0) != null) return true;
-        if (world.getBlock(x0, y1+1, z0) != null) return true;
+        if (world.getBlock(x0, y0 + 1, z0) != null) return true;
+        if (world.getBlock(x1, y0 + 1, z0) != null) return true;
+        if (world.getBlock(x1, y1 + 1, z0) != null) return true;
+        if (world.getBlock(x0, y1 + 1, z0) != null) return true;
 
-        if (world.getBlock(x0, y0+1, z1) != null) return true;
-        if (world.getBlock(x1, y0+1, z1) != null) return true;
-        if (world.getBlock(x1, y1+1, z1) != null) return true;
-        if (world.getBlock(x0, y1+1, z1) != null) return true;
+        if (world.getBlock(x0, y0 + 1, z1) != null) return true;
+        if (world.getBlock(x1, y0 + 1, z1) != null) return true;
+        if (world.getBlock(x1, y1 + 1, z1) != null) return true;
+        if (world.getBlock(x0, y1 + 1, z1) != null) return true;
 
         return false;
     }
 
     public void updateCamera() {
-        glRotatef(Math.sin(step/5.0f)/2.0f, 0, 0, 1); //Math.sin(Math.sqrt(xCam*zCam)*3)
+        glRotatef(Math.sin(step / 5.0f) / 2.0f, 0, 0, 1); //Math.sin(Math.sqrt(xCam*zCam)*3)
         glRotatef(xRot, 1, 0, 0);
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(-xCam, -yCam, -zCam);
+
+        float x = (int)(xCam - 0.5f + Math.sin(Math.toRadians(yRot)) * 3);
+        float y = (int)(yCam - 0.5f - Math.sin(Math.toRadians(xRot)) * 3);
+        float z = (int)(zCam - 0.5f - Math.cos(Math.toRadians(yRot)) * 3);
+        float s = 1f;
+
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+            world.setBlock((int)x, (int)y, (int)z, Blocks.AIR);
+
+        glBegin(GL_QUADS);
+
+        glVertex3f(x, y, z);
+        glVertex3f(x + s, y, z);
+        glVertex3f(x + s, y + s, z);
+        glVertex3f(x, y + s, z);
+
+        glVertex3f(x + s, y, z + s);
+        glVertex3f(x, y, z + s);
+        glVertex3f(x, y + s, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glVertex3f(x, y, z);
+        glVertex3f(x + s, y, z);
+        glVertex3f(x + s, y, z + s);
+        glVertex3f(x, y, z + s);
+
+        glVertex3f(x + s, y + s, z);
+        glVertex3f(x, y + s, z);
+        glVertex3f(x, y + s, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glVertex3f(x, y, z);
+        glVertex3f(x, y + s, z);
+        glVertex3f(x, y + s, z + s);
+        glVertex3f(x, y, z + s);
+
+        glVertex3f(x + s, y + s, z);
+        glVertex3f(x + s, y, z);
+        glVertex3f(x + s, y, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glEnd();
     }
 
     public float getX() {
