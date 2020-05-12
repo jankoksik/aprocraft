@@ -21,6 +21,7 @@ public class Player {
     private GUI gui = new GUI(eq);
     private boolean mouseLocked;
     private boolean isStanding;
+    private int step;
 
     private long window;
 
@@ -70,6 +71,8 @@ public class Player {
 
         isStanding = false;
 
+        step = 0;
+
         this.window = window;
         this.world = world;
     }
@@ -106,6 +109,7 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
+
         int h = 20;
 
         GLFWScrollCallback scrollCallback;
@@ -119,8 +123,6 @@ public class Player {
                         gui.setCurr(gui.GetCurr()+1);
                     }
         }));
-
-
 
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
@@ -142,6 +144,8 @@ public class Player {
 
             xSpeed *= 0.8f;
             zSpeed *= 0.8f;
+
+            step += forward;
         }
 
         xSpeed *= friction;
@@ -251,7 +255,6 @@ public class Player {
         else
             isStanding = true;
 
-
         if (world.getBlock(x0, y0, z0) != null) return true;
         if (world.getBlock(x1, y0, z0) != null) return true;
         if (world.getBlock(x1, y1, z0) != null) return true;
@@ -276,6 +279,7 @@ public class Player {
     }
 
     public void updateCamera() {
+        glRotatef(Math.sin(step/5.0f)/2.0f, 0, 0, 1); //Math.sin(Math.sqrt(xCam*zCam)*3)
         glRotatef(xRot, 1, 0, 0);
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(-xCam, -yCam, -zCam);
