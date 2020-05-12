@@ -160,6 +160,10 @@ public class Player {
         if (!checkCollision(0, y, 0)) yCam += y;
         if (!checkCollision(0, 0, z)) zCam += z;
 
+        /*if (!checkCollision(x, 0, 0) && !checkCollision(x, 0.6f, 0)) xCam += x;
+        if (!checkCollision(0, y, 0) && !checkCollision(0, y+0.6f, 0)) yCam += y;
+        if (!checkCollision(0, 0, z) && !checkCollision(0, 0.6f, z)) zCam += z;*/
+
         /*int xs = (int)Math.abs(x*100);
         int ys = (int)Math.abs(y*100);
         int zs = (int)Math.abs(z*100);
@@ -257,6 +261,16 @@ public class Player {
         if (world.getBlock(x1, y0, z1) != null) return true;
         if (world.getBlock(x1, y1, z1) != null) return true;
         if (world.getBlock(x0, y1, z1) != null) return true;
+
+        if (world.getBlock(x0, y0+1, z0) != null) return true;
+        if (world.getBlock(x1, y0+1, z0) != null) return true;
+        if (world.getBlock(x1, y1+1, z0) != null) return true;
+        if (world.getBlock(x0, y1+1, z0) != null) return true;
+
+        if (world.getBlock(x0, y0+1, z1) != null) return true;
+        if (world.getBlock(x1, y0+1, z1) != null) return true;
+        if (world.getBlock(x1, y1+1, z1) != null) return true;
+        if (world.getBlock(x0, y1+1, z1) != null) return true;
 
         return false;
     }
