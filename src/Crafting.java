@@ -146,10 +146,13 @@ public class Crafting {
                 }
                 val =  (Long) jo.get("result");
                 int ResId = (int) val;
+                val =  (Long) jo.get("Rn");
+                int Rn = (int) val;
                 val = (Long) jo.get("width");
                 int w = (int)val;
                 Recipe n = new Recipe(w, craft.length/w);
                 n.setResult(ResId);
+                n.setnR(Rn);
                 n.setCrafting(craft);
                 recipes.add(n);
                 //iterator.next();

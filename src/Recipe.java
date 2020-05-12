@@ -15,6 +15,16 @@ public class Recipe {
     int [] craft;
     int result = 0;
 
+    public int getnR() {
+        return nR;
+    }
+
+    public void setnR(int nR) {
+        this.nR = nR;
+    }
+
+    int nR = 0;
+
     public int getResult() {
         return result;
     }
@@ -57,6 +67,7 @@ public class Recipe {
         jo.put("width", w);
         jo.put("crafting", gson.toJson(craft));
         jo.put("result", result);
+        jo.put("Rn", nR);
         ja.add(jo);
         PrintWriter pw = null;
         try {

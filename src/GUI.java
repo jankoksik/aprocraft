@@ -10,7 +10,7 @@ public class GUI {
 
     private int height = 0;
     private static Texture Grid = new Texture("./resources/Grid2.png");
-    private static int magicNMBR = 20;
+    private static int magicNMBR = 15;
     private static float QABsize = APROCraft.HEIGHT/magicNMBR;
     private static float CurrMul = 1.1f;
     private  int SizeOfQAB = 8;
