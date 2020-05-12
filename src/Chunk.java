@@ -78,11 +78,13 @@ public class Chunk {
 
     private void updateBuffer() {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, fb);
+        glBufferData(GL_ARRAY_BUFFER, fb, GL_STATIC_DRAW);
+        //glBufferSubData(GL_ARRAY_BUFFER, 0, fb);
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         glBindBuffer(GL_ARRAY_BUFFER, col);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
+        glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
+        //glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
