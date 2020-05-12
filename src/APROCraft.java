@@ -22,7 +22,6 @@ public class APROCraft {
             System.exit(1);
         }
 
-
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);

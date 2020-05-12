@@ -198,15 +198,16 @@ public class Player {
     private void mouseUpdate() {
         double newX = 0, newY = 0, prevX = 0, prevY = 0;
 
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
-            glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
-            mouseLocked = !mouseLocked;
+        //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
+            //glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
+            //mouseLocked = !mouseLocked;
+            mouseLocked = true;
             if (mouseLocked)
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             else
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-        }
+        //}
 
         if (mouseLocked) {
             DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
