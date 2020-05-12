@@ -9,7 +9,7 @@ public class GUI {
 
 
     private int height = 0;
-    private static Texture Grid = new Texture("./resources/Grid2.png");
+    private static Texture Grid = new Texture("./resources/ramkka.png");
     private static int magicNMBR = 15;
     private static float QABsize = APROCraft.HEIGHT/magicNMBR;
     private static float CurrMul = 1.1f;
@@ -132,11 +132,46 @@ public class GUI {
     }
 
 
-    public static void RenderEq(){
+    public  void RenderEq(){
+        Texture Grid = new Texture("./resources/crosshair.png");
+        glEnable(GL_TEXTURE_2D);
+        Grid.bind(0);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        int cX = QABsx;
+        int cY = QABsy;
+        int offset = 100;
+        int EqBEgX = QABsx - offset;
+        float CrossSize = 30;
+        boolean eqOpened = false;
+        int W = APROCraft.WIDTH;
+        int H = APROCraft.HEIGHT;
 
+        if(!eqOpened){
+            glBegin(GL_QUADS);
 
+            glTexCoord2f(0, 0);
+            glVertex2f((W-CrossSize)/2, (H-CrossSize)/2);
 
+            glTexCoord2f(0, 1);
+            glVertex2f((W+CrossSize)/2, (H-CrossSize)/2);
 
+            glTexCoord2f(1, 1);
+            glVertex2f((W+CrossSize)/2, (H+CrossSize)/2);
+
+            glTexCoord2f(1, 0);
+            glVertex2f((W-CrossSize)/2, (H+CrossSize)/2);
+
+            glEnd();
+
+        }else {
+            for (int i = 0; i < SizeOfQAB; i++) {
+
+            }
+        }
+        cX = 0;
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
     }
 
 
