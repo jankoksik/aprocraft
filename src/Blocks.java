@@ -36,6 +36,7 @@ class LogBlock extends Block {
 class LeavesBlock extends Block {
     public LeavesBlock() {
         super("Oak Leaves", new RGB(0.1f, 0.6f, 0.1f));
+        material = Block.STICKY;
     }
 }
 
@@ -48,5 +49,6 @@ class BedrockBlock extends Block {
 class CloudBlock extends Block {
     public CloudBlock() {
         super("Cloud", new RGB(1f, 1f, 1f));
+        material = Block.BOUNCY;
     }
 }

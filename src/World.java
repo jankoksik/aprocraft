@@ -27,7 +27,7 @@ public class World {
         chunks = new Chunk[SIZE][SIZE];
 
         time = 0;
-        skyTime = 0;
+        skyTime = 3000;
         skyTimeDir = 1;
 
         for (int i = 0; i < SIZE; i++)

@@ -1,11 +1,19 @@
+import java.util.Random;
+
 public abstract class Block {
     private static int CURRENT_ID = 0;
+
+    public static final int NORMAL = 0;
+    public static final int BOUNCY = 1;
+    public static final int STICKY = 2;
+    public static final int SLIPPY = 3;
 
     private int id;
     private String name;
     private RGB color;
     private float size;
-    private float durability;
+    protected float durability;
+    protected int material;
 
     private float[] colorData;
 
@@ -18,6 +26,7 @@ public abstract class Block {
         this.color = color;
         size = 1f;
         durability = 1f;
+        material = NORMAL;
 
         colorData = new float[] {
                 //back
@@ -56,6 +65,11 @@ public abstract class Block {
                 color.r, color.g, color.b, 1,
                 color.r, color.g, color.b, 1
         };
+
+        /*Random r = new Random();
+
+        for(int i = 0; i < colorData.length; i ++)
+            colorData[i] *= (float)(r.nextInt(20)+80)/100.0f;*/
     }
 
     public float[] getData(float x, float y, float z) {
@@ -94,5 +108,9 @@ public abstract class Block {
 
     public float[] getColorData() {
         return colorData;
+    }
+
+    public int getMaterial() {
+        return material;
     }
 }

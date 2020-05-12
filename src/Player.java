@@ -127,6 +127,22 @@ public class Player {
 
         if (!isStanding())
             ySpeed -= gravity;
+        else {
+            Block b = world.getBlock((int)xCam, (int)(yCam-2f), (int)zCam);
+            if(b != null)
+                if (b.getMaterial() == Block.BOUNCY) {
+                    ySpeed += 0.8f;
+                } else if (b.getMaterial() == Block.STICKY) {
+                    xSpeed *= 0.5f;
+                    zSpeed *= 0.5f;
+                } else if (b.getMaterial() == Block.SLIPPY) {
+                    xSpeed *= 1.5f;
+                    zSpeed *= 1.5f;
+                }
+
+            xSpeed *= 0.8f;
+            zSpeed *= 0.8f;
+        }
 
         xSpeed *= friction;
         ySpeed *= friction;
