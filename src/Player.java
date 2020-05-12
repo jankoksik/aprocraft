@@ -231,7 +231,7 @@ public class Player {
     }
 
     public boolean isStanding() {
-        return isStanding;//world.getBlock((int)xCam, (int)yCam-2, (int)zCam) != null;
+        return world.getBlock((int)xCam, (int)(yCam-2f), (int)zCam) != null;//isStanding;//
     }
 
     public boolean checkCollision(float x, float y, float z) {
