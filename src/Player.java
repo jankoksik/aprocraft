@@ -297,6 +297,9 @@ public class Player {
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
             world.setBlock((int)x, (int)y, (int)z, Blocks.AIR);
 
+        glLineWidth(2);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
         glBegin(GL_QUADS);
 
         glVertex3f(x, y, z);
@@ -330,6 +333,8 @@ public class Player {
         glVertex3f(x + s, y + s, z + s);
 
         glEnd();
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
     public float getX() {
