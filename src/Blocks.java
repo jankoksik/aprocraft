@@ -17,7 +17,7 @@ public abstract class Blocks {
         blocks.add(block);
     }
 
-    public Block searchByID(int id) {
+    public static Block searchByID(int id) {
         for(Block b : blocks)
             if(b.getID() == id)
                 return b;
