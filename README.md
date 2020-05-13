@@ -13,3 +13,11 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 
 ## id Bloków
 
+## Domyślne Sterowanie
+
+## Receptury Craftingowe
+
+## Moby
+
+##  Ciekawostki 
+* chodzenie po koronach drzew jest trudne, więc spowolni to twoje ruchy
