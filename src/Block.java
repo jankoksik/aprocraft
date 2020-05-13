@@ -112,6 +112,10 @@ public abstract class Block {
         return colorData;
     }
 
+    public RGB getColor() {
+        return color;
+    }
+
     public int getMaterial() {
         return material;
     }
