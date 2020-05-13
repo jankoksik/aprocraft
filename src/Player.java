@@ -289,13 +289,16 @@ public class Player {
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(-xCam, -yCam, -zCam);
 
-        float x = (int)(xCam - 0.5f + Math.sin(Math.toRadians(yRot)) * 3);
-        float y = (int)(yCam - 0.5f - Math.sin(Math.toRadians(xRot)) * 3);
-        float z = (int)(zCam - 0.5f - Math.cos(Math.toRadians(yRot)) * 3);
+        float x = (int)(xCam + Math.sin(Math.toRadians(yRot)) * 3);
+        float y = (int)(yCam - Math.sin(Math.toRadians(xRot)) * 3);
+        float z = (int)(zCam - Math.cos(Math.toRadians(yRot)) * 3);
         float s = 1f;
 
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
             world.setBlock((int)x, (int)y, (int)z, Blocks.AIR);
+
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
+            world.setBlock((int)x, (int)y, (int)z, Blocks.CLOUD);
 
         glLineWidth(2);
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
