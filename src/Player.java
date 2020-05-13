@@ -109,6 +109,9 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
+        if (glfwGetKey(window, Controls.getInventory()) == GL_TRUE)
+            gui.setOpened(!gui.isOpened());
+
         if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
             hp += -1;
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)

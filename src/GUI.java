@@ -15,6 +15,17 @@ public class GUI {
     private static float CurrMul = 1.1f;
     private  int SizeOfQAB = 8;
     private  int currChoosed=0;
+
+    public boolean isOpened() {
+        return opened;
+    }
+
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
+
+    private  boolean opened=false;
+    private int Hoff = 0;
     private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1 );//(APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
     private int QABsy = APROCraft.HEIGHT/ magicNMBR;
 
@@ -87,6 +98,7 @@ public class GUI {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         int offsety = QABsy + (int) QABsize + 10;
         int size = (int) (0.4f * QABsize);
+        Hoff = offsety + size + size/2;
         int offsetx = 1;
         int cX = QABsx;
         int full = health/2;
@@ -133,21 +145,22 @@ public class GUI {
 
 
     public  void RenderEq(){
-        Texture Grid = new Texture("./resources/crosshair.png");
+
         glEnable(GL_TEXTURE_2D);
-        Grid.bind(0);
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         int cX = QABsx;
         int cY = QABsy;
-        int offset = 100;
+        int offset = 300;
         int EqBEgX = QABsx - offset;
         float CrossSize = 30;
-        boolean eqOpened = false;
         int W = APROCraft.WIDTH;
         int H = APROCraft.HEIGHT;
 
-        if(!eqOpened){
+        if(!opened){
+            Texture Grid = new Texture("./resources/crosshair.png");
+            Grid.bind(0);
             glBegin(GL_QUADS);
 
             glTexCoord2f(0, 0);
@@ -165,9 +178,25 @@ public class GUI {
             glEnd();
 
         }else {
-            for (int i = 0; i < SizeOfQAB; i++) {
+            Texture Grid = new Texture("./resources/Back2.png");
+            Grid.bind(0);
+            glBegin(GL_QUADS);
 
-            }
+            glTexCoord2f(0, 0);
+            glVertex2f(QABsx-offset, Hoff);
+
+            glTexCoord2f(0, 1);
+            glVertex2f(QABsx+offset + SizeOfQAB *QABsize + (SizeOfQAB - 1)*1  , Hoff);
+
+            glTexCoord2f(1, 1);
+            glVertex2f(QABsx+offset + (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1  , Hoff +  800 );
+
+            glTexCoord2f(1, 0);
+            glVertex2f(QABsx-offset, Hoff+  800);
+
+            glEnd();
+
+
         }
         cX = 0;
         glDisable(GL_BLEND);
