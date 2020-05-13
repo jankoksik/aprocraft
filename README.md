@@ -21,3 +21,8 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 
 ##  Ciekawostki 
 * chodzenie po koronach drzew jest trudne, więc spowolni to twoje ruchy
+* 
+
+## Przydatne Linki 
+* [Prezentacja nr. 1]( https://docs.google.com/presentation/d/1kTFLFQmNeN7e-ZAb40vJj1gkO3F74Sd9fUSSIczJ3Ug/edit?usp=sharing) 
+* [Wykres](https://docs.google.com/spreadsheets/d/1eKGbm1aENL7FdOXJLVnKCpnl9LFGtqn9tIk3BIec5yo/edit?usp=sharing)
