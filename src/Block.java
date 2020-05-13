@@ -66,6 +66,8 @@ public abstract class Block {
                 color.r, color.g, color.b, 1
         };
 
+        Blocks.registerBlock(this);
+
         /*Random r = new Random();
 
         for(int i = 0; i < colorData.length; i ++)
@@ -112,5 +114,14 @@ public abstract class Block {
 
     public int getMaterial() {
         return material;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + id + ")";
     }
 }

@@ -1,4 +1,5 @@
 import org.joml.Math;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
@@ -22,6 +23,7 @@ public class Player {
     private boolean mouseLocked;
     private boolean isStanding;
     private int step;
+    private Raycast raycast;
 
     private long window;
 
@@ -73,12 +75,15 @@ public class Player {
 
         step = 0;
 
+        raycast = new Raycast(this);
+
         this.window = window;
         this.world = world;
     }
 
     public void update() {
         mouseUpdate();
+        raycast.update();
 
         forward = 0;
         left = 0;
@@ -292,55 +297,65 @@ public class Player {
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(-xCam, -yCam, -zCam);
 
-        float x = (int)(xCam + Math.sin(Math.toRadians(yRot)) * 3);
+        /*float x = (int)(xCam + Math.sin(Math.toRadians(yRot)) * 3);
         float y = (int)(yCam - Math.sin(Math.toRadians(xRot)) * 3);
-        float z = (int)(zCam - Math.cos(Math.toRadians(yRot)) * 3);
-        float s = 1f;
+        float z = (int)(zCam - Math.cos(Math.toRadians(yRot)) * 3);*/
 
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-            world.setBlock((int)x, (int)y, (int)z, Blocks.AIR);
+        Vector3f v = raycast.getBlockPosition();
 
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-            world.setBlock((int)x, (int)y, (int)z, Blocks.CLOUD);
+        if(v != null) {
 
-        glLineWidth(2);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            float x = (int) (v.x);
+            float y = (int) (v.y);
+            float z = (int) (v.z);
 
-        glBegin(GL_QUADS);
+            float s = 10f;
 
-        glVertex3f(x, y, z);
-        glVertex3f(x + s, y, z);
-        glVertex3f(x + s, y + s, z);
-        glVertex3f(x, y + s, z);
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+                world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
 
-        glVertex3f(x + s, y, z + s);
-        glVertex3f(x, y, z + s);
-        glVertex3f(x, y + s, z + s);
-        glVertex3f(x + s, y + s, z + s);
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
+                world.setBlock((int) x, (int) y, (int) z, Blocks.CLOUD);
 
-        glVertex3f(x, y, z);
-        glVertex3f(x + s, y, z);
-        glVertex3f(x + s, y, z + s);
-        glVertex3f(x, y, z + s);
+            glLineWidth(2);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-        glVertex3f(x + s, y + s, z);
-        glVertex3f(x, y + s, z);
-        glVertex3f(x, y + s, z + s);
-        glVertex3f(x + s, y + s, z + s);
+            glBegin(GL_QUADS);
 
-        glVertex3f(x, y, z);
-        glVertex3f(x, y + s, z);
-        glVertex3f(x, y + s, z + s);
-        glVertex3f(x, y, z + s);
+            glVertex3f(x, y, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x, y + s, z);
 
-        glVertex3f(x + s, y + s, z);
-        glVertex3f(x + s, y, z);
-        glVertex3f(x + s, y, z + s);
-        glVertex3f(x + s, y + s, z + s);
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x, y, z + s);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x + s, y + s, z + s);
 
-        glEnd();
+            glVertex3f(x, y, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x, y, z + s);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x, y + s, z);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x + s, y + s, z + s);
+
+            glVertex3f(x, y, z);
+            glVertex3f(x, y + s, z);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x, y, z + s);
+
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x + s, y + s, z + s);
+
+            glEnd();
+
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
     }
 
     public float getX() {
@@ -353,5 +368,21 @@ public class Player {
 
     public float getZ() {
         return zCam;
+    }
+
+    public float getXRot() {
+        return xRot;
+    }
+
+    public float getYRot() {
+        return yRot;
+    }
+
+    public float getZRot() {
+        return 0;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

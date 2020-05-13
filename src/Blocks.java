@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Blocks {
+    private static List<Block> blocks = new ArrayList<Block>();
+
     public static final Block AIR = null;
     public static final Block GRASS = new GrassBlock();
     public static final Block DIRT = new DirtBlock();
@@ -7,6 +12,18 @@ public abstract class Blocks {
     public static final Block LEAVES = new LeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
+
+    public static void registerBlock(Block block) {
+        blocks.add(block);
+    }
+
+    public Block searchByID(int id) {
+        for(Block b : blocks)
+            if(b.getID() == id)
+                return b;
+
+        return null;
+    }
 }
 
 class GrassBlock extends Block {
