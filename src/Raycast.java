@@ -16,12 +16,25 @@ public class Raycast {
             points.add(new Vector3f());
     }
 
+    private Vector3f getDir() {
+        float cosY = (float)Math.cos(Math.toRadians(player.getYRot()-90));
+        float sinY = (float)Math.sin(Math.toRadians(player.getYRot()-90));
+        float cosP = (float)Math.cos(Math.toRadians(-player.getXRot()));
+        float sinP = (float)Math.sin(Math.toRadians(-player.getXRot()));;
+
+        Vector3f r = new Vector3f(cosY*cosP, sinP, sinY*cosP);
+
+        r.normalize();
+
+        return r;
+    }
+
     public void update() {
-        int i = 0;
+        int i = 160;
         for(Vector3f v : points) {
-            Vector3f pos = new Vector3f(-player.getX(), -player.getY(), -player.getZ()).add(new Vector3f(player.getXRot(), 0, player.getYRot()).mul(i/16.0f));
+            Vector3f pos = new Vector3f(player.getX(), player.getY(), player.getZ()).add(getDir()).mul(i/16.0f);
             v.set(pos);
-            i ++;
+            i --;
         }
     }
 

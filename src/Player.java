@@ -309,7 +309,7 @@ public class Player {
             float y = (int) (v.y);
             float z = (int) (v.z);
 
-            float s = 10f;
+            float s = 1f;
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
                 world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
@@ -317,7 +317,7 @@ public class Player {
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
                 world.setBlock((int) x, (int) y, (int) z, Blocks.CLOUD);
 
-            glLineWidth(2);
+            glLineWidth(4);
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
             glBegin(GL_QUADS);
