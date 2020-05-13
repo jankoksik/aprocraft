@@ -137,7 +137,7 @@ public class Player {
             Block b = world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam);
             if (b != null)
                 if (b.getMaterial() == Block.BOUNCY) {
-                    ySpeed += 0.8f;
+                    ySpeed = 0.8f;
                 } else if (b.getMaterial() == Block.STICKY) {
                     xSpeed *= 0.5f;
                     zSpeed *= 0.5f;
