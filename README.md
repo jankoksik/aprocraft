@@ -25,7 +25,7 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 ## Moby
 
 ##  Ciekawostki 
-* chodzenie po koronach drzew jest trudne, więc spowolni to twoje ruchy
+* chodzenie po koronach drzew jest trudne, więc spowolni ono twoje ruchy
 * 
 
 ## Przydatne Linki 
