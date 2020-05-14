@@ -1,6 +1,10 @@
 import org.joml.Vector2f;
 import org.lwjgl.opengl.GL11;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
@@ -28,10 +32,13 @@ public class GUI {
     private int Hoff = 0;
     private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1 );//(APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
     private int QABsy = APROCraft.HEIGHT/ magicNMBR;
+    private List<Item> inv = new ArrayList<>();
 
     public GUI(Inventory i) {
         SizeOfQAB = i.GetW();
         height = i.GetSpace()/i.GetW();
+        inv = i.getEq();
+
     }
 
     public  void setCurr(int curr){
@@ -151,7 +158,7 @@ public class GUI {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         int cX = QABsx;
-        int cY = QABsy;
+        int cY = 0;
         int offset = 300;
         int EqBEgX = QABsx - offset;
         float CrossSize = 30;
@@ -178,23 +185,56 @@ public class GUI {
             glEnd();
 
         }else {
-            Texture Grid = new Texture("./resources/Back2.png");
-            Grid.bind(0);
+            Texture back = new Texture("./resources/Background3.0.png");
+            back.bind(0);
+
+
             glBegin(GL_QUADS);
 
-            glTexCoord2f(0, 0);
+            glTexCoord2f(1, 1);
             glVertex2f(QABsx-offset, Hoff);
 
             glTexCoord2f(0, 1);
             glVertex2f(QABsx+offset + SizeOfQAB *QABsize + (SizeOfQAB - 1)*1  , Hoff);
 
-            glTexCoord2f(1, 1);
-            glVertex2f(QABsx+offset + (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1  , Hoff +  800 );
+            glTexCoord2f(0, 0);
+            glVertex2f(QABsx+offset + (SizeOfQAB - 1)*QABsize + QABsize*CurrMul + (SizeOfQAB - 1)*1  , H - Hoff/2 );
 
             glTexCoord2f(1, 0);
-            glVertex2f(QABsx-offset, Hoff+  800);
+            glVertex2f(QABsx-offset, H - Hoff/2);
 
             glEnd();
+
+            for(int y =0; y<height; y++)
+            {
+                int Bx = QABsx;
+                int By = Hoff + offset;
+                for(int x=0; x< SizeOfQAB; x++)
+                {
+                    Texture Grid = new Texture("./resources/ramkka.png");
+                    Grid.bind(0);
+
+                    DrawSquare(cX, Hoff +magicNMBR*2/3 + cY, QABsize, new float[] {0,1,0,1});
+                    int id = 0;
+                    if(!inv.isEmpty())
+                         id = inv.get(y*SizeOfQAB + x).getId();
+                    if( id!= 0)
+                    {
+                        id-=1;
+                        Texture blocks = new Texture("./resources/blocks.png");
+                        blocks.bind(0);
+                        DrawSquare(cX+(int)QABsize/4, Hoff +magicNMBR*2/3 + cY+(int)QABsize/4, QABsize/2,GetTexById(id) );
+                    }
+
+                    cX += QABsize +1;
+
+
+                }
+                cY += QABsize+1;
+                cX = QABsx;
+
+            }
+
 
 
         }
@@ -228,6 +268,37 @@ public class GUI {
 
 
     }
+
+    private void DrawSquare(int x, int y, float size, float[] texCords){
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(texCords[0],texCords[2]);
+        glVertex2f(x, y);
+
+        glTexCoord2f(texCords[0],texCords[3]);
+        glVertex2f(x+size,y);
+
+        glTexCoord2f(texCords[1],texCords[3]);
+        glVertex2f(x+size, y+size);
+
+        glTexCoord2f(texCords[1],texCords[2]);
+        glVertex2f(x, y+size);
+
+        glEnd();
+    }
+    private float[] GetTexById(int id){
+        int x = id%8;
+        int y = id/8;
+
+        float [] cords = {
+          x*1/8,
+                x*1/8 + 1/8,
+                y * 1/8,
+                y*1/8 + 1/8
+        };
+        return  cords;
+    }
+
 
 
 

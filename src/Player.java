@@ -17,6 +17,15 @@ public class Player {
     private float yRot, xRot;
     private float camSpeed, rotSpeed, jumpSpeed;
     private boolean flying;
+
+    public Inventory getEq() {
+        return eq;
+    }
+
+    public void setEq(Inventory eq) {
+        this.eq = eq;
+    }
+
     private int hp = 20;
     public Inventory eq = new Inventory(64, 8, 5);
     private GUI gui = new GUI(eq);
@@ -27,6 +36,9 @@ public class Player {
 
     private long window;
 
+    public boolean addItem (int id, int nmbr, boolean force){
+         return eq.addItem(id,nmbr,force);
+    }
     public int getHp() {
         return hp;
     }
