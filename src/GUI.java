@@ -41,6 +41,9 @@ public class GUI {
 
     }
 
+    public void updateEq(Inventory i){
+        inv = i.getEq();
+    }
     public  void setCurr(int curr){
         currChoosed =  curr;
         if(currChoosed < 0)
@@ -216,7 +219,7 @@ public class GUI {
 
                     DrawSquare(cX, Hoff +magicNMBR*2/3 + cY, QABsize, new float[] {0,1,0,1});
                     int id = 0;
-                    if(!inv.isEmpty())
+                    if(!inv.isEmpty() && (y*SizeOfQAB + x) < inv.size())
                          id = inv.get(y*SizeOfQAB + x).getId();
                     if( id!= 0)
                     {
@@ -272,13 +275,13 @@ public class GUI {
     private void DrawSquare(int x, int y, float size, float[] texCords){
         glBegin(GL_QUADS);
 
-        glTexCoord2f(texCords[0],texCords[2]);
+        glTexCoord2f(texCords[1],texCords[3]);
         glVertex2f(x, y);
 
         glTexCoord2f(texCords[0],texCords[3]);
         glVertex2f(x+size,y);
 
-        glTexCoord2f(texCords[1],texCords[3]);
+        glTexCoord2f(texCords[0],texCords[2]);
         glVertex2f(x+size, y+size);
 
         glTexCoord2f(texCords[1],texCords[2]);
@@ -291,10 +294,10 @@ public class GUI {
         int y = id/8;
 
         float [] cords = {
-          x*1/8,
-                x*1/8 + 1/8,
-                y * 1/8,
-                y*1/8 + 1/8
+                (float)x*1/8,
+                (float)x*1/8 + (float) 1/8,
+                (float)y * 1/8,
+                (float) y*1/8 +(float) 1/8
         };
         return  cords;
     }

@@ -37,6 +37,7 @@ public class Player {
     private long window;
 
     public boolean addItem (int id, int nmbr, boolean force){
+
          return eq.addItem(id,nmbr,force);
     }
     public int getHp() {
