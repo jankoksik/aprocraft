@@ -74,6 +74,6 @@ class CloudBlock extends Block {
 class SandBlock extends Block {
     public SandBlock() {
         super("Sand", new RGB(1f, 0.9f, 0.3f));
-        material = Block.STICKY;
+        //material = Block.STICKY;
     }
 }

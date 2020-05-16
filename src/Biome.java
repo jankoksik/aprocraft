@@ -4,6 +4,8 @@ import java.util.List;
 public abstract class Biome {
     private String name;
 
+    private int occurrence;
+
     private int amplitude;
     private int octave;
 
@@ -15,8 +17,10 @@ public abstract class Biome {
     private List<Structure> structures;
     private List<Integer> structureOccurrence;
 
-    public Biome(String name) {
+    public Biome(String name, int occurrence) {
         this.name = name;
+
+        this.occurrence = occurrence;
 
         amplitude = 12;
         octave = 24;
@@ -29,6 +33,8 @@ public abstract class Biome {
 
         structures = new ArrayList<>();
         structureOccurrence = new ArrayList<>();
+
+        Biomes.registerBiome(this);
     }
 
     public void setAmplitude(int amplitude) {
@@ -65,5 +71,9 @@ public abstract class Biome {
 
     public int getStructureOccurrence(int i) {
         return structureOccurrence.get(i);
+    }
+
+    public int getOccurrence() {
+        return occurrence;
     }
 }

@@ -3,7 +3,7 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 4;
+    public static final int SIZE = 6;
 
     private Generator generator;
 

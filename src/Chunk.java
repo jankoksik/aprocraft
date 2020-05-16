@@ -23,8 +23,9 @@ public class Chunk {
     public Chunk(int x, int z, Generator generator) {
         this.generator = generator;
 
-        boolean r = new Random().nextBoolean();
-        this.biome = r ? Biomes.DEFAULT : Biomes.DESERT;
+        //boolean r = new Random().nextBoolean();
+        //this.biome = r ? Biomes.FOREST : Biomes.DESERT;
+        this.biome = Biomes.choose();
 
         this.x = x;
         this.z = z;
