@@ -34,6 +34,7 @@ public class World {
             for (int j = 0; j < SIZE; j++)
                 chunks[i][j] = new Chunk(i, j, generator);
 
+        //blendBiomes();
         //generateTrees(6 * SIZE * SIZE);
         generateStructures();
         generateClouds(1 * SIZE * SIZE);
@@ -46,6 +47,19 @@ public class World {
     public Generator getGenerator() {
         return generator;
     }
+
+    /*public void blendBiomes() {
+        for (int i = 0; i < SIZE*Chunk.SIZE; i++)
+            for (int j = 0; j < SIZE*Chunk.SIZE; j++) {
+                Random r = new Random();
+                if(r.nextBoolean() == true) {
+                    setBlock(i * Chunk.SIZE, j * Chunk.SIZE, getMaxHeight(i * Chunk.SIZE, j * Chunk.SIZE),
+                            getBlock(i * Chunk.SIZE + 1 - r.nextInt(1), j * Chunk.SIZE + 1 - r.nextInt(1),
+                                    getMaxHeight(i * Chunk.SIZE + 1 - r.nextInt(1), j * Chunk.SIZE + 1 - r.nextInt(1))));
+                    setBlock(Chunk.SIZE*(i%Chunk.SIZE), getMaxHeight(Chunk.SIZE*(i%Chunk.SIZE), Chunk.SIZE*(j%Chunk.SIZE)), Chunk.SIZE*(j%Chunk.SIZE), Blocks.DARK_LEAVES);
+                }
+            }
+    }*/
 
     public void generateTrees(int n) {
         Random r = new Random();

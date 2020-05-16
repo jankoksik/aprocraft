@@ -58,6 +58,8 @@ public class Chunk {
                         Block b = biome.getLayers()[1];
                         blocks[i][j][k] = b;
                     } else if(j < h+height) {
+                        /*boolean hh = (i == 0 || i == SIZE-1 || k == 0 || k == SIZE-1);
+                        Block b = (new Random().nextBoolean() && hh) ? Blocks.GRASS : biome.getLayers()[0];*/
                         Block b = biome.getLayers()[0];
                         blocks[i][j][k] = b;
                     }
