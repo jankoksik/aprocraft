@@ -10,9 +10,14 @@ import static org.lwjgl.opengl.GL11.*;
 public class GUI {
     //Quick Action Bar
 
-
     private int height = 0;
+
     private static Texture Grid = new Texture("./resources/ramkka.png");
+    private static Texture hearts = new Texture("./resources/hearts.png");
+    private static Texture crosshair = new Texture("./resources/crosshair.png");
+    private static Texture back = new Texture("./resources/Background3.0.png");
+    private static Texture blocks = new Texture("./resources/blocks.png");
+
     private static int magicNMBR = 15;
     private static float QABsize = APROCraft.HEIGHT / magicNMBR;
     private static float CurrMul = 1.1f;
@@ -95,9 +100,9 @@ public class GUI {
             health = maxH;
         if (health < 0)
             health = 0;
-        Texture Grid = new Texture("./resources/hearts.png");
+
         glEnable(GL_TEXTURE_2D);
-        Grid.bind(0);
+        hearts.bind(0);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         int offsety = QABsy + (int) QABsize + 10;
@@ -173,8 +178,8 @@ public class GUI {
         int H = APROCraft.HEIGHT;
 
         if (!opened) {
-            Texture Grid = new Texture("./resources/crosshair.png");
-            Grid.bind(0);
+
+            crosshair.bind(0);
             glBegin(GL_QUADS);
 
             glTexCoord2f(0, 0);
@@ -192,7 +197,6 @@ public class GUI {
             glEnd();
 
         } else {
-            Texture back = new Texture("./resources/Background3.0.png");
             back.bind(0);
 
 
@@ -216,7 +220,6 @@ public class GUI {
                 int Bx = QABsx;
                 int By = Hoff + offset;
                 for (int x = 0; x < SizeOfQAB; x++) {
-                    Texture Grid = new Texture("./resources/ramkka.png");
                     Grid.bind(0);
 
                     DrawSquare(cX, Hoff + magicNMBR * 2 / 3 + cY, QABsize, new float[]{0, 1, 0, 1});
@@ -225,7 +228,6 @@ public class GUI {
                         id = inv.get(y * SizeOfQAB + x).getId();
                     if (id != 0) {
                         id -= 1;
-                        Texture blocks = new Texture("./resources/blocks.png");
                         blocks.bind(0);
                         DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
                     }
