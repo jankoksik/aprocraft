@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class APROCraft {
-    public static final String VERSION = "0.3.1 alpha";
+    public static final String VERSION = "0.4.0 alpha";
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;

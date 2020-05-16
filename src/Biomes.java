@@ -43,7 +43,8 @@ class ForestBiome extends Biome {
         super("Forest", 5);
         setAmplitude(4);
         setOctave(24);
-        addStructure(Structures.OAK_TREE, 30);
+        addStructure(Structures.OAK_TREE, 10);
+        addStructure(Structures.SPRUCE_TREE, 15);
     }
 }
 

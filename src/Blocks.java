@@ -10,6 +10,7 @@ public abstract class Blocks {
     public static final Block STONE = new StoneBlock();
     public static final Block LOG = new LogBlock();
     public static final Block LEAVES = new LeavesBlock();
+    public static final Block DARK_LEAVES = new DarkLeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
     public static final Block SAND = new SandBlock();
@@ -55,6 +56,13 @@ class LogBlock extends Block {
 class LeavesBlock extends Block {
     public LeavesBlock() {
         super("Oak Leaves", new RGB(0.1f, 0.6f, 0.1f));
+        material = Block.STICKY;
+    }
+}
+
+class DarkLeavesBlock extends Block {
+    public DarkLeavesBlock() {
+        super("Spruce Leaves", new RGB(0.1f, 0.4f, 0.2f));
         material = Block.STICKY;
     }
 }
