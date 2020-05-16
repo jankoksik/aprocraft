@@ -1,6 +1,7 @@
 public abstract class Structures {
     public static final Structure OAK_TREE = new OakTree();
     public static final Structure CLOUD = new Cloud();
+    public static final Structure CACTUS = new Cactus();
 }
 
 class OakTree extends Structure {
@@ -31,6 +32,16 @@ class Cloud extends Structure {
         for(int i = 0; i < sizeX; i ++)
             for(int j = 0; j < sizeZ; j ++)
                 blocks[i][0][j] = Blocks.CLOUD;
+
+    }
+}
+
+class Cactus extends Structure {
+    public Cactus() {
+        super(1, 3, 1);
+
+        for(int i = 0; i < sizeY; i ++)
+            blocks[0][i][0] = Blocks.LEAVES;
 
     }
 }
