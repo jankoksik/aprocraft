@@ -22,7 +22,7 @@ public class World {
     private int skyTimeDir;
 
     public World() {
-        generator = new Generator(new Random().nextLong(), 24, 12);
+        generator = new Generator(new Random().nextLong(), 32, 12);
 
         chunks = new Chunk[SIZE][SIZE];
 

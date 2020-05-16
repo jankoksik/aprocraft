@@ -26,6 +26,8 @@ public class Chunk {
         //boolean r = new Random().nextBoolean();
         //this.biome = r ? Biomes.FOREST : Biomes.DESERT;
         this.biome = Biomes.choose();
+        //generator.setAmplitude(biome.getAmplitude());
+        //generator.setOctave(biome.getOctave());
 
         this.x = x;
         this.z = z;
@@ -44,7 +46,7 @@ public class Chunk {
                     int xw = SIZE*x+i;
                     int yw = j;
                     int zw = SIZE*z+k;
-                    int h = (int)generator.getHeight(xw, zw);
+                    int h = (int)generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
 
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;

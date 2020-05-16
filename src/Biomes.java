@@ -10,6 +10,7 @@ public abstract class Biomes {
     public static final Biome FOREST = new ForestBiome();
     public static final Biome DESERT = new DesertBiome();
     public static final Biome PLAINS = new PlainsBiome();
+    public static final Biome ICEBERG = new IcebergBiome();
     //public static final int MOUNTAINS = 4;
 
     public static void registerBiome(Biome b) {
@@ -59,5 +60,12 @@ class DesertBiome extends Biome {
 class PlainsBiome extends Biome {
     public PlainsBiome() {
         super("Plains", 10);
+    }
+}
+
+class IcebergBiome extends Biome {
+    public IcebergBiome() {
+        super("Iceberg", 2);
+        setLayers(Blocks.ICE, Blocks.STONE, Blocks.STONE);
     }
 }

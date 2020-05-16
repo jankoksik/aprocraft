@@ -76,4 +76,12 @@ public abstract class Biome {
     public int getOccurrence() {
         return occurrence;
     }
+
+    public int getAmplitude() {
+        return amplitude;
+    }
+
+    public int getOctave() {
+        return octave;
+    }
 }
