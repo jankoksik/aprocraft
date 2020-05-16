@@ -74,6 +74,9 @@ public class Chunk {
 
                     Biome biome = getBiome(xw, zw);
 
+                    //h += (int)biomeGenerator.getHeight(xw, zw);
+                    //h /= 2;
+
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
