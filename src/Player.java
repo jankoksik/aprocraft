@@ -27,8 +27,8 @@ public class Player {
     }
 
     private int hp = 20;
-    public Inventory eq = new Inventory(64, 8, 5);
-    private GUI gui = new GUI(eq);
+    public Inventory eq;
+    private GUI gui;
     private boolean mouseLocked;
     private boolean isStanding;
     private int step;
@@ -88,6 +88,9 @@ public class Player {
         step = 0;
 
         raycast = new Raycast(this);
+
+        eq = new Inventory(64, 8, 5);
+        gui = new GUI(eq);
 
         this.window = window;
         this.world = world;
