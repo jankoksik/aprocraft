@@ -12,6 +12,7 @@ public abstract class Blocks {
     public static final Block LEAVES = new LeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
+    public static final Block SAND = new SandBlock();
 
     public static void registerBlock(Block block) {
         blocks.add(block);
@@ -67,5 +68,12 @@ class CloudBlock extends Block {
     public CloudBlock() {
         super("Cloud", new RGB(1f, 1f, 1f));
         material = Block.BOUNCY;
+    }
+}
+
+class SandBlock extends Block {
+    public SandBlock() {
+        super("Sand", new RGB(1f, 0.9f, 0.3f));
+        material = Block.STICKY;
     }
 }
