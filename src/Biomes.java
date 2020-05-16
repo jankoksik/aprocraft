@@ -9,6 +9,7 @@ public class Biomes {
 class DefaultBiome extends Biome {
     public DefaultBiome() {
         super("Default");
+        addStructure(Structures.OAK_TREE, 5);
     }
 }
 

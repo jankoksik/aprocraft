@@ -5,10 +5,12 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class Chunk {
     public static final int SIZE = 32;
 
+    private Biome biome;
     private Generator generator;
     private int x, z;
 
@@ -20,6 +22,9 @@ public class Chunk {
 
     public Chunk(int x, int z, Generator generator) {
         this.generator = generator;
+
+        boolean r = new Random().nextBoolean();
+        this.biome = r ? Biomes.DEFAULT : Biomes.DESERT;
 
         this.x = x;
         this.z = z;
@@ -44,13 +49,13 @@ public class Chunk {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else if(j < h+height-4) {
-                        Block b = Blocks.STONE;
+                        Block b = biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     } else if(j < h+height-1) {
-                        Block b = Blocks.DIRT;
+                        Block b = biome.getLayers()[1];
                         blocks[i][j][k] = b;
                     } else if(j < h+height) {
-                        Block b = Blocks.GRASS;
+                        Block b = biome.getLayers()[0];
                         blocks[i][j][k] = b;
                     }
                 }
@@ -86,6 +91,10 @@ public class Chunk {
         glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
         //glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    public Biome getBiome() {
+        return biome;
     }
 
     public Block getBlock(int x, int y, int z) {

@@ -54,4 +54,12 @@ public abstract class Biome {
         structures.add(type);
         structureOccurrence.add(occurrence);
     }
+
+    public Block[] getLayers() {
+        return layers;
+    }
+
+    public List<Structure> getStructures() {
+        return structures;
+    }
 }
