@@ -49,8 +49,10 @@ public class Raycast {
 
             //System.out.println(x + " " + y + " " + z);
 
-            if(player.getWorld().getBlock(x, y, z) != null)
+            if(player.getWorld().getBlock(x, y, z) != null) {
+                System.out.println(player.getWorld().getBiome(x,z));
                 return new Vector3f(x, y, z);
+            }
         }
         return null;
     }

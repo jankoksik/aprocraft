@@ -10,8 +10,9 @@ import java.util.Random;
 public class Chunk {
     public static final int SIZE = 32;
 
-    private Biome biome;
+    //private Biome biome;
     private Generator generator;
+    private Generator biomeGenerator;
     private int x, z;
 
     private static FloatBuffer fb, cb;
@@ -20,12 +21,13 @@ public class Chunk {
 
     private Block[][][] blocks;
 
-    public Chunk(int x, int z, Generator generator) {
+    public Chunk(int x, int z, Generator generator, Generator biomeGenerator) {
         this.generator = generator;
+        this.biomeGenerator = biomeGenerator;
 
         //boolean r = new Random().nextBoolean();
         //this.biome = r ? Biomes.FOREST : Biomes.DESERT;
-        this.biome = Biomes.choose();
+        //this.biome = Biomes.choose();
         //generator.setAmplitude(biome.getAmplitude());
         //generator.setOctave(biome.getOctave());
 
@@ -39,6 +41,28 @@ public class Chunk {
         generate(12);
     }
 
+    public Biome getBiome(int x, int z) {
+        Biome biome;
+        int bbb = (int)biomeGenerator.getHeight(x, z);
+
+        if(bbb < 3)
+            biome = Biomes.DESERT;
+        else if (bbb < 4)
+            biome = Biomes.DEFAULT;
+        else if (bbb < 5)
+            biome = Biomes.FOREST;
+        else if (bbb < 6)
+            biome = Biomes.PLAINS;
+        else
+            biome = Biomes.DESERT;
+
+        return biome;
+    }
+
+    /*public Biome getBiome() {
+        return biome;
+    }*/
+
     private void generate(int height) {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -47,6 +71,8 @@ public class Chunk {
                     int yw = j;
                     int zw = SIZE*z+k;
                     int h = (int)generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
+
+                    Biome biome = getBiome(xw, zw);
 
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;
@@ -96,10 +122,6 @@ public class Chunk {
         glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
         //glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
-    }
-
-    public Biome getBiome() {
-        return biome;
     }
 
     public Block getBlock(int x, int y, int z) {

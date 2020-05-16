@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Biome {
     private String name;
@@ -13,14 +14,19 @@ public abstract class Biome {
 
     private List<Block> ores;
     private List<Integer> oreOccurrence;
+    private int totalOres;
 
     private List<Structure> structures;
     private List<Integer> structureOccurrence;
+    private int totalStructures;
 
     public Biome(String name, int occurrence) {
         this.name = name;
 
         this.occurrence = occurrence;
+
+        totalOres = 0;
+        totalStructures = 0;
 
         amplitude = 12;
         octave = 24;
@@ -54,11 +60,13 @@ public abstract class Biome {
     public void addOre(Block block, int occurrence) {
         ores.add(block);
         oreOccurrence.add(occurrence);
+        totalOres += occurrence;
     }
 
     public void addStructure(Structure type, int occurrence) {
         structures.add(type);
         structureOccurrence.add(occurrence);
+        totalStructures += occurrence;
     }
 
     public Block[] getLayers() {
@@ -83,5 +91,18 @@ public abstract class Biome {
 
     public int getOctave() {
         return octave;
+    }
+
+    public Structure chooseStructure() {
+        if (totalStructures == 0) return null;
+
+        int index = new Random().nextInt(totalStructures);
+        int sum = 0;
+        int i = 0;
+        while (sum < index) {
+            sum = sum + structureOccurrence.get(i++);
+        }
+
+        return structures.get(Math.max(0, i - 1));
     }
 }

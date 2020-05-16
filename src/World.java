@@ -6,6 +6,7 @@ public class World {
     public static final int SIZE = 6;
 
     private Generator generator;
+    private Generator biomeGenerator;
 
     //TODO: Poziomy chunkow
 
@@ -23,6 +24,7 @@ public class World {
 
     public World() {
         generator = new Generator(new Random().nextLong(), 32, 12);
+        biomeGenerator = new Generator(new Random().nextLong(), 40, 8);
 
         chunks = new Chunk[SIZE][SIZE];
 
@@ -32,7 +34,7 @@ public class World {
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
-                chunks[i][j] = new Chunk(i, j, generator);
+                chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
 
         //blendBiomes();
         //generateTrees(6 * SIZE * SIZE);
@@ -61,27 +63,27 @@ public class World {
             }
     }*/
 
-    public void generateTrees(int n) {
+    /*public void generateTrees(int n) {
         Random r = new Random();
         for (int i = 0; i < n; i++) {
             int x = r.nextInt(SIZE * Chunk.SIZE);
             int z = r.nextInt(SIZE * Chunk.SIZE);
             int y = getMaxHeight(x, z);
 
-            /*if(getBlock(x, y, z) == Blocks.GRASS)
-                Structures.OAK_TREE.spawn(this, x, y+1, z);*/
+            //if(getBlock(x, y, z) == Blocks.GRASS)
+            //    Structures.OAK_TREE.spawn(this, x, y+1, z);
             Chunk c = getChunk(x, z);
             if (c == null) continue;
             for(Structure s : c.getBiome().getStructures())
                 if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
                     s.spawn(this, x, y + 1, z);
         }
-    }
+    }*/
 
     public void generateStructures() {
         Random r = new Random();
 
-        for (int i = 0; i < SIZE; i++)
+        /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
                 Biome b = chunks[i][j].getBiome();
                 for(int k = 0; k < b.getStructures().size(); k ++) {
@@ -91,6 +93,22 @@ public class World {
                         int y = getMaxHeight(x, z);
                         if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
                             b.getStructures().get(k).spawn(this, x, y + 1, z);
+                    }
+                }
+            }*/
+
+        for(int i = 0; i < SIZE*Chunk.SIZE; i ++)
+            for(int j = 0; j < SIZE*Chunk.SIZE; j ++) {
+                if(r.nextInt(100) == 1) {
+                    Biome b = getBiome(i, j);
+                    int y = getMaxHeight(i, j);
+                    if (getBlock(i, y, j) == Blocks.GRASS || getBlock(i, y, j) == Blocks.SAND) {
+                        //Structure s = b.chooseStructure();
+                        if(b.getStructures().size() > 0) {
+                            Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
+                            if (s != null)
+                                s.spawn(this, i, y + 1, j);
+                        }
                     }
                 }
             }
@@ -130,6 +148,14 @@ public class World {
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
         Chunk c = chunks[xx][zz];
         return c.getBlock(x % Chunk.SIZE, y, z % Chunk.SIZE);
+    }
+
+    public Biome getBiome(int x, int z) {
+        int xx = x / Chunk.SIZE;
+        int zz = z / Chunk.SIZE;
+        if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
+        Chunk c = chunks[xx][zz];
+        return c.getBiome(x, z);
     }
 
     public void setBlock(int x, int y, int z, Block block) {
