@@ -50,11 +50,11 @@ public class Chunk {
         else if (bbb < 4)
             biome = Biomes.DEFAULT;
         else if (bbb < 5)
-            biome = Biomes.FOREST;
+            biome = Biomes.PLAINS;
         else if (bbb < 6)
             biome = Biomes.PLAINS;
         else
-            biome = Biomes.DESERT;
+            biome = Biomes.FOREST;
 
         return biome;
     }
