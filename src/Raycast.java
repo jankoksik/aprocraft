@@ -47,7 +47,7 @@ public class Raycast {
             int y = (int)v.y;
             int z = (int)v.z;
 
-            System.out.println(x + " " + y + " " + z);
+            //System.out.println(x + " " + y + " " + z);
 
             if(player.getWorld().getBlock(x, y, z) != null)
                 return new Vector3f(x, y, z);

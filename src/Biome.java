@@ -62,4 +62,8 @@ public abstract class Biome {
     public List<Structure> getStructures() {
         return structures;
     }
+
+    public int getStructureOccurrence(int i) {
+        return structureOccurrence.get(i);
+    }
 }

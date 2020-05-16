@@ -34,7 +34,8 @@ public class World {
             for (int j = 0; j < SIZE; j++)
                 chunks[i][j] = new Chunk(i, j, generator);
 
-        generateTrees(6 * SIZE * SIZE);
+        //generateTrees(6 * SIZE * SIZE);
+        generateStructures();
         generateClouds(1 * SIZE * SIZE);
 
         for (int i = 0; i < SIZE; i++)
@@ -61,6 +62,24 @@ public class World {
                 if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
                     s.spawn(this, x, y + 1, z);
         }
+    }
+
+    public void generateStructures() {
+        Random r = new Random();
+
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++) {
+                Biome b = chunks[i][j].getBiome();
+                for(int k = 0; k < b.getStructures().size(); k ++) {
+                    for(int l = 0; l < b.getStructureOccurrence(k); l ++) {
+                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE);
+                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE);
+                        int y = getMaxHeight(x, z);
+                        if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
+                            b.getStructures().get(k).spawn(this, x, y + 1, z);
+                    }
+                }
+            }
     }
 
     public void generateClouds(int n) {
