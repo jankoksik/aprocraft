@@ -138,8 +138,7 @@ public class Player {
         if (hp > 20)
             hp = 20;
 
-        GLFWScrollCallback scrollCallback;
-        glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
+        glfwSetScrollCallback(window, GLFWScrollCallback.create((window, xoffset, yoffset) -> {
             if (yoffset > 0) {
                 gui.setCurr(gui.GetCurr() - 1);
             } else if (yoffset < 0) {

@@ -3,7 +3,7 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 6;
+    public static final int SIZE = 8;
 
     private Generator generator;
     private Generator biomeGenerator;
@@ -24,7 +24,7 @@ public class World {
 
     public World() {
         generator = new Generator(new Random().nextLong(), 32, 12);
-        biomeGenerator = new Generator(new Random().nextLong(), 40, 8);
+        biomeGenerator = new Generator(new Random().nextLong(), 64, 8);
 
         chunks = new Chunk[SIZE][SIZE];
 
@@ -103,12 +103,12 @@ public class World {
                     Biome b = getBiome(i, j);
                     int y = getMaxHeight(i, j);
                     if (getBlock(i, y, j) == Blocks.GRASS || getBlock(i, y, j) == Blocks.SAND) {
-                        //Structure s = b.chooseStructure();
-                        if(b.getStructures().size() > 0) {
-                            Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
+                        Structure s = b.chooseStructure();
+                        //if(b.getStructures().size() > 0) {
+                        //    Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
                             if (s != null)
                                 s.spawn(this, i, y + 1, j);
-                        }
+                        //}
                     }
                 }
             }
