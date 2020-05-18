@@ -150,12 +150,10 @@ public class Player {
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
             hp += 1;
         if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
-           eq.addItem(5);
+           eq.addItem(4);
            gui.SetEq(eq.getEq());
-           System.out.println(eq.getNmbrOfItems(5));
+           //System.out.println(eq.getNmbrOfItems(6));
         }
-        if (glfwGetKey(window, GLFW_KEY_M) == GL_TRUE)
-            System.out.println(eq.getNmbrOfItems(5));
 
         if (hp < 0)
             hp = 0;
