@@ -62,12 +62,13 @@ public class GUI {
 
     public void RenderQAB() {
         glEnable(GL_TEXTURE_2D);
-        Grid.bind(0);
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         int cX = QABsx;
         int cY = QABsy;
         for (int i = 0; i < SizeOfQAB; i++) {
+            Grid.bind(0);
             float si = QABsize;
 
             if (currChoosed == i)
@@ -86,16 +87,17 @@ public class GUI {
             glTexCoord2f(1, 0);
             glVertex2f(cX, QABsy + si);
 
-            cX += (si + 1);
+
             glEnd();
             int id = 0;
-            if (!inv.isEmpty() && inv.size() > 32)
+            if (!inv.isEmpty() && inv.size() > i)
                 id = inv.get(i).getId();
             if (id != 0) {
                 id -= 1;
                 blocks.bind(0);
-                DrawSquare(cX + (int) QABsize / 4, QABsy + (int) QABsize / 4, QABsize / 2, GetTexById(id));
+                DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si/ 2, GetTexById(id));
             }
+            cX += (si + 1);
         }
         cX = 0;
         glDisable(GL_BLEND);
