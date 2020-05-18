@@ -88,6 +88,14 @@ public class GUI {
 
             cX += (si + 1);
             glEnd();
+            int id = 0;
+            if (!inv.isEmpty() && inv.size() > 32)
+                id = inv.get(height * SizeOfQAB + i).getId();
+            if (id != 0) {
+                id -= 1;
+                blocks.bind(0);
+                DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
+            }
         }
         cX = 0;
         glDisable(GL_BLEND);
@@ -162,7 +170,10 @@ public class GUI {
 
     }
 
-
+    public void SetEq(List<Item> a)
+    {
+        inv = a;
+    }
     public void RenderEq() {
 
         glEnable(GL_TEXTURE_2D);
@@ -224,7 +235,7 @@ public class GUI {
 
                     DrawSquare(cX, Hoff + magicNMBR * 2 / 3 + cY, QABsize, new float[]{0, 1, 0, 1});
                     int id = 0;
-                    if (!inv.isEmpty())
+                    if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
                         id = inv.get(y * SizeOfQAB + x).getId();
                     if (id != 0) {
                         id -= 1;

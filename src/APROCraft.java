@@ -153,6 +153,7 @@ public class APROCraft {
                 glMatrixMode(GL_MODELVIEW);
                 glPushMatrix();
                 glLoadIdentity();
+
                 //player.addItem(6,256,true);
 
                 player.getGui().RenderHealth(player.getHp());
