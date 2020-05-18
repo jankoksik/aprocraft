@@ -32,6 +32,7 @@ public class Player {
     private boolean mouseLocked;
     private int step;
     private Raycast raycast;
+    private Vector3f v;
 
     private long window;
 
@@ -95,7 +96,22 @@ public class Player {
 
     public void update() {
         mouseUpdate();
+
         raycast.update();
+        v = raycast.getBlockPosition();
+
+        if(v != null) {
+
+            float x = (int) (v.x);
+            float y = (int) (v.y);
+            float z = (int) (v.z);
+
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+                world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
+
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
+                world.setBlock((int) x, (int) y + 1, (int) z, Blocks.CLOUD);
+        }
 
         forward = 0;
         left = 0;
@@ -318,7 +334,7 @@ public class Player {
         float y = (int)(yCam - Math.sin(Math.toRadians(xRot)) * 3);
         float z = (int)(zCam - Math.cos(Math.toRadians(yRot)) * 3);*/
 
-        Vector3f v = raycast.getBlockPosition();
+        //Vector3f v = raycast.getBlockPosition();
 
         if(v != null) {
 
@@ -328,11 +344,11 @@ public class Player {
 
             float s = 1f;
 
-            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+            /*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
                 world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y+1, (int) z, Blocks.CLOUD);
+                world.setBlock((int) x, (int) y+1, (int) z, Blocks.CLOUD);*/
 
             glLineWidth(4);
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
