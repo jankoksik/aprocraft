@@ -151,7 +151,8 @@ public class Player {
             hp += 1;
         if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
            eq.addItem(5,1,true);
-            gui.SetEq(eq.getEq());
+           gui.SetEq(eq.getEq());
+           System.out.println(eq.getNmbrOfItems(5));
         }
         if (glfwGetKey(window, GLFW_KEY_M) == GL_TRUE)
             System.out.println(eq.getNmbrOfItems(5));

@@ -11,6 +11,7 @@ public abstract class Biomes {
     public static final Biome DESERT = new DesertBiome();
     public static final Biome PLAINS = new PlainsBiome();
     public static final Biome ICEBERG = new IcebergBiome();
+    public static final Biome CANYON = new CanyonBiome();
     //public static final int MOUNTAINS = 4;
 
     public static void registerBiome(Biome b) {
@@ -41,8 +42,8 @@ class DefaultBiome extends Biome {
 class ForestBiome extends Biome {
     public ForestBiome() {
         super("Forest", 5);
-        setAmplitude(4);
-        setOctave(24);
+        //setAmplitude(4);
+        //setOctave(24);
         addStructure(Structures.OAK_TREE, 10);
         addStructure(Structures.SPRUCE_TREE, 15);
     }
@@ -51,8 +52,8 @@ class ForestBiome extends Biome {
 class DesertBiome extends Biome {
     public DesertBiome() {
         super("Desert", 5);
-        setAmplitude(8);
-        setOctave(28);
+        //setAmplitude(8);
+        //setOctave(28);
         setLayers(Blocks.SAND, Blocks.SAND, Blocks.STONE);
         addStructure(Structures.CACTUS, 6);
     }
@@ -68,5 +69,14 @@ class IcebergBiome extends Biome {
     public IcebergBiome() {
         super("Iceberg", 2);
         setLayers(Blocks.ICE, Blocks.STONE, Blocks.STONE);
+    }
+}
+
+class CanyonBiome extends Biome {
+    public CanyonBiome() {
+        super("Canyon", 2);
+        setLayers(Blocks.RED_SANDSTONE, Blocks.RED_SANDSTONE, Blocks.RED_SANDSTONE);
+        setAmplitude(30);
+        setOctave(40);
     }
 }

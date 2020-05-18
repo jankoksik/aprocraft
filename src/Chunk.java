@@ -45,16 +45,29 @@ public class Chunk {
         Biome biome;
         int bbb = (int)biomeGenerator.getHeight(x, z);
 
-        if(bbb < 3)
-            biome = Biomes.DESERT;
+        /*if(bbb < 3)
+            biome = Biomes.CANYON;
         else if (bbb < 4)
             biome = Biomes.DEFAULT;
         else if (bbb < 5)
-            biome = Biomes.PLAINS;
+            biome = Biomes.DESERT;
         else if (bbb < 6)
             biome = Biomes.PLAINS;
         else
+            biome = Biomes.FOREST;*/
+
+        if(bbb < 2)
+            biome = Biomes.CANYON;
+        else if (bbb < 3)
+            biome = Biomes.DESERT;
+        else if (bbb < 4)
+            biome = Biomes.PLAINS;
+        else if (bbb < 6)
+            biome = Biomes.DEFAULT;
+        else if (bbb < 7)
             biome = Biomes.FOREST;
+        else
+            biome = Biomes.ICEBERG;
 
         return biome;
     }
@@ -76,6 +89,7 @@ public class Chunk {
 
                     //h += (int)biomeGenerator.getHeight(xw, zw);
                     //h /= 2;
+                    h *= (biome.getAmplitude()/generator.getAmplitude());
 
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;
