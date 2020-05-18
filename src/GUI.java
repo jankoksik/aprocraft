@@ -90,11 +90,11 @@ public class GUI {
             glEnd();
             int id = 0;
             if (!inv.isEmpty() && inv.size() > 32)
-                id = inv.get(height * SizeOfQAB + i).getId();
+                id = inv.get(i).getId();
             if (id != 0) {
                 id -= 1;
                 blocks.bind(0);
-                DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
+                DrawSquare(cX + (int) QABsize / 4, QABsy + (int) QABsize / 4, QABsize / 2, GetTexById(id));
             }
         }
         cX = 0;
