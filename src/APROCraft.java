@@ -11,11 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class APROCraft {
-    public static final String VERSION = "0.3.1 alpha";
+    public static final String VERSION = "0.4.1 alpha";
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;
-    boolean add = true;
 
     public APROCraft() {
         if (glfwInit() != true) {
@@ -154,15 +153,12 @@ public class APROCraft {
                 glMatrixMode(GL_MODELVIEW);
                 glPushMatrix();
                 glLoadIdentity();
+                //player.addItem(6,256,true);
 
-                if(add){
-                    player.addItem(4,256,true);
-                    player.getGui().updateEq(player.getEq());
-                }
-                add = false;
                 player.getGui().RenderHealth(player.getHp());
                 player.getGui().RenderQAB();
                 player.getGui().RenderEq();
+
                 //GUI.Test();
                 //glColor3f(1f, .5f, 1f);
 

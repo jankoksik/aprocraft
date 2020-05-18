@@ -5,11 +5,14 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class Chunk {
     public static final int SIZE = 32;
 
+    //private Biome biome;
     private Generator generator;
+    private Generator biomeGenerator;
     private int x, z;
 
     private static FloatBuffer fb, cb;
@@ -18,8 +21,15 @@ public class Chunk {
 
     private Block[][][] blocks;
 
-    public Chunk(int x, int z, Generator generator) {
+    public Chunk(int x, int z, Generator generator, Generator biomeGenerator) {
         this.generator = generator;
+        this.biomeGenerator = biomeGenerator;
+
+        //boolean r = new Random().nextBoolean();
+        //this.biome = r ? Biomes.FOREST : Biomes.DESERT;
+        //this.biome = Biomes.choose();
+        //generator.setAmplitude(biome.getAmplitude());
+        //generator.setOctave(biome.getOctave());
 
         this.x = x;
         this.z = z;
@@ -31,6 +41,28 @@ public class Chunk {
         generate(12);
     }
 
+    public Biome getBiome(int x, int z) {
+        Biome biome;
+        int bbb = (int)biomeGenerator.getHeight(x, z);
+
+        if(bbb < 3)
+            biome = Biomes.DESERT;
+        else if (bbb < 4)
+            biome = Biomes.DEFAULT;
+        else if (bbb < 5)
+            biome = Biomes.PLAINS;
+        else if (bbb < 6)
+            biome = Biomes.PLAINS;
+        else
+            biome = Biomes.FOREST;
+
+        return biome;
+    }
+
+    /*public Biome getBiome() {
+        return biome;
+    }*/
+
     private void generate(int height) {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -38,19 +70,26 @@ public class Chunk {
                     int xw = SIZE*x+i;
                     int yw = j;
                     int zw = SIZE*z+k;
-                    int h = (int)generator.getHeight(xw, zw);
+                    int h = (int)generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
+
+                    Biome biome = getBiome(xw, zw);
+
+                    //h += (int)biomeGenerator.getHeight(xw, zw);
+                    //h /= 2;
 
                     if(j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else if(j < h+height-4) {
-                        Block b = Blocks.STONE;
+                        Block b = biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     } else if(j < h+height-1) {
-                        Block b = Blocks.DIRT;
+                        Block b = biome.getLayers()[1];
                         blocks[i][j][k] = b;
                     } else if(j < h+height) {
-                        Block b = Blocks.GRASS;
+                        /*boolean hh = (i == 0 || i == SIZE-1 || k == 0 || k == SIZE-1);
+                        Block b = (new Random().nextBoolean() && hh) ? Blocks.GRASS : biome.getLayers()[0];*/
+                        Block b = biome.getLayers()[0];
                         blocks[i][j][k] = b;
                     }
                 }

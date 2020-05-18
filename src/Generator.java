@@ -83,4 +83,16 @@ public class Generator {
     public long getSeed() {
         return seed;
     }
+
+    public void setOctave(int octave) {
+        this.octave = octave;
+    }
+
+    public void setAmplitude(int amplitude) {
+        this.amplitude = amplitude;
+    }
+
+    public float getAmplitude() {
+        return amplitude;
+    }
 }

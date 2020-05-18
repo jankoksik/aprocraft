@@ -10,8 +10,11 @@ public abstract class Blocks {
     public static final Block STONE = new StoneBlock();
     public static final Block LOG = new LogBlock();
     public static final Block LEAVES = new LeavesBlock();
+    public static final Block DARK_LEAVES = new DarkLeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
+    public static final Block SAND = new SandBlock();
+    public static final Block ICE = new IceBlock();
 
     public static void registerBlock(Block block) {
         blocks.add(block);
@@ -57,6 +60,13 @@ class LeavesBlock extends Block {
     }
 }
 
+class DarkLeavesBlock extends Block {
+    public DarkLeavesBlock() {
+        super("Spruce Leaves", new RGB(0.1f, 0.4f, 0.2f));
+        material = Block.STICKY;
+    }
+}
+
 class BedrockBlock extends Block {
     public BedrockBlock() {
         super("Bedrock", new RGB(0.1f, 0.1f, 0.1f));
@@ -67,5 +77,19 @@ class CloudBlock extends Block {
     public CloudBlock() {
         super("Cloud", new RGB(1f, 1f, 1f));
         material = Block.BOUNCY;
+    }
+}
+
+class SandBlock extends Block {
+    public SandBlock() {
+        super("Sand", new RGB(1f, 0.9f, 0.3f));
+        //material = Block.STICKY;
+    }
+}
+
+class IceBlock extends Block {
+    public IceBlock() {
+        super("Ice", new RGB(0.6f, 0.7f, 1f));
+        material = Block.SLIPPY;
     }
 }

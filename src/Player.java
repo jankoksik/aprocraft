@@ -15,7 +15,7 @@ public class Player {
     private float friction;
     private float gravity;
     private float yRot, xRot;
-    private float camSpeed, rotSpeed, jumpSpeed;
+    private float camSpeed, jumpSpeed;
     private boolean flying;
 
     public Inventory getEq() {
@@ -27,10 +27,9 @@ public class Player {
     }
 
     private int hp = 20;
-    public Inventory eq = new Inventory(64, 8, 5);
-    private GUI gui = new GUI(eq);
+    public Inventory eq;
+    private GUI gui;
     private boolean mouseLocked;
-    private boolean isStanding;
     private int step;
     private Raycast raycast;
 
@@ -74,7 +73,6 @@ public class Player {
 
         gravity = 0.02f;
         camSpeed = 0.2f;
-        rotSpeed = 0.2f;
         jumpSpeed = 0.3f;
 
         yRot = 135;
@@ -84,11 +82,12 @@ public class Player {
 
         mouseLocked = false;
 
-        isStanding = false;
-
         step = 0;
 
         raycast = new Raycast(this);
+
+        eq = new Inventory(64, 8, 5);
+        gui = new GUI(eq);
 
         this.window = window;
         this.world = world;
@@ -140,8 +139,7 @@ public class Player {
         if (hp > 20)
             hp = 20;
 
-        GLFWScrollCallback scrollCallback;
-        glfwSetScrollCallback(window, scrollCallback = GLFWScrollCallback.create((window, xoffset, yoffset) -> {
+        glfwSetScrollCallback(window, GLFWScrollCallback.create((window, xoffset, yoffset) -> {
             if (yoffset > 0) {
                 gui.setCurr(gui.GetCurr() - 1);
             } else if (yoffset < 0) {
@@ -276,10 +274,10 @@ public class Player {
         int z0 = (int) (zCam + z + radius);
         int z1 = (int) (zCam + z - radius);
 
-        if (world.getBlock((int) (xCam + x), (int) (yCam - 1 + y - radius - 1), (int) (zCam + z)) == null)
+        /*if (world.getBlock((int) (xCam + x), (int) (yCam - 1 + y - radius - 1), (int) (zCam + z)) == null)
             isStanding = false;
         else
-            isStanding = true;
+            isStanding = true;*/
 
         if (world.getBlock(x0, y0, z0) != null) return true;
         if (world.getBlock(x1, y0, z0) != null) return true;
@@ -328,7 +326,7 @@ public class Player {
                 world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y, (int) z, Blocks.CLOUD);
+                world.setBlock((int) x, (int) y+1, (int) z, Blocks.CLOUD);
 
             glLineWidth(4);
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

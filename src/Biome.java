@@ -1,0 +1,108 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public abstract class Biome {
+    private String name;
+
+    private int occurrence;
+
+    private int amplitude;
+    private int octave;
+
+    private Block[] layers;
+
+    private List<Block> ores;
+    private List<Integer> oreOccurrence;
+    private int totalOres;
+
+    private List<Structure> structures;
+    private List<Integer> structureOccurrence;
+    private int totalStructures;
+
+    public Biome(String name, int occurrence) {
+        this.name = name;
+
+        this.occurrence = occurrence;
+
+        totalOres = 0;
+        totalStructures = 0;
+
+        amplitude = 12;
+        octave = 24;
+
+        layers = new Block[3];
+        setLayers(Blocks.GRASS, Blocks.DIRT, Blocks.STONE);
+
+        ores = new ArrayList<>();
+        oreOccurrence = new ArrayList<>();
+
+        structures = new ArrayList<>();
+        structureOccurrence = new ArrayList<>();
+
+        Biomes.registerBiome(this);
+    }
+
+    public void setAmplitude(int amplitude) {
+        this.amplitude = amplitude;
+    }
+
+    public void setOctave(int octave) {
+        this.octave = octave;
+    }
+
+    public void setLayers(Block lv1, Block lv2, Block lv3) {
+        layers[0] = lv1;
+        layers[1] = lv2;
+        layers[2] = lv3;
+    }
+
+    public void addOre(Block block, int occurrence) {
+        ores.add(block);
+        oreOccurrence.add(occurrence);
+        totalOres += occurrence;
+    }
+
+    public void addStructure(Structure type, int occurrence) {
+        structures.add(type);
+        structureOccurrence.add(occurrence);
+        totalStructures += occurrence;
+    }
+
+    public Block[] getLayers() {
+        return layers;
+    }
+
+    public List<Structure> getStructures() {
+        return structures;
+    }
+
+    public int getStructureOccurrence(int i) {
+        return structureOccurrence.get(i);
+    }
+
+    public int getOccurrence() {
+        return occurrence;
+    }
+
+    public int getAmplitude() {
+        return amplitude;
+    }
+
+    public int getOctave() {
+        return octave;
+    }
+
+    public Structure chooseStructure() {
+        if (totalStructures == 0) return null;
+
+        int index = new Random().nextInt(totalStructures);
+        int sum = 0;
+        int i = 0;
+        while (sum < index) {
+            sum = sum + structureOccurrence.get(i++);
+        }
+
+        return structures.get(Math.max(0, i - 1));
+    }
+}
