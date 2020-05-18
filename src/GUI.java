@@ -242,7 +242,6 @@ public class GUI {
                         blocks.bind(0);
                         DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
                     }
-
                     cX += QABsize + 1;
 
 

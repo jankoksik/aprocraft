@@ -36,9 +36,9 @@ public class Player {
 
     private long window;
 
-    public boolean addItem (int id, int nmbr, boolean force){
+    public boolean addItem (int id){
 
-         return eq.addItem(id,nmbr,force);
+         return eq.addItem(id);
     }
     public int getHp() {
         return hp;
@@ -150,7 +150,7 @@ public class Player {
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
             hp += 1;
         if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
-           eq.addItem(5,1,true);
+           eq.addItem(5);
            gui.SetEq(eq.getEq());
            System.out.println(eq.getNmbrOfItems(5));
         }
