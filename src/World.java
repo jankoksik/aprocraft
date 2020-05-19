@@ -3,7 +3,7 @@ import org.joml.Vector2f;
 import java.util.Random;
 
 public class World {
-    public static final int SIZE = 8;
+    public static final int SIZE = 16;
 
     private Generator generator;
     private Generator biomeGenerator;
@@ -24,7 +24,7 @@ public class World {
 
     public World() {
         generator = new Generator(new Random().nextLong(), 32, 12);
-        biomeGenerator = new Generator(new Random().nextLong(), 64, 8);
+        biomeGenerator = new Generator(new Random().nextLong(), 96, 8);
 
         chunks = new Chunk[SIZE][SIZE];
 

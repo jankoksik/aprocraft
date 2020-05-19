@@ -38,12 +38,29 @@ public class Chunk {
 
         fbsize = 0;
 
-        generate(12);
+        generate(8);
     }
 
     public Biome getBiome(int x, int z) {
         Biome biome;
         int bbb = (int)biomeGenerator.getHeight(x, z);
+
+        //int bbb = (int)(8*(Math.max(generator.getHeight(z, x)/generator.getAmplitude(), biomeGenerator.getHeight(x, z)/biomeGenerator.getAmplitude())));
+        //int bbb = (int)(16*(generator.getHeight(x, z)+biomeGenerator.getHeight(x, z))/(generator.getAmplitude()+biomeGenerator.getAmplitude()));
+        //int bbb = (int)(8*Math.abs((generator.getHeight(x, z)/generator.getAmplitude())-(2*biomeGenerator.getHeight(x, z)/(biomeGenerator.getAmplitude()))));
+
+        /*if(bbb == 1 || bbb == 2 || bbb == 8)
+            biome = Biomes.DEFAULT;
+        else if(bbb == 3 || bbb == 7)
+            biome = Biomes.CANYON;
+        else if (bbb == 4 || bbb == 12)
+            biome = Biomes.DESERT;
+        else if (bbb == 6 || bbb == 14 || bbb == 16)
+            biome = Biomes.PLAINS;
+        else if (bbb == 15)
+            biome = Biomes.ICEBERG;
+        else
+            biome = Biomes.FOREST;*/
 
         /*if(bbb < 3)
             biome = Biomes.CANYON;
@@ -61,13 +78,13 @@ public class Chunk {
         else if (bbb < 3)
             biome = Biomes.DESERT;
         else if (bbb < 4)
-            biome = Biomes.PLAINS;
+            biome = Biomes.DESERT;
         else if (bbb < 6)
-            biome = Biomes.DEFAULT;
+            biome = Biomes.PLAINS;
         else if (bbb < 7)
-            biome = Biomes.FOREST;
+            biome = Biomes.DEFAULT;
         else
-            biome = Biomes.ICEBERG;
+            biome = Biomes.FOREST;
 
         return biome;
     }
