@@ -33,8 +33,9 @@ public abstract class Blocks {
 
 class GrassBlock extends Block {
     public GrassBlock() {
-        super("Grass", new RGB(0.35f, 1f, 0.15f), 1, 0);
+        super("Grass", new RGB(0.4f, 1f, 0.2f), 1, 0);
     }
+    //new RGB(0.35f, 1f, 0.15f)
 }
 
 class DirtBlock extends Block {
