@@ -66,7 +66,7 @@ class Cactus extends Structure {
         super(1, 3, 1);
 
         for(int i = 0; i < sizeY; i ++)
-            blocks[0][i][0] = Blocks.LEAVES;
+            blocks[0][i][0] = Blocks.CACTUS;
 
     }
 }

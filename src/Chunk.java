@@ -15,8 +15,8 @@ public class Chunk {
     private Generator biomeGenerator;
     private int x, z;
 
-    private static FloatBuffer fb, cb;
-    private int vbo, col;
+    private static FloatBuffer fb, cb, lb;
+    private int vbo, col, light;
     int fbsize;
 
     private Block[][][] blocks;
@@ -144,6 +144,11 @@ public class Chunk {
         glBindBuffer(GL_ARRAY_BUFFER, col);
         glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        light = glGenBuffers();
+        glBindBuffer(GL_ARRAY_BUFFER, light);
+        glBufferData(GL_ARRAY_BUFFER, lb, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
     private void updateBuffer() {
@@ -156,6 +161,9 @@ public class Chunk {
         glBufferData(GL_ARRAY_BUFFER, cb, GL_STATIC_DRAW);
         //glBufferSubData(GL_ARRAY_BUFFER, 0, cb);
         //glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, light);
+        glBufferData(GL_ARRAY_BUFFER, lb, GL_STATIC_DRAW);
     }
 
     public Block getBlock(int x, int y, int z) {
@@ -173,7 +181,8 @@ public class Chunk {
 
     public void create(World world) {
         fb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 3);
-        cb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 4);
+        cb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 2);
+        lb = BufferUtils.createFloatBuffer(SIZE * SIZE * SIZE * 6 * 4 * 4);
 
         fbsize = 0;
 
@@ -198,12 +207,14 @@ public class Chunk {
 
                     fb.put(b.getData(xw, yw, zw));
                     cb.put(b.getColorData());
+                    lb.put(b.getLightData());
                     fbsize += 6*4;
 
                 }
 
         fb.flip();
         cb.flip();
+        lb.flip();
         createBuffer();
     }
 
@@ -211,6 +222,7 @@ public class Chunk {
         fbsize = 0;
         fb.clear();
         cb.clear();
+        lb.clear();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
@@ -232,30 +244,45 @@ public class Chunk {
 
                     fb.put(b.getData(xw, yw, zw));
                     cb.put(b.getColorData());
+                    lb.put(b.getLightData());
                     fbsize += 6*4;
 
                 }
 
         fb.flip();
         cb.flip();
+        lb.flip();
         updateBuffer();
     }
 
+    static Texture tex = new Texture("./resources/pack.png");
+
     public void render() {
+        glEnable(GL_TEXTURE_2D);
+        tex.bind(0);
+
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexPointer(3, GL_FLOAT, 0, 0L);
 
         glBindBuffer(GL_ARRAY_BUFFER, col);
+        glTexCoordPointer(2, GL_FLOAT, 0, 0L);
+        //glColorPointer(4, GL_FLOAT, 0, 0L);
+
+        glBindBuffer(GL_ARRAY_BUFFER, light);
         glColorPointer(4, GL_FLOAT, 0, 0L);
 
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);//GL_COLOR_ARRAY
         glEnableClientState(GL_COLOR_ARRAY);
+        //GL_TEXTURE_COORD_ARRAY
 
         glDrawArrays(GL_QUADS, 0, fbsize);//SIZE * SIZE * SIZE * 6 * 4 * 4
 
         glDisableClientState(GL_COLOR_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
 
+        glDisable(GL_TEXTURE_2D);
         /*glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 

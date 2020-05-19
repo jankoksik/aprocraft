@@ -16,7 +16,7 @@ public class GUI {
     private static Texture hearts = new Texture("./resources/hearts.png");
     private static Texture crosshair = new Texture("./resources/crosshair.png");
     private static Texture back = new Texture("./resources/Background3.0.png");
-    private static Texture blocks = new Texture("./resources/blocks.png");
+    public static final Texture blocks = new Texture("./resources/blocks.png");
 
     private static int magicNMBR = 15;
     private static float QABsize = APROCraft.HEIGHT / magicNMBR;
