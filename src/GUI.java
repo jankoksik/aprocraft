@@ -235,6 +235,7 @@ public class GUI {
                 for (int x = 0; x < SizeOfQAB; x++) {
                     Grid.bind(0);
 
+
                     DrawSquare(cX, Hoff + magicNMBR * 2 / 3 + cY, QABsize, new float[]{0, 1, 0, 1});
                     int id = 0;
                     if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
@@ -252,6 +253,12 @@ public class GUI {
                 cX = QABsx;
 
             }
+            Grid.bind(0);
+            DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - (int)QABsize - 3*magicNMBR-1, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - 3*magicNMBR, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int)QABsize*6 +4 + 4*magicNMBR +1, QABsy+4*Hoff- 3*magicNMBR , QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int)QABsize*6 +4 + 4*magicNMBR +1, QABsy+4*Hoff - (int)QABsize- 3*magicNMBR -1, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int)QABsize*8 +4 + 4*magicNMBR, QABsy+4*Hoff - 3*magicNMBR - (int)QABsize/2 , QABsize, new float[]{0, 1, 0, 1});
 
 
         }
@@ -313,6 +320,29 @@ public class GUI {
         };
         return cords;
     }
+
+    public void renderCrafting(Crafting crafting)
+    {
+        int w = crafting.w;
+        int h = crafting.craft.length/crafting.w;
+        int xS = APROCraft.WIDTH /2 - (int)QABsize*w;
+        int yS = APROCraft.HEIGHT /2 - (int)QABsize*h/2;
+        Grid.bind(0);
+        for(int y =0; y<h; y++)
+        {
+            for(int x=0; x<w; x++)
+            {
+                DrawSquare(xS + (int)QABsize*x + x, yS + (int)QABsize*y+y, QABsize, new float[]{0, 1, 0, 1} );
+            }
+        }
+        DrawSquare(xS + (int)QABsize*(w+2)+w, yS + (int)QABsize*h/2+h/2, QABsize, new float[]{0, 1, 0, 1} );
+    }
+
+
+
+
+
+
 
 
 }
