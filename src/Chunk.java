@@ -255,8 +255,6 @@ public class Chunk {
         updateBuffer();
     }
 
-
-
     public void render() {
         glEnable(GL_TEXTURE_2D);
         Blocks.TEXTURE_PACK.bind(0);
@@ -294,5 +292,9 @@ public class Chunk {
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);*/
+    }
+
+    public Block[][][] getBlocks() {
+        return blocks;
     }
 }

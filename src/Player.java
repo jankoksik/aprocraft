@@ -120,7 +120,7 @@ public class Player {
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
                 placeTimer ++;
-                if(placeTimer % 5 == 0 && v2.distance(xCam-0.5f, yCam, zCam-0.5f) > 1.6f)
+                if(placeTimer % 8 == 0 && v2.distance(xCam-0.5f, yCam, zCam-0.5f) > 1.6f)
                     world.setBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.PLANKS);
             }
         }
