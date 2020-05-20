@@ -56,4 +56,22 @@ public class Raycast {
         }
         return null;
     }
+
+    public Vector3f getNextBlockPosition() {
+        Vector3f prev = new Vector3f();
+        for(Vector3f v : points) {
+            int x = (int)v.x;
+            int y = (int)v.y;
+            int z = (int)v.z;
+
+            //System.out.println(x + " " + y + " " + z);
+
+            if(player.getWorld().getBlock(x, y, z) != null) {
+                //System.out.println(player.getWorld().getBiome(x,z));
+                break;
+            }
+            prev = new Vector3f(x, y, z);
+        }
+        return prev;
+    }
 }

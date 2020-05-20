@@ -17,6 +17,7 @@ public class Player {
     private float yRot, xRot;
     private float camSpeed, jumpSpeed;
     private boolean flying;
+    private int destroyTimer, placeTimer;
 
     public Inventory getEq() {
         return eq;
@@ -85,6 +86,9 @@ public class Player {
 
         step = 0;
 
+        destroyTimer = 0;
+        placeTimer = 0;
+
         raycast = new Raycast(this);
 
         eq = new Inventory(64, 8, 5);
@@ -99,6 +103,10 @@ public class Player {
 
         raycast.update();
         v = raycast.getBlockPosition();
+        Vector3f v2 = raycast.getNextBlockPosition();
+
+        destroyTimer ++;
+        placeTimer ++;
 
         if(v != null) {
 
@@ -106,11 +114,15 @@ public class Player {
             float y = (int) (v.y);
             float z = (int) (v.z);
 
-            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+                if(destroyTimer % 8 == 0)
+                    world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
+            }
 
-            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y + 1, (int) z, Blocks.CLOUD);
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+                if(placeTimer % 5 == 0)
+                    world.setBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.PLANKS);
+            }
         }
 
         forward = 0;
