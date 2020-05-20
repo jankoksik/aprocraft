@@ -115,7 +115,7 @@ class RedSandstoneBlock extends Block {
 
 class CactusBlock extends Block {
     public CactusBlock() {
-        super("Cactus", new RGB(0.1f, 0.6f, 0.1f), 7, 8);
+        super("Cactus", new RGB(0.1f, 0.6f, 0.1f), 5, 4);
         material = Block.STICKY;
     }
 }

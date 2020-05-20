@@ -73,9 +73,9 @@ public class Chunk {
         else
             biome = Biomes.FOREST;*/
 
-        if(bbb < 2)
-            biome = Biomes.CANYON;
-        else if (bbb < 3)
+        /*if(bbb < 2)
+            biome = Biomes.CANYON;*/
+        if (bbb < 3)
             biome = Biomes.DESERT;
         else if (bbb < 4)
             biome = Biomes.DESERT;
