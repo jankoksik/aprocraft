@@ -1,7 +1,9 @@
 public class AI {
     public enum Behaviour {
         Attack, Escape, Follow, Search, Idle, Goto
-    };
+    }
+
+    ;
 
     private boolean Change = false;
     private Behaviour actBehaviour = Behaviour.Idle;
@@ -10,18 +12,16 @@ public class AI {
 
     }
 
-    public void ChangeAction(Behaviour beh)
-    {
+    public void ChangeAction(Behaviour beh) {
         actBehaviour = beh;
         Change = true;
     }
-    public void Do(){
 
-        if(Change)
-        {
+    public void Do() {
+
+        if (Change) {
             Change = false;
-            switch (actBehaviour)
-            {
+            switch (actBehaviour) {
                 case Goto:
                     break;
 
@@ -47,25 +47,27 @@ public class AI {
     }
 
 
+    public void GoTo(Player player) {
+        float x = player.getX();
+        float y = player.getY();
+        float z = player.getZ();
 
-    public void GoTo(Player player){
-     float x = player.getX();
-     float y = player.getY();
-     float z = player.getZ();
-
-            // ur code here plz
-    }
-    public void GoTo(float x, float y, float z){
-        // ur code here plz
-    }
-    public void GoTo(Block block){
         // ur code here plz
     }
 
-    public void Attack (Player player) {
+    public void GoTo(float x, float y, float z) {
+        // ur code here plz
+    }
+
+    public void GoTo(Block block) {
+        // ur code here plz
+    }
+
+    public void Attack(Player player) {
         //type code here
     }
-    public void Attack (mob mob) {
+
+    public void Attack(Mob mob) {
         //type code here
     }
 
