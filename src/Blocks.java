@@ -36,7 +36,7 @@ public abstract class Blocks {
 
 class GrassBlock extends Block {
     public GrassBlock() {
-        super("Grass", new RGB(0.45f, 0.8f, 0.3f), 0, 0);
+        super("Grass", new RGB(0.45f, 0.9f, 0.3f), 0, 0);
     }
     //new RGB(0.35f, 1f, 0.15f)
 }
@@ -67,14 +67,14 @@ class PlanksBlock extends Block {
 
 class LeavesBlock extends Block {
     public LeavesBlock() {
-        super("Oak Leaves", new RGB(0.2f, 0.6f, 0.2f), 5, 3);
+        super("Oak Leaves", new RGB(0.3f, 0.7f, 0.3f), 5, 3);
         material = Block.STICKY;
     }
 }
 
 class DarkLeavesBlock extends Block {
     public DarkLeavesBlock() {
-        super("Spruce Leaves", new RGB(0.1f, 0.4f, 0.2f), 5, 3);
+        super("Spruce Leaves", new RGB(0.15f, 0.5f, 0.25f), 5, 3);
         material = Block.STICKY;
     }
 }

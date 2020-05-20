@@ -76,8 +76,10 @@ public abstract class Block {
         colorData = new float[] {
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
-                tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
-                tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                //tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                //tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                tx,ty, tx,ty+s, tx+s,ty+s, tx+s,ty,
+                tx,ty, tx,ty+s, tx+s,ty+s, tx+s,ty,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s
         };
