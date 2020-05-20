@@ -195,4 +195,9 @@ public class World {
     public float getSkyColorMultiplier() {
         return ((float) skyTime / 3600f);
     }
+
+    public Chunk[][] getChunks(){
+        return  chunks;
+    }
+
 }
