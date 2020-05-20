@@ -131,7 +131,8 @@ public class APROCraft {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-                glClearColor(0.25f*stefan.getSkyColorMultiplier(), 0.4f*stefan.getSkyColorMultiplier(), 0.8f*stefan.getSkyColorMultiplier(), 1);//(0.25f, 0.4f, 0.8f, 1);
+                //glClearColor(0.25f*stefan.getSkyColorMultiplier(), 0.4f*stefan.getSkyColorMultiplier(), 0.8f*stefan.getSkyColorMultiplier(), 1);
+                glClearColor(0.25f, 0.4f, 0.8f, 1);
 
 
                 glMatrixMode(GL_PROJECTION);

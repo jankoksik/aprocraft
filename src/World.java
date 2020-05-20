@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class World {
     public static final int SIZE = 8;
+    public static final int RENDER_DISTANCE = 192;
 
     private Generator generator;
     private Generator biomeGenerator;
@@ -182,7 +183,7 @@ public class World {
             for (int j = 0; j < SIZE; j++) {
                 float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
                 //System.out.println(dist);
-                if (dist <= 128)
+                if (dist <= RENDER_DISTANCE)
                     chunks[i][j].render();
             }
     }
