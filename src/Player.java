@@ -115,7 +115,7 @@ public class Player {
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
                 destroyTimer ++;
                 if(destroyTimer % 8 == 0)
-                    world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
+                    world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {

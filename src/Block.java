@@ -105,7 +105,7 @@ public abstract class Block {
                 0,0, 1,0, 1,1, 0,1,
                 0,0, 1,0, 1,1, 0,1
          */
-        if(name != "Grass" && !name.contains("Leaves"))
+        if(name != "Grass" && !name.contains("Leaves") && name != "Red Sandstone")
         color = new RGB(1, 1, 1);
         lightData = new float[] {
                 //back

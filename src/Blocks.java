@@ -108,7 +108,7 @@ class IceBlock extends Block {
 
 class RedSandstoneBlock extends Block {
     public RedSandstoneBlock() {
-        super("Red Sandstone", new RGB(0.9f, 0.4f, 0.1f), 0, 0);
+        super("Red Sandstone", new RGB(0.9f, 0.4f, 0.1f), 1, 0);
         //material = Block.STICKY;
     }
 }
