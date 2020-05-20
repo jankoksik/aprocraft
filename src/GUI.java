@@ -1,7 +1,13 @@
 import org.joml.Vector2f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
+
+import java.awt.*;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +17,22 @@ public class GUI {
     //Quick Action Bar
 
     private int height = 0;
-
     private static Texture Grid = new Texture("./resources/ramkka.png");
+    private Font awtFont;
     private static Texture hearts = new Texture("./resources/hearts.png");
     private static Texture crosshair = new Texture("./resources/crosshair.png");
     private static Texture back = new Texture("./resources/Background3.0.png");
     public static final Texture blocks = new Texture("./resources/blocks.png");
+    public static final Texture NmbTex = new Texture("./resources/font.png");
+
 
     private static int magicNMBR = 15;
     private static float QABsize = APROCraft.HEIGHT / magicNMBR;
+    private static int FontSize = (int)QABsize/4;
     private static float CurrMul = 1.1f;
     private int SizeOfQAB = 8;
     private int currChoosed = 0;
+    Numbers numCord = new Numbers();
 
     public boolean isOpened() {
         return opened;
@@ -42,7 +52,7 @@ public class GUI {
         SizeOfQAB = i.GetW();
         height = i.GetSpace() / i.GetW();
         inv = i.getEq();
-
+        awtFont = new Font("Times New Roman", Font.BOLD, FontSize);
     }
 
     public void setCurr(int curr) {
@@ -96,6 +106,7 @@ public class GUI {
                 id -= 1;
                 blocks.bind(0);
                 DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si/ 2, GetTexById(id));
+                DrawNumber(cX + (int) si / 2, QABsy + (int) si / 4, inv.get(i).getSize() );
             }
             cX += (si + 1);
         }
@@ -244,6 +255,7 @@ public class GUI {
                         id -= 1;
                         blocks.bind(0);
                         DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
+                        DrawNumber(cX + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, inv.get(y * SizeOfQAB + x).getSize() );
                     }
                     cX += QABsize + 1;
 
@@ -337,6 +349,55 @@ public class GUI {
         }
         DrawSquare(xS + (int)QABsize*(w+2)+w, yS + (int)QABsize*h/2+h/2, QABsize, new float[]{0, 1, 0, 1} );
     }
+
+    public void DrawNumber(int x, int y, int number){
+        NmbTex.bind(0);
+       int scnd = number%10;
+       int fst = number/10;
+
+       if(fst >0) {
+           int [] coord = Numbers.getNmbrs().get(fst);
+           glBegin(GL_QUADS);
+
+           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+           glVertex2f(x , y+FontSize);
+
+           glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+           glVertex2f(x+FontSize, y+FontSize);
+
+           glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+           glVertex2f(x+FontSize, y);
+
+
+           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+           glVertex2f(x , y);
+
+           glEnd();
+       }
+        int [] coord = Numbers.getNmbrs().get(scnd);
+        glBegin(GL_QUADS);
+
+        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)((float) coord[1] /(float)Numbers.getH()));
+        glVertex2f(x+FontSize+1 , y+FontSize);
+
+        glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+        glVertex2f(x+FontSize+FontSize+1 , y+FontSize);
+
+
+        glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] +(float) coord[3])/(float)Numbers.getH()));
+        glVertex2f(x+FontSize+FontSize+1 , y);
+
+
+        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+        glVertex2f(x +FontSize+1 , y);
+
+        glEnd();
+
+
+    }
+
+
+
 
 
 
