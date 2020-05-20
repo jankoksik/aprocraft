@@ -73,9 +73,9 @@ public class Chunk {
         else
             biome = Biomes.FOREST;*/
 
-        if(bbb < 2)
-            biome = Biomes.CANYON;
-        else if (bbb < 3)
+        /*if(bbb < 2)
+            biome = Biomes.CANYON;*/
+        if (bbb < 3)
             biome = Biomes.DESERT;
         else if (bbb < 4)
             biome = Biomes.DESERT;
@@ -255,11 +255,11 @@ public class Chunk {
         updateBuffer();
     }
 
-    static Texture tex = new Texture("./resources/pack.png");
+
 
     public void render() {
         glEnable(GL_TEXTURE_2D);
-        tex.bind(0);
+        Blocks.TEXTURE_PACK.bind(0);
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexPointer(3, GL_FLOAT, 0, 0L);

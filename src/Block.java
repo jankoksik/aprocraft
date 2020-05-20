@@ -76,8 +76,10 @@ public abstract class Block {
         colorData = new float[] {
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
-                tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
-                tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                //tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                //tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
+                tx,ty, tx,ty+s, tx+s,ty+s, tx+s,ty,
+                tx,ty, tx,ty+s, tx+s,ty+s, tx+s,ty,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s,
                 tx,ty, tx+s,ty, tx+s,ty+s, tx,ty+s
         };
@@ -103,43 +105,44 @@ public abstract class Block {
                 0,0, 1,0, 1,1, 0,1,
                 0,0, 1,0, 1,1, 0,1
          */
-        //color = new RGB(1, 1, 1);
+        if(name != "Grass" && !name.contains("Leaves"))
+        color = new RGB(1, 1, 1);
         lightData = new float[] {
                 //back
-                color.r*0.7f, color.g*0.7f, color.b*0.7f, 1,
-                color.r*0.7f, color.g*0.7f, color.b*0.7f, 1,
-                color.r*0.7f, color.g*0.7f, color.b*0.7f, 1,
-                color.r*0.7f, color.g*0.7f, color.b*0.7f, 1,
-
-                //right
-                color.r*0.6f, color.g*0.6f, color.b*0.6f, 1,
-                color.r*0.6f, color.g*0.6f, color.b*0.6f, 1,
-                color.r*0.6f, color.g*0.6f, color.b*0.6f, 1,
-                color.r*0.6f, color.g*0.6f, color.b*0.6f, 1,
-
-                //left
-                color.r*0.9f, color.g*0.9f, color.b*0.9f, 1,
-                color.r*0.9f, color.g*0.9f, color.b*0.9f, 1,
-                color.r*0.9f, color.g*0.9f, color.b*0.9f, 1,
-                color.r*0.9f, color.g*0.9f, color.b*0.9f, 1,
+                color.r*0.65f, color.g*0.65f, color.b*0.65f, 1,
+                color.r*0.65f, color.g*0.65f, color.b*0.65f, 1,
+                color.r*0.65f, color.g*0.65f, color.b*0.65f, 1,
+                color.r*0.65f, color.g*0.65f, color.b*0.65f, 1,
 
                 //front
-                color.r*0.8f, color.g*0.8f, color.b*0.8f, 1,
-                color.r*0.8f, color.g*0.8f, color.b*0.8f, 1,
-                color.r*0.8f, color.g*0.8f, color.b*0.8f, 1,
-                color.r*0.8f, color.g*0.8f, color.b*0.8f, 1,
+                color.r*0.75f, color.g*0.75f, color.b*0.75f, 1,
+                color.r*0.75f, color.g*0.75f, color.b*0.75f, 1,
+                color.r*0.75f, color.g*0.75f, color.b*0.75f, 1,
+                color.r*0.75f, color.g*0.75f, color.b*0.75f, 1,
+
+                //left
+                color.r*0.85f, color.g*0.85f, color.b*0.85f, 1,
+                color.r*0.85f, color.g*0.85f, color.b*0.85f, 1,
+                color.r*0.85f, color.g*0.85f, color.b*0.85f, 1,
+                color.r*0.85f, color.g*0.85f, color.b*0.85f, 1,
+
+                //right
+                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
+                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
+                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
+                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
 
                 //bottom
-                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
-                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
-                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
-                color.r*0.5f, color.g*0.5f, color.b*0.5f, 1,
+                color.r*0.4f, color.g*0.4f, color.b*0.4f, 1,
+                color.r*0.4f, color.g*0.4f, color.b*0.4f, 1,
+                color.r*0.4f, color.g*0.4f, color.b*0.4f, 1,
+                color.r*0.4f, color.g*0.4f, color.b*0.4f, 1,
 
                 //top
-                color.r, color.g, color.b, 1,
-                color.r, color.g, color.b, 1,
-                color.r, color.g, color.b, 1,
-                color.r, color.g, color.b, 1
+                color.r*0.95f, color.g*0.95f, color.b*0.95f, 1,
+                color.r*0.95f, color.g*0.95f, color.b*0.95f, 1,
+                color.r*0.95f, color.g*0.95f, color.b*0.95f, 1,
+                color.r*0.95f, color.g*0.95f, color.b*0.95f, 1
         };
 
         Blocks.registerBlock(this);
