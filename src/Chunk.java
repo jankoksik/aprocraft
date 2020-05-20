@@ -255,11 +255,11 @@ public class Chunk {
         updateBuffer();
     }
 
-    static Texture tex = new Texture("./resources/pack.png");
+
 
     public void render() {
         glEnable(GL_TEXTURE_2D);
-        tex.bind(0);
+        Blocks.TEXTURE_PACK.bind(0);
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexPointer(3, GL_FLOAT, 0, 0L);
