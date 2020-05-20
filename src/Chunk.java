@@ -13,7 +13,8 @@ public class Chunk {
     //private Biome biome;
     private Generator generator;
     private Generator biomeGenerator;
-    private int x, z;
+    private int x;
+    private int z;
 
     private static FloatBuffer fb, cb, lb;
     private int vbo, col, light;
@@ -315,5 +316,12 @@ public class Chunk {
 
     public Block[][][] getBlocks() {
         return blocks;
+    }
+    public int getX() {
+        return x;
+    }
+
+    public int getZ() {
+        return z;
     }
 }

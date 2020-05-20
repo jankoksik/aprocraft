@@ -36,7 +36,31 @@ public class WorldSaveNRead extends World {
             }
         }
     }
-    public static  void Update(){
+
+    public static void SaveChunk (String GameName, Chunk[][] chunk, int x, int z){
+        PrintWriter pw = null;
+        JSONObject jo = new JSONObject();
+        Gson gson = new Gson();
+                jo.put("x", x);
+                jo.put("z", z);
+                jo.put("blocks", gson.toJson(chunk[x][z].getBlocks()));
+                try {
+                    pw = new PrintWriter(new FileWriter("./Saves/"+GameName + "/"+x+"_"+z+".json", false));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pw.write(jo.toJSONString());
+
+                pw.flush();
+                pw.close();
+
+    }
+
+
+    public static void Update(){
+
 
     }
 
