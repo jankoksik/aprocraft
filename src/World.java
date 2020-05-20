@@ -123,8 +123,8 @@ public class World {
                 if (chunks[i][j] == null) continue;
                 if (!chunks[i][j].hasStructures) {
                     for (int a = 0; a < 10; a++) {
-                        int x = i * Chunk.SIZE + r.nextInt(31);
-                        int z = j * Chunk.SIZE + r.nextInt(31);
+                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
+                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
                         Biome b = getBiome(x, z);
                         int y = getMaxHeight(x, z);
                         if (getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND) {
@@ -142,15 +142,15 @@ public class World {
             }
     }
 
-    public void generateStructures(Chunk chunk) {
+    /*public void generateStructures(Chunk chunk) {
         Random r = new Random();
 
         for (int i = 0; i < Chunk.SIZE; i++)
             for (int j = 0; j < Chunk.SIZE; j++) {
                 if (r.nextInt(100) == 1) {
-                    Biome b = chunk.getBiome(i, j);
-                    int y = chunk.getMaxHeight(i, j);
-                    if (chunk.getBlock(i, y, j) == Blocks.GRASS || chunk.getBlock(i, y, j) == Blocks.SAND) {
+                    Biome b = getBiome(chunk.getX() * Chunk.SIZE + i, chunk.getX() * Chunk.SIZE + j);
+                    int y = getMaxHeight(chunk.getX() * Chunk.SIZE + i, chunk.getX() * Chunk.SIZE + j);
+                    if (getBlock(chunk.getX() * Chunk.SIZE + i, y, chunk.getX() * Chunk.SIZE + j) == Blocks.GRASS || getBlock(chunk.getX() * Chunk.SIZE + i, y, chunk.getX() * Chunk.SIZE + j) == Blocks.SAND) {
                         Structure s = b.chooseStructure();
                         //if(b.getStructures().size() > 0) {
                         //    Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
@@ -160,11 +160,11 @@ public class World {
                     }
                 }
             }
-    }
+    }*/
 
     public void generateClouds(int n) {
         Random r = new Random();
-        for (int i = 0; i < n; i++) {
+        /*for (int i = 0; i < n; i++) {
             int x = r.nextInt(SIZE * Chunk.SIZE);
             int z = r.nextInt(SIZE * Chunk.SIZE);
             int y = Chunk.SIZE - 2;
@@ -172,7 +172,23 @@ public class World {
             for (int j = 0; j < 6; j++) {
                 Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, y + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
             }
-        }
+        }*/
+
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++) {
+                if (chunks[i][j] == null) continue;
+                if (!chunks[i][j].hasClouds) {
+                    for (int a = 0; a < n; a++) {
+                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
+                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
+
+                        for (int q = 0; q < 3; q++)
+                            Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, Chunk.SIZE-2 + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
+                    }
+
+                    chunks[i][j].hasClouds = true;
+                }
+            }
     }
 
     public int getMaxHeight(int x, int z) {
@@ -180,6 +196,7 @@ public class World {
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return 0;
         Chunk c = chunks[xx][zz];
+        if (c == null) return 0;
         return c.getMaxHeight(x % Chunk.SIZE, z % Chunk.SIZE);
     }
 
@@ -243,6 +260,7 @@ public class World {
                     if (chunks[i][j] == null) {
                         chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
                         generateStructures();
+                        generateClouds(2);
                         chunks[i][j].create(this);
                         //chunks[i][j].updateChunk(this);
                         /*if(i > 0 && i < SIZE && j > 0 && j < SIZE) {
@@ -258,8 +276,11 @@ public class World {
                     }
             }
 
-        if (time % 60 == 0)
-            getChunk((int) player.getX(), (int) player.getZ()).updateChunk(this);
+        if (time % 60 == 0) {
+            Chunk c = getChunk((int) player.getX(), (int) player.getZ());
+            if (c != null)
+                c.updateChunk(this);
+        }
     }
 
     public void render(Player player) {
