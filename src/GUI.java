@@ -106,7 +106,7 @@ public class GUI {
                 id -= 1;
                 blocks.bind(0);
                 DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si/ 2, GetTexById(id));
-                DrawNumber(cX + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, inv.get(i).getSize() );
+                DrawNumber(cX + (int) si / 2, QABsy + (int) si / 4, inv.get(i).getSize() );
             }
             cX += (si + 1);
         }
@@ -359,16 +359,17 @@ public class GUI {
            int [] coord = Numbers.getNmbrs().get(fst);
            glBegin(GL_QUADS);
 
-           glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
            glVertex2f(x , y+FontSize);
 
-           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+           glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
            glVertex2f(x+FontSize, y+FontSize);
 
-           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+           glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
            glVertex2f(x+FontSize, y);
 
-           glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+
+           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
            glVertex2f(x , y);
 
            glEnd();
@@ -376,16 +377,18 @@ public class GUI {
         int [] coord = Numbers.getNmbrs().get(scnd);
         glBegin(GL_QUADS);
 
-        glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] +(float) coord[3])/(float)Numbers.getH()));
+        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)((float) coord[1] /(float)Numbers.getH()));
         glVertex2f(x+FontSize+1 , y+FontSize);
 
-        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
+        glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
         glVertex2f(x+FontSize+FontSize+1 , y+FontSize);
 
-        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)((float) coord[1] /(float)Numbers.getH()));
+
+        glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] +(float) coord[3])/(float)Numbers.getH()));
         glVertex2f(x+FontSize+FontSize+1 , y);
 
-        glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
+
+        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
         glVertex2f(x +FontSize+1 , y);
 
         glEnd();
