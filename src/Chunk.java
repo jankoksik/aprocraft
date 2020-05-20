@@ -317,11 +317,4 @@ public class Chunk {
     public Block[][][] getBlocks() {
         return blocks;
     }
-    public int getX() {
-        return x;
-    }
-
-    public int getZ() {
-        return z;
-    }
 }
