@@ -123,7 +123,7 @@ public class APROCraft {
                     glfwSetWindowShouldClose(win, true);
 
                 player.update();
-                stefan.update();
+                stefan.update(player);
 
                 ticks++;
                 timePrev += ns;

@@ -21,6 +21,8 @@ public class Chunk {
 
     private Block[][][] blocks;
 
+    public boolean hasStructures, hasClouds;
+
     public Chunk(int x, int z, Generator generator, Generator biomeGenerator) {
         this.generator = generator;
         this.biomeGenerator = biomeGenerator;
@@ -33,6 +35,9 @@ public class Chunk {
 
         this.x = x;
         this.z = z;
+
+        hasStructures = false;
+        hasClouds = false;
 
         blocks = new Block[SIZE][SIZE][SIZE];
 
@@ -93,7 +98,7 @@ public class Chunk {
         return biome;
     }*/
 
-    private void generate(int height) {
+    public void generate(int height) {
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
@@ -172,12 +177,17 @@ public class Chunk {
         return blocks[x][y][z];
     }
 
-    public void setBlock(int x, int y, int z, Block block, World world) {
+    public void placeBlock(int x, int y, int z, Block block, World world) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
 
         if(fb != null)
             updateChunk(world);
+    }
+
+    public void setBlock(int x, int y, int z, Block block) {
+        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
+        blocks[x][y][z] = block;
     }
 
     public void create(World world) {
@@ -293,6 +303,14 @@ public class Chunk {
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);*/
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getZ() {
+        return z;
     }
 
     public Block[][][] getBlocks() {

@@ -60,9 +60,9 @@ public class Player {
     private World world;
 
     public Player(long window, World world) {
-        xCam = 10;
+        xCam = 512;
         yCam = 34;
-        zCam = 10;
+        zCam = 512;
 
         forward = 0;
         left = 0;
@@ -121,7 +121,7 @@ public class Player {
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
                 placeTimer ++;
                 if(placeTimer % 8 == 0 && v2.distance(xCam-0.5f, yCam, zCam-0.5f) > 1.6f)
-                    world.setBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.PLANKS);
+                    world.placeBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.PLANKS);
             }
         }
 
