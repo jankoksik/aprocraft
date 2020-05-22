@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Klasa odpowiedzialna za tworzenie przedmiotów.
+ * Przedmioty tworzone są poprez umieszczanie ich w kwadracie 3x3.
+ * Do stowrzenia danego przedmiotu odpowiedni skłądnick musi być dodany w opdowiednie pole
+ */
 public class Crafting {
     ArrayList<Recipe> recipes = new ArrayList<>();
     String Fn; // Json
@@ -38,6 +43,14 @@ public class Crafting {
 1	3	4	5
 
 2	6	7	8
+     */
+
+    /**
+     * Metoda odpowedziala za dodanie składnika we wskazanym przez gracza polu
+     * @param x pierwsza współzędna pola w którym został dodany składnik
+     * @param y pierwsza współzędna pola w którym został dodany składnik
+     * @param itemId id dodanego składnika
+     * @param Eq ekwipunek gracza, z którego dodany zostął skałdnik
      */
     public void PlaceItemInCrafting(int x, int y, int itemId, Inventory Eq){
         if(Eq.removeOne(itemId)) {
@@ -77,6 +90,12 @@ public class Crafting {
 
         return new Size(LX-CornerX, Ly-CornerY);
     }
+
+    /**
+     * metoda konwertująca ArrayList do tablicy int
+     * @param integers Arrayslist integer
+     * @return tablica int
+     */
     private static int[] convertIntegers(ArrayList<Integer> integers)
     {
         int[] ret = new int[integers.size()];
@@ -124,6 +143,9 @@ public class Crafting {
         return  convertIntegers(curr);
     }
 
+    /**
+     * Metoda wczytująca z pliku JSon przepisy opisujące, jak należy stworzyć poszczególne przedmioty
+     */
     public void LoadRecipes(){
         Object obj = null;
         try {
@@ -209,6 +231,10 @@ public class Crafting {
             return  -1;
     }
 
+    /**
+     * Metoda dodająca do ekwipunku gracza stworzony przedmiot
+     * @param Eq ekwipunek gracza do ktrego dodany ma zostać przedmiot
+     */
     public void Craft(Inventory Eq){
         Eq.addItem(ShowPatternMatchinResult());
     }

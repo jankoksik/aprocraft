@@ -3,6 +3,9 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa weryfikująca które bloki znajdują się w zasięgu gracza i na jaki blok gracz obecnie wskazuje kursorem
+ */
 public class Raycast {
     private List<Vector3f> points;
     private Player player;
@@ -29,6 +32,9 @@ public class Raycast {
 //        return r;
 //    }
 
+    /**
+     * Metoda aktualizująca pozycję gracza i zasięg w jakim gracz może nawiązywać interakcję z blokami
+     */
     public void update() {
         int i = 0;
         for(Vector3f v : points) {
@@ -41,6 +47,10 @@ public class Raycast {
         }
     }
 
+    /**
+     * Metoda pobiera współrzędne bloku na, który obecnie wskazuje kursor gracza
+     * @return współrzędne bloku w 3 wymiarach
+     */
     public Vector3f getBlockPosition() {
         for(Vector3f v : points) {
             int x = (int)v.x;
@@ -57,6 +67,10 @@ public class Raycast {
         return null;
     }
 
+    /**
+     * Metoda pobierająca współrzędne bloku, który znajduje sie przed blokiem, na który wskazuje kursor gracza
+     * @return współrzędne bloku w 3 wymiarach
+     */
     public Vector3f getNextBlockPosition() {
         Vector3f prev = new Vector3f();
         for(Vector3f v : points) {

@@ -229,6 +229,6 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lwjgl" level="project" />
+    <orderEntry type="library" exported="" name="lwjgl" level="project" />
   </component>
 </module>
