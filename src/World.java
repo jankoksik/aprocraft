@@ -23,9 +23,16 @@ public class World {
     private int skyTime;
     private int skyTimeDir;
 
+    private long seed, biomeSeed;
+
     public World() {
-        generator = new Generator(new Random().nextLong(), 32, 12);
-        biomeGenerator = new Generator(new Random().nextLong(), 96, 10);
+        seed = new Random().nextLong();
+        biomeSeed = new Random().nextLong();
+
+        generator = new Generator(seed, 32, 12);
+        biomeGenerator = new Generator(biomeSeed, 96, 10);
+
+        System.out.println("Seed: " + seed + "\nBiome Seed: " + biomeSeed);
 
         chunks = new Chunk[SIZE][SIZE];
 
