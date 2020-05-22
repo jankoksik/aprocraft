@@ -429,4 +429,15 @@ public class Player {
     public World getWorld() {
         return world;
     }
+
+
+    public void AutoSave(){
+
+        Thread thread = new Thread(() -> {
+            System.out.println("AutoSave_player");
+            eq.saveEq(APROCraft.GameName + "_inv");
+        });
+        thread.setName("AutoSave_Player");
+        thread.start();
+    }
 }

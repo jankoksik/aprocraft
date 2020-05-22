@@ -10,12 +10,13 @@ import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
     //Quick Action Bar
-
+    Timer timer = new Timer();
     private int height = 0;
     private static Texture Grid = new Texture("./resources/ramkka.png");
     private Font awtFont;
@@ -396,14 +397,7 @@ public class GUI {
 
     }
 
+    public void RenderAutoSave(){
 
-
-
-
-
-
-
-
-
-
+    }
 }

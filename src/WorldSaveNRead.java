@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 import java.io.*;
 
-public class WorldSaveNRead extends World {
+public class WorldSaveNRead{
 
     String Seed = "";
     Chunk[][] chunks;
@@ -59,11 +59,12 @@ public class WorldSaveNRead extends World {
     }
 
 
+
+
     public static void Update(){
 
 
     }
-
-
-
 }
+
+

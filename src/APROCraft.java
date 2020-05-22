@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class APROCraft {
     public static final String VERSION = "0.5.0 alpha";
+    public static String GameName = "TestGame";
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;

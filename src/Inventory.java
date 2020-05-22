@@ -4,10 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -302,7 +299,8 @@ public class Inventory {
     public void readEq(String filename){
         try {
             Gson gson = new Gson();
-            FileReader obj = new FileReader("./data/"+filename+".json");
+            boolean success = (new File("./Saves/"+APROCraft.GameName)).mkdirs();
+            FileReader obj = new FileReader("./Saves/"+ APROCraft.GameName+ "/"+filename+".json");
             Type type = new TypeToken<ArrayList<Item>>(){}.getType();
             ArrayList<Item> lista = gson.fromJson(obj, type);
 

@@ -313,4 +313,13 @@ public class World {
         return chunks;
     }
 
+    public void AutoSave(){
+
+        Thread thread = new Thread(() -> {
+            System.out.println("AutoSave");
+            WorldSaveNRead.Save(APROCraft.GameName,this.getChunks());
+        });
+        thread.setName("AutoSave_World");
+        thread.start();
+    }
 }
