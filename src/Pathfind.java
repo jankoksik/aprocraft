@@ -107,6 +107,7 @@ public class Pathfind  {
         for(int i=0; i<h; i++){
             if(map.getBlock(x, y+i, z)!=null)return true;
         }
+        if(map.getBlock(x, y-1, z) == null) return  true;
         return  false;
     }
 
