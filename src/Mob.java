@@ -3,6 +3,7 @@ public class Mob {
    private int attack;
    private Item[] Drop;
    float x,y,z;
+   World map;
 
     public enum Behaviour {
         Attack, Escape, Follow, Search, Idle, Goto
@@ -14,8 +15,8 @@ public class Mob {
         Change = true;
     }
 
-    public Mob(){
-
+    public Mob(World world){
+        map = world;
 
     }
 
@@ -99,7 +100,11 @@ public class Mob {
         // ur code here plz
     }
 
-    public void GoTo(float x, float y, float z) {
+    public void GoTo(float DesX, float DesY, float DesZ) {
+        float DX = DesX - x;
+        float DY = DesY - y;
+        float DZ = DesZ - z;
+
 
 
     }
@@ -114,6 +119,13 @@ public class Mob {
 
     public void Attack(Mob mob) {
         //type code here
+    }
+
+    public boolean checkCollision(float x, float y, float z) {
+
+        if (map.getBlock((int)x, (int)y, (int)z) != null) return true;
+
+        return false;
     }
 
 
