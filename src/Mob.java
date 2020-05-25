@@ -1,9 +1,18 @@
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mob {
    private int hp;
    private int attack;
    private Item[] Drop;
    float x,y,z;
+   int mobH = 2;
    World map;
+   List<Vector3f> route = new ArrayList<>();
+
 
     public enum Behaviour {
         Attack, Escape, Follow, Search, Idle, Goto
@@ -60,7 +69,20 @@ public class Mob {
     }
 
 
-
+    public void SetDest (int x, int y, int z){
+        Thread thread = new Thread(() -> {
+            Pathfind path = new Pathfind(map, mobH);
+            path.setDx(x);
+            path.setDy(y);
+            path.setDz(z);
+            path.setSx(this.x);
+            path.setSy(this.y);
+            path.setSz(this.z);
+            route = path.FindRoute2D();
+        });
+        thread.setName("Pathfind");
+        thread.start();
+    }
 
     public void Do() {
 
@@ -93,20 +115,26 @@ public class Mob {
 
 
     public void GoTo(Player player) {
-        float x = player.getX();
-        float y = player.getY();
-        float z = player.getZ();
+        int x = (int)  player.getX();
+        int y =  (int) player.getY();
+        int z =  (int) player.getZ();
 
+        GoTo(x,y,z);
         // ur code here plz
     }
 
-    public void GoTo(float DesX, float DesY, float DesZ) {
-        float DX = DesX - x;
-        float DY = DesY - y;
-        float DZ = DesZ - z;
+    public void GoTo(int DesX, int DesY, int DesZ) {
+        if(route == null) {
+            SetDest(DesX, DesY, DesZ);
 
-
-
+        }
+        if(route != null)
+        {
+            Vector3f move = route.get(0);
+            route.remove(0);
+            x = move.x;
+            z = move.z;
+        }
     }
 
     public void GoTo(Block block) {

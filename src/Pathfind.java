@@ -1,3 +1,5 @@
+import org.joml.Vector3f;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +35,12 @@ public class Pathfind  {
 
     public Pathfind(World map, int h){
         this.map = map;
+        this.h = h;
     }
 
 
-    public ArrayList<Block> FindRoute2D(){
-     ArrayList<Block> route = new ArrayList<>();
+    public ArrayList<Vector3f> FindRoute2D(){
+     ArrayList<Vector3f> route = new ArrayList<>();
 
         cx = (int)sx;
         cz = (int) sz;
@@ -49,13 +52,13 @@ public class Pathfind  {
                 if(d>0 && !Colision(cx+1, cy,cz))
                 {
                     cx+=1;
-                    route.add(map.getBlock(cx, cy,cz));
+                    route.add(new Vector3f(cx, cy, cz));
                     check = true;
                 }
                 else if(d<0 && !Colision(cx-1, cy,cz))
                 {
                     cx-=1;
-                    route.add(map.getBlock(cx, cy,cz));
+                    route.add(new Vector3f(cx, cy, cz));
                     check = true;
                 }
 
@@ -65,13 +68,13 @@ public class Pathfind  {
                 if(d>0 && !Colision(cx, cy,cz+1))
                 {
                     cz+=1;
-                    route.add(map.getBlock(cx, cy,cz));
+                    route.add(new Vector3f(cx, cy, cz));
                     check = true;
                 }
                 else if(d<0 && !Colision(cx, cy,cz-1))
                 {
                     cz-=1;
-                    route.add(map.getBlock(cx, cy,cz));
+                    route.add(new Vector3f(cx, cy, cz));
                     check = true;
                 }
 
@@ -83,6 +86,9 @@ public class Pathfind  {
         }
         return  route;
     }
+
+
+
 
     private float max(float a, float b)
     {
