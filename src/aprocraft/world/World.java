@@ -301,23 +301,38 @@ public class World {
             for (int j = 0; j < SIZE; j++) {
                 float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
                 //System.out.println(dist);
-                if (dist <= RENDER_DISTANCE) {
-                    float angle = getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE)-(player.getYRot()%360);
-                    //if(angle <= 90 || angle >= 270)
+                if (dist <= RENDER_DISTANCE/3) {
+                    if (chunks[i][j] != null)
+                        chunks[i][j].render();
+                } else if (dist <= RENDER_DISTANCE) {
+                    float angle = clampRot(getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE)-(clampRot(player.getYRot())));
+                    System.out.println(angle);
+                    if(angle >= 30 && angle <= 150)
                         if (chunks[i][j] != null)
                             chunks[i][j].render();
                 }
             }
     }
 
+    private float clampRot(float angle) {
+        float res = angle;
+        while(res < 0){
+            res += 360;
+        }
+
+        res %= 360;
+
+        return res;
+    }
+
     public float getAngle(Player p, float x, float z) {
         float angle = (float) Math.toDegrees(Math.atan2(p.getZ() - z, p.getX() - x));
 
-        angle = angle % 360;
-
-        if(angle < 0){
+        while(angle < 0){
             angle += 360;
         }
+
+        angle %= 360;
 
         return angle;
     }
