@@ -6,11 +6,12 @@ import static org.lwjgl.opengl.GL15.*;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Random;
 
 public class Chunk {
     public static final int SIZE = 32;
 
-    //private aprocraft.world.Biome biome;
+    //private Biome biome;
     private Generator generator;
     private Generator biomeGenerator;
     private int x;
@@ -100,7 +101,7 @@ public class Chunk {
     }*/
 
     public void generate(int height) {
-
+        Random r = new Random();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
@@ -119,7 +120,7 @@ public class Chunk {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else if(j < h+height-4) {
-                        Block b = biome.getLayers()[2];
+                        Block b = (r.nextInt(32) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     } else if(j < h+height-1) {
                         Block b = biome.getLayers()[1];

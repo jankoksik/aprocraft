@@ -266,16 +266,17 @@ public class World {
         if (skyTime == 3600 || skyTime == 0)
             skyTimeDir *= -1;
 
-        for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < SIZE; j++) {
-                float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
-                if (dist <= RENDER_DISTANCE)
-                    if (chunks[i][j] == null) {
-                        chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
-                        generateStructures();
-                        generateClouds(2);
-                        chunks[i][j].create(this);
-                        //chunks[i][j].updateChunk(this);
+        if (time % 20 == 0) {
+            for (int i = 0; i < SIZE; i++)
+                for (int j = 0; j < SIZE; j++) {
+                    float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
+                    if (dist <= RENDER_DISTANCE)
+                        if (chunks[i][j] == null) {
+                            chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
+                            generateStructures();
+                            generateClouds(2);
+                            chunks[i][j].create(this);
+                            //chunks[i][j].updateChunk(this);
                         /*if(i > 0 && i < SIZE && j > 0 && j < SIZE) {
                             if(chunks[i - 1][j] != null)
                                 chunks[i - 1][j].updateChunk(this);
@@ -286,8 +287,9 @@ public class World {
                             if(chunks[i][j + 1] != null)
                                 chunks[i][j + 1].updateChunk(this);
                         }*/
-                    }
-            }
+                        }
+                }
+        }
 
         if (time % 60 == 0) {
             Chunk c = getChunk((int) player.getX(), (int) player.getZ());
@@ -306,7 +308,7 @@ public class World {
                         chunks[i][j].render();
                 } else if (dist <= RENDER_DISTANCE) {
                     float angle = clampRot(getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE)-(clampRot(player.getYRot())));
-                    System.out.println(angle);
+                    //System.out.println(angle);
                     if(angle >= 30 && angle <= 150)
                         if (chunks[i][j] != null)
                             chunks[i][j].render();

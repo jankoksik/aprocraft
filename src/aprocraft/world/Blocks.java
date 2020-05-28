@@ -10,6 +10,7 @@ public abstract class Blocks {
 
     private static List<Block> blocks = new ArrayList<Block>();
 
+    //podstawowe bloki
     public static final Block AIR = null;
     public static final Block GRASS = new GrassBlock();
     public static final Block DIRT = new DirtBlock();
@@ -24,6 +25,9 @@ public abstract class Blocks {
     public static final Block ICE = new IceBlock();
     public static final Block RED_SANDSTONE = new RedSandstoneBlock();
     public static final Block CACTUS = new CactusBlock();
+
+    //rudy
+    public static final Block DIAMOND_ORE = new DiamondOreBlock();
 
     public static void registerBlock(Block block) {
         blocks.add(block);
@@ -124,3 +128,8 @@ class CactusBlock extends Block {
     }
 }
 
+class DiamondOreBlock extends Block {
+    public DiamondOreBlock() {
+        super("Diamond Ore", new RGB(1, 1, 1), 2, 3);
+    }
+}

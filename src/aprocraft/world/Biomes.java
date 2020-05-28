@@ -38,6 +38,7 @@ class DefaultBiome extends Biome {
     public DefaultBiome() {
         super("Default", 10);
         addStructure(Structures.OAK_TREE, 3);
+        addOre(Blocks.DIAMOND_ORE, 10);
     }
 }
 
@@ -48,6 +49,8 @@ class ForestBiome extends Biome {
         //setOctave(24);
         addStructure(Structures.OAK_TREE, 10);
         addStructure(Structures.SPRUCE_TREE, 15);
+
+        addOre(Blocks.DIAMOND_ORE, 10);
     }
 }
 
@@ -58,19 +61,26 @@ class DesertBiome extends Biome {
         //setOctave(28);
         setLayers(Blocks.SAND, Blocks.SAND, Blocks.STONE);
         addStructure(Structures.CACTUS, 6);
+
+        addOre(Blocks.DIAMOND_ORE, 10);
     }
 }
 
 class PlainsBiome extends Biome {
     public PlainsBiome() {
         super("Plains", 10);
+
+        addOre(Blocks.DIAMOND_ORE, 10);
     }
+
 }
 
 class IcebergBiome extends Biome {
     public IcebergBiome() {
         super("Iceberg", 2);
         setLayers(Blocks.ICE, Blocks.STONE, Blocks.STONE);
+
+        addOre(Blocks.DIAMOND_ORE, 10);
     }
 }
 

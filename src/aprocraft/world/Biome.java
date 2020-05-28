@@ -107,4 +107,21 @@ public abstract class Biome {
 
         return structures.get(Math.max(0, i - 1));
     }
+
+    public Block chooseOre() {
+        if (totalOres == 0) return null;
+
+        int index = new Random().nextInt(totalOres);
+        int sum = 0;
+        int i = 0;
+        while (sum < index) {
+            sum = sum + oreOccurrence.get(i++);
+        }
+
+        return ores.get(Math.max(0, i - 1));
+    }
+
+    public int getTotalOres() {
+        return totalOres;
+    }
 }
