@@ -401,7 +401,7 @@ public class GUI {
     }
 
     public int GetcurrQABid(){
-        if(inv.size()>=1)
+        if(!inv.isEmpty() && currChoosed<inv.size())
             return inv.get(currChoosed).getId();
         else
             return 0;
