@@ -8,14 +8,20 @@ import aprocraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_FILL;
 
 public class Mob {
     private int hp;
     private int attack;
     private Item[] Drop;
     float x, y, z;
+    float s; //size
+    float xSpeed, ySpeed, zSpeed;
     int mobH = 2;
-    World map;
+    World world;
     List<Vector3f> route = new ArrayList<>();
 
     public enum Behaviour {
@@ -31,10 +37,9 @@ public class Mob {
     }
 
     public Mob(World world) {
-        map = world;
+        world = world;
 
     }
-
 
     public int getHp() {
         return hp;
@@ -87,7 +92,7 @@ public class Mob {
 
     public void SetDest(int x, int y, int z) {
         Thread thread = new Thread(() -> {
-            Pathfind path = new Pathfind(map, mobH);
+            Pathfind path = new Pathfind(world, mobH);
             path.setDx(x);
             path.setDy(y);
             path.setDz(z);
@@ -96,7 +101,7 @@ public class Mob {
             path.setSz(this.z);
             route = path.FindRoute2D();
         });
-        thread.setName("aprocraft.mob.Pathfind");
+        thread.setName("Pathfind");
         thread.start();
     }
 
@@ -166,9 +171,71 @@ public class Mob {
 
     public boolean checkCollision(float x, float y, float z) {
 
-        if (map.getBlock((int) x, (int) y, (int) z) != null) return true;
+        if (world.getBlock((int) x, (int) y, (int) z) != null) return true;
 
         return false;
+    }
+
+    public void update(World world) {
+        x += xSpeed;
+        z += zSpeed;
+        y += ySpeed;
+
+        //if(y-s < world.getMaxHeight((int)x, (int)z))
+        if(world.getBlock((int)x, (int)(y-s*0.5f), (int)z) != null)
+            ySpeed = 0.3f;
+
+        ySpeed -= 0.01f;
+
+        //xSpeed *= 0.96f;
+        ySpeed *= 0.96f;
+        //zSpeed *= 0.96f;
+
+        if(world.getTime()%240==0) {
+            Random r = new Random();
+            xSpeed = (r.nextInt(20)-10)*0.01f;
+            zSpeed = (r.nextInt(20)-10)*0.01f;
+        }
+    }
+
+    public void render() {
+        float s = this.s*0.5f;
+
+        glColor3f(0.4f, 1, 0.4f);
+        glBegin(GL_QUADS);
+
+        glVertex3f(x - s, y - s, z - s);
+        glVertex3f(x + s, y - s, z - s);
+        glVertex3f(x + s, y + s, z - s);
+        glVertex3f(x - s, y + s, z - s);
+
+        glVertex3f(x + s, y - s, z + s);
+        glVertex3f(x - s, y - s, z + s);
+        glVertex3f(x - s, y + s, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glVertex3f(x - s, y - s, z - s);
+        glVertex3f(x + s, y - s, z - s);
+        glVertex3f(x + s, y - s, z + s);
+        glVertex3f(x - s, y - s, z + s);
+
+        glVertex3f(x + s, y + s, z - s);
+        glVertex3f(x - s, y + s, z - s);
+        glVertex3f(x - s, y + s, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glVertex3f(x - s, y - s, z - s);
+        glVertex3f(x - s, y + s, z - s);
+        glVertex3f(x - s, y + s, z + s);
+        glVertex3f(x - s, y - s, z + s);
+
+        glVertex3f(x + s, y + s, z - s);
+        glVertex3f(x + s, y - s, z - s);
+        glVertex3f(x + s, y - s, z + s);
+        glVertex3f(x + s, y + s, z + s);
+
+        glEnd();
+        glColor3f(1, 1, 1);
     }
 
 }

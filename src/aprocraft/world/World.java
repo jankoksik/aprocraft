@@ -1,5 +1,6 @@
 package aprocraft.world;
 
+import aprocraft.mob.Slime;
 import org.joml.Vector2f;
 
 import java.util.Random;
@@ -31,6 +32,8 @@ public class World {
 
     private long seed, biomeSeed;
 
+    Slime slime;
+
     public World() {
         seed = new Random().nextLong();
         biomeSeed = new Random().nextLong();
@@ -45,6 +48,8 @@ public class World {
         time = 0;
         skyTime = 3000;
         skyTimeDir = 1;
+
+        slime = new Slime(this, 512.5f, 32,512.5f, 2);
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
@@ -63,6 +68,10 @@ public class World {
                 if(chunks[i][j] != null)
                     chunks[i][j].create(this);*/
     }
+
+//    public void init() {
+//        slime = new Slime(this, 512, 32,512, 4);
+//    }
 
     public Generator getGenerator() {
         return generator;
@@ -296,6 +305,8 @@ public class World {
             if (c != null)
                 c.updateChunk(this);
         }
+
+        slime.update(this);
     }
 
     public void render(Player player) {
@@ -314,6 +325,8 @@ public class World {
                             chunks[i][j].render();
                 }
             }
+
+        slime.render();
     }
 
     private float clampRot(float angle) {
