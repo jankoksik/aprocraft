@@ -1,6 +1,12 @@
+package aprocraft.world;
+
 import org.joml.Vector2f;
 
 import java.util.Random;
+
+import aprocraft.player.*;
+import aprocraft.APROCraft;
+import aprocraft.io.WorldSaveNRead;
 
 public class World {
     public static final int SIZE = 32;
@@ -42,9 +48,9 @@ public class World {
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
-                float dist = Vector2f.distance(0, 0, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
+                float dist = Vector2f.distance(0, 0, (i + 0.5f) * aprocraft.world.Chunk.SIZE, (j + 0.5f) * aprocraft.world.Chunk.SIZE);
                 if (dist <= RENDER_DISTANCE)
-                    chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
+                    chunks[i][j] = new aprocraft.world.Chunk(i, j, generator, biomeGenerator);
             }*/
 
         //blendBiomes();
@@ -63,14 +69,14 @@ public class World {
     }
 
     /*public void blendBiomes() {
-        for (int i = 0; i < SIZE*Chunk.SIZE; i++)
-            for (int j = 0; j < SIZE*Chunk.SIZE; j++) {
+        for (int i = 0; i < SIZE*aprocraft.world.Chunk.SIZE; i++)
+            for (int j = 0; j < SIZE*aprocraft.world.Chunk.SIZE; j++) {
                 Random r = new Random();
                 if(r.nextBoolean() == true) {
-                    setBlock(i * Chunk.SIZE, j * Chunk.SIZE, getMaxHeight(i * Chunk.SIZE, j * Chunk.SIZE),
-                            getBlock(i * Chunk.SIZE + 1 - r.nextInt(1), j * Chunk.SIZE + 1 - r.nextInt(1),
-                                    getMaxHeight(i * Chunk.SIZE + 1 - r.nextInt(1), j * Chunk.SIZE + 1 - r.nextInt(1))));
-                    setBlock(Chunk.SIZE*(i%Chunk.SIZE), getMaxHeight(Chunk.SIZE*(i%Chunk.SIZE), Chunk.SIZE*(j%Chunk.SIZE)), Chunk.SIZE*(j%Chunk.SIZE), Blocks.DARK_LEAVES);
+                    setBlock(i * aprocraft.world.Chunk.SIZE, j * aprocraft.world.Chunk.SIZE, getMaxHeight(i * aprocraft.world.Chunk.SIZE, j * aprocraft.world.Chunk.SIZE),
+                            getBlock(i * aprocraft.world.Chunk.SIZE + 1 - r.nextInt(1), j * aprocraft.world.Chunk.SIZE + 1 - r.nextInt(1),
+                                    getMaxHeight(i * aprocraft.world.Chunk.SIZE + 1 - r.nextInt(1), j * aprocraft.world.Chunk.SIZE + 1 - r.nextInt(1))));
+                    setBlock(aprocraft.world.Chunk.SIZE*(i%aprocraft.world.Chunk.SIZE), getMaxHeight(aprocraft.world.Chunk.SIZE*(i%aprocraft.world.Chunk.SIZE), aprocraft.world.Chunk.SIZE*(j%aprocraft.world.Chunk.SIZE)), aprocraft.world.Chunk.SIZE*(j%aprocraft.world.Chunk.SIZE), aprocraft.world.Blocks.DARK_LEAVES);
                 }
             }
     }*/
@@ -78,16 +84,16 @@ public class World {
     /*public void generateTrees(int n) {
         Random r = new Random();
         for (int i = 0; i < n; i++) {
-            int x = r.nextInt(SIZE * Chunk.SIZE);
-            int z = r.nextInt(SIZE * Chunk.SIZE);
+            int x = r.nextInt(SIZE * aprocraft.world.Chunk.SIZE);
+            int z = r.nextInt(SIZE * aprocraft.world.Chunk.SIZE);
             int y = getMaxHeight(x, z);
 
-            //if(getBlock(x, y, z) == Blocks.GRASS)
-            //    Structures.OAK_TREE.spawn(this, x, y+1, z);
-            Chunk c = getChunk(x, z);
+            //if(getBlock(x, y, z) == aprocraft.world.Blocks.GRASS)
+            //    aprocraft.world.Structures.OAK_TREE.spawn(this, x, y+1, z);
+            aprocraft.world.Chunk c = getChunk(x, z);
             if (c == null) continue;
-            for(Structure s : c.getBiome().getStructures())
-                if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
+            for(aprocraft.world.Structure s : c.getBiome().getStructures())
+                if(getBlock(x, y, z) == aprocraft.world.Blocks.GRASS || getBlock(x, y, z) == aprocraft.world.Blocks.SAND)
                     s.spawn(this, x, y + 1, z);
         }
     }*/
@@ -97,27 +103,27 @@ public class World {
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
-                Biome b = chunks[i][j].getBiome();
+                aprocraft.world.Biome b = chunks[i][j].getBiome();
                 for(int k = 0; k < b.getStructures().size(); k ++) {
                     for(int l = 0; l < b.getStructureOccurrence(k); l ++) {
-                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE);
-                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE);
+                        int x = i * aprocraft.world.Chunk.SIZE + r.nextInt(aprocraft.world.Chunk.SIZE);
+                        int z = j * aprocraft.world.Chunk.SIZE + r.nextInt(aprocraft.world.Chunk.SIZE);
                         int y = getMaxHeight(x, z);
-                        if(getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND)
+                        if(getBlock(x, y, z) == aprocraft.world.Blocks.GRASS || getBlock(x, y, z) == aprocraft.world.Blocks.SAND)
                             b.getStructures().get(k).spawn(this, x, y + 1, z);
                     }
                 }
             }*/
 
-        /*for(int i = 0; i < SIZE*Chunk.SIZE; i ++)
-            for(int j = 0; j < SIZE*Chunk.SIZE; j ++) {
+        /*for(int i = 0; i < SIZE*aprocraft.world.Chunk.SIZE; i ++)
+            for(int j = 0; j < SIZE*aprocraft.world.Chunk.SIZE; j ++) {
                 if(r.nextInt(100) == 1) {
-                    Biome b = getBiome(i, j);
+                    aprocraft.world.Biome b = getBiome(i, j);
                     int y = getMaxHeight(i, j);
-                    if (getBlock(i, y, j) == Blocks.GRASS || getBlock(i, y, j) == Blocks.SAND) {
-                        Structure s = b.chooseStructure();
+                    if (getBlock(i, y, j) == aprocraft.world.Blocks.GRASS || getBlock(i, y, j) == aprocraft.world.Blocks.SAND) {
+                        aprocraft.world.Structure s = b.chooseStructure();
                         //if(b.getStructures().size() > 0) {
-                        //    Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
+                        //    aprocraft.world.Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
                             if (s != null)
                                 s.spawn(this, i, y + 1, j);
                         //}
@@ -137,7 +143,7 @@ public class World {
                         if (getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND) {
                             Structure s = b.chooseStructure();
                             //if(b.getStructures().size() > 0) {
-                            //    Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
+                            //    aprocraft.world.Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
                             if (s != null)
                                 s.spawn(this, x, y + 1, z);
                             //}
@@ -149,20 +155,20 @@ public class World {
             }
     }
 
-    /*public void generateStructures(Chunk chunk) {
+    /*public void generateStructures(aprocraft.world.Chunk chunk) {
         Random r = new Random();
 
-        for (int i = 0; i < Chunk.SIZE; i++)
-            for (int j = 0; j < Chunk.SIZE; j++) {
+        for (int i = 0; i < aprocraft.world.Chunk.SIZE; i++)
+            for (int j = 0; j < aprocraft.world.Chunk.SIZE; j++) {
                 if (r.nextInt(100) == 1) {
-                    Biome b = getBiome(chunk.getX() * Chunk.SIZE + i, chunk.getX() * Chunk.SIZE + j);
-                    int y = getMaxHeight(chunk.getX() * Chunk.SIZE + i, chunk.getX() * Chunk.SIZE + j);
-                    if (getBlock(chunk.getX() * Chunk.SIZE + i, y, chunk.getX() * Chunk.SIZE + j) == Blocks.GRASS || getBlock(chunk.getX() * Chunk.SIZE + i, y, chunk.getX() * Chunk.SIZE + j) == Blocks.SAND) {
-                        Structure s = b.chooseStructure();
+                    aprocraft.world.Biome b = getBiome(chunk.getX() * aprocraft.world.Chunk.SIZE + i, chunk.getX() * aprocraft.world.Chunk.SIZE + j);
+                    int y = getMaxHeight(chunk.getX() * aprocraft.world.Chunk.SIZE + i, chunk.getX() * aprocraft.world.Chunk.SIZE + j);
+                    if (getBlock(chunk.getX() * aprocraft.world.Chunk.SIZE + i, y, chunk.getX() * aprocraft.world.Chunk.SIZE + j) == aprocraft.world.Blocks.GRASS || getBlock(chunk.getX() * aprocraft.world.Chunk.SIZE + i, y, chunk.getX() * aprocraft.world.Chunk.SIZE + j) == aprocraft.world.Blocks.SAND) {
+                        aprocraft.world.Structure s = b.chooseStructure();
                         //if(b.getStructures().size() > 0) {
-                        //    Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
+                        //    aprocraft.world.Structure s = b.getStructures().get(r.nextInt(b.getStructures().size()));
                         if (s != null)
-                            s.spawn(this, chunk.getX() * Chunk.SIZE + i, y + 1, chunk.getZ() * Chunk.SIZE + j);
+                            s.spawn(this, chunk.getX() * aprocraft.world.Chunk.SIZE + i, y + 1, chunk.getZ() * aprocraft.world.Chunk.SIZE + j);
                         //}
                     }
                 }
@@ -172,12 +178,12 @@ public class World {
     public void generateClouds(int n) {
         Random r = new Random();
         /*for (int i = 0; i < n; i++) {
-            int x = r.nextInt(SIZE * Chunk.SIZE);
-            int z = r.nextInt(SIZE * Chunk.SIZE);
-            int y = Chunk.SIZE - 2;
+            int x = r.nextInt(SIZE * aprocraft.world.Chunk.SIZE);
+            int z = r.nextInt(SIZE * aprocraft.world.Chunk.SIZE);
+            int y = aprocraft.world.Chunk.SIZE - 2;
 
             for (int j = 0; j < 6; j++) {
-                Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, y + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
+                aprocraft.world.Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, y + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
             }
         }*/
 
@@ -295,10 +301,25 @@ public class World {
             for (int j = 0; j < SIZE; j++) {
                 float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
                 //System.out.println(dist);
-                if (dist <= RENDER_DISTANCE)
-                    if (chunks[i][j] != null)
-                        chunks[i][j].render();
+                if (dist <= RENDER_DISTANCE) {
+                    float angle = getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE)-(player.getYRot()%360);
+                    //if(angle <= 90 || angle >= 270)
+                        if (chunks[i][j] != null)
+                            chunks[i][j].render();
+                }
             }
+    }
+
+    public float getAngle(Player p, float x, float z) {
+        float angle = (float) Math.toDegrees(Math.atan2(p.getZ() - z, p.getX() - x));
+
+        angle = angle % 360;
+
+        if(angle < 0){
+            angle += 360;
+        }
+
+        return angle;
     }
 
     public int getTime() {
@@ -317,7 +338,7 @@ public class World {
 
         Thread thread = new Thread(() -> {
             System.out.println("AutoSave");
-            WorldSaveNRead.Save(APROCraft.GameName,this.getChunks());
+            WorldSaveNRead.Save(APROCraft.GAME_NAME,this.getChunks());
         });
         thread.setName("AutoSave_World");
         thread.start();

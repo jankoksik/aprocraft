@@ -32,7 +32,7 @@ public class APROCraft {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-        window = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, NULL, NULL);
+        window = glfwCreateWindow(WIDTH, HEIGHT, "aprocraft.APROCraft v" + VERSION, NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -43,7 +43,7 @@ public class APROCraft {
 
         GL.createCapabilities();
 
-        //c = new Chunk(0, 0);
+        //c = new aprocraft.world.Chunk(0, 0);
 
 
     }

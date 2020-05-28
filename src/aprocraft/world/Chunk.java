@@ -1,16 +1,16 @@
+package aprocraft.world;
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.*;
 
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
-import java.util.Random;
 
 public class Chunk {
     public static final int SIZE = 32;
 
-    //private Biome biome;
+    //private aprocraft.world.Biome biome;
     private Generator generator;
     private Generator biomeGenerator;
     private int x;
@@ -29,8 +29,8 @@ public class Chunk {
         this.biomeGenerator = biomeGenerator;
 
         //boolean r = new Random().nextBoolean();
-        //this.biome = r ? Biomes.FOREST : Biomes.DESERT;
-        //this.biome = Biomes.choose();
+        //this.biome = r ? aprocraft.world.Biomes.FOREST : aprocraft.world.Biomes.DESERT;
+        //this.biome = aprocraft.world.Biomes.choose();
         //generator.setAmplitude(biome.getAmplitude());
         //generator.setOctave(biome.getOctave());
 
@@ -56,28 +56,28 @@ public class Chunk {
         //int bbb = (int)(8*Math.abs((generator.getHeight(x, z)/generator.getAmplitude())-(2*biomeGenerator.getHeight(x, z)/(biomeGenerator.getAmplitude()))));
 
         /*if(bbb == 1 || bbb == 2 || bbb == 8)
-            biome = Biomes.DEFAULT;
+            biome = aprocraft.world.Biomes.DEFAULT;
         else if(bbb == 3 || bbb == 7)
-            biome = Biomes.CANYON;
+            biome = aprocraft.world.Biomes.CANYON;
         else if (bbb == 4 || bbb == 12)
-            biome = Biomes.DESERT;
+            biome = aprocraft.world.Biomes.DESERT;
         else if (bbb == 6 || bbb == 14 || bbb == 16)
-            biome = Biomes.PLAINS;
+            biome = aprocraft.world.Biomes.PLAINS;
         else if (bbb == 15)
-            biome = Biomes.ICEBERG;
+            biome = aprocraft.world.Biomes.ICEBERG;
         else
-            biome = Biomes.FOREST;*/
+            biome = aprocraft.world.Biomes.FOREST;*/
 
         /*if(bbb < 3)
-            biome = Biomes.CANYON;
+            biome = aprocraft.world.Biomes.CANYON;
         else if (bbb < 4)
-            biome = Biomes.DEFAULT;
+            biome = aprocraft.world.Biomes.DEFAULT;
         else if (bbb < 5)
-            biome = Biomes.DESERT;
+            biome = aprocraft.world.Biomes.DESERT;
         else if (bbb < 6)
-            biome = Biomes.PLAINS;
+            biome = aprocraft.world.Biomes.PLAINS;
         else
-            biome = Biomes.FOREST;*/
+            biome = aprocraft.world.Biomes.FOREST;*/
 
         if(bbb < 2)
             biome = Biomes.CANYON;
@@ -95,7 +95,7 @@ public class Chunk {
         return biome;
     }
 
-    /*public Biome getBiome() {
+    /*public aprocraft.world.Biome getBiome() {
         return biome;
     }*/
 
@@ -126,7 +126,7 @@ public class Chunk {
                         blocks[i][j][k] = b;
                     } else if(j < h+height) {
                         /*boolean hh = (i == 0 || i == SIZE-1 || k == 0 || k == SIZE-1);
-                        Block b = (new Random().nextBoolean() && hh) ? Blocks.GRASS : biome.getLayers()[0];*/
+                        aprocraft.world.Block b = (new Random().nextBoolean() && hh) ? aprocraft.world.Blocks.GRASS : biome.getLayers()[0];*/
                         Block b = biome.getLayers()[0];
                         blocks[i][j][k] = b;
                     }

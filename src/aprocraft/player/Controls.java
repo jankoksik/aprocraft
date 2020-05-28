@@ -1,3 +1,5 @@
+package aprocraft.player;
+
 /**
  * Klsa odpoiwadająca za poruszanie się avatarem gracza i inne akcje jakie może wykonać gracz.
  * W pliku JSON zawarte są informacje jaki klawisz odpowiada za jaką akcję

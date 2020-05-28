@@ -1,3 +1,5 @@
+package aprocraft.io;
+
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL13.*;
@@ -7,11 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 
-import org.lwjgl.opengl.GL11.*;
-
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.stbi_image_free;
 import static org.lwjgl.stb.STBImage.stbi_load;
 

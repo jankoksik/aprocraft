@@ -1,3 +1,5 @@
+package aprocraft.io;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -8,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+
+import aprocraft.player.*;
 
 public class SaveNReadJson {
 

@@ -1,10 +1,18 @@
+package aprocraft;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+import aprocraft.eq.Crafting;
+import aprocraft.eq.Inventory;
+import aprocraft.eq.Item;
+import aprocraft.io.SaveNReadJson;
+import aprocraft.player.Player;
 import org.joml.Math;
 import org.json.simple.parser.ParseException;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import aprocraft.world.World;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,7 +20,7 @@ import java.util.Map;
 
 public class APROCraft {
     public static final String VERSION = "0.5.0 alpha";
-    public static String GameName = "TestGame";
+    public static final String GAME_NAME = "APROCraft";
     public static final int WIDTH = 1600;
     public static final int HEIGHT = 900;
     public static final float FPS = 60.0f;
@@ -27,7 +35,7 @@ public class APROCraft {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + VERSION, 0, 0);
+        long win = glfwCreateWindow(WIDTH, HEIGHT, GAME_NAME + " v" + VERSION, 0, 0);
 
         GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         glfwSetWindowPos(win, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
@@ -162,7 +170,7 @@ public class APROCraft {
                 player.getGui().RenderQAB();
                 player.getGui().RenderEq() ;
 
-                //GUI.Test();
+                //aprocraft.eq.GUI.Test();
                 //glColor3f(1f, .5f, 1f);
 
                 /*glBegin(GL_QUADS);
@@ -184,7 +192,7 @@ public class APROCraft {
 
             if (System.currentTimeMillis() - timer > 1000) {
                 //System.out.println("FPS: " + frames + " UPS: " + ticks);
-                glfwSetWindowTitle(win, "APROCraft v" + VERSION + "     FPS: " + frames);
+                glfwSetWindowTitle(win, "aprocraft.APROCraft v" + VERSION + "     FPS: " + frames);
                 frames = 0;
                 ticks = 0;
                 timer += 1000;

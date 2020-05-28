@@ -1,4 +1,4 @@
-# APROCraft
+# aprocraft.APROCraft
 
 ## O Projekcie : 
 Minecraft jest grą sandboxową, co oznacza że nie ma odgórnego celu rozgrywki. Każdy znajdzie coś dla siebie. Są elementy eksploracji, kopania, budowania.

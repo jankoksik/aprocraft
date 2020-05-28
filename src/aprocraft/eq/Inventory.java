@@ -1,16 +1,13 @@
+package aprocraft.eq;
+
+import aprocraft.APROCraft;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Queue;
 
 public class Inventory {
 
@@ -41,7 +38,7 @@ public class Inventory {
         }
         for(Item i : map)
         {
-           // Item add = new Item(i.getId());
+           // aprocraft.eq.Item add = new aprocraft.eq.Item(i.getId());
            // add.setSize(i.getSize());
             sum.add(i);
         }
@@ -299,8 +296,8 @@ public class Inventory {
     public void readEq(String filename){
         try {
             Gson gson = new Gson();
-            boolean success = (new File("./Saves/"+APROCraft.GameName)).mkdirs();
-            FileReader obj = new FileReader("./Saves/"+ APROCraft.GameName+ "/"+filename+".json");
+            boolean success = (new File("./Saves/"+ APROCraft.GAME_NAME)).mkdirs();
+            FileReader obj = new FileReader("./Saves/"+ APROCraft.GAME_NAME+ "/"+filename+".json");
             Type type = new TypeToken<ArrayList<Item>>(){}.getType();
             ArrayList<Item> lista = gson.fromJson(obj, type);
 

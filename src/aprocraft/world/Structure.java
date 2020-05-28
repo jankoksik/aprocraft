@@ -1,3 +1,8 @@
+package aprocraft.world;
+
+import aprocraft.world.Block;
+import aprocraft.world.World;
+
 public abstract class Structure {
     public int sizeX, sizeY, sizeZ;
 

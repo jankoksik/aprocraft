@@ -1,3 +1,5 @@
+package aprocraft.world;
+
 public abstract class Structures {
     public static final Structure OAK_TREE = new OakTree();
     public static final Structure SPRUCE_TREE = new SpruceTree();

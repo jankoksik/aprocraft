@@ -1,7 +1,16 @@
+package aprocraft.player;
+
+import aprocraft.APROCraft;
+import aprocraft.eq.GUI;
+import aprocraft.eq.Inventory;
 import org.joml.Math;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWScrollCallback;
+
+import aprocraft.world.Block;
+import aprocraft.world.Blocks;
+import aprocraft.world.World;
 
 import java.nio.DoubleBuffer;
 
@@ -211,8 +220,8 @@ public class Player {
         move(xSpeed, ySpeed, zSpeed);
 
 
-        //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
-        //world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, Blocks.AIR);
+        //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + aprocraft.world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
+        //aprocraft.world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, aprocraft.world.Blocks.AIR);
     }
 
     private void move(float x, float y, float z) {
@@ -251,7 +260,7 @@ public class Player {
         double newX = 0, newY = 0, prevX = 0, prevY = 0;
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
-            //glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
+            //glfwSetCursorPos(window, aprocraft.APROCraft.WIDTH / 2, aprocraft.APROCraft.HEIGHT / 2);
             //mouseLocked = !mouseLocked;
             mouseLocked = true;
             if (mouseLocked)
@@ -307,7 +316,7 @@ public class Player {
         int z0 = (int) (zCam + z + radius);
         int z1 = (int) (zCam + z - radius);
 
-        /*if (world.getBlock((int) (xCam + x), (int) (yCam - 1 + y - radius - 1), (int) (zCam + z)) == null)
+        /*if (aprocraft.world.getBlock((int) (xCam + x), (int) (yCam - 1 + y - radius - 1), (int) (zCam + z)) == null)
             isStanding = false;
         else
             isStanding = true;*/
@@ -356,10 +365,10 @@ public class Player {
             float s = 1f;
 
             /*if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y, (int) z, Blocks.AIR);
+                aprocraft.world.setBlock((int) x, (int) y, (int) z, aprocraft.world.Blocks.AIR);
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-                world.setBlock((int) x, (int) y+1, (int) z, Blocks.CLOUD);*/
+                aprocraft.world.setBlock((int) x, (int) y+1, (int) z, aprocraft.world.Blocks.CLOUD);*/
 
             glLineWidth(4);
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -435,7 +444,7 @@ public class Player {
 
         Thread thread = new Thread(() -> {
             System.out.println("AutoSave_player");
-            eq.saveEq(APROCraft.GameName + "_inv");
+            eq.saveEq(APROCraft.GAME_NAME + "_inv");
         });
         thread.setName("AutoSave_Player");
         thread.start();

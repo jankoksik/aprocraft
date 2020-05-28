@@ -24,31 +24,31 @@ public class Test {
         final int WIDTH = 640 * 2;
         final int HEIGHT = 480 * 2;
 
-        long win = glfwCreateWindow(WIDTH, HEIGHT, "APROCraft v" + APROCraft.VERSION, 0, 0);
+        long win = glfwCreateWindow(WIDTH, HEIGHT, "aprocraft.APROCraft v" + APROCraft.VERSION, 0, 0);
 
         /* DEFAULT SETTINGS
         //MOUSE
-        Controls.setAttack(GLFW_MOUSE_BUTTON_1);
-        Controls.setPlace(GLFW_MOUSE_BUTTON_3);
+        aprocraft.player.Controls.setAttack(GLFW_MOUSE_BUTTON_1);
+        aprocraft.player.Controls.setPlace(GLFW_MOUSE_BUTTON_3);
         //FLY
-        Controls.setDown(GLFW_KEY_DOWN);
-        Controls.setUp(GLFW_KEY_UP);
+        aprocraft.player.Controls.setDown(GLFW_KEY_DOWN);
+        aprocraft.player.Controls.setUp(GLFW_KEY_UP);
         //W S A D
-        Controls.setForward(GLFW_KEY_W);
-        Controls.setBackward(GLFW_KEY_S);
-        Controls.setLeft(GLFW_KEY_A);
-        Controls.setRight(GLFW_KEY_D);
+        aprocraft.player.Controls.setForward(GLFW_KEY_W);
+        aprocraft.player.Controls.setBackward(GLFW_KEY_S);
+        aprocraft.player.Controls.setLeft(GLFW_KEY_A);
+        aprocraft.player.Controls.setRight(GLFW_KEY_D);
         //JUMP
-        Controls.setJump(GLFW_KEY_SPACE);
+        aprocraft.player.Controls.setJump(GLFW_KEY_SPACE);
         // OTHER
-        Controls.setDrop(GLFW_KEY_Q);
-        Controls.setUse(GLFW_KEY_E);
-        Controls.setCrouch(GLFW_KEY_LEFT_CONTROL);
+        aprocraft.player.Controls.setDrop(GLFW_KEY_Q);
+        aprocraft.player.Controls.setUse(GLFW_KEY_E);
+        aprocraft.player.Controls.setCrouch(GLFW_KEY_LEFT_CONTROL);
 
 
         SAVE SETTINGS
         try {
-            SaveNReadJson.SaveControls("Controls");
+            aprocraft.io.SaveNReadJson.SaveControls("aprocraft.player.Controls");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -90,7 +90,7 @@ public class Test {
         }
 //
         // TestLogLabel("save eq");
-        //eqi.saveEq("Inventory");
+        //eqi.saveEq("aprocraft.eq.Inventory");
         TestLogLabel("Test carft");
         Crafting craft = new Crafting(3,3,"");
         craft.PlaceItemInCrafting(2,2, 1, eqi );
@@ -114,7 +114,7 @@ public class Test {
 
         // testowe wypisanie eq
        // TestLogLabel("Read eq");
-        //eqi.readEq("Inventory");
+        //eqi.readEq("aprocraft.eq.Inventory");
 
 
         TestLogLabel("Eq content");
@@ -124,10 +124,10 @@ public class Test {
 
 
 
-        TestLogLabel("Controls read");
+        TestLogLabel("aprocraft.player.Controls read");
 
         try {
-            HashMap<String, Integer> cntrl = SaveNReadJson.readControls("Controls");
+            HashMap<String, Integer> cntrl = SaveNReadJson.readControls("aprocraft.player.Controls");
             SaveNReadJson.applyCOntrols(cntrl);
             for (Map.Entry<String, Integer> entry : cntrl.entrySet()) {
                 String key = entry.getKey();
@@ -152,9 +152,9 @@ public class Test {
         //glEnable(GL_TEXTURE_2D);
         // tworzyc obiekty i tekstury pod tym
 
-        //Texture dirt = new Texture("./resources/DirtGrassSide.png");
+        //aprocraft.io.Texture dirt = new aprocraft.io.Texture("./resources/DirtGrassSide.png");
 
-        //Chunk stefan = new Chunk(0,0, new Generator(new Random().nextLong(), 10, 3));
+        //aprocraft.world.Chunk stefan = new aprocraft.world.Chunk(0,0, new aprocraft.world.Generator(new Random().nextLong(), 10, 3));
         World stefan = new World();
         Player player = new Player(win, stefan);
 

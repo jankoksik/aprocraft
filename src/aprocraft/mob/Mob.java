@@ -1,5 +1,10 @@
-import org.joml.Vector2f;
+package aprocraft.mob;
+
+import aprocraft.eq.Item;
+import aprocraft.player.Player;
 import org.joml.Vector3f;
+import aprocraft.world.Block;
+import aprocraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +85,7 @@ public class Mob {
             path.setSz(this.z);
             route = path.FindRoute2D();
         });
-        thread.setName("Pathfind");
+        thread.setName("aprocraft.mob.Pathfind");
         thread.start();
     }
 

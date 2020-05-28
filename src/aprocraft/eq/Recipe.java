@@ -1,3 +1,5 @@
+package aprocraft.eq;
+
 import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -6,8 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Recipe {

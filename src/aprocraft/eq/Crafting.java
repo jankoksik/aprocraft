@@ -1,3 +1,5 @@
+package aprocraft.eq;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -5,13 +7,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Klasa odpowiedzialna za tworzenie przedmiotów.
@@ -110,7 +107,7 @@ public class Crafting {
         ArrayList<Integer> curr = new ArrayList<>();
         int craftH = craft.length / w;
         boolean found = false;
-       // Size n = GetCurrDim();
+       // aprocraft.eq.Size n = GetCurrDim();
        // int [] curr = new int[n.getW() * n.getH()];
         int CornerX=0, CornerY = 0, LX=0, Ly=0;
         for (int y = 0; y < craftH; y++) {

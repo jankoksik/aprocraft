@@ -1,4 +1,4 @@
-import java.util.Random;
+package aprocraft.world;
 
 public abstract class Block {
     private static int CURRENT_ID = 0;

@@ -1,6 +1,8 @@
+package aprocraft.eq;
+
 /**
  * Klasa implementująca przedmioty
- * Obiekt Item ma swoje id, nazwę i ilość danego przedmiotu
+ * Obiekt aprocraft.eq.Item ma swoje id, nazwę i ilość danego przedmiotu
  */
 public class Item {
     private int id = 0;
@@ -8,23 +10,23 @@ public class Item {
     private int size = 0;
 
     /**
-     * Konstruktor obiektu Item
-     * @param id idetyfikator obiektu Item
+     * Konstruktor obiektu aprocraft.eq.Item
+     * @param id idetyfikator obiektu aprocraft.eq.Item
      */
     public Item(int id) {
         this.id = id;
     }
 
     /**
-     * Metoda zwraca id danego obiektu Item
-     * @return zwraca id Danrgo obiktu Item
+     * Metoda zwraca id danego obiektu aprocraft.eq.Item
+     * @return zwraca id Danrgo obiktu aprocraft.eq.Item
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Metoda zwraca ilośc przedmiotów przypisanych do danego obiektu Item
+     * Metoda zwraca ilośc przedmiotów przypisanych do danego obiektu aprocraft.eq.Item
      * @return ilość przedmiotów
      */
     public int getSize() {
@@ -32,7 +34,7 @@ public class Item {
     }
 
     /**
-     * Metoda ustawiająca ilośc przedmiotów przypisanych do danego obiektu Item
+     * Metoda ustawiająca ilośc przedmiotów przypisanych do danego obiektu aprocraft.eq.Item
      * @param size ilość przedmiotów jaką chcem ustawić
      */
     public void setSize(int size) {

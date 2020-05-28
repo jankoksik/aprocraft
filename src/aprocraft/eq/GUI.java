@@ -1,13 +1,10 @@
-import org.joml.Vector2f;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
+package aprocraft.eq;
+
+import aprocraft.APROCraft;
+import aprocraft.io.Texture;
 
 
-import java.awt.*;
 import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -45,7 +42,7 @@ public class GUI {
 
     private boolean opened = false;
     private int Hoff = 0;
-    private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1);//(APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
+    private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1);//(aprocraft.APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
     private int QABsy = APROCraft.HEIGHT / magicNMBR;
     private List<Item> inv = new ArrayList<>();
 

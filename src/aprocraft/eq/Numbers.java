@@ -1,3 +1,5 @@
+package aprocraft.eq;
+
 import java.util.HashMap;
 
 public class Numbers {

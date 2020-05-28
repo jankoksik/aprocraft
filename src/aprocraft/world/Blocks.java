@@ -1,5 +1,9 @@
+package aprocraft.world;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import aprocraft.io.*;
 
 public abstract class Blocks {
     public static final Texture TEXTURE_PACK = new Texture("./resources/pack3.png");
@@ -38,7 +42,7 @@ class GrassBlock extends Block {
     public GrassBlock() {
         super("Grass", new RGB(0.45f, 0.9f, 0.3f), 0, 0);
     }
-    //new RGB(0.35f, 1f, 0.15f)
+    //new aprocraft.world.RGB(0.35f, 1f, 0.15f)
 }
 
 class DirtBlock extends Block {
@@ -95,7 +99,7 @@ class CloudBlock extends Block {
 class SandBlock extends Block {
     public SandBlock() {
         super("Sand", new RGB(1f, 0.9f, 0.3f), 2, 1);
-        //material = Block.STICKY;
+        //material = aprocraft.world.Block.STICKY;
     }
 }
 
@@ -109,7 +113,7 @@ class IceBlock extends Block {
 class RedSandstoneBlock extends Block {
     public RedSandstoneBlock() {
         super("Red Sandstone", new RGB(0.9f, 0.4f, 0.1f), 1, 0);
-        //material = Block.STICKY;
+        //material = aprocraft.world.Block.STICKY;
     }
 }
 
