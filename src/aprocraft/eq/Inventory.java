@@ -139,7 +139,7 @@ public class Inventory {
 
         return false;
     }
-    private Item getEq(int id){
+    public Item getEq(int id){
         for(Item k : eq)
         {
             if(k.getId() == id)
