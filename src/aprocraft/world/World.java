@@ -325,7 +325,7 @@ public class World {
         return res;
     }
 
-    public float getAngle(Player p, float x, float z) {
+    private float getAngle(Player p, float x, float z) {
         float angle = (float) Math.toDegrees(Math.atan2(p.getZ() - z, p.getX() - x));
 
         while(angle < 0){
