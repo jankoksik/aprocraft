@@ -28,6 +28,9 @@ public abstract class Blocks {
 
     //rudy
     public static final Block DIAMOND_ORE = new DiamondOreBlock();
+    public static final Block COAL_ORE = new CoalOreBlock();
+    public static final Block GOLD_ORE = new GoldOreBlock();
+    public static final Block IRON_ORE = new IronOreBlock();
 
     public static void registerBlock(Block block) {
         blocks.add(block);
@@ -131,5 +134,23 @@ class CactusBlock extends Block {
 class DiamondOreBlock extends Block {
     public DiamondOreBlock() {
         super("Diamond Ore", new RGB(1, 1, 1), 2, 3);
+    }
+}
+
+class CoalOreBlock extends Block {
+    public CoalOreBlock() {
+        super("Coal Ore", new RGB(1, 1, 1), 2, 2);
+    }
+}
+
+class GoldOreBlock extends Block {
+    public GoldOreBlock() {
+        super("Gold Ore", new RGB(1, 1, 1), 0, 2);
+    }
+}
+
+class IronOreBlock extends Block {
+    public IronOreBlock() {
+        super("Iron Ore", new RGB(1, 1, 1), 1, 2);
     }
 }
