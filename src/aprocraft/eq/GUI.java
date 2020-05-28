@@ -5,7 +5,8 @@ import aprocraft.io.Texture;
 import aprocraft.world.Blocks;
 
 
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -398,4 +399,19 @@ public class GUI {
     public void RenderAutoSave(){
 
     }
+
+    public int GetcurrQABid(){
+        if(inv.size()>=1)
+            return inv.get(currChoosed).getId();
+        else
+            return 0;
+    }
+    public void drag(Item item){
+
+
+
+
+    }
+
+
 }
