@@ -123,8 +123,12 @@ public class Player {
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
                 destroyTimer ++;
-                if(destroyTimer % 8 == 0)
+                if(destroyTimer % 8 == 0) {
+                    //eq.addItem(4);
+                    eq.addItem(world.getBlock((int) x, (int) y, (int) z).getID());
+                    gui.SetEq(eq.getEq());
                     world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
+                }
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
@@ -172,7 +176,7 @@ public class Player {
             hp += 1;
         if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
            eq.addItem(4);
-           gui.SetEq(eq.getEq());
+           //gui.SetEq(eq.getEq());
            //System.out.println(eq.getNmbrOfItems(6));
         }
 

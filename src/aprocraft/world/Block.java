@@ -204,7 +204,8 @@ public abstract class Block {
     }
 
     public int getID() {
-        return id;
+        return coordX+coordY*16+1;
+        //return id;
     }
 
     @Override

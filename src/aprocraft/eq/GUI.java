@@ -2,6 +2,7 @@ package aprocraft.eq;
 
 import aprocraft.APROCraft;
 import aprocraft.io.Texture;
+import aprocraft.world.Blocks;
 
 
 import java.awt.Font;
@@ -20,7 +21,7 @@ public class GUI {
     private static Texture hearts = new Texture("./resources/hearts.png");
     private static Texture crosshair = new Texture("./resources/crosshair.png");
     private static Texture back = new Texture("./resources/Background3.0.png");
-    public static final Texture blocks = new Texture("./resources/blocks.png");
+    //public static final Texture blocks = new Texture("./resources/blocks.png");
     public static final Texture NmbTex = new Texture("./resources/font.png");
 
 
@@ -97,12 +98,13 @@ public class GUI {
 
 
             glEnd();
-            int id = 0;
+            int id = -1;
             if (!inv.isEmpty() && inv.size() > i)
                 id = inv.get(i).getId();
-            if (id != 0) {
+            if (id != -1) {
                 id -= 1;
-                blocks.bind(0);
+                //blocks.bind(0);
+                Blocks.TEXTURE_PACK.bind(0);
                 DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si/ 2, GetTexById(id));
                 DrawNumber(cX + (int) si / 2, QABsy + (int) si / 4, inv.get(i).getSize() );
             }
@@ -246,12 +248,13 @@ public class GUI {
 
 
                     DrawSquare(cX, Hoff + magicNMBR * 2 / 3 + cY, QABsize, new float[]{0, 1, 0, 1});
-                    int id = 0;
+                    int id = -1;
                     if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
                         id = inv.get(y * SizeOfQAB + x).getId();
-                    if (id != 0) {
+                    if (id != -1) {
                         id -= 1;
-                        blocks.bind(0);
+                        //blocks.bind(0);
+                        Blocks.TEXTURE_PACK.bind(0);
                         DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
                         DrawNumber(cX + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, inv.get(y * SizeOfQAB + x).getSize() );
                     }
@@ -278,27 +281,25 @@ public class GUI {
     }
 
 
-    private void Test() {
-        Texture tex = new Texture("./resources/Grid2.png");
-        glEnable(GL_TEXTURE_2D);
-        tex.bind(0);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(-50f, 50f);
-        glTexCoord2f(0, 1);
-        glVertex2f(50f, 50f);
-        glTexCoord2f(1, 1);
-        glVertex2f(50f, -50f);
-        glTexCoord2f(1, 0);
-        glVertex2f(-50f, -50f);
-        glEnd();
-        glDisable(GL_BLEND);
-        glDisable(GL_TEXTURE_2D);
-
-
-    }
+//    private void Test() {
+//        Texture tex = new Texture("./resources/Grid2.png");
+//        glEnable(GL_TEXTURE_2D);
+//        tex.bind(0);
+//        glEnable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//        glBegin(GL_QUADS);
+//        glTexCoord2f(0, 0);
+//        glVertex2f(-50f, 50f);
+//        glTexCoord2f(0, 1);
+//        glVertex2f(50f, 50f);
+//        glTexCoord2f(1, 1);
+//        glVertex2f(50f, -50f);
+//        glTexCoord2f(1, 0);
+//        glVertex2f(-50f, -50f);
+//        glEnd();
+//        glDisable(GL_BLEND);
+//        glDisable(GL_TEXTURE_2D);
+//    }
 
     private void DrawSquare(int x, int y, float size, float[] texCords) {
         glBegin(GL_QUADS);
@@ -319,14 +320,14 @@ public class GUI {
     }
 
     private float[] GetTexById(int id) {
-        int x = id % 8;
-        int y = id / 8;
+        int x = id % 16;
+        int y = id / 16;
 
         float[] cords = {
-                (float) x * 1 / 8,
-                (float) x * 1 / 8 + (float) 1 / 8,
-                (float) y * 1 / 8,
-                (float) y * 1 / 8 + (float) 1 / 8
+                (float) x * 1 / 16,
+                (float) x * 1 / 16 + (float) 1 / 16,
+                (float) y * 1 / 16,
+                (float) y * 1 / 16 + (float) 1 / 16
         };
         return cords;
     }
