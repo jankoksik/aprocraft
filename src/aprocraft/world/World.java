@@ -11,7 +11,7 @@ import aprocraft.io.WorldSaveNRead;
 
 public class World {
     public static final int SIZE = 32;
-    public static final int RENDER_DISTANCE = 192;
+    public static final int RENDER_DISTANCE = 96; //192
 
     private Generator generator;
     private Generator biomeGenerator;
@@ -49,7 +49,7 @@ public class World {
         skyTime = 3000;
         skyTimeDir = 1;
 
-        slime = new Slime(this, 512.5f, 32,512.5f, 2);
+        slime = new Slime(this, 518.5f, 32,518.5f, 2);
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {

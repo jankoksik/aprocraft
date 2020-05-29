@@ -27,6 +27,7 @@ public class Player {
     private float camSpeed, jumpSpeed;
     private boolean flying;
     private int destroyTimer, placeTimer;
+    private int mouseTimer;
 
     public Inventory getEq() {
         return eq;
@@ -97,6 +98,8 @@ public class Player {
 
         destroyTimer = 0;
         placeTimer = 0;
+
+        mouseTimer = 0;
 
         raycast = new Raycast(this);
 
@@ -177,11 +180,11 @@ public class Player {
             hp += -1;
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
             hp += 1;
-        if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
-           eq.addItem(4);
-           //gui.SetEq(eq.getEq());
-           //System.out.println(eq.getNmbrOfItems(6));
-        }
+//        if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
+//           eq.addItem(4);
+//           //gui.SetEq(eq.getEq());
+//           //System.out.println(eq.getNmbrOfItems(6));
+//        }
 
         if (hp < 0)
             hp = 0;
@@ -263,37 +266,35 @@ public class Player {
                 z = 0;*/
     }
 
+    private boolean prevPressed = false;
+
     private void mouseUpdate() {
-        double newX = 0, newY = 0, prevX = 0, prevY = 0;
+        double newX = 0, newY = 0;
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
             //glfwSetCursorPos(window, aprocraft.APROCraft.WIDTH / 2, aprocraft.APROCraft.HEIGHT / 2);
             //mouseLocked = !mouseLocked;
-            mouseLocked = true;
-            if (mouseLocked)
+
+            if(!gui.isOpened())
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             else
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
         //}
 
-        if (mouseLocked) {
-            DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
-            DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
+        DoubleBuffer x = BufferUtils.createDoubleBuffer(1);
+        DoubleBuffer y = BufferUtils.createDoubleBuffer(1);
 
-            glfwGetCursorPos(window, x, y);
-            x.rewind();
-            y.rewind();
+        glfwGetCursorPos(window, x, y);
+        x.rewind();
+        y.rewind();
 
-            newX = x.get();
-            newY = y.get();
+        newX = x.get();
+        newY = y.get();
 
+        if (!gui.isOpened()) {
             double deltaX = newX - APROCraft.WIDTH / 2;
             double deltaY = newY - APROCraft.HEIGHT / 2;
-
-            prevX = newX;
-            prevY = newY;
-            // System.out.println(xRot);
 
             xRot += deltaY * 0.2f;
             yRot += deltaX * 0.2f;
@@ -303,8 +304,18 @@ public class Player {
             if (xRot > 90)
                 xRot = 90;
 
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+                mouseTimer ++;
+            } else {
+                mouseTimer = 0;
+            }
+
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
+        } else {
+
         }
+
+        prevPressed = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS;
     }
 
     public boolean isStanding() {
@@ -351,11 +362,65 @@ public class Player {
         return false;
     }
 
+    public void drawHand() {
+        float x = -0.5f;
+        float y = -0.4f;
+        float z = 1f;
+
+        float s = 0.125f;
+
+        glColor3f(1f, 0.8f, 0.4f);
+
+        glBegin(GL_QUADS);
+
+        glVertex3f(x - s, y - s, z - s*3);
+        glVertex3f(x + s, y - s, z - s*3);
+        glVertex3f(x + s, y + s, z - s*3);
+        glVertex3f(x - s, y + s, z - s*3);
+
+        glVertex3f(x + s, y - s, z + s*3);
+        glVertex3f(x - s, y - s, z + s*3);
+        glVertex3f(x - s, y + s, z + s*3);
+        glVertex3f(x + s, y + s, z + s*3);
+
+        glVertex3f(x - s, y - s, z - s*3);
+        glVertex3f(x + s, y - s, z - s*3);
+        glVertex3f(x + s, y - s, z + s*3);
+        glVertex3f(x - s, y - s, z + s*3);
+
+        glVertex3f(x + s, y + s, z - s*3);
+        glVertex3f(x - s, y + s, z - s*3);
+        glVertex3f(x - s, y + s, z + s*3);
+        glVertex3f(x + s, y + s, z + s*3);
+
+        glVertex3f(x - s, y - s, z - s*3);
+        glVertex3f(x - s, y + s, z - s*3);
+        glVertex3f(x - s, y + s, z + s*3);
+        glVertex3f(x - s, y - s, z + s*3);
+
+        glVertex3f(x + s, y + s, z - s*3);
+        glVertex3f(x + s, y - s, z - s*3);
+        glVertex3f(x + s, y - s, z + s*3);
+        glVertex3f(x + s, y + s, z + s*3);
+
+        glEnd();
+
+        glColor3f(1, 1, 1);
+    }
+
     public void updateCamera() {
+        glLoadIdentity();
         glRotatef(Math.sin(step / 5.0f) / 2.0f, 0, 0, 1); //Math.sin(Math.sqrt(xCam*zCam)*3)
         glRotatef(xRot, 1, 0, 0);
         glRotatef(yRot, 0, 1, 0);
         glTranslatef(-xCam, -yCam, -zCam);
+
+        glPushMatrix();
+        glTranslatef(xCam, yCam, zCam);
+        glRotatef(180-yRot, 0, 1, 0);
+        glRotatef(xRot+Math.sin(mouseTimer*0.5f)*8, 1, 0, 0);
+        drawHand();
+        glPopMatrix();
 
         /*float x = (int)(xCam + Math.sin(Math.toRadians(yRot)) * 3);
         float y = (int)(yCam - Math.sin(Math.toRadians(xRot)) * 3);
