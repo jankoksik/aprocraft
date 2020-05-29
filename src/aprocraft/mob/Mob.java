@@ -18,6 +18,7 @@ public class Mob {
     private int attack;
     private Item[] Drop;
     float x, y, z;
+    float MoveTox, MoveToy, MoveToz;
     float s; //size
     float xSpeed, ySpeed, zSpeed;
     int mobH = 2;
@@ -152,8 +153,8 @@ public class Mob {
         if (route != null) {
             Vector3f move = route.get(0);
             route.remove(0);
-            x = move.x;
-            z = move.z;
+            MoveTox = move.x;
+            MoveToz = move.z;
         }
     }
 
