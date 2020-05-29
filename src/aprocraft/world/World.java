@@ -11,7 +11,7 @@ import aprocraft.io.WorldSaveNRead;
 
 public class World {
     public static final int SIZE = 32;
-    public static final int RENDER_DISTANCE = 96; //192
+    public static final int RENDER_DISTANCE = 128; //192
 
     private Generator generator;
     private Generator biomeGenerator;

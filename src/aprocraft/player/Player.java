@@ -13,6 +13,8 @@ import aprocraft.world.Blocks;
 import aprocraft.world.World;
 
 import java.nio.DoubleBuffer;
+import java.util.Random;
+import java.util.Scanner;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -185,6 +187,27 @@ public class Player {
 //           //gui.SetEq(eq.getEq());
 //           //System.out.println(eq.getNmbrOfItems(6));
 //        }
+
+        if (glfwGetKey(window, GLFW_KEY_T) == GL_TRUE) {
+            /*Scanner keyboard = new Scanner(System.in);
+            if (keyboard.hasNextInt()) {
+                eq.addItem(keyboard.nextInt());
+                gui.SetEq(eq.getEq());
+            }*/
+
+            Random r = new Random();
+            for(int i = 0; i < 40; i++) {
+                int nr = r.nextInt(255);
+                class B extends Block {
+                    public B() {
+                        super("Block X", null, nr%16, (int)nr/16);
+                    }
+                }
+                eq.addItem(new B().getID());
+            }
+
+            gui.SetEq(eq.getEq());
+        }
 
         if (hp < 0)
             hp = 0;
