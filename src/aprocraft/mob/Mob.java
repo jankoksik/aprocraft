@@ -140,17 +140,16 @@ public class Mob {
         int x = (int) player.getX();
         int y = (int) player.getY();
         int z = (int) player.getZ();
-
-        GoTo(x, y, z);
+        SetDest(x,y,z);
+        GoTo();
         // ur code here plz
     }
 
-    public void GoTo(int DesX, int DesY, int DesZ) {
+    public void GoTo() {
         if (route == null) {
-            SetDest(DesX, DesY, DesZ);
 
         }
-        if (route != null) {
+       else{
             Vector3f move = route.get(0);
             route.remove(0);
             MoveTox = move.x;
