@@ -130,7 +130,7 @@ public class Player {
                 destroyTimer ++;
                 if(destroyTimer % 8 == 0) {
                     //eq.addItem(4);
-                    eq.addItem(world.getBlock((int) x, (int) y, (int) z).getID());
+                    eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
                     gui.SetEq(eq.getEq());
                     world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
                 }
@@ -152,7 +152,6 @@ public class Player {
         if (glfwGetKey(window, Controls.getJump()) == GL_TRUE) {
             if (isStanding()) {
                 ySpeed = jumpSpeed;
-                // System.out.println("jump");
             }
         }
 

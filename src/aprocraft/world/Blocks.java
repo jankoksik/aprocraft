@@ -38,8 +38,8 @@ public abstract class Blocks {
     }
 
     public static Block searchByID(int id) {
-        for(Block b : blocks)
-            if(b.getID() == id)
+        for (Block b : blocks)
+            if (b.getID() == id)
                 return b;
 
         return null;
@@ -49,6 +49,7 @@ public abstract class Blocks {
 class GrassBlock extends Block {
     public GrassBlock() {
         super("Grass", 1);
+        setDrop(2); //DIRT
     }
 }
 
@@ -61,6 +62,7 @@ class DirtBlock extends Block {
 class StoneBlock extends Block {
     public StoneBlock() {
         super("Stone", 3);
+        setDrop(4); //COBBLESTONE
     }
 }
 
@@ -85,14 +87,14 @@ class PlanksBlock extends Block {
 class LeavesBlock extends Block {
     public LeavesBlock() {
         super("Oak Leaves", 23);
-        material = Block.STICKY;
+        setMaterial(Block.STICKY);
     }
 }
 
 class DarkLeavesBlock extends Block {
     public DarkLeavesBlock() {
         super("Spruce Leaves", 24);
-        material = Block.STICKY;
+        setMaterial(Block.STICKY);
     }
 }
 
@@ -105,7 +107,7 @@ class BedrockBlock extends Block {
 class CloudBlock extends Block {
     public CloudBlock() {
         super("Cloud", 50);
-        material = Block.BOUNCY;
+        setMaterial(Block.BOUNCY);
     }
 }
 
@@ -118,7 +120,7 @@ class SandBlock extends Block {
 class IceBlock extends Block {
     public IceBlock() {
         super("Ice", 51);
-        material = Block.SLIPPY;
+        setMaterial(Block.SLIPPY);
     }
 }
 
@@ -131,7 +133,7 @@ class RedSandstoneBlock extends Block {
 class CactusBlock extends Block {
     public CactusBlock() {
         super("Cactus", 26);
-        material = Block.STICKY;
+        setMaterial(Block.STICKY);
     }
 }
 

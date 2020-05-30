@@ -219,7 +219,7 @@ public class Chunk {
                     Block b = blocks[i][j][k];
 
                     fb.put(b.getData(xw, yw, zw));
-                    cb.put(b.getColorData());
+                    cb.put(b.getTextureData());
                     lb.put(b.getLightData());
                     fbsize += 6*4;
 
@@ -256,7 +256,7 @@ public class Chunk {
                     Block b = blocks[i][j][k];
 
                     fb.put(b.getData(xw, yw, zw));
-                    cb.put(b.getColorData());
+                    cb.put(b.getTextureData());
                     lb.put(b.getLightData());
                     fbsize += 6*4;
 

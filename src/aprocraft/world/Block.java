@@ -13,19 +13,22 @@ public abstract class Block {
     private int size;
     private int coordX, coordY;
 
-    protected float durability;
-    protected int material;
+    private int drop;
+    private float durability;
+    private int material;
 
-    private float[] colorData, lightData;
+    private float[] textureData, lightData;
 
     public Block(String name, int id) {
         this.name = name;
 
         this.id = id;
 
-        size = 1;
+        drop = id;
         durability = 1f;
         material = NORMAL;
+
+        size = 1;
 
         color = new RGB(1, 1, 1);
 
@@ -36,7 +39,7 @@ public abstract class Block {
         float ty = coordY / 16.0f;
         float s = 1f / 16.0f;
 
-        colorData = new float[]{
+        textureData = new float[]{
                 tx, ty, tx + s, ty, tx + s, ty + s, tx, ty + s,
                 tx, ty, tx + s, ty, tx + s, ty + s, tx, ty + s,
                 tx, ty, tx, ty + s, tx + s, ty + s, tx + s, ty,
@@ -120,8 +123,20 @@ public abstract class Block {
         };
     }
 
-    public float[] getColorData() {
-        return colorData;
+    public void setDrop(int drop) {
+        this.drop = drop;
+    }
+
+    public void setMaterial(int material) {
+        this.material = material;
+    }
+
+    public void setDurability(float durability) {
+        this.durability = durability;
+    }
+
+    public float[] getTextureData() {
+        return textureData;
     }
 
     public float[] getLightData() {
@@ -134,6 +149,14 @@ public abstract class Block {
 
     public int getMaterial() {
         return material;
+    }
+
+    public float getDurability() {
+        return durability;
+    }
+
+    public int getDrop() {
+        return drop;
     }
 
     public int getID() {
