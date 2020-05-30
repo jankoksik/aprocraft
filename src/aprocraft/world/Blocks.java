@@ -6,7 +6,7 @@ import java.util.List;
 import aprocraft.io.*;
 
 public abstract class Blocks {
-    public static final Texture TEXTURE_PACK = new Texture("./resources/pack3.png");
+    public static final Texture TEXTURE_PACK = new Texture("./resources/pack.png");
 
     private static List<Block> blocks = new ArrayList<Block>();
 
@@ -15,6 +15,7 @@ public abstract class Blocks {
     public static final Block GRASS = new GrassBlock();
     public static final Block DIRT = new DirtBlock();
     public static final Block STONE = new StoneBlock();
+    public static final Block COBBLESTONE = new CobblestoneBlock();
     public static final Block LOG = new LogBlock();
     public static final Block PLANKS = new PlanksBlock();
     public static final Block LEAVES = new LeavesBlock();
@@ -47,110 +48,113 @@ public abstract class Blocks {
 
 class GrassBlock extends Block {
     public GrassBlock() {
-        super("Grass", new RGB(0.45f, 0.9f, 0.3f), 0, 0);
+        super("Grass", 1);
     }
-    //new aprocraft.world.RGB(0.35f, 1f, 0.15f)
 }
 
 class DirtBlock extends Block {
     public DirtBlock() {
-        super("Dirt", new RGB(0.4f, 0.3f, 0.1f), 2, 0);
+        super("Dirt", 2);
     }
 }
 
 class StoneBlock extends Block {
     public StoneBlock() {
-        super("Stone", new RGB(0.3f, 0.3f, 0.3f), 1, 0);
+        super("Stone", 3);
+    }
+}
+
+class CobblestoneBlock extends Block {
+    public CobblestoneBlock() {
+        super("Cobblestone", 4);
     }
 }
 
 class LogBlock extends Block {
     public LogBlock() {
-        super("Oak Log", new RGB(0.3f, 0.2f, 0.0f), 4, 1);
+        super("Oak Log", 17);
     }
 }
 
 class PlanksBlock extends Block {
     public PlanksBlock() {
-        super("Planks", new RGB(0.7f, 0.6f, 0.3f), 4, 0);
+        super("Planks", 20);
     }
 }
 
 class LeavesBlock extends Block {
     public LeavesBlock() {
-        super("Oak Leaves", new RGB(0.3f, 0.7f, 0.3f), 5, 3);
+        super("Oak Leaves", 23);
         material = Block.STICKY;
     }
 }
 
 class DarkLeavesBlock extends Block {
     public DarkLeavesBlock() {
-        super("Spruce Leaves", new RGB(0.15f, 0.5f, 0.25f), 5, 3);
+        super("Spruce Leaves", 24);
         material = Block.STICKY;
     }
 }
 
 class BedrockBlock extends Block {
     public BedrockBlock() {
-        super("Bedrock", new RGB(0.1f, 0.1f, 0.1f), 1, 1);
+        super("Bedrock", 15);
     }
 }
 
 class CloudBlock extends Block {
     public CloudBlock() {
-        super("Cloud", new RGB(1f, 1f, 1f), 2, 4);
+        super("Cloud", 50);
         material = Block.BOUNCY;
     }
 }
 
 class SandBlock extends Block {
     public SandBlock() {
-        super("Sand", new RGB(1f, 0.9f, 0.3f), 2, 1);
-        //material = aprocraft.world.Block.STICKY;
+        super("Sand", 10);
     }
 }
 
 class IceBlock extends Block {
     public IceBlock() {
-        super("Ice", new RGB(0.6f, 0.7f, 1f), 1, 1);
+        super("Ice", 51);
         material = Block.SLIPPY;
     }
 }
 
 class RedSandstoneBlock extends Block {
     public RedSandstoneBlock() {
-        super("Red Sandstone", new RGB(0.9f, 0.4f, 0.1f), 1, 0);
-        //material = aprocraft.world.Block.STICKY;
+        super("Red Sandstone", 13);
     }
 }
 
 class CactusBlock extends Block {
     public CactusBlock() {
-        super("Cactus", new RGB(0.1f, 0.6f, 0.1f), 5, 4);
+        super("Cactus", 26);
         material = Block.STICKY;
     }
 }
 
 class DiamondOreBlock extends Block {
     public DiamondOreBlock() {
-        super("Diamond Ore", new RGB(1, 1, 1), 2, 3);
+        super("Diamond Ore", 37);
     }
 }
 
 class CoalOreBlock extends Block {
     public CoalOreBlock() {
-        super("Coal Ore", new RGB(1, 1, 1), 2, 2);
+        super("Coal Ore", 36);
     }
 }
 
 class GoldOreBlock extends Block {
     public GoldOreBlock() {
-        super("Gold Ore", new RGB(1, 1, 1), 0, 2);
+        super("Gold Ore", 33);
     }
 }
 
 class IronOreBlock extends Block {
     public IronOreBlock() {
-        super("Iron Ore", new RGB(1, 1, 1), 1, 2);
+        super("Iron Ore", 34);
     }
 }

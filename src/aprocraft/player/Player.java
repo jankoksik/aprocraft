@@ -197,10 +197,10 @@ public class Player {
 
             Random r = new Random();
             for(int i = 0; i < 40; i++) {
-                int nr = r.nextInt(255);
+                int nr = r.nextInt(127);
                 class B extends Block {
                     public B() {
-                        super("Block X", null, nr%16, (int)nr/16);
+                        super("Block X", nr);
                     }
                 }
                 eq.addItem(new B().getID());

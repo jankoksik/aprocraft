@@ -321,8 +321,8 @@ public class GUI {
     }
 
     private float[] GetTexById(int id) {
-        int x = id % 16;
-        int y = id / 16;
+        int x = (id) % 16;
+        int y = (id) / 16;
 
         float[] cords = {
                 (float) x * 1 / 16,

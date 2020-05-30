@@ -21,8 +21,8 @@ import java.util.Map;
 public class APROCraft {
     public static final String VERSION = "0.6.1 alpha";
     public static final String GAME_NAME = "APROCraft";
-    public static final int WIDTH = 1600;
-    public static final int HEIGHT = 900;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
     public static final float FPS = 60.0f;
 
     public APROCraft() {
