@@ -400,6 +400,13 @@ public class GUI {
 
     }
 
+    public Item GetItemXY(int x, int y)
+    {
+        if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
+           return inv.get(y * SizeOfQAB + x);
+        else
+            return null;
+    }
     public int GetcurrQABid(){
         if(!inv.isEmpty() && currChoosed<inv.size())
             return inv.get(currChoosed).getId();
