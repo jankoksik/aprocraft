@@ -200,7 +200,7 @@ public class Player {
                 gui.SetEq(eq.getEq());
             }*/
 
-            Random r = new Random();
+            /*Random r = new Random();
             for(int i = 0; i < 40; i++) {
                 int nr = r.nextInt(127);
                 class B extends Block {
@@ -209,7 +209,19 @@ public class Player {
                     }
                 }
                 eq.addItem(new B().getID());
-            }
+            }*/
+
+            /*eq.addItem(1);
+            eq.addItem(2);
+            eq.addItem(3);
+            eq.addItem(4);*/
+
+            eq.addItem(17);
+            eq.addItem(18);
+            eq.addItem(19);
+            eq.addItem(20);
+            eq.addItem(21);
+            eq.addItem(22);
 
             gui.SetEq(eq.getEq());
         }

@@ -27,9 +27,11 @@ public abstract class Blocks {
     public static final Block LOG = new LogBlock(0);
     public static final Block PLANKS = new PlanksBlock(0);
     public static final Block LEAVES = new LeavesBlock(0);
+
     public static final Block SPRUCE_LOG = new LogBlock(1);
     public static final Block SPRUCE_PLANKS = new PlanksBlock(1);
     public static final Block SPRUCE_LEAVES = new LeavesBlock(1);
+
     public static final Block BIRCH_LOG = new LogBlock(2);
     public static final Block BIRCH_PLANKS = new PlanksBlock(2);
     public static final Block BIRCH_LEAVES = new LeavesBlock(2);
