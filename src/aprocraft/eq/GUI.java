@@ -26,11 +26,11 @@ public class GUI {
     public static final Texture NmbTex = new Texture("./resources/font.png");
 
 
-    private static int magicNMBR = 15;
-    private static float QABsize = APROCraft.HEIGHT / magicNMBR;
+    public static int magicNMBR = 15;
+    public static float QABsize = APROCraft.HEIGHT / magicNMBR;
     private static int FontSize = (int)QABsize/4;
     private static float CurrMul = 1.1f;
-    private int SizeOfQAB = 8;
+    public static int SizeOfQAB = 8;
     private int currChoosed = 0;
     Numbers numCord = new Numbers();
 
@@ -44,9 +44,16 @@ public class GUI {
 
     private boolean opened = false;
     private int Hoff = 0;
-    private int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1);//(aprocraft.APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
-    private int QABsy = APROCraft.HEIGHT / magicNMBR;
+    public static int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1);//(aprocraft.APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
+    public static int QABsy = APROCraft.HEIGHT / magicNMBR;
     private List<Item> inv = new ArrayList<>();
+
+    public int getYOffset() {
+        int offsety = QABsy + (int) QABsize + 10;
+        int size = (int) (0.4f * QABsize);
+        int hoff = offsety + size + size / 2;
+        return hoff + magicNMBR * 2 / 3;
+    }
 
     public GUI(Inventory i) {
         SizeOfQAB = i.GetW();
@@ -242,8 +249,8 @@ public class GUI {
             glEnd();
 
             for (int y = 0; y < height; y++) {
-                int Bx = QABsx;
-                int By = Hoff + offset;
+                //int Bx = QABsx;
+                //int By = Hoff + offset;
                 for (int x = 0; x < SizeOfQAB; x++) {
                     Grid.bind(0);
 
@@ -301,6 +308,16 @@ public class GUI {
 //        glDisable(GL_BLEND);
 //        glDisable(GL_TEXTURE_2D);
 //    }
+
+    public void renderGrabbedItem(int x, int y, Item item) {
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        Blocks.TEXTURE_PACK.bind(0);
+        DrawSquare((int)(x-QABsize/4), (int)(y-QABsize/4), QABsize/2, GetTexById(item.getId()-1));
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+    }
 
     private void DrawSquare(int x, int y, float size, float[] texCords) {
         glBegin(GL_QUADS);

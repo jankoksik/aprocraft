@@ -169,7 +169,8 @@ public class APROCraft {
 
                 player.getGui().RenderHealth(player.getHp());
                 player.getGui().RenderQAB();
-                player.getGui().RenderEq() ;
+                player.getGui().RenderEq();
+                player.renderGrabbedItem();
 
                 //aprocraft.eq.GUI.Test();
                 //glColor3f(1f, .5f, 1f);

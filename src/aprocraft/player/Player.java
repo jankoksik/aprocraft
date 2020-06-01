@@ -3,6 +3,7 @@ package aprocraft.player;
 import aprocraft.APROCraft;
 import aprocraft.eq.GUI;
 import aprocraft.eq.Inventory;
+import aprocraft.eq.Item;
 import org.joml.Math;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
@@ -48,6 +49,11 @@ public class Player {
     private Vector3f v;
 
     private long window;
+
+    double mouseX, mouseY;
+    private boolean prevPressed = false;
+    private boolean grabbed = false;
+    private Item grabbedItem;
 
     public boolean addItem (int id){
 
@@ -288,10 +294,7 @@ public class Player {
                 z = 0;*/
     }
 
-    private boolean prevPressed = false;
-
     private void mouseUpdate() {
-        double newX = 0, newY = 0;
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
             //glfwSetCursorPos(window, aprocraft.APROCraft.WIDTH / 2, aprocraft.APROCraft.HEIGHT / 2);
@@ -311,12 +314,12 @@ public class Player {
         x.rewind();
         y.rewind();
 
-        newX = x.get();
-        newY = y.get();
+        mouseX = x.get();
+        mouseY = y.get();
 
         if (!gui.isOpened()) {
-            double deltaX = newX - APROCraft.WIDTH / 2;
-            double deltaY = newY - APROCraft.HEIGHT / 2;
+            double deltaX = mouseX - APROCraft.WIDTH / 2;
+            double deltaY = mouseY - APROCraft.HEIGHT / 2;
 
             xRot += deltaY * 0.2f;
             yRot += deltaX * 0.2f;
@@ -334,12 +337,34 @@ public class Player {
 
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
         } else {
+            int selectionX = (int)((mouseX - GUI.QABsx)/(GUI.QABsize+1));
+            int selectionY = 4-(int)((mouseY - gui.getYOffset()*2 - 46)/(GUI.QABsize+1));
+            //System.out.println("Mouse(" + selectionX + ", " + selectionY + ") " + grabbed + ", " + grabbedItem);
 
+            /*for(int i = 0; i < 8; i ++)
+                for(int j = 0; j < 5; j ++)
+                    if(gui.GetItemXY(i, j) != null)
+                        System.out.println(i + ", " + j);*/
+
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS && !prevPressed) {
+                grabbed = true;
+                grabbedItem = gui.GetItemXY(selectionX, selectionY);
+            }
+
+            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE && prevPressed) {
+                grabbed = false;
+                grabbedItem = null;
+            }
         }
 
         prevPressed = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS;
     }
 
+    public void renderGrabbedItem() {
+        if(grabbed && grabbedItem != null)
+            gui.renderGrabbedItem((int)mouseX, (int)(APROCraft.HEIGHT-mouseY), grabbedItem);
+    }
+    
     public boolean isStanding() {
         return world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam) != null;//isStanding;//
     }
