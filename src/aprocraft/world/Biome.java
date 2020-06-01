@@ -61,13 +61,13 @@ public abstract class Biome {
 
     public void addOre(Block block, int occurrence) {
         ores.add(block);
-        oreOccurrence.add(occurrence);
+        oreOccurrence.add(occurrence+1);
         totalOres += occurrence;
     }
 
     public void addStructure(Structure type, int occurrence) {
         structures.add(type);
-        structureOccurrence.add(occurrence);
+        structureOccurrence.add(occurrence+1);
         totalStructures += occurrence;
     }
 

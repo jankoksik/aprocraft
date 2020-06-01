@@ -16,10 +16,6 @@ public abstract class Blocks {
     public static final Block DIRT = new DirtBlock();
     public static final Block STONE = new StoneBlock();
     public static final Block COBBLESTONE = new CobblestoneBlock();
-    public static final Block LOG = new LogBlock();
-    public static final Block PLANKS = new PlanksBlock();
-    public static final Block LEAVES = new LeavesBlock();
-    public static final Block DARK_LEAVES = new DarkLeavesBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
     public static final Block SAND = new SandBlock();
@@ -27,11 +23,37 @@ public abstract class Blocks {
     public static final Block RED_SANDSTONE = new RedSandstoneBlock();
     public static final Block CACTUS = new CactusBlock();
 
+    //drewno, liscie itp
+    public static final Block LOG = new LogBlock(0);
+    public static final Block PLANKS = new PlanksBlock(0);
+    public static final Block LEAVES = new LeavesBlock(0);
+    public static final Block SPRUCE_LOG = new LogBlock(1);
+    public static final Block SPRUCE_PLANKS = new PlanksBlock(1);
+    public static final Block SPRUCE_LEAVES = new LeavesBlock(1);
+    public static final Block BIRCH_LOG = new LogBlock(2);
+    public static final Block BIRCH_PLANKS = new PlanksBlock(2);
+    public static final Block BIRCH_LEAVES = new LeavesBlock(2);
+
     //rudy
     public static final Block DIAMOND_ORE = new DiamondOreBlock();
     public static final Block COAL_ORE = new CoalOreBlock();
     public static final Block GOLD_ORE = new GoldOreBlock();
     public static final Block IRON_ORE = new IronOreBlock();
+    public static final Block COPPER_ORE = new CopperOreBlock();
+    public static final Block RUBY_ORE = new RubyOreBlock();
+    public static final Block SAPPHIRE_ORE = new SapphireOreBlock();
+    public static final Block EMERALD_ORE = new EmeraldOreBlock();
+
+    //kolorowa welna
+    public static final Block WHITE_WOOL = new WoolBlock(0);
+    public static final Block GRAY_WOOL = new WoolBlock(1);
+    public static final Block BLACK_WOOL = new WoolBlock(2);
+    public static final Block RED_WOOL = new WoolBlock(3);
+    public static final Block ORANGE_WOOL = new WoolBlock(4);
+    public static final Block YELLOW_WOOL = new WoolBlock(5);
+    public static final Block GREEN_WOOL = new WoolBlock(6);
+    public static final Block BLUE_WOOL = new WoolBlock(7);
+    public static final Block PURPLE_WOOL = new WoolBlock(8);
 
     public static void registerBlock(Block block) {
         blocks.add(block);
@@ -73,27 +95,20 @@ class CobblestoneBlock extends Block {
 }
 
 class LogBlock extends Block {
-    public LogBlock() {
-        super("Oak Log", 17);
+    public LogBlock(int type) {
+        super("Log", 17+type);
     }
 }
 
 class PlanksBlock extends Block {
-    public PlanksBlock() {
-        super("Planks", 20);
+    public PlanksBlock(int type) {
+        super("Planks", 20+type);
     }
 }
 
 class LeavesBlock extends Block {
-    public LeavesBlock() {
-        super("Oak Leaves", 23);
-        setMaterial(Block.STICKY);
-    }
-}
-
-class DarkLeavesBlock extends Block {
-    public DarkLeavesBlock() {
-        super("Spruce Leaves", 24);
+    public LeavesBlock(int type) {
+        super("Leaves", 23+type);
         setMaterial(Block.STICKY);
     }
 }
@@ -144,9 +159,7 @@ class DiamondOreBlock extends Block {
 }
 
 class CoalOreBlock extends Block {
-    public CoalOreBlock() {
-        super("Coal Ore", 36);
-    }
+    public CoalOreBlock() { super("Coal Ore", 36); }
 }
 
 class GoldOreBlock extends Block {
@@ -158,5 +171,35 @@ class GoldOreBlock extends Block {
 class IronOreBlock extends Block {
     public IronOreBlock() {
         super("Iron Ore", 34);
+    }
+}
+
+class CopperOreBlock extends Block {
+    public CopperOreBlock() {
+        super("Copper Ore", 35);
+    }
+}
+
+class RubyOreBlock extends Block {
+    public RubyOreBlock() {
+        super("Ruby Ore", 38);
+    }
+}
+
+class SapphireOreBlock extends Block {
+    public SapphireOreBlock() {
+        super("Sapphire Ore", 39);
+    }
+}
+
+class EmeraldOreBlock extends Block {
+    public EmeraldOreBlock() {
+        super("Emerald Ore", 40);
+    }
+}
+
+class WoolBlock extends Block {
+    public WoolBlock(int color) {
+        super("Wool", 64 + color);
     }
 }

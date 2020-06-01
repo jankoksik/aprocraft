@@ -14,7 +14,7 @@ public abstract class Biomes {
     public static final Biome PLAINS = new PlainsBiome();
     public static final Biome ICEBERG = new IcebergBiome();
     public static final Biome CANYON = new CanyonBiome();
-    //public static final int MOUNTAINS = 4;
+    //MOUNTAINS, JUNGLE
 
     public static void registerBiome(Biome b) {
         biomes.add(b);
@@ -38,11 +38,16 @@ class DefaultBiome extends Biome {
     public DefaultBiome() {
         super("Default", 10);
 
-        addStructure(Structures.OAK_TREE, 3);
+        addStructure(Structures.OAK_TREE, 1);
+        addStructure(Structures.BIRCH_TREE, 3);
 
-        addOre(Blocks.COAL_ORE, 20);
+        addOre(Blocks.COAL_ORE, 15);
+        addOre(Blocks.COPPER_ORE, 10);
         addOre(Blocks.IRON_ORE, 7);
         addOre(Blocks.GOLD_ORE, 4);
+        addOre(Blocks.RUBY_ORE, 3);
+        addOre(Blocks.SAPPHIRE_ORE, 3);
+        addOre(Blocks.EMERALD_ORE, 3);
         addOre(Blocks.DIAMOND_ORE, 3);
 
     }
@@ -56,9 +61,13 @@ class ForestBiome extends Biome {
         addStructure(Structures.OAK_TREE, 10);
         addStructure(Structures.SPRUCE_TREE, 15);
 
-        addOre(Blocks.COAL_ORE, 20);
+        addOre(Blocks.COAL_ORE, 15);
+        addOre(Blocks.COPPER_ORE, 10);
         addOre(Blocks.IRON_ORE, 7);
         addOre(Blocks.GOLD_ORE, 4);
+        addOre(Blocks.RUBY_ORE, 3);
+        addOre(Blocks.SAPPHIRE_ORE, 3);
+        addOre(Blocks.EMERALD_ORE, 3);
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
@@ -71,9 +80,13 @@ class DesertBiome extends Biome {
         setLayers(Blocks.SAND, Blocks.SAND, Blocks.STONE);
         addStructure(Structures.CACTUS, 6);
 
-        addOre(Blocks.COAL_ORE, 20);
+        addOre(Blocks.COAL_ORE, 15);
+        addOre(Blocks.COPPER_ORE, 10);
         addOre(Blocks.IRON_ORE, 7);
         addOre(Blocks.GOLD_ORE, 4);
+        addOre(Blocks.RUBY_ORE, 3);
+        addOre(Blocks.SAPPHIRE_ORE, 3);
+        addOre(Blocks.EMERALD_ORE, 3);
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
@@ -82,9 +95,13 @@ class PlainsBiome extends Biome {
     public PlainsBiome() {
         super("Plains", 10);
 
-        addOre(Blocks.COAL_ORE, 20);
+        addOre(Blocks.COAL_ORE, 15);
+        addOre(Blocks.COPPER_ORE, 10);
         addOre(Blocks.IRON_ORE, 7);
         addOre(Blocks.GOLD_ORE, 4);
+        addOre(Blocks.RUBY_ORE, 3);
+        addOre(Blocks.SAPPHIRE_ORE, 3);
+        addOre(Blocks.EMERALD_ORE, 3);
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 
@@ -95,9 +112,13 @@ class IcebergBiome extends Biome {
         super("Iceberg", 2);
         setLayers(Blocks.ICE, Blocks.STONE, Blocks.STONE);
 
-        addOre(Blocks.COAL_ORE, 20);
+        addOre(Blocks.COAL_ORE, 15);
+        addOre(Blocks.COPPER_ORE, 10);
         addOre(Blocks.IRON_ORE, 7);
         addOre(Blocks.GOLD_ORE, 4);
+        addOre(Blocks.RUBY_ORE, 3);
+        addOre(Blocks.SAPPHIRE_ORE, 3);
+        addOre(Blocks.EMERALD_ORE, 3);
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
