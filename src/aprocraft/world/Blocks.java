@@ -57,6 +57,9 @@ public abstract class Blocks {
     public static final Block BLUE_WOOL = new WoolBlock(7);
     public static final Block PURPLE_WOOL = new WoolBlock(8);
 
+    //specjalne
+    public static final Block CRAFTINGBOX = new CraftingboxBlock();
+
     public static void registerBlock(Block block) {
         blocks.add(block);
     }
@@ -203,5 +206,11 @@ class EmeraldOreBlock extends Block {
 class WoolBlock extends Block {
     public WoolBlock(int color) {
         super("Wool", 64 + color);
+    }
+}
+
+class CraftingboxBlock extends Block {
+    public CraftingboxBlock() {
+        super("Craftingbox", 81);
     }
 }

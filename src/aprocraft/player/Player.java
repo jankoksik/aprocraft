@@ -216,6 +216,7 @@ public class Player {
             eq.addItem(3);
             eq.addItem(4);*/
 
+            eq.addItem(81);
             eq.addItem(17);
             eq.addItem(18);
             eq.addItem(19);

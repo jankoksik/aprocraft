@@ -120,7 +120,7 @@ public class Chunk {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else if(j < h+height-4) {
-                        Block b = (r.nextInt(32) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
+                        Block b = (r.nextInt(j*2+8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     } else if(j < h+height-1) {
                         Block b = biome.getLayers()[1];
