@@ -466,6 +466,31 @@ public class Player {
         glEnd();
 
         glColor3f(1, 1, 1);
+
+        int id = gui.GetcurrQABid()-1;
+
+        if(id != -1) {
+            float cx = (id % 16) / 16.0f;
+            float cy = (id / 16) / 16.0f;
+            float cs = 1.0f / 16.0f;
+
+            Blocks.TEXTURE_PACK.bind(0);
+
+            glEnable(GL_TEXTURE_2D);
+            glBegin(GL_QUADS);
+
+            glTexCoord2f(cx, cy);
+            glVertex3f(x - s + 0.1f, y - s + 0.1f, z - s + 0.3f);
+            glTexCoord2f(cx + cs, cy);
+            glVertex3f(x + s + 0.1f, y - s + 0.1f, z - s + 0.3f);
+            glTexCoord2f(cx + cs, cy + cs);
+            glVertex3f(x + s + 0.1f, y + s + 0.1f, z - s + 0.3f);
+            glTexCoord2f(cx, cy + cs);
+            glVertex3f(x - s + 0.1f, y + s + 0.1f, z - s + 0.3f);
+
+            glEnd();
+            glDisable(GL_TEXTURE_2D);
+        }
     }
 
     public void updateCamera() {
