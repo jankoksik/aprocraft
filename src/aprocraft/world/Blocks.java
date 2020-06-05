@@ -90,24 +90,28 @@ class StoneBlock extends Block {
     public StoneBlock() {
         super("Stone", 3);
         setDrop(4); //COBBLESTONE
+        setDurability(40);
     }
 }
 
 class CobblestoneBlock extends Block {
     public CobblestoneBlock() {
         super("Cobblestone", 4);
+        setDurability(40);
     }
 }
 
 class LogBlock extends Block {
     public LogBlock(int type) {
         super("Log", 17+type);
+        setDurability(30);
     }
 }
 
 class PlanksBlock extends Block {
     public PlanksBlock(int type) {
         super("Planks", 20+type);
+        setDurability(28);
     }
 }
 
@@ -115,12 +119,14 @@ class LeavesBlock extends Block {
     public LeavesBlock(int type) {
         super("Leaves", 23+type);
         setMaterial(Block.STICKY);
+        setDurability(8);
     }
 }
 
 class BedrockBlock extends Block {
     public BedrockBlock() {
         super("Bedrock", 15);
+        setDurability(1000);
     }
 }
 
@@ -128,6 +134,7 @@ class CloudBlock extends Block {
     public CloudBlock() {
         super("Cloud", 50);
         setMaterial(Block.BOUNCY);
+        setDurability(12);
     }
 }
 
@@ -141,12 +148,14 @@ class IceBlock extends Block {
     public IceBlock() {
         super("Ice", 51);
         setMaterial(Block.SLIPPY);
+        setDurability(12);
     }
 }
 
 class RedSandstoneBlock extends Block {
     public RedSandstoneBlock() {
         super("Red Sandstone", 13);
+        setDurability(40);
     }
 }
 
@@ -154,63 +163,76 @@ class CactusBlock extends Block {
     public CactusBlock() {
         super("Cactus", 26);
         setMaterial(Block.STICKY);
+        setDurability(15);
     }
 }
 
 class DiamondOreBlock extends Block {
     public DiamondOreBlock() {
         super("Diamond Ore", 37);
+        setDurability(80);
     }
 }
 
 class CoalOreBlock extends Block {
-    public CoalOreBlock() { super("Coal Ore", 36); }
+    public CoalOreBlock() {
+        super("Coal Ore", 36);
+        setDurability(80);
+    }
 }
 
 class GoldOreBlock extends Block {
     public GoldOreBlock() {
         super("Gold Ore", 33);
+        setDurability(80);
     }
 }
 
 class IronOreBlock extends Block {
     public IronOreBlock() {
         super("Iron Ore", 34);
+        setDurability(80);
     }
 }
 
 class CopperOreBlock extends Block {
     public CopperOreBlock() {
         super("Copper Ore", 35);
+        setDurability(80);
     }
 }
 
 class RubyOreBlock extends Block {
     public RubyOreBlock() {
         super("Ruby Ore", 38);
+        setDurability(80);
     }
 }
 
 class SapphireOreBlock extends Block {
     public SapphireOreBlock() {
         super("Sapphire Ore", 39);
+        setDurability(80);
     }
 }
 
 class EmeraldOreBlock extends Block {
     public EmeraldOreBlock() {
         super("Emerald Ore", 40);
+        setDurability(80);
     }
 }
 
 class WoolBlock extends Block {
     public WoolBlock(int color) {
         super("Wool", 64 + color);
+        setDurability(25);
     }
 }
 
 class CraftingboxBlock extends Block {
     public CraftingboxBlock() {
         super("Craftingbox", 81);
+        setDurability(30);
     }
 }

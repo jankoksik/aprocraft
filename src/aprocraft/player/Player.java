@@ -32,21 +32,16 @@ public class Player {
     private int destroyTimer, placeTimer;
     private int mouseTimer;
 
-    public Inventory getEq() {
-        return eq;
-    }
-
-    public void setEq(Inventory eq) {
-        this.eq = eq;
-    }
-
     private int hp = 20;
     public Inventory eq;
     private GUI gui;
+    private boolean invPrev;
+
     private boolean mouseLocked;
     private int step;
     private Raycast raycast;
     private Vector3f v;
+    private Vector3f vPrev;
 
     private long window;
 
@@ -54,26 +49,6 @@ public class Player {
     private boolean prevPressed = false;
     private boolean grabbed = false;
     private Item grabbedItem;
-
-    public boolean addItem (int id){
-
-         return eq.addItem(id);
-    }
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public GUI getGui() {
-        return gui;
-    }
-
-    public void setGui(GUI gui) {
-        this.gui = gui;
-    }
 
     private World world;
 
@@ -126,20 +101,28 @@ public class Player {
         Vector3f v2 = raycast.getNextBlockPosition();
 
 
-        if(v != null) {
+        if(v != null && vPrev != null) {
 
             float x = (int) (v.x);
             float y = (int) (v.y);
             float z = (int) (v.z);
 
+            float xp = (int) (vPrev.x);
+            float yp = (int) (vPrev.y);
+            float zp = (int) (vPrev.z);
+
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
-                destroyTimer ++;
-                if(destroyTimer % 8 == 0) {
-                    //eq.addItem(4);
-                    eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
-                    gui.SetEq(eq.getEq());
-                    world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
-                }
+                if(x == xp && y == yp && z == zp) {
+                    destroyTimer++;
+                    if (destroyTimer >= world.getBlock((int) x, (int) y, (int) z).getDurability()) {
+                        //eq.addItem(4);
+                        eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
+                        gui.SetEq(eq.getEq());
+                        world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
+                        destroyTimer = 0;
+                    }
+                } else
+                    destroyTimer = 0;
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
@@ -151,6 +134,8 @@ public class Player {
                 }
             }
         }
+
+        vPrev = v;
 
         forward = 0;
         left = 0;
@@ -180,8 +165,11 @@ public class Player {
 
         if (glfwGetKey(window, Controls.getBackward()) == GL_TRUE)
             forward = -1;
-        if (glfwGetKey(window, Controls.getInventory()) == GL_TRUE)
+
+        if (glfwGetKey(window, Controls.getInventory()) == GL_TRUE && !invPrev)
             gui.setOpened(!gui.isOpened());
+
+        invPrev = glfwGetKey(window, Controls.getInventory()) == GL_TRUE;
 
         if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
             hp += -1;
@@ -565,6 +553,45 @@ public class Player {
             glEnd();
 
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+            /*Blocks.TEXTURE_PACK.bind(0);
+            glEnable(GL_TEXTURE_2D);
+
+            glBegin(GL_QUADS);
+
+            glVertex3f(x, y, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x, y + s, z);
+
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x, y, z + s);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x + s, y + s, z + s);
+
+            glVertex3f(x, y, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x, y, z + s);
+
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x, y + s, z);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x + s, y + s, z + s);
+
+            glVertex3f(x, y, z);
+            glVertex3f(x, y + s, z);
+            glVertex3f(x, y + s, z + s);
+            glVertex3f(x, y, z + s);
+
+            glVertex3f(x + s, y + s, z);
+            glVertex3f(x + s, y, z);
+            glVertex3f(x + s, y, z + s);
+            glVertex3f(x + s, y + s, z + s);
+
+            glEnd();
+
+            glDisable(GL_TEXTURE_2D);*/
         }
     }
 
@@ -596,6 +623,33 @@ public class Player {
         return world;
     }
 
+    public boolean addItem (int id){
+
+        return eq.addItem(id);
+    }
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public GUI getGui() {
+        return gui;
+    }
+
+    public void setGui(GUI gui) {
+        this.gui = gui;
+    }
+
+    public Inventory getEq() {
+        return eq;
+    }
+
+    public void setEq(Inventory eq) {
+        this.eq = eq;
+    }
 
     public void AutoSave(){
 

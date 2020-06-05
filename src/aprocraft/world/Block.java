@@ -25,7 +25,7 @@ public abstract class Block {
         this.id = id;
 
         drop = id;
-        durability = 1f;
+        durability = 20;
         material = NORMAL;
 
         size = 1;
