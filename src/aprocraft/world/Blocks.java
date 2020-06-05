@@ -22,6 +22,7 @@ public abstract class Blocks {
     public static final Block ICE = new IceBlock();
     public static final Block RED_SANDSTONE = new RedSandstoneBlock();
     public static final Block CACTUS = new CactusBlock();
+    public static final Block CONCRETE = new ConcreteBlock();
 
     //drewno, liscie itp
     public static final Block LOG = new LogBlock(0);
@@ -234,5 +235,12 @@ class CraftingboxBlock extends Block {
     public CraftingboxBlock() {
         super("Craftingbox", 81);
         setDurability(30);
+    }
+}
+
+class ConcreteBlock extends Block {
+    public ConcreteBlock() {
+        super("Concrete", 52);
+        setDurability(50);
     }
 }
