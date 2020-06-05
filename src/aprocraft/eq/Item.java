@@ -1,13 +1,25 @@
 package aprocraft.eq;
 
+import java.util.Comparator;
+
 /**
  * Klasa implementująca przedmioty
  * Obiekt aprocraft.eq.Item ma swoje id, nazwę i ilość danego przedmiotu
  */
-public class Item {
+public class Item implements Comparable {
     private int id = 0;
     private String Name;
     private int size = 0;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    int x =0;
 
     /**
      * Konstruktor obiektu aprocraft.eq.Item
@@ -49,5 +61,25 @@ public class Item {
         size += 1;
     }
 
+    public String getName() {
+        return Name;
+    }
 
+    public static Comparator<Item> ItemComp = new Comparator<Item>() {
+
+        @Override
+        public int compare(Item e1, Item e2) {
+            return Integer.compare(e1.getX(), e2.getX());
+        }
+    };
+
+   @Override
+   public int compareTo(Object o) {
+       if(o. == this.getX())
+       return  0;
+       else if(this.getX() > o.getX())
+           return  1;
+       else
+           return  -1;
+   }
 }

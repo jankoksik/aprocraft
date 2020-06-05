@@ -7,7 +7,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Inventory {
 
@@ -19,6 +21,7 @@ public class Inventory {
     private int space;
     private int w;
     private ArrayList<Item> map= new ArrayList<>();
+    private PriorityQueue<Item> order = new PriorityQueue<>();
 
 
     public Inventory(int stack, int w, int h) {
@@ -30,17 +33,9 @@ public class Inventory {
     //malo optymalne
     public List<Item> getEq(){
         ArrayList<Item> sum = new ArrayList<>();
-        for(Item i : eq)
-        {
-            i.setSize(stack);
-            sum.add(i);
-            //getEq(i.getId()).setSize(stack);
-        }
-        for(Item i : map)
-        {
-           // aprocraft.eq.Item add = new aprocraft.eq.Item(i.getId());
-           // add.setSize(i.getSize());
-            sum.add(i);
+        Iterator<Item> it = order.iterator();
+        while(it.hasNext()) {
+            sum.add(it.next());
         }
         return sum;
     }
@@ -148,6 +143,13 @@ public class Inventory {
         return null;
     }
 
+    public void Swap(int x1, int y1, int x2, int y2){
+        int xpom =0;
+        xpom = getEq().get(y1*w + x1).getX();
+        getEq().get(y1*w + x1).setX(getEq().get(y2*w + x2).getX());
+        getEq().get(y2*w + x2).setX(xpom);
+    }
+
     public  int getNmbrOfItems(int id){
         int nmbr = 0;
         for(Item i : eq) {
@@ -189,26 +191,34 @@ public class Inventory {
         }
         return  true;
     }
-
+        public int FindSpot(){
+           return map.indexOf(null);
+        }
 
     public boolean addItem(int itemId){
         Item n = new Item(itemId);
         if(!map.isEmpty() && contain(n))
         {
             get(n.getId()).AddOne();
+
                 if(get(n.getId()).getSize() == stack)
                 {
+                    n.setX(FindSpot());
                     eq.add(n);
                     eq.get(eq.indexOf(n)).setSize(stack);
                    removeStack(n.getId());
+
                 }
+                order.add(n);
         return true;
         }
         else
         {
             if(eq.size() + map.size() < space){
                 n.AddOne();
+                n.setX(FindSpot());
                 map.add(n);
+                order.add(n);
                 return true;
             }
             else{
