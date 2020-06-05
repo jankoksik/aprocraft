@@ -204,13 +204,16 @@ public class Player {
             eq.addItem(3);
             eq.addItem(4);*/
 
-            eq.addItem(81);
+            /*eq.addItem(81);
             eq.addItem(17);
             eq.addItem(18);
             eq.addItem(19);
             eq.addItem(20);
             eq.addItem(21);
-            eq.addItem(22);
+            eq.addItem(22);*/
+
+            eq.addItem(Blocks.PLANKS.getID());
+            eq.addItem(Blocks.CONCRETE.getID());
 
             gui.SetEq(eq.getEq());
         }
