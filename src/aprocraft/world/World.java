@@ -367,6 +367,18 @@ public class World {
         Chunk c = getChunk((int) player.getX(), CAVES, (int) player.getZ());
         if (c != null)
             c.render();
+        c = getChunk((int) player.getX()+Chunk.SIZE, CAVES, (int) player.getZ());
+        if (c != null)
+            c.render();
+        c = getChunk((int) player.getX()-Chunk.SIZE, CAVES, (int) player.getZ());
+        if (c != null)
+            c.render();
+        c = getChunk((int) player.getX(), CAVES, (int) player.getZ()+Chunk.SIZE);
+        if (c != null)
+            c.render();
+        c = getChunk((int) player.getX(), CAVES, (int) player.getZ()-Chunk.SIZE);
+        if (c != null)
+            c.render();
 
         slime.render();
     }
