@@ -14,8 +14,7 @@ public class Chunk {
     //private Biome biome;
     private Generator generator;
     private Generator biomeGenerator;
-    private int x;
-    private int z;
+    private int x, y, z;
 
     private static FloatBuffer fb, cb, lb;
     private int vbo, col, light;
@@ -25,7 +24,7 @@ public class Chunk {
 
     public boolean hasStructures, hasClouds;
 
-    public Chunk(int x, int z, Generator generator, Generator biomeGenerator) {
+    public Chunk(int x, int y, int z, Generator generator, Generator biomeGenerator) {
         this.generator = generator;
         this.biomeGenerator = biomeGenerator;
 
@@ -36,6 +35,7 @@ public class Chunk {
         //generator.setOctave(biome.getOctave());
 
         this.x = x;
+        this.y = y;
         this.z = z;
 
         hasStructures = false;
@@ -45,7 +45,7 @@ public class Chunk {
 
         fbsize = 0;
 
-        generate(8);
+        //generate(12);
     }
 
     public Biome getBiome(int x, int z) {
@@ -106,7 +106,7 @@ public class Chunk {
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
                     int xw = SIZE*x+i;
-                    int yw = j;
+                    int yw = SIZE*y+j;
                     int zw = SIZE*z+k;
                     int h = (int)generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
 
@@ -116,10 +116,11 @@ public class Chunk {
                     //h /= 2;
                     h *= (biome.getAmplitude()/generator.getAmplitude());
 
-                    if(j == 0) {
+                    /*if(j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
-                    } else if(j < h+height-4) {
+                    } else */
+                    if(j < h+height-4) {
                         Block b = (r.nextInt(j*2+8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     } else if(j < h+height-1) {
@@ -129,6 +130,26 @@ public class Chunk {
                         /*boolean hh = (i == 0 || i == SIZE-1 || k == 0 || k == SIZE-1);
                         aprocraft.world.Block b = (new Random().nextBoolean() && hh) ? aprocraft.world.Blocks.GRASS : biome.getLayers()[0];*/
                         Block b = biome.getLayers()[0];
+                        blocks[i][j][k] = b;
+                    }
+                }
+    }
+
+    public void generateStone() {
+        Random r = new Random();
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                for (int k = 0; k < SIZE; k++) {
+                    int xw = SIZE*x+i;
+                    int zw = SIZE*z+k;
+
+                    Biome biome = getBiome(xw, zw);
+
+                    if(j == 0) {
+                        Block b = Blocks.BEDROCK;
+                        blocks[i][j][k] = b;
+                    } else {
+                        Block b = (r.nextInt(j*2+8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     }
                 }
@@ -203,7 +224,7 @@ public class Chunk {
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
                     int xw = SIZE*x+i;
-                    int yw = j;
+                    int yw = SIZE*y+j;
                     int zw = SIZE*z+k;
 
                     boolean up = world.getBlock(xw, yw+1, zw) == null;
@@ -240,7 +261,7 @@ public class Chunk {
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
                     int xw = SIZE*x+i;
-                    int yw = j;
+                    int yw = SIZE*y+j;
                     int zw = SIZE*z+k;
 
                     boolean up = world.getBlock(xw, yw+1, zw) == null;

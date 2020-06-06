@@ -54,7 +54,7 @@ public class Player {
 
     public Player(long window, World world) {
         xCam = 512;
-        yCam = 34;
+        yCam = 64;
         zCam = 512;
 
         forward = 0;

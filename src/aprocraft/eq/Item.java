@@ -19,7 +19,7 @@ public class Item implements Comparable {
         this.x = x;
     }
 
-    int x =0;
+    private int x =0;
 
     /**
      * Konstruktor obiektu aprocraft.eq.Item
@@ -58,7 +58,7 @@ public class Item implements Comparable {
      *
      */
     public void AddOne() {
-        size += 1;
+        size ++;
     }
 
     public String getName() {
@@ -75,9 +75,10 @@ public class Item implements Comparable {
 
    @Override
    public int compareTo(Object o) {
-       if(o. == this.getX())
+       Item i = (Item)o;
+       if(i.getX() == this.getX())
        return  0;
-       else if(this.getX() > o.getX())
+       else if(this.getX() > i.getX())
            return  1;
        else
            return  -1;

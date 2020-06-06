@@ -11,6 +11,7 @@ import aprocraft.io.WorldSaveNRead;
 
 public class World {
     public static final int SIZE = 32;
+    public static final int HEIGHT = 3;
     public static final int RENDER_DISTANCE = 128; //192
 
     private Generator generator;
@@ -18,13 +19,17 @@ public class World {
 
     //TODO: Poziomy chunkow
 
-    public static final int HELL = 0;
+    /*public static final int HELL = 0;
     public static final int CAVES = 1;
     public static final int LAND = 2;
     public static final int CLOUDS = 3;
-    public static final int SPACE = 4;
+    public static final int SPACE = 4;*/
 
-    private Chunk[][] chunks;
+    public static final int CAVES = 0;
+    public static final int LAND = 1;
+    public static final int CLOUDS = 2;
+
+    private Chunk[][][] chunks;
 
     private int time;
     private int skyTime;
@@ -43,13 +48,13 @@ public class World {
 
         System.out.println("Seed: " + seed + "\nBiome Seed: " + biomeSeed);
 
-        chunks = new Chunk[SIZE][SIZE];
+        chunks = new Chunk[SIZE][HEIGHT][SIZE];
 
         time = 0;
         skyTime = 3000;
         skyTimeDir = 1;
 
-        slime = new Slime(this, 518.5f, 32,518.5f, 2);
+        slime = new Slime(this, 518.5f, 32, 518.5f, 2);
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
@@ -142,11 +147,11 @@ public class World {
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
-                if (chunks[i][j] == null) continue;
-                if (!chunks[i][j].hasStructures) {
+                if (chunks[i][LAND][j] == null) continue;
+                if (!chunks[i][LAND][j].hasStructures) {
                     for (int a = 0; a < 10; a++) {
-                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
-                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
+                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE - 1);
+                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE - 1);
                         Biome b = getBiome(x, z);
                         int y = getMaxHeight(x, z);
                         if (getBlock(x, y, z) == Blocks.GRASS || getBlock(x, y, z) == Blocks.SAND) {
@@ -159,7 +164,7 @@ public class World {
                         }
                     }
 
-                    chunks[i][j].hasStructures = true;
+                    chunks[i][LAND][j].hasStructures = true;
                 }
             }
     }
@@ -198,17 +203,17 @@ public class World {
 
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
-                if (chunks[i][j] == null) continue;
-                if (!chunks[i][j].hasClouds) {
+                if (chunks[i][CLOUDS][j] == null) continue;
+                if (!chunks[i][CLOUDS][j].hasClouds) {
                     for (int a = 0; a < n; a++) {
-                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
-                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE-1);
+                        int x = i * Chunk.SIZE + r.nextInt(Chunk.SIZE - 1);
+                        int z = j * Chunk.SIZE + r.nextInt(Chunk.SIZE - 1);
 
                         for (int q = 0; q < 3; q++)
-                            Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, Chunk.SIZE-2 + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
+                            Structures.CLOUD.spawn(this, x + r.nextInt(5) - 2, (CLOUDS + 1) * Chunk.SIZE - 12 + r.nextInt(2) - 1, z + r.nextInt(5) - 2);
                     }
 
-                    chunks[i][j].hasClouds = true;
+                    chunks[i][CLOUDS][j].hasClouds = true;
                 }
             }
     }
@@ -217,52 +222,56 @@ public class World {
         int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return 0;
-        Chunk c = chunks[xx][zz];
+        Chunk c = chunks[xx][LAND][zz];
         if (c == null) return 0;
-        return c.getMaxHeight(x % Chunk.SIZE, z % Chunk.SIZE);
+        return c.getMaxHeight(x % Chunk.SIZE, z % Chunk.SIZE) + LAND * Chunk.SIZE;
     }
 
-    public Chunk getChunk(int x, int z) {
+    public Chunk getChunk(int x, int y, int z) {
         int xx = x / Chunk.SIZE;
+        int yy = y / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
-        if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
-        return chunks[xx][zz];
+        if (xx < 0 || zz < 0 || yy < 0 || xx >= SIZE || zz >= SIZE || yy >= HEIGHT) return null;
+        return chunks[xx][yy][zz];
     }
 
     public Block getBlock(int x, int y, int z) {
-        int xx = x / Chunk.SIZE;
+        /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
-        Chunk c = chunks[xx][zz];
+        Chunk c = chunks[xx][zz];*/
+        Chunk c = getChunk(x, y, z);
         if (c == null) return null;
-        return c.getBlock(x % Chunk.SIZE, y, z % Chunk.SIZE);
+        return c.getBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE);
     }
 
     public Biome getBiome(int x, int z) {
         int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return null;
-        Chunk c = chunks[xx][zz];
+        Chunk c = chunks[xx][LAND][zz];
         if (c == null) return null;
         return c.getBiome(x, z);
     }
 
     public void setBlock(int x, int y, int z, Block block) {
-        int xx = x / Chunk.SIZE;
+        /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return;
-        Chunk c = chunks[xx][zz];
+        Chunk c = chunks[xx][zz];*/
+        Chunk c = getChunk(x, y, z);
         if (c == null) return;
-        c.setBlock(x % Chunk.SIZE, y, z % Chunk.SIZE, block);
+        c.setBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE, block);
     }
 
     public void placeBlock(int x, int y, int z, Block block) {
-        int xx = x / Chunk.SIZE;
+        /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
         if (xx < 0 || zz < 0 || xx >= SIZE || zz >= SIZE) return;
-        Chunk c = chunks[xx][zz];
+        Chunk c = chunks[xx][zz];*/
+        Chunk c = getChunk(x, y, z);
         if (c == null) return;
-        c.placeBlock(x % Chunk.SIZE, y, z % Chunk.SIZE, block, this);
+        c.placeBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE, block, this);
     }
 
     public void update(Player player) {
@@ -276,15 +285,22 @@ public class World {
             skyTimeDir *= -1;
 
         if (time % 20 == 0) {
+            //for (int l = 0; l < HEIGHT; l++) {
             for (int i = 0; i < SIZE; i++)
                 for (int j = 0; j < SIZE; j++) {
                     float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
                     if (dist <= RENDER_DISTANCE)
-                        if (chunks[i][j] == null) {
-                            chunks[i][j] = new Chunk(i, j, generator, biomeGenerator);
+                        if (chunks[i][LAND][j] == null) {
+                            chunks[i][LAND][j] = new Chunk(i, LAND, j, generator, biomeGenerator);
+                            chunks[i][LAND][j].generate(16);
+                            chunks[i][CLOUDS][j] = new Chunk(i, CLOUDS, j, generator, biomeGenerator);
+                            chunks[i][CAVES][j] = new Chunk(i, CAVES, j, generator, biomeGenerator);
+                            chunks[i][CAVES][j].generateStone();
                             generateStructures();
                             generateClouds(2);
-                            chunks[i][j].create(this);
+                            chunks[i][LAND][j].create(this);
+                            chunks[i][CLOUDS][j].create(this);
+                            chunks[i][CAVES][j].create(this);
                             //chunks[i][j].updateChunk(this);
                         /*if(i > 0 && i < SIZE && j > 0 && j < SIZE) {
                             if(chunks[i - 1][j] != null)
@@ -298,10 +314,31 @@ public class World {
                         }*/
                         }
                 }
+            //}
         }
 
         if (time % 60 == 0) {
-            Chunk c = getChunk((int) player.getX(), (int) player.getZ());
+            Chunk c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ());
+            if (c != null)
+                c.updateChunk(this);
+
+            c = getChunk((int) player.getX()+Chunk.SIZE, (int) player.getY(), (int) player.getZ());
+            if (c != null)
+                c.updateChunk(this);
+
+            c = getChunk((int) player.getX()-Chunk.SIZE, (int) player.getY(), (int) player.getZ());
+            if (c != null)
+                c.updateChunk(this);
+
+            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ()+Chunk.SIZE);
+            if (c != null)
+                c.updateChunk(this);
+
+            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ()-Chunk.SIZE);
+            if (c != null)
+                c.updateChunk(this);
+
+            c = getChunk((int) player.getX(), (int) player.getY()-Chunk.SIZE, (int) player.getZ());
             if (c != null)
                 c.updateChunk(this);
         }
@@ -310,28 +347,33 @@ public class World {
     }
 
     public void render(Player player) {
-        for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < SIZE; j++) {
-                float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
-                //System.out.println(dist);
-                if (dist <= RENDER_DISTANCE/3) {
-                    if (chunks[i][j] != null)
-                        chunks[i][j].render();
-                } else if (dist <= RENDER_DISTANCE) {
-                    float angle = clampRot(getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE)-(clampRot(player.getYRot())));
-                    //System.out.println(angle);
-                    if(angle >= 30 && angle <= 150)
-                        if (chunks[i][j] != null)
-                            chunks[i][j].render();
+        for (int l = 1; l < HEIGHT; l++)
+            for (int i = 0; i < SIZE; i++)
+                for (int j = 0; j < SIZE; j++) {
+                    float dist = Vector2f.distance(player.getX(), player.getZ(), (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE);
+                    //System.out.println(dist);
+                    if (dist <= RENDER_DISTANCE / 3) {
+                        if (chunks[i][l][j] != null)
+                            chunks[i][l][j].render();
+                    } else if (dist <= RENDER_DISTANCE) {
+                        float angle = clampRot(getAngle(player, (i + 0.5f) * Chunk.SIZE, (j + 0.5f) * Chunk.SIZE) - (clampRot(player.getYRot())));
+                        //System.out.println(angle);
+                        if (angle >= 30 && angle <= 150)
+                            if (chunks[i][l][j] != null)
+                                chunks[i][l][j].render();
+                    }
                 }
-            }
+
+        Chunk c = getChunk((int) player.getX(), CAVES, (int) player.getZ());
+        if (c != null)
+            c.render();
 
         slime.render();
     }
 
     private float clampRot(float angle) {
         float res = angle;
-        while(res < 0){
+        while (res < 0) {
             res += 360;
         }
 
@@ -343,7 +385,7 @@ public class World {
     private float getAngle(Player p, float x, float z) {
         float angle = (float) Math.toDegrees(Math.atan2(p.getZ() - z, p.getX() - x));
 
-        while(angle < 0){
+        while (angle < 0) {
             angle += 360;
         }
 
@@ -360,17 +402,17 @@ public class World {
         return ((float) skyTime / 3600f);
     }
 
-    public Chunk[][] getChunks() {
+    public Chunk[][][] getChunks() {
         return chunks;
     }
 
-    public void AutoSave(){
+    public void AutoSave() {
 
-        Thread thread = new Thread(() -> {
+        /*Thread thread = new Thread(() -> {
             System.out.println("AutoSave");
-            WorldSaveNRead.Save(APROCraft.GAME_NAME,this.getChunks());
+            WorldSaveNRead.Save(APROCraft.GAME_NAME, this.getChunks());
         });
         thread.setName("AutoSave_World");
-        thread.start();
+        thread.start();*/
     }
 }

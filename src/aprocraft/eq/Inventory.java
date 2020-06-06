@@ -14,119 +14,118 @@ import java.util.PriorityQueue;
 public class Inventory {
 
     //stack - liczba bloków w stacku
-    // space - ilosc kratek na przedmioty
+    //space - ilosc kratek na przedmioty
 
-    private  ArrayList<Item> eq = new ArrayList<>();
+    private ArrayList<Item> eq = new ArrayList<>();
     private int stack;
     private int space;
     private int w;
-    private ArrayList<Item> map= new ArrayList<>();
+    private ArrayList<Item> map = new ArrayList<>();
     private PriorityQueue<Item> order = new PriorityQueue<>();
 
 
     public Inventory(int stack, int w, int h) {
         this.stack = stack;
-        this.space = w*h;
+        this.space = w * h;
         this.w = w;
     }
 
     //malo optymalne
-    public List<Item> getEq(){
+    public List<Item> getEq() {
         ArrayList<Item> sum = new ArrayList<>();
         Iterator<Item> it = order.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             sum.add(it.next());
         }
         return sum;
     }
 
-    private boolean contain(Item n){
-        for(Item k : map)
-        {
-            if(k.getId() == n.getId())
+    private boolean contain(Item n) {
+        for (Item k : map) {
+            if (k.getId() == n.getId())
                 return true;
         }
         return false;
     }
-    private boolean contain(int id){
-        for(Item k : map)
-        {
-            if(k.getId() == id)
+
+    private boolean contain(int id) {
+        for (Item k : map) {
+            if (k.getId() == id)
                 return true;
         }
         return false;
     }
-    private Item get(Item n){
-        for(Item k : map)
-        {
-            if(k.getId() == n.getId())
+
+    private Item get(Item n) {
+        for (Item k : map) {
+            if (k.getId() == n.getId())
                 return k;
         }
         return null;
     }
 
-    public int GetSpace(){
+    public int GetSpace() {
         return space;
     }
-    public int GetW(){
+
+    public int GetW() {
         return w;
     }
-    private Item get(int id){
-        for(Item k : map)
-        {
-            if(k.getId() == id)
+
+    private Item get(int id) {
+        for (Item k : map) {
+            if (k.getId() == id)
                 return k;
         }
         return null;
     }
-    private boolean removeStack(Item i){
-        for(Item k : map)
-        {
-            if(k.getId() == i.getId()) {
+
+    private boolean removeStack(Item i) {
+        for (Item k : map) {
+            if (k.getId() == i.getId()) {
                 map.remove(k);
                 return true;
             }
         }
         return false;
     }
-    private boolean removeStack(int id){
-        for(Item k : map)
-        {
-            if(k.getId() == id) {
+
+    private boolean removeStack(int id) {
+        for (Item k : map) {
+            if (k.getId() == id) {
                 map.remove(k);
                 return true;
             }
         }
         return false;
     }
-    private boolean removeStackEq(int id){
-        for(Item k : eq)
-        {
-            if(k.getId() == id) {
+
+    private boolean removeStackEq(int id) {
+        for (Item k : eq) {
+            if (k.getId() == id) {
                 eq.remove(k);
                 return true;
             }
         }
         return false;
     }
-    public boolean removeOne(int id){
-        for(Item k : map)
-        {
-            if(k.getId() == id) {
-                int nmbr = k.getSize()-1;
-                if(nmbr ==0)
+
+    public boolean removeOne(int id) {
+        for (Item k : map) {
+            if (k.getId() == id) {
+                int nmbr = k.getSize() - 1;
+                if (nmbr == 0)
                     map.remove(k);
                 else
                     k.setSize(nmbr);
                 return true;
             }
         }
-        for(Item k : eq)
-        {
-            if(k.getId() == id) {
+        for (Item k : eq) {
+            if (k.getId() == id) {
                 eq.remove(k);
                 Item n = new Item(id);
-                n.setSize(stack-1);
+                n.setSize(stack - 1);
                 map.add(n);
                 return true;
             }
@@ -134,94 +133,86 @@ public class Inventory {
 
         return false;
     }
-    public Item getEq(int id){
-        for(Item k : eq)
-        {
-            if(k.getId() == id)
+
+    public Item getEq(int id) {
+        for (Item k : eq) {
+            if (k.getId() == id)
                 return k;
         }
         return null;
     }
 
-    public void Swap(int x1, int y1, int x2, int y2){
-        int xpom =0;
-        xpom = getEq().get(y1*w + x1).getX();
-        getEq().get(y1*w + x1).setX(getEq().get(y2*w + x2).getX());
-        getEq().get(y2*w + x2).setX(xpom);
+    public void Swap(int x1, int y1, int x2, int y2) {
+        int xpom = 0;
+        xpom = getEq().get(y1 * w + x1).getX();
+        getEq().get(y1 * w + x1).setX(getEq().get(y2 * w + x2).getX());
+        getEq().get(y2 * w + x2).setX(xpom);
     }
 
-    public  int getNmbrOfItems(int id){
+    public int getNmbrOfItems(int id) {
         int nmbr = 0;
-        for(Item i : eq) {
-            if(i.getId() == id){
+        for (Item i : eq) {
+            if (i.getId() == id) {
                 nmbr += stack;
             }
         }
-        for(Item i : map) {
-            if(i.getId() == id){
+        for (Item i : map) {
+            if (i.getId() == id) {
                 nmbr += i.getSize();
             }
         }
 
-        return  nmbr;
+        return nmbr;
     }
 
     // force -> true - usun tyle ile sie da /  false - nie usunie itemow jesli niema wystarczajacej ilosci
-    public boolean remove(int id, int nmbr, boolean force){
-        if(nmbr>getNmbrOfItems(id) && !force)
+    public boolean remove(int id, int nmbr, boolean force) {
+        if (nmbr > getNmbrOfItems(id) && !force)
             return false;
-        int br = nmbr/stack;
-        int del=0;
-        for(;br>0; br--, del++)
-        {
-            if(!removeStackEq(id))
+        int br = nmbr / stack;
+        int del = 0;
+        for (; br > 0; br--, del++) {
+            if (!removeStackEq(id))
                 break;
         }
-        int left = nmbr - del*stack;
-        if(contain(id) && left>0)
-        {
+        int left = nmbr - del * stack;
+        if (contain(id) && left > 0) {
             int v = get(id).getSize() - left;
-            if(v<=0)
-            {
+            if (v <= 0) {
                 map.remove(get(id));
-            }
-            else{
+            } else {
                 get(id).setSize(v);
             }
         }
-        return  true;
+        return true;
     }
-        public int FindSpot(){
-           return map.indexOf(null);
-        }
 
-    public boolean addItem(int itemId){
+    public int FindSpot() {
+        return map.indexOf(null);
+    }
+
+    public boolean addItem(int itemId) {
         Item n = new Item(itemId);
-        if(!map.isEmpty() && contain(n))
-        {
+        if (!map.isEmpty() && contain(n)) {
             get(n.getId()).AddOne();
 
-                if(get(n.getId()).getSize() == stack)
-                {
-                    n.setX(FindSpot());
-                    eq.add(n);
-                    eq.get(eq.indexOf(n)).setSize(stack);
-                   removeStack(n.getId());
+            if (get(n.getId()).getSize() == stack) {
+                n.setX(FindSpot());
+                eq.add(n);
+                eq.get(eq.indexOf(n)).setSize(stack);
+                removeStack(n.getId());
 
-                }
-                order.add(n);
-        return true;
-        }
-        else
-        {
-            if(eq.size() + map.size() < space){
+            }
+            order.add(n);
+            return true;
+        } else {
+            if (eq.size() + map.size() < space) {
                 n.AddOne();
                 n.setX(FindSpot());
                 map.add(n);
                 order.add(n);
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
 
@@ -238,7 +229,7 @@ public class Inventory {
             return false;
 
         int miejsce = space - eq.size() - map.size();
-        if(miejsce < stacks+1 && !force)
+        if (miejsce < stacks + 1 && !force)
             return false;
         n.setSize(stack);
         int added = 0;
@@ -262,72 +253,64 @@ public class Inventory {
             map.add(k);
             return true;
         }
-        return  true;
+        return true;
     }
 
     //przekaz itemy do innego eq
-    public boolean passItem(Inventory other, int id, int nmbr)
-    {
-        if(remove(id,nmbr, false)){
-        if (other.addItem(id, nmbr, false)) {
-            return true;
+    public boolean passItem(Inventory other, int id, int nmbr) {
+        if (remove(id, nmbr, false)) {
+            if (other.addItem(id, nmbr, false)) {
+                return true;
+            } else {
+                addItem(id, nmbr, false);
+                return false;
+            }
         }
-        else{
-            addItem(id,nmbr, false);
-            return false;
-        }
-        }
-        return  false;
+        return false;
     }
 
 
-    public boolean saveEq(String filename){
+    public boolean saveEq(String filename) {
         try {
             Gson gson = new Gson();
-        PrintWriter pw = null;
+            PrintWriter pw = null;
 
-            pw = new PrintWriter("./data/"+filename+".json");
+            pw = new PrintWriter("./data/" + filename + ".json");
 
-        pw.write(gson.toJson(getEq()));
+            pw.write(gson.toJson(getEq()));
 
-        pw.flush();
-        pw.close();
-        return  true;
+            pw.flush();
+            pw.close();
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return  false;
+            return false;
         }
-
-
 
 
     }
 
-    public void readEq(String filename){
+    public void readEq(String filename) {
         try {
             Gson gson = new Gson();
-            boolean success = (new File("./Saves/"+ APROCraft.GAME_NAME)).mkdirs();
-            FileReader obj = new FileReader("./Saves/"+ APROCraft.GAME_NAME+ "/"+filename+".json");
-            Type type = new TypeToken<ArrayList<Item>>(){}.getType();
+            boolean success = (new File("./Saves/" + APROCraft.GAME_NAME)).mkdirs();
+            FileReader obj = new FileReader("./Saves/" + APROCraft.GAME_NAME + "/" + filename + ".json");
+            Type type = new TypeToken<ArrayList<Item>>() {
+            }.getType();
             ArrayList<Item> lista = gson.fromJson(obj, type);
 
-            for(Item i : lista){
-                if(i.getSize() == stack)
-                {
+            for (Item i : lista) {
+                if (i.getSize() == stack) {
                     eq.add(i);
-                }
-                else{
+                } else {
                     map.add(i);
                 }
             }
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
     }
