@@ -332,6 +332,8 @@ public class Chunk {
         return x;
     }
 
+    public int getY() { return y; }
+
     public int getZ() {
         return z;
     }

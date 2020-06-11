@@ -35,13 +35,13 @@ public class World {
     private int skyTime;
     private int skyTimeDir;
 
-    private long seed, biomeSeed;
+    private int seed, biomeSeed;
 
     Slime slime;
 
     public World() {
-        seed = new Random().nextLong();
-        biomeSeed = new Random().nextLong();
+        seed = new Random().nextInt();
+        biomeSeed = new Random().nextInt();
 
         generator = new Generator(seed, 32, 12);
         biomeGenerator = new Generator(biomeSeed, 96, 10);
@@ -80,6 +80,10 @@ public class World {
 
     public Generator getGenerator() {
         return generator;
+    }
+
+    public Generator getBiomeGenerator() {
+        return biomeGenerator;
     }
 
     /*public void blendBiomes() {
@@ -252,6 +256,10 @@ public class World {
         Chunk c = chunks[xx][LAND][zz];
         if (c == null) return null;
         return c.getBiome(x, z);
+    }
+
+    public void setChunk(int x, int y, int z, Chunk c) {
+        chunks[x][y][z] = c;
     }
 
     public void setBlock(int x, int y, int z, Block block) {

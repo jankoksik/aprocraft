@@ -7,6 +7,7 @@ import aprocraft.eq.Crafting;
 import aprocraft.eq.Inventory;
 import aprocraft.eq.Item;
 import aprocraft.io.SaveNReadJson;
+import aprocraft.io.WorldSaveNRead;
 import aprocraft.player.Player;
 import org.joml.Math;
 import org.json.simple.parser.ParseException;
@@ -25,7 +26,7 @@ public class APROCraft {
     public static final int HEIGHT = 720;
     public static final float FPS = 60.0f;
 
-    public APROCraft() {
+    public APROCraft() throws IOException {
         if (glfwInit() != true) {
             System.err.println("GLFW sie zepsul");
             System.exit(1);
@@ -135,6 +136,17 @@ public class APROCraft {
                 player.update();
                 stefan.update(player);
 
+                if (glfwGetKey(win, GLFW_KEY_1) == GL_TRUE)
+                    WorldSaveNRead.save(GAME_NAME, stefan);
+
+                if (glfwGetKey(win, GLFW_KEY_2) == GL_TRUE)
+                    WorldSaveNRead.load(GAME_NAME, stefan);
+                    //stefan.setChunk(16, 1, 16, WorldSaveNRead.loadChunk(GAME_NAME, stefan, 16, 1, 16));
+
+                /*if(stefan.getChunk((int)player.getX(), (int)player.getY(), (int)player.getZ()) != null)
+                    System.out.println(stefan.getChunk((int)player.getX(), (int)player.getY(), (int)player.getZ()).getX() + "  " +
+                        stefan.getChunk((int)player.getX(), (int)player.getY(), (int)player.getZ()).getZ());*/
+
                 ticks++;
                 timePrev += ns;
             } else {
@@ -221,7 +233,7 @@ public class APROCraft {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new APROCraft();
     }
 }

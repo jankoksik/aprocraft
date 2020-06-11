@@ -7,11 +7,11 @@ import java.util.Random;
 public class Generator {
     private Random rand;
 
-    private long seed;
+    private int seed;
     private int octave;
     private float amplitude;
 
-    public Generator(long seed, int octave, float amplitude) {
+    public Generator(int seed, int octave, float amplitude) {
         this.seed = seed;
         this.octave = octave;
         this.amplitude = amplitude;
@@ -82,9 +82,11 @@ public class Generator {
         return rand.nextDouble();
     }
 
-    public long getSeed() {
+    public int getSeed() {
         return seed;
     }
+
+    public void setSeed(int seed) { this.seed = seed; }
 
     public void setOctave(int octave) {
         this.octave = octave;
