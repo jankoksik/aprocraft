@@ -226,6 +226,13 @@ public class Crafting {
         }
         return null;
     }
+    int getNmbrOfItems(){
+        Recipe r = checkPattern();
+        if (r != null)
+            return r.nR;
+        else
+            return -1;
+    }
 
     public int ShowPatternMatchinResult() {
         Recipe r = checkPattern();
@@ -241,7 +248,9 @@ public class Crafting {
      * @param Eq ekwipunek gracza do ktrego dodany ma zostać przedmiot
      */
     public void Craft(Inventory Eq) {
-        Eq.addItem(ShowPatternMatchinResult());
+
+        for(int i=0; i< getNmbrOfItems(); i++)
+            Eq.addItem(ShowPatternMatchinResult());
     }
 
 
