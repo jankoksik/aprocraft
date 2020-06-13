@@ -29,7 +29,7 @@ public class GUI {
 
     public static int magicNMBR = 15;
     public static float QABsize = APROCraft.HEIGHT / magicNMBR;
-    private static int FontSize = (int)QABsize/4;
+    private static int FontSize = (int) QABsize / 4;
     private static float CurrMul = 1.1f;
     public static int SizeOfQAB = 8;
     private int currChoosed = 0;
@@ -114,8 +114,8 @@ public class GUI {
                 id -= 1;
                 //blocks.bind(0);
                 Blocks.TEXTURE_PACK.bind(0);
-                DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si/ 2, GetTexById(id));
-                DrawNumber(cX + (int) si / 2, QABsy + (int) si / 4, inv.get(i).getSize() );
+                DrawSquare(cX + (int) si / 4, QABsy + (int) si / 4, si / 2, GetTexById(id));
+                DrawNumber(cX + (int) si / 2, QABsy + (int) si / 4, inv.get(i).getSize());
             }
             cX += (si + 1);
         }
@@ -192,8 +192,7 @@ public class GUI {
 
     }
 
-    public void SetEq(List<Item> a)
-    {
+    public void SetEq(List<Item> a) {
         inv = a;
     }
 
@@ -202,14 +201,14 @@ public class GUI {
 //            if(!inventory.contains(i))
 //
 //        }
-        for (Iterator<Item> it = inv.iterator(); it.hasNext();) {
+        for (Iterator<Item> it = inv.iterator(); it.hasNext(); ) {
             Item i = it.next();
-            if(!inventory.contains(i))
+            if (!inventory.contains(i))
                 it.remove(); //metoda remove() iteratora
         }
 
-        for(Item i : inventory) {
-            if(!inv.contains(i))
+        for (Item i : inventory) {
+            if (!inv.contains(i))
                 inv.add(i);
         }
     }
@@ -283,7 +282,7 @@ public class GUI {
                         //blocks.bind(0);
                         Blocks.TEXTURE_PACK.bind(0);
                         DrawSquare(cX + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, QABsize / 2, GetTexById(id));
-                        DrawNumber(cX + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, inv.get(y * SizeOfQAB + x).getSize() );
+                        DrawNumber(cX + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + cY + (int) QABsize / 4, inv.get(y * SizeOfQAB + x).getSize());
                     }
                     cX += QABsize + 1;
 
@@ -307,11 +306,11 @@ public class GUI {
             }*/
 
             Grid.bind(0);
-            DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - (int)QABsize - 3*magicNMBR-1, QABsize, new float[]{0, 1, 0, 1});
-            DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - 3*magicNMBR, QABsize, new float[]{0, 1, 0, 1});
-            DrawSquare(QABsx + (int)QABsize*6 +4 + 4*magicNMBR +1, QABsy+4*Hoff- 3*magicNMBR , QABsize, new float[]{0, 1, 0, 1});
-            DrawSquare(QABsx + (int)QABsize*6 +4 + 4*magicNMBR +1, QABsy+4*Hoff - (int)QABsize- 3*magicNMBR -1, QABsize, new float[]{0, 1, 0, 1});
-            DrawSquare(QABsx + (int)QABsize*8 +4 + 4*magicNMBR, QABsy+4*Hoff - 3*magicNMBR - (int)QABsize/2 , QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int) QABsize * 5 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - (int) QABsize - 3 * magicNMBR - 1, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int) QABsize * 5 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - 3 * magicNMBR, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int) QABsize * 6 + 4 + 4 * magicNMBR + 1, QABsy + 4 * Hoff - 3 * magicNMBR, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int) QABsize * 6 + 4 + 4 * magicNMBR + 1, QABsy + 4 * Hoff - (int) QABsize - 3 * magicNMBR - 1, QABsize, new float[]{0, 1, 0, 1});
+            DrawSquare(QABsx + (int) QABsize * 8 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - 3 * magicNMBR - (int) QABsize / 2, QABsize, new float[]{0, 1, 0, 1});
 
 
         }
@@ -320,33 +319,12 @@ public class GUI {
         glDisable(GL_TEXTURE_2D);
     }
 
-
-//    private void Test() {
-//        Texture tex = new Texture("./resources/Grid2.png");
-//        glEnable(GL_TEXTURE_2D);
-//        tex.bind(0);
-//        glEnable(GL_BLEND);
-//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//        glBegin(GL_QUADS);
-//        glTexCoord2f(0, 0);
-//        glVertex2f(-50f, 50f);
-//        glTexCoord2f(0, 1);
-//        glVertex2f(50f, 50f);
-//        glTexCoord2f(1, 1);
-//        glVertex2f(50f, -50f);
-//        glTexCoord2f(1, 0);
-//        glVertex2f(-50f, -50f);
-//        glEnd();
-//        glDisable(GL_BLEND);
-//        glDisable(GL_TEXTURE_2D);
-//    }
-
     public void renderGrabbedItem(int x, int y, Item item) {
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Blocks.TEXTURE_PACK.bind(0);
-        DrawSquare((int)(x-QABsize/4), (int)(y-QABsize/4), QABsize/2, GetTexById(item.getId()-1));
+        DrawSquare((int) (x - QABsize / 4), (int) (y - QABsize / 4), QABsize / 2, GetTexById(item.getId() - 1));
         glDisable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
     }
@@ -382,70 +360,67 @@ public class GUI {
         return cords;
     }
 
-    public void renderCrafting(Crafting crafting)
-    {
+    public void renderCrafting(Crafting crafting) {
         int w = crafting.w;
-        int h = crafting.craft.length/crafting.w;
-        int xS = APROCraft.WIDTH /2 - (int)QABsize*w;
-        int yS = APROCraft.HEIGHT /2 - (int)QABsize*h/2;
+        int h = crafting.craft.length / crafting.w;
+        int xS = APROCraft.WIDTH / 2 - (int) QABsize * w;
+        int yS = APROCraft.HEIGHT / 2 - (int) QABsize * h / 2;
         Grid.bind(0);
-        for(int y =0; y<h; y++)
-        {
-            for(int x=0; x<w; x++)
-            {
-                DrawSquare(xS + (int)QABsize*x + x, yS + (int)QABsize*y+y, QABsize, new float[]{0, 1, 0, 1} );
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                DrawSquare(xS + (int) QABsize * x + x, yS + (int) QABsize * y + y, QABsize, new float[]{0, 1, 0, 1});
             }
         }
-        DrawSquare(xS + (int)QABsize*(w+2)+w, yS + (int)QABsize*h/2+h/2, QABsize, new float[]{0, 1, 0, 1} );
+        DrawSquare(xS + (int) QABsize * (w + 2) + w, yS + (int) QABsize * h / 2 + h / 2, QABsize, new float[]{0, 1, 0, 1});
     }
 
-    public void DrawNumber(int x, int y, int number){
+    public void DrawNumber(int x, int y, int number) {
         NmbTex.bind(0);
-       int scnd = number%10;
-       int fst = number/10;
+        int scnd = number % 10;
+        int fst = number / 10;
 
-       if(fst >0) {
-           int [] coord = Numbers.getNmbrs().get(fst);
-           glBegin(GL_QUADS);
+        if (fst > 0) {
+            int[] coord = Numbers.getNmbrs().get(fst);
+            glBegin(GL_QUADS);
 
-           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
-           glVertex2f(x , y+FontSize);
+            glTexCoord2f((float) ((float) coord[0] / (float) Numbers.getW()), (float) ((float) coord[1] / (float) Numbers.getH()));
+            glVertex2f(x, y + FontSize);
 
-           glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
-           glVertex2f(x+FontSize, y+FontSize);
+            glTexCoord2f((float) (((float) coord[0] + (float) coord[2]) / (float) Numbers.getW()), (float) ((float) coord[1] / (float) Numbers.getH()));
+            glVertex2f(x + FontSize, y + FontSize);
 
-           glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
-           glVertex2f(x+FontSize, y);
+            glTexCoord2f((float) (((float) coord[0] + (float) coord[2]) / (float) Numbers.getW()), (float) (((float) coord[1] + (float) coord[3]) / (float) Numbers.getH()));
+            glVertex2f(x + FontSize, y);
 
 
-           glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
-           glVertex2f(x , y);
+            glTexCoord2f((float) ((float) coord[0] / (float) Numbers.getW()), (float) (((float) coord[1] + (float) coord[3]) / (float) Numbers.getH()));
+            glVertex2f(x, y);
 
-           glEnd();
-       }
-        int [] coord = Numbers.getNmbrs().get(scnd);
+            glEnd();
+        }
+        int[] coord = Numbers.getNmbrs().get(scnd);
         glBegin(GL_QUADS);
 
-        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)((float) coord[1] /(float)Numbers.getH()));
-        glVertex2f(x+FontSize+1 , y+FontSize);
+        glTexCoord2f((float) ((float) coord[0] / (float) Numbers.getW()), (float) ((float) coord[1] / (float) Numbers.getH()));
+        glVertex2f(x + FontSize + 1, y + FontSize);
 
-        glTexCoord2f((float)( ((float)coord[0] + (float)coord[2])/(float)Numbers.getW()), (float)( (float)coord[1] /(float)Numbers.getH()));
-        glVertex2f(x+FontSize+FontSize+1 , y+FontSize);
-
-
-        glTexCoord2f((float)( ((float)coord[0] +(float) coord[2])/(float)Numbers.getW()), (float)( ((float)coord[1] +(float) coord[3])/(float)Numbers.getH()));
-        glVertex2f(x+FontSize+FontSize+1 , y);
+        glTexCoord2f((float) (((float) coord[0] + (float) coord[2]) / (float) Numbers.getW()), (float) ((float) coord[1] / (float) Numbers.getH()));
+        glVertex2f(x + FontSize + FontSize + 1, y + FontSize);
 
 
-        glTexCoord2f((float)( (float)coord[0]/(float)Numbers.getW()), (float)( ((float)coord[1] + (float)coord[3])/(float)Numbers.getH()));
-        glVertex2f(x +FontSize+1 , y);
+        glTexCoord2f((float) (((float) coord[0] + (float) coord[2]) / (float) Numbers.getW()), (float) (((float) coord[1] + (float) coord[3]) / (float) Numbers.getH()));
+        glVertex2f(x + FontSize + FontSize + 1, y);
+
+
+        glTexCoord2f((float) ((float) coord[0] / (float) Numbers.getW()), (float) (((float) coord[1] + (float) coord[3]) / (float) Numbers.getH()));
+        glVertex2f(x + FontSize + 1, y);
 
         glEnd();
 
 
     }
 
-    public void RenderAutoSave(){
+    public void RenderAutoSave() {
 
     }
 
@@ -463,22 +438,21 @@ public class GUI {
         }
     }
 
-    public Item GetItemXY(int x, int y)
-    {
+    public Item GetItemXY(int x, int y) {
         if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
-           return inv.get(y * SizeOfQAB + x);
+            return inv.get(y * SizeOfQAB + x);
         else
             return null;
     }
-    public int GetcurrQABid(){
-        if(!inv.isEmpty() && currChoosed<inv.size())
+
+    public int GetcurrQABid() {
+        if (!inv.isEmpty() && currChoosed < inv.size())
             return inv.get(currChoosed).getId();
         else
             return 0;
     }
-    public void drag(Item item){
 
-
+    public void drag(Item item) {
 
 
     }

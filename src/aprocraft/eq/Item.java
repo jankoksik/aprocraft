@@ -12,6 +12,7 @@ public class Item {
 
     /**
      * Konstruktor obiektu Item
+     *
      * @param id idetyfikator obiektu Item
      */
     public Item(int id) {
@@ -26,6 +27,7 @@ public class Item {
 
     /**
      * Metoda zwraca id danego obiektu Item
+     *
      * @return zwraca id Danrgo obiktu Item
      */
     public int getId() {
@@ -34,6 +36,7 @@ public class Item {
 
     /**
      * Metoda zwraca iloœc przedmiotów przypisanych do danego obiektu Item
+     *
      * @return iloœæ przedmiotów
      */
     public int getSize() {
@@ -42,6 +45,7 @@ public class Item {
 
     /**
      * Metoda ustawiaj¹ca iloœc przedmiotów przypisanych do danego obiektu Item
+     *
      * @param size iloœæ przedmiotów jak¹ chcem ustawiæ
      */
     public void setSize(int size) {
@@ -50,7 +54,6 @@ public class Item {
 
     /**
      * Metoda zwiêkszaj¹ca parametr size o jeden
-     *
      */
     public void AddOne() {
         size += 1;

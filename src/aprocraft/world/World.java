@@ -3,6 +3,8 @@ package aprocraft.world;
 import aprocraft.mob.Slime;
 import org.joml.Vector2f;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import aprocraft.player.*;
@@ -37,11 +39,12 @@ public class World {
 
     private int seed, biomeSeed;
 
-    Slime slime;
+    List<Slime> slimes;
 
     public World() {
-        seed = new Random().nextInt();
-        biomeSeed = new Random().nextInt();
+        Random rand = new Random();
+        seed = rand.nextInt();
+        biomeSeed = rand.nextInt();
 
         generator = new Generator(seed, 32, 12);
         biomeGenerator = new Generator(biomeSeed, 96, 10);
@@ -54,7 +57,10 @@ public class World {
         skyTime = 3000;
         skyTimeDir = 1;
 
-        slime = new Slime(this, 518.5f, 32, 518.5f, 2);
+        slimes = new ArrayList<>();
+
+        for(int i = 0; i < 200; i ++)
+            slimes.add(new Slime(this, rand.nextInt(1024), 32, rand.nextInt(1024), 1+rand.nextInt(30)*0.1f));
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
@@ -351,7 +357,9 @@ public class World {
                 c.updateChunk(this);
         }
 
-        slime.update(this);
+        for(Slime slime : slimes)
+            if(Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
+                slime.update(this);
     }
 
     public void render(Player player) {
@@ -388,7 +396,9 @@ public class World {
         if (c != null)
             c.render();
 
-        slime.render();
+        for(Slime slime : slimes)
+            if(Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
+                slime.render();
     }
 
     private float clampRot(float angle) {

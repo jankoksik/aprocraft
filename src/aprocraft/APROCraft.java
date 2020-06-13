@@ -43,20 +43,12 @@ public class APROCraft {
 
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");
-        Inventory eqi = new Inventory(3, 10,1);
+        Inventory eqi = new Inventory(3, 10, 1);
         if (eqi.addItem(0)) {
             System.out.println("dodano pomyslnie item");
         } else {
             System.out.println("blad");
         }
-        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        //if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(2)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(1)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(0)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
-        // if(eqi.addItem(3)){System.out.println("dodano pomyslnie item");}else {System.out.println("blad");}
 
         TestLogLabel("Eq add many");
         if (eqi.addItem(1, 7, true)) {
@@ -141,7 +133,7 @@ public class APROCraft {
 
                 if (glfwGetKey(win, GLFW_KEY_2) == GL_TRUE)
                     WorldSaveNRead.load(GAME_NAME, stefan);
-                    //stefan.setChunk(16, 1, 16, WorldSaveNRead.loadChunk(GAME_NAME, stefan, 16, 1, 16));
+                //stefan.setChunk(16, 1, 16, WorldSaveNRead.loadChunk(GAME_NAME, stefan, 16, 1, 16));
 
                 /*if(stefan.getChunk((int)player.getX(), (int)player.getY(), (int)player.getZ()) != null)
                     System.out.println(stefan.getChunk((int)player.getX(), (int)player.getY(), (int)player.getZ()).getX() + "  " +

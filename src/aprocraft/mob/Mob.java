@@ -199,43 +199,6 @@ public class Mob {
     }
 
     public void render() {
-        float s = this.s*0.5f;
-
-        glColor3f(0.4f, 1, 0.4f);
-        glBegin(GL_QUADS);
-
-        glVertex3f(x - s, y - s, z - s);
-        glVertex3f(x + s, y - s, z - s);
-        glVertex3f(x + s, y + s, z - s);
-        glVertex3f(x - s, y + s, z - s);
-
-        glVertex3f(x + s, y - s, z + s);
-        glVertex3f(x - s, y - s, z + s);
-        glVertex3f(x - s, y + s, z + s);
-        glVertex3f(x + s, y + s, z + s);
-
-        glVertex3f(x - s, y - s, z - s);
-        glVertex3f(x + s, y - s, z - s);
-        glVertex3f(x + s, y - s, z + s);
-        glVertex3f(x - s, y - s, z + s);
-
-        glVertex3f(x + s, y + s, z - s);
-        glVertex3f(x - s, y + s, z - s);
-        glVertex3f(x - s, y + s, z + s);
-        glVertex3f(x + s, y + s, z + s);
-
-        glVertex3f(x - s, y - s, z - s);
-        glVertex3f(x - s, y + s, z - s);
-        glVertex3f(x - s, y + s, z + s);
-        glVertex3f(x - s, y - s, z + s);
-
-        glVertex3f(x + s, y + s, z - s);
-        glVertex3f(x + s, y - s, z - s);
-        glVertex3f(x + s, y - s, z + s);
-        glVertex3f(x + s, y + s, z + s);
-
-        glEnd();
-        glColor3f(1, 1, 1);
     }
 
 }
