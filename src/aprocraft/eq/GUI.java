@@ -382,13 +382,15 @@ public class GUI {
             for (int x = 0; x < w; x++) {
                 int id = crafting.craft[x+y*w];
                 if(id != 0)
-                    DrawSquare(xS + (int) QABsize * x + x, yS + (int) QABsize * y + y, QABsize, GetTexById(id-1));
+                    DrawSquare(xS + (int) QABsize * x + x + (int) QABsize / 4, yS + (int) QABsize * y + y + (int) QABsize / 4, QABsize / 2, GetTexById(id-1));
             }
         }
 
         int id = crafting.ShowPatternMatchinResult();
-        if(id != 0)
-            DrawSquare(xS + (int) QABsize * (w + 2) + w, yS + (int) QABsize * h / 2 + h / 2, QABsize, GetTexById(id-1));
+        if(id != -1) {
+            DrawSquare(xS + (int) QABsize * (w + 2) + w + (int) QABsize / 4, yS + (int) QABsize * h / 2 + h / 2 + (int) QABsize / 4, QABsize / 2, GetTexById(id - 1));
+            DrawNumber(xS + (int) QABsize * (w + 2) + w + (int) QABsize / 2, yS + (int) QABsize * h / 2 + h / 2 + (int) QABsize / 4, crafting.getNmbrOfItems());
+        }
 
         glDisable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);

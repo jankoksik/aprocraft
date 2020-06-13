@@ -92,7 +92,7 @@ public class Player {
         eq = new Inventory(64, 8, 5);
         gui = new GUI(eq);
 
-        eq.addItem(1, 10, false);
+        //eq.addItem(1, 10, false);
 
         crafting = new Crafting(2, 2, "TestRecip");
         crafting.LoadRecipes();
