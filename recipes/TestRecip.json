@@ -1,7 +1,9 @@
 {
   "recipes":[
-    {"result":5,"Rn": 1,"crafting":[1, 1],"width":1},
-    {"result":2,"Rn": 1,"crafting":[1, 1],"width":2}
+    {"result":3,"Rn": 1,"crafting":[4],"width":1},
+    {"result":17,"Rn": 4,"crafting":[20],"width":1},
+    {"result":18,"Rn": 4,"crafting":[21],"width":1},
+    {"result":19,"Rn": 4,"crafting":[22],"width":1}
 
 
   ]
