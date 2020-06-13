@@ -18,6 +18,41 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 
 ## id Bloków
 
+| id         | blok                |
+|------------|---------------------|
+| 1          | trawa               |
+| 2          | ziemia              |
+| 3          | kamień              |
+| 4          | cobble              |
+| 17         | drewno zwykłe       |
+| 18         | drewno ciemne       |
+| 19         | drewno jasne        |
+| 20         | deski zwykłe        |
+| 21         | deski ciemne        |
+| 22         | deski jasne         |
+| 23         | liście zwykłe       |
+| 24         | liście ciemne       |
+| 25         | liście jasne        |
+| 15         | bedrock             |
+| 50         | chmura              |
+| 10         | piach               |
+| 51         | lód                 |
+| 13         | czerwony piaskowiec |
+| 26         | kaktus              |
+| 37         | ruda diamentów      |
+| 36         | ruda węgla          |
+| 33         | ruda złota          |
+| 34         | ruda żelaza         |
+| 35         | ruda miedzi         |
+| 38         | ruda rubinu         |
+| 39         | ruda szafiru        |
+| 40         | ruda szmaragdu      |
+| 64 + kolor | kolorowa wełna      |
+| 81         | stół craftingowy    |
+| 52         | beton               |
+
+
+
 ## Domyślne Sterowanie
 
 ## Receptury Craftingowe
