@@ -211,8 +211,8 @@ public class Crafting {
     public Recipe checkPattern() {
         if (!recipes.isEmpty()) {
             Size curr = GetCurrDim();
-            int w = curr.w + 1;//
-            int h = curr.h + 1;//
+            int w = curr.w ;//
+            int h = curr.h ;//
             Recipe r = new Recipe(w, h);
             int[] ready = getSeperated();
             r.setCrafting(ready);

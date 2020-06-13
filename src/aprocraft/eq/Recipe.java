@@ -34,7 +34,8 @@ public class Recipe {
 
     public Recipe(int width, int height)
     {
-        craft = new int[width*height];
+        if(width*height >0)
+            craft = new int[width*height];
         w = width;
     }
 
