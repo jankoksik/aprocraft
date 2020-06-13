@@ -5,6 +5,7 @@ public abstract class Block {
     public static final int BOUNCY = 1;
     public static final int STICKY = 2;
     public static final int SLIPPY = 3;
+    public static final int HURTING = 4;
 
     private int id;
     private String name;

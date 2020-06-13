@@ -163,7 +163,7 @@ class RedSandstoneBlock extends Block {
 class CactusBlock extends Block {
     public CactusBlock() {
         super("Cactus", 26);
-        setMaterial(Block.STICKY);
+        setMaterial(Block.HURTING);
         setDurability(15);
     }
 }

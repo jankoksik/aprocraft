@@ -69,7 +69,7 @@ public class Player {
 
         friction = 0.96f;
 
-        gravity = 0.02f;
+        gravity = 0.03f;
         camSpeed = 0.2f;
         jumpSpeed = 0.3f;
 
@@ -189,10 +189,10 @@ public class Player {
 
         invPrev = glfwGetKey(window, Controls.getInventory()) == GL_TRUE;
 
-        if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
+        /*if (glfwGetKey(window, GLFW_KEY_O) == GL_TRUE)
             hp += -1;
         if (glfwGetKey(window, GLFW_KEY_P) == GL_TRUE)
-            hp += 1;
+            hp += 1;*/
 //        if (glfwGetKey(window, GLFW_KEY_L) == GL_TRUE) {
 //           eq.addItem(4);
 //           //gui.SetEq(eq.getEq());
@@ -252,11 +252,13 @@ public class Player {
         xSpeed = camSpeed * (forward * Math.sin(Math.toRadians(yRot)) - left * Math.cos(Math.toRadians(yRot)));
         zSpeed = camSpeed * (-forward * Math.cos(Math.toRadians(yRot)) - left * Math.sin(Math.toRadians(yRot)));
 
-        if (!isStanding())
+        if (!isStanding()) {
             ySpeed -= gravity;
-        else {
+        } else {
             Block b = world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam);
             if (b != null)
+                //ySpeed += gravity/2;
+
                 if (b.getMaterial() == Block.BOUNCY) {
                     ySpeed = 0.8f;
                 } else if (b.getMaterial() == Block.STICKY) {
@@ -265,12 +267,18 @@ public class Player {
                 } else if (b.getMaterial() == Block.SLIPPY) {
                     xSpeed *= 1.5f;
                     zSpeed *= 1.5f;
+                } else if(b.getMaterial() == Block.HURTING) {
+                    if(world.getTime() % 20 == 0)
+                        hp--;
                 }
 
             xSpeed *= 0.8f;
             zSpeed *= 0.8f;
 
             step += forward;
+
+            if(ySpeed <= -0.3f)
+                hp += ySpeed*2;
         }
 
         xSpeed *= friction;
@@ -279,6 +287,8 @@ public class Player {
 
         move(xSpeed, ySpeed, zSpeed);
 
+        if(world.getTime() % 200 == 0)
+            hp++;
 
         //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + aprocraft.world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
         //aprocraft.world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, aprocraft.world.Blocks.AIR);
@@ -286,7 +296,7 @@ public class Player {
 
     private void move(float x, float y, float z) {
         if (!checkCollision(x, 0, 0)) xCam += x;
-        if (!checkCollision(0, y, 0)) yCam += y;
+        if (!checkCollision(0, y, 0)) yCam += y; else ySpeed = 0;
         if (!checkCollision(0, 0, z)) zCam += z;
 
         /*if (!checkCollision(x, 0, 0) && !checkCollision(x, 0.6f, 0)) xCam += x;
@@ -316,7 +326,7 @@ public class Player {
                 z = 0;*/
     }
 
-    int lsx, lsy;
+    private int lsx, lsy;
 
     private void mouseUpdate() {
 
@@ -430,8 +440,8 @@ public class Player {
         int x0 = (int) (xCam + x + radius);
         int x1 = (int) (xCam + x - radius);
 
-        int y0 = (int) (yCam - 1 + y + radius);
-        int y1 = (int) (yCam - 1 + y - radius);
+        int y0 = (int) (yCam - 0.9f + y + radius);
+        int y1 = (int) (yCam - 0.9f + y - radius);
 
         int z0 = (int) (zCam + z + radius);
         int z1 = (int) (zCam + z - radius);
