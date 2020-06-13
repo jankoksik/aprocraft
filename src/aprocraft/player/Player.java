@@ -1,6 +1,7 @@
 package aprocraft.player;
 
 import aprocraft.APROCraft;
+import aprocraft.eq.Crafting;
 import aprocraft.eq.GUI;
 import aprocraft.eq.Inventory;
 import aprocraft.eq.Item;
@@ -50,6 +51,8 @@ public class Player {
     private boolean grabbed = false;
     private Item grabbedItem;
 
+    private Crafting crafting;
+
     private World world;
 
     public Player(long window, World world) {
@@ -89,6 +92,21 @@ public class Player {
         eq = new Inventory(64, 8, 5);
         gui = new GUI(eq);
 
+        eq.addItem(1, 10, false);
+
+        crafting = new Crafting(2, 2, "TestRecip");
+        crafting.LoadRecipes();
+        //crafting.PlaceItemInCrafting(0, 0, 1, eq);
+        //crafting.PlaceItemInCrafting(0, 1, 1, eq);
+        /*int res = crafting.ShowPatternMatchinResult();
+        if (res != -1) {
+            crafting.Craft(eq);
+            System.out.println("zcraftowano : " + res);
+            System.out.println("zcraftowales patyk z ziemi :-/ ");
+        } else {
+            System.out.println("nie znaleziono craftingu ");
+        }*/
+
         this.window = window;
         this.world = world;
     }
@@ -101,7 +119,7 @@ public class Player {
         Vector3f v2 = raycast.getNextBlockPosition();
 
 
-        if(v != null && vPrev != null) {
+        if (v != null && vPrev != null) {
 
             float x = (int) (v.x);
             float y = (int) (v.y);
@@ -112,7 +130,7 @@ public class Player {
             float zp = (int) (vPrev.z);
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
-                if(x == xp && y == yp && z == zp) {
+                if (x == xp && y == yp && z == zp) {
                     destroyTimer++;
                     if (destroyTimer >= world.getBlock((int) x, (int) y, (int) z).getDurability()) {
                         //eq.addItem(4);
@@ -126,8 +144,8 @@ public class Player {
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
-                placeTimer ++;
-                if(placeTimer % 8 == 0 && v2.distance(xCam-0.5f, yCam, zCam-0.5f) > 1.6f) {
+                placeTimer++;
+                if (placeTimer % 8 == 0 && v2.distance(xCam - 0.5f, yCam, zCam - 0.5f) > 1.6f) {
                     world.placeBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.searchByID(gui.GetcurrQABid()));//Blocks.PLANKS
                     eq.removeOne(gui.GetcurrQABid());
                     gui.updateEq(eq.getEq());
@@ -303,13 +321,13 @@ public class Player {
     private void mouseUpdate() {
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
-            //glfwSetCursorPos(window, aprocraft.APROCraft.WIDTH / 2, aprocraft.APROCraft.HEIGHT / 2);
-            //mouseLocked = !mouseLocked;
+        //glfwSetCursorPos(window, aprocraft.APROCraft.WIDTH / 2, aprocraft.APROCraft.HEIGHT / 2);
+        //mouseLocked = !mouseLocked;
 
-            if(!gui.isOpened())
-                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-            else
-                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        if (!gui.isOpened())
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        else
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
         //}
 
@@ -336,15 +354,15 @@ public class Player {
                 xRot = 90;
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
-                mouseTimer ++;
+                mouseTimer++;
             } else {
                 mouseTimer = 0;
             }
 
             glfwSetCursorPos(window, APROCraft.WIDTH / 2, APROCraft.HEIGHT / 2);
         } else {
-            int selectionX = (int)((mouseX - GUI.QABsx)/(GUI.QABsize+1));
-            int selectionY = 4-(int)((mouseY - gui.getYOffset()*2 - 46)/(GUI.QABsize+1));
+            int selectionX = (int) ((mouseX - GUI.QABsx) / (GUI.QABsize + 1));
+            int selectionY = 4 - (int) ((mouseY - gui.getYOffset() * 2 - 46) / (GUI.QABsize + 1));
             //System.out.println("Mouse(" + selectionX + ", " + selectionY + ") " + grabbed + ", " + grabbedItem);
 
             /*for(int i = 0; i < 8; i ++)
@@ -353,6 +371,23 @@ public class Player {
                         System.out.println(i + ", " + j);*/
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS && !prevPressed) {
+                if(selectionX == 10 && selectionY == 7) {
+                    int res = crafting.ShowPatternMatchinResult();
+                    if (res != -1) {
+                        crafting.Craft(eq);
+                        crafting.craft[0] = 0;
+                        crafting.craft[1] = 0;
+                        crafting.craft[2] = 0;
+                        crafting.craft[3] = 0;
+                        gui.updateEq(eq.getEq());
+                    }
+                }
+
+                if (selectionX >= 6 && selectionY >= 6 && selectionX <= 7 && selectionY <= 7) {
+                    crafting.GetItemFromCrafting(selectionX - 6, selectionY - 6, eq);
+                    gui.updateEq(eq.getEq());
+                }
+
                 grabbed = true;
                 grabbedItem = gui.GetItemXY(selectionX, selectionY);
                 lsx = selectionX;
@@ -360,7 +395,13 @@ public class Player {
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE && prevPressed) {
-                gui.swap(lsx, lsy, selectionX, selectionY);
+                if (grabbedItem != null)
+                    if (selectionX >= 6 && selectionY >= 6 && selectionX <= 7 && selectionY <= 7) {
+                        crafting.PlaceItemInCrafting(selectionX - 6, selectionY - 6, grabbedItem.getId(), eq);
+                        gui.updateEq(eq.getEq());
+                    } else
+                        gui.swap(lsx, lsy, selectionX, selectionY);
+
                 grabbed = false;
                 grabbedItem = null;
             }
@@ -370,10 +411,15 @@ public class Player {
     }
 
     public void renderGrabbedItem() {
-        if(grabbed && grabbedItem != null)
-            gui.renderGrabbedItem((int)mouseX, (int)(APROCraft.HEIGHT-mouseY), grabbedItem);
+        if (grabbed && grabbedItem != null)
+            gui.renderGrabbedItem((int) mouseX, (int) (APROCraft.HEIGHT - mouseY), grabbedItem);
     }
-    
+
+    public void renderCrafting() {
+        if (gui.isOpened())
+            gui.renderCrafting(crafting);
+    }
+
     public boolean isStanding() {
         return world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam) != null;//isStanding;//
     }
@@ -429,43 +475,43 @@ public class Player {
 
         glBegin(GL_QUADS);
 
-        glVertex3f(x - s, y - s, z - s*3);
-        glVertex3f(x + s, y - s, z - s*3);
-        glVertex3f(x + s, y + s, z - s*3);
-        glVertex3f(x - s, y + s, z - s*3);
+        glVertex3f(x - s, y - s, z - s * 3);
+        glVertex3f(x + s, y - s, z - s * 3);
+        glVertex3f(x + s, y + s, z - s * 3);
+        glVertex3f(x - s, y + s, z - s * 3);
 
-        glVertex3f(x + s, y - s, z + s*3);
-        glVertex3f(x - s, y - s, z + s*3);
-        glVertex3f(x - s, y + s, z + s*3);
-        glVertex3f(x + s, y + s, z + s*3);
+        glVertex3f(x + s, y - s, z + s * 3);
+        glVertex3f(x - s, y - s, z + s * 3);
+        glVertex3f(x - s, y + s, z + s * 3);
+        glVertex3f(x + s, y + s, z + s * 3);
 
-        glVertex3f(x - s, y - s, z - s*3);
-        glVertex3f(x + s, y - s, z - s*3);
-        glVertex3f(x + s, y - s, z + s*3);
-        glVertex3f(x - s, y - s, z + s*3);
+        glVertex3f(x - s, y - s, z - s * 3);
+        glVertex3f(x + s, y - s, z - s * 3);
+        glVertex3f(x + s, y - s, z + s * 3);
+        glVertex3f(x - s, y - s, z + s * 3);
 
-        glVertex3f(x + s, y + s, z - s*3);
-        glVertex3f(x - s, y + s, z - s*3);
-        glVertex3f(x - s, y + s, z + s*3);
-        glVertex3f(x + s, y + s, z + s*3);
+        glVertex3f(x + s, y + s, z - s * 3);
+        glVertex3f(x - s, y + s, z - s * 3);
+        glVertex3f(x - s, y + s, z + s * 3);
+        glVertex3f(x + s, y + s, z + s * 3);
 
-        glVertex3f(x - s, y - s, z - s*3);
-        glVertex3f(x - s, y + s, z - s*3);
-        glVertex3f(x - s, y + s, z + s*3);
-        glVertex3f(x - s, y - s, z + s*3);
+        glVertex3f(x - s, y - s, z - s * 3);
+        glVertex3f(x - s, y + s, z - s * 3);
+        glVertex3f(x - s, y + s, z + s * 3);
+        glVertex3f(x - s, y - s, z + s * 3);
 
-        glVertex3f(x + s, y + s, z - s*3);
-        glVertex3f(x + s, y - s, z - s*3);
-        glVertex3f(x + s, y - s, z + s*3);
-        glVertex3f(x + s, y + s, z + s*3);
+        glVertex3f(x + s, y + s, z - s * 3);
+        glVertex3f(x + s, y - s, z - s * 3);
+        glVertex3f(x + s, y - s, z + s * 3);
+        glVertex3f(x + s, y + s, z + s * 3);
 
         glEnd();
 
         glColor3f(1, 1, 1);
 
-        int id = gui.GetcurrQABid()-1;
+        int id = gui.GetcurrQABid() - 1;
 
-        if(id != -1) {
+        if (id != -1) {
             float cx = (id % 16) / 16.0f;
             float cy = (id / 16) / 16.0f;
             float cs = 1.0f / 16.0f;
@@ -498,8 +544,8 @@ public class Player {
 
         glPushMatrix();
         glTranslatef(xCam, yCam, zCam);
-        glRotatef(180-yRot, 0, 1, 0);
-        glRotatef(xRot+Math.sin(mouseTimer*0.5f)*8, 1, 0, 0);
+        glRotatef(180 - yRot, 0, 1, 0);
+        glRotatef(xRot + Math.sin(mouseTimer * 0.5f) * 8, 1, 0, 0);
         drawHand();
         glPopMatrix();
 
@@ -509,7 +555,7 @@ public class Player {
 
         //Vector3f v = raycast.getBlockPosition();
 
-        if(v != null) {
+        if (v != null) {
 
             float x = (int) (v.x);
             float y = (int) (v.y);
@@ -603,6 +649,10 @@ public class Player {
         }
     }
 
+    public Crafting getCrafting() {
+        return crafting;
+    }
+
     public float getX() {
         return xCam;
     }
@@ -631,10 +681,11 @@ public class Player {
         return world;
     }
 
-    public boolean addItem (int id){
+    public boolean addItem(int id) {
 
         return eq.addItem(id);
     }
+
     public int getHp() {
         return hp;
     }
@@ -659,7 +710,7 @@ public class Player {
         this.eq = eq;
     }
 
-    public void AutoSave(){
+    public void AutoSave() {
 
         Thread thread = new Thread(() -> {
             System.out.println("AutoSave_player");

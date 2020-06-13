@@ -11,9 +11,10 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 public class Recipe {
-    int w=0;
+    int w;
     int [] craft;
     int result = 0;
+    int nR = 0;
 
     public int getnR() {
         return nR;
@@ -23,8 +24,6 @@ public class Recipe {
         this.nR = nR;
     }
 
-    int nR = 0;
-
     public int getResult() {
         return result;
     }
@@ -32,8 +31,6 @@ public class Recipe {
     public void setResult(int result) {
         this.result = result;
     }
-
-
 
     public Recipe(int width, int height)
     {

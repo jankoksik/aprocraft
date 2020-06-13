@@ -174,6 +174,7 @@ public class APROCraft {
                 player.getGui().RenderHealth(player.getHp());
                 player.getGui().RenderQAB();
                 player.getGui().RenderEq();
+                player.renderCrafting();
                 player.renderGrabbedItem();
 
                 //aprocraft.eq.GUI.Test();

@@ -305,13 +305,13 @@ public class GUI {
                 }
             }*/
 
-            Grid.bind(0);
+            /*Grid.bind(0);
             DrawSquare(QABsx + (int) QABsize * 5 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - (int) QABsize - 3 * magicNMBR - 1, QABsize, new float[]{0, 1, 0, 1});
             DrawSquare(QABsx + (int) QABsize * 5 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - 3 * magicNMBR, QABsize, new float[]{0, 1, 0, 1});
             DrawSquare(QABsx + (int) QABsize * 6 + 4 + 4 * magicNMBR + 1, QABsy + 4 * Hoff - 3 * magicNMBR, QABsize, new float[]{0, 1, 0, 1});
             DrawSquare(QABsx + (int) QABsize * 6 + 4 + 4 * magicNMBR + 1, QABsy + 4 * Hoff - (int) QABsize - 3 * magicNMBR - 1, QABsize, new float[]{0, 1, 0, 1});
             DrawSquare(QABsx + (int) QABsize * 8 + 4 + 4 * magicNMBR, QABsy + 4 * Hoff - 3 * magicNMBR - (int) QABsize / 2, QABsize, new float[]{0, 1, 0, 1});
-
+            */
 
         }
         cX = 0;
@@ -361,10 +361,14 @@ public class GUI {
     }
 
     public void renderCrafting(Crafting crafting) {
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        int xS = QABsx + (int) QABsize * 5 + 4 + 4 * magicNMBR;
+        int yS = QABsy + 4 * Hoff - (int) QABsize - 3 * magicNMBR - 1;
         int w = crafting.w;
         int h = crafting.craft.length / crafting.w;
-        int xS = APROCraft.WIDTH / 2 - (int) QABsize * w;
-        int yS = APROCraft.HEIGHT / 2 - (int) QABsize * h / 2;
+        //int xS = APROCraft.WIDTH / 2 - (int) QABsize * w;
+        //int yS = APROCraft.HEIGHT / 2 - (int) QABsize * h / 2;
         Grid.bind(0);
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
@@ -372,6 +376,22 @@ public class GUI {
             }
         }
         DrawSquare(xS + (int) QABsize * (w + 2) + w, yS + (int) QABsize * h / 2 + h / 2, QABsize, new float[]{0, 1, 0, 1});
+
+        Blocks.TEXTURE_PACK.bind(0);
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int id = crafting.craft[x+y*w];
+                if(id != 0)
+                    DrawSquare(xS + (int) QABsize * x + x, yS + (int) QABsize * y + y, QABsize, GetTexById(id-1));
+            }
+        }
+
+        int id = crafting.ShowPatternMatchinResult();
+        if(id != 0)
+            DrawSquare(xS + (int) QABsize * (w + 2) + w, yS + (int) QABsize * h / 2 + h / 2, QABsize, GetTexById(id-1));
+
+        glDisable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
     }
 
     public void DrawNumber(int x, int y, int number) {
@@ -420,10 +440,6 @@ public class GUI {
 
     }
 
-    public void RenderAutoSave() {
-
-    }
-
     public void swap(int i, int j) {
         Item tmp = inv.get(i);
         inv.set(i, inv.get(j));
@@ -451,11 +467,4 @@ public class GUI {
         else
             return 0;
     }
-
-    public void drag(Item item) {
-
-
-    }
-
-
 }
