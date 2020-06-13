@@ -8,6 +8,7 @@ import aprocraft.world.Blocks;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 
@@ -195,6 +196,24 @@ public class GUI {
     {
         inv = a;
     }
+
+    public void updateEq(List<Item> inventory) {
+//        for(Item i : inv) {
+//            if(!inventory.contains(i))
+//
+//        }
+        for (Iterator<Item> it = inv.iterator(); it.hasNext();) {
+            Item i = it.next();
+            if(!inventory.contains(i))
+                it.remove(); //metoda remove() iteratora
+        }
+
+        for(Item i : inventory) {
+            if(!inv.contains(i))
+                inv.add(i);
+        }
+    }
+
     public void RenderEq() {
 
         glEnable(GL_TEXTURE_2D);

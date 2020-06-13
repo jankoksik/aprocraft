@@ -117,7 +117,7 @@ public class Player {
                     if (destroyTimer >= world.getBlock((int) x, (int) y, (int) z).getDurability()) {
                         //eq.addItem(4);
                         eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
-                        gui.SetEq(eq.getEq());
+                        gui.updateEq(eq.getEq());
                         world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
                         destroyTimer = 0;
                     }
@@ -130,7 +130,7 @@ public class Player {
                 if(placeTimer % 8 == 0 && v2.distance(xCam-0.5f, yCam, zCam-0.5f) > 1.6f) {
                     world.placeBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.searchByID(gui.GetcurrQABid()));//Blocks.PLANKS
                     eq.removeOne(gui.GetcurrQABid());
-                    gui.SetEq(eq.getEq());
+                    gui.updateEq(eq.getEq());
                 }
             }
         }
@@ -215,7 +215,7 @@ public class Player {
             eq.addItem(Blocks.PLANKS.getID());
             eq.addItem(Blocks.CONCRETE.getID());
 
-            gui.SetEq(eq.getEq());
+            gui.updateEq(eq.getEq());
         }
 
         if (hp < 0)
