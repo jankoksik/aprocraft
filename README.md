@@ -24,6 +24,9 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 | 2          | ziemia              |
 | 3          | kamień              |
 | 4          | cobble              |
+| 10         | piach               |
+| 13         | czerwony piaskowiec |
+| 15         | bedrock             |
 | 17         | drewno zwykłe       |
 | 18         | drewno ciemne       |
 | 19         | drewno jasne        |
@@ -33,31 +36,46 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 | 23         | liście zwykłe       |
 | 24         | liście ciemne       |
 | 25         | liście jasne        |
-| 15         | bedrock             |
-| 50         | chmura              |
-| 10         | piach               |
-| 51         | lód                 |
-| 13         | czerwony piaskowiec |
 | 26         | kaktus              |
-| 37         | ruda diamentów      |
-| 36         | ruda węgla          |
 | 33         | ruda złota          |
 | 34         | ruda żelaza         |
 | 35         | ruda miedzi         |
+| 36         | ruda węgla          |
+| 37         | ruda diamentów      |
 | 38         | ruda rubinu         |
 | 39         | ruda szafiru        |
 | 40         | ruda szmaragdu      |
+| 50         | chmura              |
+| 51         | lód                 |
+| 52         | beton               |
 | 64 + kolor | kolorowa wełna      |
 | 81         | stół craftingowy    |
-| 52         | beton               |
+
 
 
 
 ## Domyślne Sterowanie
+| klawisz | funkcja                     |
+|---------|-----------------------------|
+| w       | do przodu                   |
+| s       | do tyłu                     |
+| a       | w lewo                      |
+| d       | w prawo                     |
+| E       | ekwipunek                   |
+| lmb     | niszczenie bloków           |
+| rmb     | stawianie bloków            |
+| Spacja  | skok                        |
+| 1       | zapis świata                |
+| 2       | wczytanie ostatniego zapisu |
+
+
 
 ## Receptury Craftingowe
 
+
+
 ## Moby
+* slime
 
 ##  Ciekawostki 
 * chodzenie po koronach drzew jest trudne, więc spowolni ono twoje ruchy
