@@ -1,86 +1,60 @@
 package aprocraft.eq;
 
-import java.util.Comparator;
-
 /**
- * Klasa implementujÄ…ca przedmioty
- * Obiekt aprocraft.eq.Item ma swoje id, nazwÄ™ i iloÅ›Ä‡ danego przedmiotu
+ * Klasa implementuj¹ca przedmioty
+ * Obiekt Item ma swoje id, nazwê i iloœæ danego przedmiotu
  */
-public class Item implements Comparable {
+public class Item {
     private int id = 0;
     private String Name;
     private int size = 0;
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    private int x =0;
+    //public int pos;
 
     /**
-     * Konstruktor obiektu aprocraft.eq.Item
-     * @param id idetyfikator obiektu aprocraft.eq.Item
+     * Konstruktor obiektu Item
+     * @param id idetyfikator obiektu Item
      */
     public Item(int id) {
         this.id = id;
+        //pos = -1;
     }
 
+    /*public void setPosition(int pos) {
+        if(this.pos == -1)
+            this.pos = pos;
+    }*/
+
     /**
-     * Metoda zwraca id danego obiektu aprocraft.eq.Item
-     * @return zwraca id Danrgo obiktu aprocraft.eq.Item
+     * Metoda zwraca id danego obiektu Item
+     * @return zwraca id Danrgo obiktu Item
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Metoda zwraca iloÅ›c przedmiotÃ³w przypisanych do danego obiektu aprocraft.eq.Item
-     * @return iloÅ›Ä‡ przedmiotÃ³w
+     * Metoda zwraca iloœc przedmiotów przypisanych do danego obiektu Item
+     * @return iloœæ przedmiotów
      */
     public int getSize() {
         return size;
     }
 
     /**
-     * Metoda ustawiajÄ…ca iloÅ›c przedmiotÃ³w przypisanych do danego obiektu aprocraft.eq.Item
-     * @param size iloÅ›Ä‡ przedmiotÃ³w jakÄ… chcem ustawiÄ‡
+     * Metoda ustawiaj¹ca iloœc przedmiotów przypisanych do danego obiektu Item
+     * @param size iloœæ przedmiotów jak¹ chcem ustawiæ
      */
     public void setSize(int size) {
         this.size = size;
     }
 
     /**
-     * Metoda zwiÄ™kszajÄ…ca parametr size o jeden
+     * Metoda zwiêkszaj¹ca parametr size o jeden
      *
      */
     public void AddOne() {
-        size ++;
+        size += 1;
     }
 
-    public String getName() {
-        return Name;
-    }
 
-    public static Comparator<Item> ItemComp = new Comparator<Item>() {
-
-        @Override
-        public int compare(Item e1, Item e2) {
-            return Integer.compare(e1.getX(), e2.getX());
-        }
-    };
-
-   @Override
-   public int compareTo(Object o) {
-       Item i = (Item)o;
-       if(i.getX() == this.getX())
-       return  0;
-       else if(this.getX() > i.getX())
-           return  1;
-       else
-           return  -1;
-   }
 }

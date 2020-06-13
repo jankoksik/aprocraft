@@ -298,6 +298,8 @@ public class Player {
                 z = 0;*/
     }
 
+    int lsx, lsy;
+
     private void mouseUpdate() {
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
@@ -353,9 +355,12 @@ public class Player {
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS && !prevPressed) {
                 grabbed = true;
                 grabbedItem = gui.GetItemXY(selectionX, selectionY);
+                lsx = selectionX;
+                lsy = selectionY;
             }
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE && prevPressed) {
+                gui.swap(lsx, lsy, selectionX, selectionY);
                 grabbed = false;
                 grabbedItem = null;
             }

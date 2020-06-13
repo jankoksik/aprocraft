@@ -3,25 +3,28 @@ package aprocraft.eq;
 import aprocraft.APROCraft;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Inventory {
 
-    //stack - liczba blokÃ³w w stacku
-    //space - ilosc kratek na przedmioty
+    //stack - liczba bloków w stacku
+    // space - ilosc kratek na przedmioty
 
     private ArrayList<Item> eq = new ArrayList<>();
     private int stack;
     private int space;
     private int w;
     private ArrayList<Item> map = new ArrayList<>();
-    private PriorityQueue<Item> order = new PriorityQueue<>();
 
 
     public Inventory(int stack, int w, int h) {
@@ -33,9 +36,17 @@ public class Inventory {
     //malo optymalne
     public List<Item> getEq() {
         ArrayList<Item> sum = new ArrayList<>();
-        Iterator<Item> it = order.iterator();
-        while (it.hasNext()) {
-            sum.add(it.next());
+        int pos = 0;
+        for (Item i : eq) {
+            i.setSize(stack);
+            //i.pos = pos++;
+            sum.add(i);
+            //getEq(i.getId()).setSize(stack);
+        }
+        for (Item i : map) {
+            // Item add = new Item(i.getId());
+            // add.setSize(i.getSize());
+            sum.add(i);
         }
         return sum;
     }
@@ -134,19 +145,12 @@ public class Inventory {
         return false;
     }
 
-    public Item getEq(int id) {
+    private Item getEq(int id) {
         for (Item k : eq) {
             if (k.getId() == id)
                 return k;
         }
         return null;
-    }
-
-    public void Swap(int x1, int y1, int x2, int y2) {
-        int xpom = 0;
-        xpom = getEq().get(y1 * w + x1).getX();
-        getEq().get(y1 * w + x1).setX(getEq().get(y2 * w + x2).getX());
-        getEq().get(y2 * w + x2).setX(xpom);
     }
 
     public int getNmbrOfItems(int id) {
@@ -187,30 +191,39 @@ public class Inventory {
         return true;
     }
 
-    public int FindSpot() {
-        return map.indexOf(null);
-    }
+    /*private int findFreeSlot() {
+        int res = 0;
+        for (Item i : map) {
+            if(i.pos != res) {
+                for (Item j : eq) {
+                    if(j.pos != res)
+                        return res;
+                }
+            }
+            res++;
+        }
+
+        return res;
+    }*/
 
     public boolean addItem(int itemId) {
         Item n = new Item(itemId);
         if (!map.isEmpty() && contain(n)) {
             get(n.getId()).AddOne();
-
             if (get(n.getId()).getSize() == stack) {
-                n.setX(FindSpot());
+                //int p = findFreeSlot();
+                //n.setPosition(p);
                 eq.add(n);
                 eq.get(eq.indexOf(n)).setSize(stack);
                 removeStack(n.getId());
-
             }
-            order.add(n);
             return true;
         } else {
             if (eq.size() + map.size() < space) {
                 n.AddOne();
-                n.setX(FindSpot());
+                //int p = findFreeSlot();
+                //n.setPosition(p);
                 map.add(n);
-                order.add(n);
                 return true;
             } else {
                 return false;
@@ -232,8 +245,12 @@ public class Inventory {
         if (miejsce < stacks + 1 && !force)
             return false;
         n.setSize(stack);
+        //int p = findFreeSlot();
+        //n.setPosition(p);
         int added = 0;
         for (int i = stacks; i > 0 && miejsce > 0; i--, miejsce--, added++) {
+            //p = findFreeSlot();
+            //n.setPosition(p);
             eq.add(n);
         }
         int left = (NmbrOfItems - (added * stack));
@@ -244,12 +261,18 @@ public class Inventory {
             }
             if (left > 0 && eq.size() + map.size() < space) {
                 n.setSize(left);
+                //n.pos = left;
+                //p = findFreeSlot();
+                //n.setPosition(p);
                 map.add(n);
                 return true;
             }
         } else if (eq.size() + map.size() < space && left > 0) {
             Item k = new Item(itemId);
             k.setSize(left);
+            //p = findFreeSlot();
+            //k.setPosition(p);
+            //k.pos = left;
             map.add(k);
             return true;
         }

@@ -274,6 +274,19 @@ public class GUI {
                 cX = QABsx;
 
             }
+
+            /*for(Item i : inv) {
+                int id = i.getId();
+                if (id != -1) {
+                    id -= 1;
+                    //blocks.bind(0);
+                    Blocks.TEXTURE_PACK.bind(0);
+                    System.out.println(i.pos);
+                    DrawSquare(QABsx + i.pos*(int)QABsize + (int) QABsize / 4, Hoff + magicNMBR * 2 / 3 + (int)(i.pos/QABsize) + (int) QABsize / 4, QABsize / 2, GetTexById(id));
+                    DrawNumber(QABsx + i.pos*(int)QABsize + (int) QABsize / 2, Hoff + magicNMBR * 2 / 3 + (int)(i.pos/QABsize) + (int) QABsize / 4, i.getSize() );
+                }
+            }*/
+
             Grid.bind(0);
             DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - (int)QABsize - 3*magicNMBR-1, QABsize, new float[]{0, 1, 0, 1});
             DrawSquare(QABsx + (int)QABsize*5 +4 + 4*magicNMBR, QABsy+4*Hoff - 3*magicNMBR, QABsize, new float[]{0, 1, 0, 1});
@@ -415,6 +428,20 @@ public class GUI {
 
     public void RenderAutoSave(){
 
+    }
+
+    public void swap(int i, int j) {
+        Item tmp = inv.get(i);
+        inv.set(i, inv.get(j));
+        inv.set(j, tmp);
+    }
+
+    public void swap(int x1, int y1, int x2, int y2) {
+        if (!inv.isEmpty() && inv.size() > y1 * SizeOfQAB + x1 && inv.size() > y2 * SizeOfQAB + x2) {
+            int i = y1 * SizeOfQAB + x1;
+            int j = y2 * SizeOfQAB + x2;
+            swap(i, j);
+        }
     }
 
     public Item GetItemXY(int x, int y)
