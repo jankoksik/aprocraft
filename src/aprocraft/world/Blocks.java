@@ -19,6 +19,7 @@ public abstract class Blocks {
     public static final Block DIRT = new DirtBlock();
     public static final Block STONE = new StoneBlock();
     public static final Block COBBLESTONE = new CobblestoneBlock();
+    public static final Block MOSSY_COBBLESTONE = new MossyCobblestoneBlock();
     public static final Block BEDROCK = new BedrockBlock();
     public static final Block CLOUD = new CloudBlock();
     public static final Block SAND = new SandBlock();
@@ -26,6 +27,8 @@ public abstract class Blocks {
     public static final Block RED_SANDSTONE = new RedSandstoneBlock();
     public static final Block CACTUS = new CactusBlock();
     public static final Block CONCRETE = new ConcreteBlock();
+    public static final Block BRICKS = new BricksBlock();
+    public static final Block STONE_BRICKS = new StoneBricksBlock();
 
     //drewno, liscie itp
     public static final Block LOG = new LogBlock(0);
@@ -124,6 +127,16 @@ class CobblestoneBlock extends Block {
 }
 
 /**
+ * Implementacja bloku - stłuczony kamień z mchem
+ */
+class MossyCobblestoneBlock extends Block {
+    public MossyCobblestoneBlock() {
+        super("Mossy Cobblestone", 5);
+        setDurability(40);
+    }
+}
+
+/**
  * Implementacja bloku - kłoda
  */
 class LogBlock extends Block {
@@ -201,6 +214,26 @@ class IceBlock extends Block {
 class RedSandstoneBlock extends Block {
     public RedSandstoneBlock() {
         super("Red Sandstone", 13);
+        setDurability(40);
+    }
+}
+
+/**
+ * Implementacja bloku - kamienne cegly
+ */
+class StoneBricksBlock extends Block {
+    public StoneBricksBlock() {
+        super("Stone Bricks", 6);
+        setDurability(40);
+    }
+}
+
+/**
+ * Implementacja bloku - cegly
+ */
+class BricksBlock extends Block {
+    public BricksBlock() {
+        super("Bricks", 9);
         setDurability(40);
     }
 }
