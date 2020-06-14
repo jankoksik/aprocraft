@@ -1,5 +1,9 @@
 package aprocraft.world;
 
+/**
+ * Implementacja poszczególnych struktur
+ */
+
 public abstract class Structures {
     public static final Structure OAK_TREE = new DefaultTree(Blocks.LEAVES, Blocks.LOG);
     public static final Structure BIRCH_TREE = new DefaultTree(Blocks.BIRCH_LEAVES, Blocks.BIRCH_LOG);
@@ -8,6 +12,9 @@ public abstract class Structures {
     public static final Structure CACTUS = new Cactus();
 }
 
+/**
+ * Implementacja struktury - podstawowe drewno
+ */
 class DefaultTree extends Structure {
     public DefaultTree(Block leaves, Block log) {
         super(5, 6, 5);
@@ -31,7 +38,9 @@ class DefaultTree extends Structure {
                 }
     }
 }
-
+/**
+ * Implementacja struktury - świerk
+ */
 class SpruceTree extends Structure {
     public SpruceTree() {
         super(5, 8, 5);
@@ -58,7 +67,9 @@ class SpruceTree extends Structure {
                 }
     }
 }
-
+/**
+ * Implementacja struktury - chmura
+ */
 class Cloud extends Structure {
     public Cloud() {
         super(5, 1, 5);
@@ -69,7 +80,9 @@ class Cloud extends Structure {
 
     }
 }
-
+/**
+ * Implementacja struktury - kaktus
+ */
 class Cactus extends Structure {
     public Cactus() {
         super(1, 3, 1);

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Klasa implementująca poszczególne biomy
+ */
 public abstract class Biomes {
     private static List<Biome> biomes = new ArrayList<Biome>();
     private static int totalSum = 0;
@@ -34,6 +37,9 @@ public abstract class Biomes {
     }
 }
 
+/**
+ * Implementacjia biomu bazowego
+ */
 class DefaultBiome extends Biome {
     public DefaultBiome() {
         super("Default", 10);
@@ -53,6 +59,9 @@ class DefaultBiome extends Biome {
     }
 }
 
+/**
+ * Implementacja biomu - lasu
+ */
 class ForestBiome extends Biome {
     public ForestBiome() {
         super("Forest", 5);
@@ -71,7 +80,9 @@ class ForestBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
-
+/**
+ * Implementacja biomu - pustyni
+ */
 class DesertBiome extends Biome {
     public DesertBiome() {
         super("Desert", 5);
@@ -90,7 +101,9 @@ class DesertBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
-
+/**
+ * Implementacja biomu - równiny
+ */
 class PlainsBiome extends Biome {
     public PlainsBiome() {
         super("Plains", 10);
@@ -106,7 +119,9 @@ class PlainsBiome extends Biome {
     }
 
 }
-
+/**
+ * Implementacja biomu - góra lodowa
+ */
 class IcebergBiome extends Biome {
     public IcebergBiome() {
         super("Iceberg", 2);
@@ -122,7 +137,9 @@ class IcebergBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
-
+/**
+ * Implementacja biomu - kanion
+ */
 class CanyonBiome extends Biome {
     public CanyonBiome() {
         super("Canyon", 2);

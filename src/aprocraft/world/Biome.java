@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Klasa implementująca biomy
+ */
+
 public abstract class Biome {
     private String name;
 
@@ -53,24 +57,44 @@ public abstract class Biome {
         this.octave = octave;
     }
 
+    /**
+     * Metoda ustawiająca wartyw terenu
+     * @param lv1 typ bloków tworzących warstwę 1
+     * @param lv2 typ bloków tworzących warstwę 2
+     * @param lv3 typ bloków tworzących warstwę 3
+     */
     public void setLayers(Block lv1, Block lv2, Block lv3) {
         layers[0] = lv1;
         layers[1] = lv2;
         layers[2] = lv3;
     }
 
+    /**
+     * Metoda dodająca rudę
+     * @param block typ rudy
+     * @param occurrence szansa występowani ustawionej rudy
+     */
     public void addOre(Block block, int occurrence) {
         ores.add(block);
         oreOccurrence.add(occurrence);
         totalOres += occurrence;
     }
 
+    /**
+     * Metod adodająca struktue
+     * @param type typ struktury
+     * @param occurrence szansa występowani ustawionej struktury
+     */
     public void addStructure(Structure type, int occurrence) {
         structures.add(type);
         structureOccurrence.add(occurrence);
         totalStructures += occurrence;
     }
 
+    /**
+     * Metoda zwracająca ustawione warstwy
+     * @return tablica zawierająca typy bloków tworzących warstwy
+     */
     public Block[] getLayers() {
         return layers;
     }
@@ -95,6 +119,11 @@ public abstract class Biome {
         return octave;
     }
 
+
+    /**
+     * Metoda wybierająca struktórę do dodania ze zbioru struktór
+     * @return wybrana struktura
+     */
     public Structure chooseStructure() {
         if (totalStructures == 0) return null;
 
@@ -108,6 +137,10 @@ public abstract class Biome {
         return structures.get(Math.max(0, i - 1));
     }
 
+    /**
+     *  Metoda wybierająca rudę do dodania ze zbioru rud
+     * @return wybrana ruda
+     */
     public Block chooseOre() {
         if (totalOres == 0) return null;
 
@@ -121,6 +154,10 @@ public abstract class Biome {
         return ores.get(Math.max(0, i - 1));
     }
 
+    /**
+     * Metoda sumująca ilośc wszystkich bloków rudy
+     * @return ilość bloków
+     */
     public int getTotalOres() {
         return totalOres;
     }

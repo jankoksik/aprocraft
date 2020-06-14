@@ -8,6 +8,10 @@ import org.lwjgl.BufferUtils;
 import java.nio.FloatBuffer;
 import java.util.Random;
 
+/**
+ * Metoda implementująca strukturę chunka
+ */
+
 public class Chunk {
     public static final int SIZE = 32;
 
@@ -24,6 +28,14 @@ public class Chunk {
 
     public boolean hasStructures, hasClouds;
 
+    /**
+     * Konstruktor
+     * @param x
+     * @param y
+     * @param z
+     * @param generator
+     * @param biomeGenerator
+     */
     public Chunk(int x, int y, int z, Generator generator, Generator biomeGenerator) {
         this.generator = generator;
         this.biomeGenerator = biomeGenerator;
@@ -48,6 +60,12 @@ public class Chunk {
         //generate(12);
     }
 
+    /**
+     * Metoda pobierająca jaki biom występuje na danej współrzędnej
+     * @param x współrzędna x
+     * @param z współrzędna z
+     * @return typ biomu
+     */
     public Biome getBiome(int x, int z) {
         Biome biome;
         int bbb = (int)biomeGenerator.getHeight(x, z);
@@ -100,6 +118,10 @@ public class Chunk {
         return biome;
     }*/
 
+    /**
+     * Metoda generująca ..
+     * @param height
+     */
     public void generate(int height) {
         Random r = new Random();
         for (int i = 0; i < SIZE; i++)
@@ -135,6 +157,9 @@ public class Chunk {
                 }
     }
 
+    /**
+     *Metoda generująca ...
+     */
     public void generateStone() {
         Random r = new Random();
         for (int i = 0; i < SIZE; i++)
@@ -155,6 +180,12 @@ public class Chunk {
                 }
     }
 
+    /**
+     * Metoda zwracająca maksymalną wysokość
+     * @param x współrzędna x
+     * @param z współrzędna y
+     * @return maksymalna wysokość
+     */
     public int getMaxHeight(int x, int z) {
         for(int i = SIZE-1; i >= 0; i --)
             if (getBlock(x, i, z) != null)
@@ -163,6 +194,9 @@ public class Chunk {
         return 0;
     }
 
+    /**
+     * Metoda tworząca buffor
+     */
     private void createBuffer() {
         vbo = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -180,6 +214,9 @@ public class Chunk {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    /**
+     * Metoda odśiwerzająca zawartość buffora
+     */
     private void updateBuffer() {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferData(GL_ARRAY_BUFFER, fb, GL_STATIC_DRAW);
@@ -195,11 +232,26 @@ public class Chunk {
         glBufferData(GL_ARRAY_BUFFER, lb, GL_STATIC_DRAW);
     }
 
+    /**
+     * Metoda zwracająca informacje o położeniu bloku
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param z współrzędna z
+     * @return wskazany blok
+     */
     public Block getBlock(int x, int y, int z) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
         return blocks[x][y][z];
     }
 
+    /**
+     * Metoda dodająca blok
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param z współrzędna z
+     * @param block typ dodanego bloku
+     * @param world obiekt wygnerowanego świata
+     */
     public void placeBlock(int x, int y, int z, Block block, World world) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
@@ -208,6 +260,13 @@ public class Chunk {
             updateChunk(world);
     }
 
+    /**
+     * Metoda ustawiająca typ bloku
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param z współrzędna z
+     * @param block typ bloku
+     */
     public void setBlock(int x, int y, int z, Block block) {
         if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
@@ -252,6 +311,10 @@ public class Chunk {
         createBuffer();
     }
 
+    /**
+     * Metoda odświerzająca chunka
+     * @param world obiekt wygnerowanego świata
+     */
     public void updateChunk(World world) {
         fbsize = 0;
         fb.clear();
@@ -289,6 +352,9 @@ public class Chunk {
         updateBuffer();
     }
 
+    /**
+     * Metoda wyśiwetlająca chunka
+     */
     public void render() {
         glEnable(GL_TEXTURE_2D);
         Blocks.TEXTURE_PACK.bind(0);
@@ -338,6 +404,10 @@ public class Chunk {
         return z;
     }
 
+    /**
+     * Metoda zwracająca tablicę bloków zawarych w chunku
+     * @return tablica bloków
+     */
     public Block[][][] getBlocks() {
         return blocks;
     }

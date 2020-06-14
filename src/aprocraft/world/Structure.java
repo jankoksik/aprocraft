@@ -3,11 +3,21 @@ package aprocraft.world;
 import aprocraft.world.Block;
 import aprocraft.world.World;
 
+/**
+ * Metoda implementująca struktury
+ */
+
 public abstract class Structure {
     public int sizeX, sizeY, sizeZ;
 
     protected Block[][][] blocks;
 
+    /**
+     * Konstruktor struktury
+     * @param sizeX współrzędna x
+     * @param sizeY współrzędna y
+     * @param sizeZ współrzędna z
+     */
     public Structure(int sizeX, int sizeY, int sizeZ) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;

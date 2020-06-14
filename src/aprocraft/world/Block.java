@@ -1,5 +1,9 @@
 package aprocraft.world;
 
+/**
+ * Klasa implementująca obiekt bloków
+ */
+
 public abstract class Block {
     public static final int NORMAL = 0;
     public static final int BOUNCY = 1;
@@ -20,6 +24,11 @@ public abstract class Block {
 
     private float[] textureData, lightData;
 
+    /**
+     * Konstruktor obiektu
+     * @param name nazwa bloku
+     * @param id identyfikator bloku
+     */
     public Block(String name, int id) {
         this.name = name;
 
@@ -90,6 +99,13 @@ public abstract class Block {
         Blocks.registerBlock(this);
     }
 
+    /**
+     * Metoda zwracająca informacje o położeniu bloku
+     * @param x współrzędna x
+     * @param y współrzędna y
+     * @param z współrzędna z
+     * @return talica współrzędnych
+     */
     public float[] getData(float x, float y, float z) {
         return new float[]{
                 x, y, z,
@@ -124,42 +140,82 @@ public abstract class Block {
         };
     }
 
+    /**
+     * Metoda ustawiająca jaki przedmiot otrzymuje gracz po zniszczeniu bloku
+     * @param drop otrzymywany blok
+     */
     public void setDrop(int drop) {
         this.drop = drop;
     }
 
+    /**
+     * Metoda ustawiająca materiał bloku
+     * @param material materiał bloku
+     */
     public void setMaterial(int material) {
         this.material = material;
     }
 
+    /**
+     * Metoda ustawiająca wytrzymałość bloku
+     * @param durability wytrzymałość bloku
+     */
     public void setDurability(float durability) {
         this.durability = durability;
     }
 
+    /**
+     * Metoda zwracająca teksturę bloku
+     * @return tekstura bloku
+     */
     public float[] getTextureData() {
         return textureData;
     }
 
+    /**
+     * Metoda zwracająca oświetlenie bloku
+     * @return oświetlenie bloku
+     */
     public float[] getLightData() {
         return lightData;
     }
 
+    /**
+     * Metoda zwracająca kolor bloku
+     * @return klor wyrażony w notacji RGB
+     */
     public RGB getColor() {
         return color;
     }
 
+    /**
+     * Metoda zwracająca materiał bloku
+     * @return materiał bloku
+     */
     public int getMaterial() {
         return material;
     }
 
+    /**
+     * Metoda zwracająca wytrzymałość bloku
+     * @return wytrzxymałość
+     */
     public float getDurability() {
         return durability;
     }
 
+    /**
+     * Metoda zwracająca jaki przedmiot otrzyma gracz po zniszczeniu bloku
+     * @return otrzymywany przedmiot
+     */
     public int getDrop() {
         return drop;
     }
 
+    /**
+     * Metoda zwracająca identyfiaktor bloku
+     * @return idetyfikator
+     */
     public int getID() {
         return id;
     }

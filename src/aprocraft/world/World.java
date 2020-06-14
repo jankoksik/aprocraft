@@ -11,6 +11,9 @@ import aprocraft.player.*;
 import aprocraft.APROCraft;
 import aprocraft.io.WorldSaveNRead;
 
+/**
+ * Klasa
+ */
 public class World {
     public static final int SIZE = 32;
     public static final int HEIGHT = 3;
@@ -122,6 +125,9 @@ public class World {
         }
     }*/
 
+    /**
+     * Metoda generująca struktury
+     */
     public void generateStructures() {
         Random r = new Random();
 
@@ -199,6 +205,10 @@ public class World {
             }
     }*/
 
+    /**
+     * Metoda generująca chmury
+     * @param n
+     */
     public void generateClouds(int n) {
         Random r = new Random();
         /*for (int i = 0; i < n; i++) {
@@ -288,6 +298,10 @@ public class World {
         c.placeBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE, block, this);
     }
 
+    /**
+     * Metoda odświerzająca parametry gracza
+     * @param player gracz o którym odśiwerzamy gracze
+     */
     public void update(Player player) {
         time++;
         skyTime += skyTimeDir;
@@ -362,6 +376,10 @@ public class World {
                 slime.update(this);
     }
 
+    /**
+     *
+     * @param player
+     */
     public void render(Player player) {
         for (int l = 1; l < HEIGHT; l++)
             for (int i = 0; i < SIZE; i++)
