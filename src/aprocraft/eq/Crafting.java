@@ -112,7 +112,7 @@ public class Crafting {
             LX = CornerX + 1;
             Ly = CornerY + 1;
         }
-
+        //JEdno
         return new Size(LX - CornerX, Ly - CornerY);
     }
 
