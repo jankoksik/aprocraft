@@ -1,12 +1,12 @@
 package aprocraft.world;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
 import java.util.Random;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
 
 /**
  * Klasa implementujaca chunk

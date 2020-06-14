@@ -1,9 +1,9 @@
 package aprocraft.world;
 
+import aprocraft.io.Texture;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import aprocraft.io.*;
 
 /**
  * Klasa implementując poszczególne bloki

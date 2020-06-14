@@ -1,8 +1,5 @@
 package aprocraft.world;
 
-import aprocraft.world.Block;
-import aprocraft.world.World;
-
 /**
  * Klasa implementująca struktury
  */
