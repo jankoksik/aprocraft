@@ -122,7 +122,7 @@ public class Crafting {
 
 
     /**
-     *
+     * Metoda pozwalająca podzielić przedmioty w danym obiekcie na dwa obiekty
      * @return
      */
     public int[] getSeperated() {
@@ -229,7 +229,7 @@ public class Crafting {
     }
 
     /**
-     *
+     * Metoda weryfikująca czy dla podanego wzoru istnieje recipe
      * @return
      */
     public Recipe checkPattern() {
@@ -252,8 +252,8 @@ public class Crafting {
     }
 
     /**
-     *
-     * @return
+     * Metoda informująca ile obietków sie z crafotwało
+     * @return liczba obietków
      */
     int getNmbrOfItems(){
         Recipe r = checkPattern();

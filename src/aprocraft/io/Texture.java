@@ -80,6 +80,10 @@ public class Texture {
 
     }
 
+    /**
+     * Metoda przydzielająca teksturę
+     * @param sampler
+     */
     public void bind(int sampler) {
         if (sampler >= 0 && sampler <= 31) {
             glActiveTexture(GL_TEXTURE0 + sampler);
@@ -87,10 +91,17 @@ public class Texture {
         }
     }
 
+    /**
+     * Metoda zwracjąca szerokość tekstury
+     * @return szerokość
+     */
     public int getWidth() {
         return width;
     }
-
+    /**
+     * Metoda zwracjąca wysokość tekstury
+     * @return wysokość
+     */
     public int getHeight() {
         return height;
     }

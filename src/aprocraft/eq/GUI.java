@@ -35,6 +35,10 @@ public class GUI {
     private int currChoosed = 0;
     Numbers numCord = new Numbers();
 
+    /**
+     * Metoda odpowiadająca za otworzenie GUI
+     * @return
+     */
     public boolean isOpened() {
         return opened;
     }
@@ -48,6 +52,7 @@ public class GUI {
     public static int QABsx = (int) (APROCraft.HEIGHT - (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1);//(aprocraft.APROCraft.HEIGHT/2 + ((SizeOfQAB+1)*1 + SizeOfQAB*QABsize)/2);
     public static int QABsy = APROCraft.HEIGHT / magicNMBR;
     private List<Item> inv = new ArrayList<>();
+
 
     public int getYOffset() {
         int offsety = QABsy + (int) QABsize + 10;
@@ -63,6 +68,10 @@ public class GUI {
         awtFont = new Font("Times New Roman", Font.BOLD, FontSize);
     }
 
+    /**
+     * Metoda ustawiająca które pole
+     * * @param curr
+     */
     public void setCurr(int curr) {
         currChoosed = curr;
         if (currChoosed < 0) {
@@ -78,6 +87,9 @@ public class GUI {
         return currChoosed;
     }
 
+    /**
+     * Metoda odpowiedzialna za wyświetlenie paska szynkiego wybierania
+     */
     public void RenderQAB() {
         glEnable(GL_TEXTURE_2D);
 
@@ -221,7 +233,9 @@ public class GUI {
         }
     }
 
-
+    /**
+     * Metoda odpowiedzialan za wyświetlanie ewkipunku
+     */
     public void RenderEq() {
 
         glEnable(GL_TEXTURE_2D);
@@ -344,6 +358,14 @@ public class GUI {
         glDisable(GL_TEXTURE_2D);
     }
 
+    /**
+     * Metoda rusująca kwadraty (są ona później wykorzystywane do konstrukcji wizualnej części ekwipunku,
+     * okna craftingu i obietków w ewkipunku
+     * @param x współrzędna x kwadratu
+     * @param y współrzędna y kwadratu
+     * @param size rozmiary kwadrtu
+     * @param texCords
+     */
     private void DrawSquare(int x, int y, float size, float[] texCords) {
         glBegin(GL_QUADS);
 
@@ -362,6 +384,11 @@ public class GUI {
         glEnd();
     }
 
+    /**
+     * Zwraca kordy textury po id
+     * @param id identyfikator wskazanej tekstury
+     * @return
+     */
     private float[] GetTexById(int id) {
         int x = (id) % 16;
         int y = (id) / 16;
@@ -376,7 +403,7 @@ public class GUI {
     }
 
     /**
-     * Metoida wyśiwtlająca okno craftingu
+     * Metoda wyświetlająca okno craftingu
      * @param crafting
      */
     public void renderCrafting(Crafting crafting) {
@@ -415,6 +442,12 @@ public class GUI {
         glDisable(GL_TEXTURE_2D);
     }
 
+    /**
+     * Metoda pozwalająca rysować numery
+     * @param x współrzędna x rysowanego numeru
+     * @param y współrzędna y rysowanego numeru
+     * @param number rysowany numer
+     */
     public void DrawNumber(int x, int y, int number) {
         NmbTex.bind(0);
         int scnd = number % 10;
@@ -463,8 +496,8 @@ public class GUI {
 
     /**
      * Metoda odpowiadająca za zamianę oiektów miejscami w ekipunku
-     * @param i
-     * @param j
+     * @param i indeks obiektu w ekwipunku
+     * @param j indeks obiektu w ekwipunku
      */
     public void swap(int i, int j) {
         Item tmp = inv.get(i);
@@ -500,6 +533,10 @@ public class GUI {
             return null;
     }
 
+    /**
+     * Metoda zwracająca które pole na pasku szybkiego wyboru jest obecnie zaznaczone
+     * @return numer indeksy wybranego pola
+     */
     public int GetcurrQABid() {
         if (!inv.isEmpty() && currChoosed < inv.size())
             return inv.get(currChoosed).getId();

@@ -32,7 +32,7 @@ public class Inventory {
 
     /**
      * Konstruktor klasy
-     * @param stack
+     * @param stack ile przedmiotów może zawierać jeden obiekt
      * @param w szerokośc ekwipunku
      * @param h wysokość ewkipunku
      */
@@ -43,6 +43,11 @@ public class Inventory {
     }
 
     //malo optymalne
+
+    /**
+     * zwraca  listę przedmiotów zawartych w ekwipunku
+     * @return lista obiektów Irem
+     */
     public List<Item> getEq() {
         ArrayList<Item> sum = new ArrayList<>();
         int pos = 0;
@@ -61,9 +66,9 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param n
-     * @return
+     * Metoda weryfikująca czyw ekwpipunku znajduje się dany obiket ( sprawdzenie po typie obiektu)
+     * @param n typ obiektu
+     * @return wartość boolean cy taki przedmiot został znaleziony
      */
     private boolean contain(Item n) {
         for (Item k : map) {
@@ -74,9 +79,9 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Metoda weryfikująca czyw ekwpipunku znajduje się dany obiket ( sprawdzenie po id obiektu)
+     * @param id identyfikator obiektu
+     * @return wartość boolean cy taki przedmiot został znaleziony
      */
     private boolean contain(int id) {
         for (Item k : map) {
@@ -102,10 +107,19 @@ public class Inventory {
         return space;
     }
 
+    /**
+     * Meotda zwracająca szerokość ekwipunku
+     * @return szrokość
+     */
     public int GetW() {
         return w;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     private Item get(int id) {
         for (Item k : map) {
             if (k.getId() == id)
@@ -140,9 +154,9 @@ public class Inventory {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Metoda usuwająca stack przedmiotów z ewkipunku
+     * @param id identyfokator usuanwgo obiektu
+     * @return wartość boolean informująca czy operacja powiodła się
      */
     private boolean removeStackEq(int id) {
         for (Item k : eq) {
@@ -156,9 +170,9 @@ public class Inventory {
 
 
     /**
-     *
-     * @param id
-     * @return
+     * Metoda usuwająca pojedyńczy przedmiot z obiektu
+     * @param id id obiektu
+     * @return wartość boolean informująca czy operacja powiodła się
      */
     public boolean removeOne(int id) {
         for (Item k : map) {
@@ -292,7 +306,15 @@ public class Inventory {
 
     }
 
-    // force -> true - dodaj tyle ile sie da /  false - nie doda itemow jesli niema miejsca
+    //
+
+    /**
+     * Metoda dodająca obiekt do ekwipunku
+     * @param itemId identyfikator dodawanego obiektu
+     * @param NmbrOfItems ilość przedmiotów wchodzących w skałd obiektu
+     * @param force force -> true - dodaj tyle ile sie da /  false - nie doda itemow jesli niema miejsca
+     * @return wartość boolean informująca czy operacja powiodła się
+     */
     public boolean addItem(int itemId, int NmbrOfItems, boolean force) {
         Item n = new Item(itemId);
         int stacks = NmbrOfItems / stack;

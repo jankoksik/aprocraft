@@ -17,7 +17,7 @@ import static org.lwjgl.opengl.GL11.GL_FILL;
 /**
  * Klasa implemetująca moby - postaci niezależne od gracza zasiedlające generowany świat
  * Mob zdefiniowany jest przez: punkty żźycia, siłę ataku, przedmioty zdobywane po jego pokonaniu,
- * współrzedne jego przebywania, prędkość z którą się porusza, rozmiary moba,
+ * współrzedne jego przebywania, prędkość z którą się porusza, rozmiary moba, zacowanie
  */
 public class Mob {
     private int hp;
@@ -48,50 +48,94 @@ public class Mob {
 
     }
 
+    /**
+     * Metoda zwracająca punkty żywotnośc moba
+     * @return punkty życiaa
+     */
     public int getHp() {
         return hp;
     }
 
+    /**
+     * Metoda ustawiająca mobowi punkty życia
+     * @param hp punkty życia
+     */
     public void setHp(int hp) {
         this.hp = hp;
     }
 
+    /**
+     * Metoda zwracająca punkty ataku moba
+     * @return punkty ataku
+     */
     public int getAttack() {
         return attack;
     }
 
+    /**
+     * Metoda ustawiająca punkty ataku mona
+     * @param attack punkty ataku
+     */
     public void setAttack(int attack) {
         this.attack = attack;
     }
 
+    /**
+     * Metoda zqracająca jake przedmiotu otrzymuje się po pokonaniu moba
+     * @return otrzymywane przedmioty
+     */
     public Item[] getDrop() {
         return Drop;
     }
 
+    /**
+     * Metoda ustawiająca jake przedmiotu otrzymuje się po pokonaniu moba
+     * @param drop otrzymywane przedmioty
+     */
     public void setDrop(Item[] drop) {
         Drop = drop;
     }
 
+    /**
+     * Metoda zwracająca współrzędną z moba
+     * @return współrzędna x
+     */
     public float getX() {
         return x;
     }
 
+    /**
+     * Metoda ustawiająca pozycję moba
+     * @param x współrzena x
+     */
     public void setX(float x) {
         this.x = x;
     }
 
-    public float getY() {
+    /**
+     * Metoda zwracająca współrzędną z moba
+     * y@return współrzędna x
+     */public float getY() {
         return y;
     }
-
+    /**
+     * Metoda ustawiająca pozycję moba
+     * @param y współrzena y
+     */
     public void setY(float y) {
         this.y = y;
     }
-
+    /**
+     * Metoda zwracająca współrzędną z moba
+     * z@return współrzędna x
+     */
     public float getZ() {
         return z;
     }
-
+    /**
+     * Metoda ustawiająca pozycję moba
+     * @param z współrzena z
+     */
     public void setZ(float z) {
         this.z = z;
     }
@@ -151,6 +195,7 @@ public class Mob {
         // ur code here plz
     }
 
+
     public void GoTo() {
         if (route == null) {
 
@@ -182,6 +227,10 @@ public class Mob {
         return false;
     }
 
+    /**
+     *  Metoda odświerzająca obecną pozycję moba
+     * @param world obiekt wygnerowanego świata
+     */
     public void update(World world) {
         x += xSpeed;
         z += zSpeed;

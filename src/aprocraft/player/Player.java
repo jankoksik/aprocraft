@@ -441,11 +441,17 @@ public class Player {
         prevPressed = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS;
     }
 
+    /**
+     * Metoda wyświetlająca trzymany przedmiot
+     */
     public void renderGrabbedItem() {
         if (grabbed && grabbedItem != null)
             gui.renderGrabbedItem((int) mouseX, (int) (APROCraft.HEIGHT - mouseY), grabbedItem);
     }
 
+    /**
+     * Metoda wywołująca wyświetlenie okna craftingu
+     */
     public void renderCrafting() {
         if (gui.isOpened())
             gui.renderCrafting(crafting);
@@ -778,7 +784,7 @@ public class Player {
     }
 
     /**
-     * Metoda
+     * Metoda zwracająca ewkipunek gracza
      * @return
      */
     public Inventory getEq() {

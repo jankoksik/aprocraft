@@ -1,5 +1,6 @@
 package aprocraft.eq;
 
+
 public class Size {
     public Size(int w, int h){
         this.w =w;

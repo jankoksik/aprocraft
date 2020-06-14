@@ -3,7 +3,7 @@ package aprocraft.eq;
 import java.util.HashMap;
 
 /**
- *
+ * Klasa impelmentująca czcionkę
  */
 public class Numbers {
     public static HashMap<Integer, int[]> Nmbrs = new HashMap<>(); // float[] :  [0] - x, [1] - y, [2] - w, [3] - h
@@ -27,7 +27,7 @@ public class Numbers {
     }
 
     /**
-     * Metoda zwracająca szerokośc ekwipunku
+     * Metoda zwracająca szerokość pliku z numerami
      * @return szerokość ekwipunku
      */
     public static int getW() {
@@ -35,8 +35,8 @@ public class Numbers {
     }
 
     /**
-     * Metoda zwracająca wysokośc ekwipunku
-     * @return wysokośc ekwipunku (
+     * Metoda zwracająca wysokość pliku z numerami
+     * @return wysokośc ekwipunku
      */
     public static int getH() {
         return h;
