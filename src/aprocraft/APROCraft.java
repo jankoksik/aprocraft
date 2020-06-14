@@ -1,23 +1,23 @@
 package aprocraft;
 
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-
 import aprocraft.eq.Crafting;
 import aprocraft.eq.Inventory;
 import aprocraft.eq.Item;
 import aprocraft.io.SaveNReadJson;
 import aprocraft.io.WorldSaveNRead;
 import aprocraft.player.Player;
+import aprocraft.world.World;
 import org.joml.Math;
 import org.json.simple.parser.ParseException;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
-import aprocraft.world.World;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 
 public class APROCraft {
     public static final String VERSION = "0.8.0 alpha";

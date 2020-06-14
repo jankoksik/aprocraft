@@ -3,7 +3,6 @@ package aprocraft.mob;
 import aprocraft.world.World;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glColor3f;
 
 /**
  * Klasa mplementująca moba - slime

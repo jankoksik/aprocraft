@@ -4,9 +4,7 @@ import aprocraft.APROCraft;
 import aprocraft.io.Texture;
 import aprocraft.world.Blocks;
 
-
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +21,6 @@ public class GUI {
     private static Texture hearts = new Texture("./resources/hearts.png");
     private static Texture crosshair = new Texture("./resources/crosshair.png");
     private static Texture back = new Texture("./resources/Background3.0.png");
-    //public static final Texture blocks = new Texture("./resources/blocks.png");
     public static final Texture NmbTex = new Texture("./resources/font.png");
 
 
@@ -279,16 +276,19 @@ public class GUI {
             glBegin(GL_QUADS);
 
             glTexCoord2f(1, 1);
-            glVertex2f(QABsx - offset, Hoff);
+            glVertex2f(QABsx - offset*0.7f, Hoff);
 
             glTexCoord2f(0, 1);
-            glVertex2f(QABsx + offset + SizeOfQAB * QABsize + (SizeOfQAB - 1) * 1, Hoff);
+            glVertex2f(QABsx + offset*0.7f + SizeOfQAB * QABsize + (SizeOfQAB - 1) * 1, Hoff);
 
             glTexCoord2f(0, 0);
-            glVertex2f(QABsx + offset + (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1, H - Hoff / 2);
+            glVertex2f(QABsx + offset*0.7f + (SizeOfQAB - 1) * QABsize + QABsize * CurrMul + (SizeOfQAB - 1) * 1, H - Hoff / 2);
 
             glTexCoord2f(1, 0);
-            glVertex2f(QABsx - offset, H - Hoff / 2);
+            glVertex2f(QABsx - offset*0.7f, H - Hoff / 2);
+
+            /*System.out.println("width: " + (QABsx + offset*0.7f + SizeOfQAB * QABsize + (SizeOfQAB - 1) * 1 - (QABsx - offset*0.7f)) +
+                    "\nheight: " + (H - Hoff / 2 - Hoff));*/
 
             glEnd();
 

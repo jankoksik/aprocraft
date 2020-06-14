@@ -15,8 +15,6 @@ import aprocraft.world.Blocks;
 import aprocraft.world.World;
 
 import java.nio.DoubleBuffer;
-import java.util.Random;
-import java.util.Scanner;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -215,50 +213,42 @@ public class Player {
 //           //System.out.println(eq.getNmbrOfItems(6));
 //        }
 
-        if (glfwGetKey(window, GLFW_KEY_T) == GL_TRUE) {
-            /*Scanner keyboard = new Scanner(System.in);
-            if (keyboard.hasNextInt()) {
-                eq.addItem(keyboard.nextInt());
-                gui.SetEq(eq.getEq());
-            }*/
-
-            /*Random r = new Random();
-            for(int i = 0; i < 40; i++) {
-                int nr = r.nextInt(127);
-                class B extends Block {
-                    public B() {
-                        super("Block X", nr);
-                    }
-                }
-                eq.addItem(new B().getID());
-            }*/
-
-            /*eq.addItem(1);
-            eq.addItem(2);
-            eq.addItem(3);
-            eq.addItem(4);*/
-
-            /*eq.addItem(81);
-            eq.addItem(17);
-            eq.addItem(18);
-            eq.addItem(19);
-            eq.addItem(20);
-            eq.addItem(21);
-            eq.addItem(22);*/
-
-            eq.addItem(Blocks.PLANKS.getID());
-            eq.addItem(Blocks.CONCRETE.getID());
-
-            gui.updateEq(eq.getEq());
-        }
-
-        if (glfwGetKey(window, GLFW_KEY_Y) == GL_TRUE) {
-            eq.addItem(Blocks.LOG.getID(), 16, false);
-            eq.addItem(Blocks.PLANKS.getID(), 16, false);
-            eq.addItem(Blocks.STONE.getID(), 16, false);
-            eq.addItem(Blocks.COBBLESTONE.getID(), 16, false);
-            gui.SetEq(eq.getEq());
-        }
+//        if (glfwGetKey(window, GLFW_KEY_T) == GL_TRUE) {
+//            /*Scanner keyboard = new Scanner(System.in);
+//            if (keyboard.hasNextInt()) {
+//                eq.addItem(keyboard.nextInt());
+//                gui.SetEq(eq.getEq());
+//            }*/
+//
+//            /*Random r = new Random();
+//            for(int i = 0; i < 40; i++) {
+//                int nr = r.nextInt(127);
+//                class B extends Block {
+//                    public B() {
+//                        super("Block X", nr);
+//                    }
+//                }
+//                eq.addItem(new B().getID());
+//            }*/
+//
+//            /*eq.addItem(1);
+//            eq.addItem(2);
+//            eq.addItem(3);
+//            eq.addItem(4);*/
+//
+//            /*eq.addItem(81);
+//            eq.addItem(17);
+//            eq.addItem(18);
+//            eq.addItem(19);
+//            eq.addItem(20);
+//            eq.addItem(21);
+//            eq.addItem(22);*/
+//
+//            eq.addItem(Blocks.PLANKS.getID());
+//            eq.addItem(Blocks.CONCRETE.getID());
+//
+//            gui.updateEq(eq.getEq());
+//        }
 
         if (hp < 0)
             hp = 0;
