@@ -143,26 +143,28 @@ public class Player {
             float yp = (int) (vPrev.y);
             float zp = (int) (vPrev.z);
 
-            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
-                if (x == xp && y == yp && z == zp) {
-                    destroyTimer++;
-                    if (destroyTimer >= world.getBlock((int) x, (int) y, (int) z).getDurability()) {
-                        //eq.addItem(4);
-                        eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
-                        gui.updateEq(eq.getEq());
-                        world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
+            if (!gui.isOpened()) {
+                if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+                    if (x == xp && y == yp && z == zp) {
+                        destroyTimer++;
+                        if (destroyTimer >= world.getBlock((int) x, (int) y, (int) z).getDurability()) {
+                            //eq.addItem(4);
+                            eq.addItem(world.getBlock((int) x, (int) y, (int) z).getDrop());
+                            gui.updateEq(eq.getEq());
+                            world.placeBlock((int) x, (int) y, (int) z, Blocks.AIR);
+                            destroyTimer = 0;
+                        }
+                    } else
                         destroyTimer = 0;
-                    }
-                } else
-                    destroyTimer = 0;
-            }
+                }
 
-            if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
-                placeTimer++;
-                if (placeTimer % 8 == 0 && v2.distance(xCam - 0.5f, yCam, zCam - 0.5f) > 1.6f) {
-                    world.placeBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.searchByID(gui.GetcurrQABid()));//Blocks.PLANKS
-                    eq.removeOne(gui.GetcurrQABid());
-                    gui.updateEq(eq.getEq());
+                if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+                    placeTimer++;
+                    if (placeTimer % 8 == 0 && v2.distance(xCam - 0.5f, yCam, zCam - 0.5f) > 1.6f) {
+                        world.placeBlock((int) v2.x, (int) v2.y, (int) v2.z, Blocks.searchByID(gui.GetcurrQABid()));//Blocks.PLANKS
+                        eq.removeOne(gui.GetcurrQABid());
+                        gui.updateEq(eq.getEq());
+                    }
                 }
             }
         }

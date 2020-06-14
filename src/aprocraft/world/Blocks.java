@@ -301,7 +301,7 @@ class EmeraldOreBlock extends Block {
  */
 class WoolBlock extends Block {
     public WoolBlock(int color) {
-        super("Wool", 64 + color);
+        super("Wool", 65 + color);
         setDurability(25);
     }
 }
