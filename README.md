@@ -24,6 +24,7 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 | 2          | ziemia              |
 | 3          | kamień              |
 | 4          | cobble              |
+| 9          | cegły               |
 | 10         | piach               |
 | 13         | czerwony piaskowiec |
 | 15         | bedrock             |
