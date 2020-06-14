@@ -108,14 +108,11 @@ public class Crafting {
             if(craft[i]!= 0)
                 count++;
         }
-        //if(count==1 && LX-CornerX<=0) {
-        //    LX=  CornerX+1 ;
-//
-        //}
-        //if(count==1 && Ly-CornerY<=0) {
-        //    Ly= CornerY+1;
-        //}
-//
+        if(count==1 ) {
+            LX = CornerX + 1;
+            Ly = CornerY + 1;
+        }
+
         return new Size(LX - CornerX, Ly - CornerY);
     }
 
