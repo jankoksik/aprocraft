@@ -252,6 +252,13 @@ public class Player {
 //            gui.updateEq(eq.getEq());
 //        }
 
+        if (glfwGetKey(window, GLFW_KEY_T) == GL_TRUE) {
+            for(Block b : Blocks.getBlocks())
+                eq.addItem(b.getID());
+
+            gui.updateEq(eq.getEq());
+        }
+
         if (hp < 0)
             hp = 0;
         if (hp > 20)

@@ -84,6 +84,10 @@ public abstract class Blocks {
 
         return null;
     }
+
+    public static List<Block> getBlocks() {
+        return blocks;
+    }
 }
 
 /**
