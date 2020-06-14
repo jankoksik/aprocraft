@@ -19,10 +19,10 @@ public class Mob {
     private int hp;
     private int attack;
     private Item[] Drop;
-    private float x, y, z;
+    public float x, y, z;
     private float MoveTox, MoveToy, MoveToz;
-    private float s; //size
-    private float xSpeed, ySpeed, zSpeed;
+    public float s; //size
+    public float xSpeed, ySpeed, zSpeed;
     private int mobH = 2;
     private World world;
     private List<Vector3f> route = new ArrayList<>();
