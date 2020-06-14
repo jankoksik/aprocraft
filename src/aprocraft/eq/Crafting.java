@@ -97,8 +97,8 @@ public class Crafting {
         for (int y = 0; y < craftH; y++) {
             for (int x = 0; x < w; x++) {
                 if (craft[w * y + x] != 0) {
-                    LX = y;
-                    Ly = x;
+                    LX = y+1;
+                    Ly = x+1;
                 }
             }
         }
@@ -108,14 +108,14 @@ public class Crafting {
             if(craft[i]!= 0)
                 count++;
         }
-        if(count==1 && LX-CornerX<=0) {
-            LX=  CornerX+1 ;
-
-        }
-        if(count==1 && Ly-CornerY<=0) {
-            Ly= CornerY+1;
-        }
-
+        //if(count==1 && LX-CornerX<=0) {
+        //    LX=  CornerX+1 ;
+//
+        //}
+        //if(count==1 && Ly-CornerY<=0) {
+        //    Ly= CornerY+1;
+        //}
+//
         return new Size(LX - CornerX, Ly - CornerY);
     }
 
