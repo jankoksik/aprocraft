@@ -28,7 +28,8 @@ public abstract class Biome {
 
     /**
      * Konstruktor klasy Biome
-     * @param name nazwa biomu
+     *
+     * @param name       nazwa biomu
      * @param occurrence czestotliwosc wystepowania
      */
     public Biome(String name, int occurrence) {
@@ -64,6 +65,7 @@ public abstract class Biome {
 
     /**
      * Metoda ustawiająca wartyw terenu
+     *
      * @param lv1 typ bloków tworzących warstwę 1
      * @param lv2 typ bloków tworzących warstwę 2
      * @param lv3 typ bloków tworzących warstwę 3
@@ -76,7 +78,8 @@ public abstract class Biome {
 
     /**
      * Metoda dodająca rudę
-     * @param block typ rudy
+     *
+     * @param block      typ rudy
      * @param occurrence szansa występowani ustawionej rudy
      */
     public void addOre(Block block, int occurrence) {
@@ -87,7 +90,8 @@ public abstract class Biome {
 
     /**
      * Metod adodająca struktue
-     * @param type typ struktury
+     *
+     * @param type       typ struktury
      * @param occurrence szansa występowani ustawionej struktury
      */
     public void addStructure(Structure type, int occurrence) {
@@ -98,6 +102,7 @@ public abstract class Biome {
 
     /**
      * Metoda zwracająca ustawione warstwy
+     *
      * @return tablica zawierająca typy bloków tworzących warstwy
      */
     public Block[] getLayers() {
@@ -127,6 +132,7 @@ public abstract class Biome {
 
     /**
      * Metoda wybierająca struktórę do dodania ze zbioru struktór
+     *
      * @return wybrana struktura
      */
     public Structure chooseStructure() {
@@ -143,7 +149,8 @@ public abstract class Biome {
     }
 
     /**
-     *  Metoda wybierająca rudę do dodania ze zbioru rud
+     * Metoda wybierająca rudę do dodania ze zbioru rud
+     *
      * @return wybrana ruda
      */
     public Block chooseOre() {
@@ -161,6 +168,7 @@ public abstract class Biome {
 
     /**
      * Metoda sumująca ilośc wszystkich bloków rudy
+     *
      * @return ilość bloków
      */
     public int getTotalOres() {

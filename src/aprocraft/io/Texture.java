@@ -23,6 +23,7 @@ public class Texture {
 
     /**
      * Konstruktor klasy pobierający tekstury z przygotwaneo pliku
+     *
      * @param filename nazwa pliku przechowującego informacje o teksturach
      */
     public Texture(String filename) {
@@ -82,6 +83,7 @@ public class Texture {
 
     /**
      * Metoda przydzielająca teksturę
+     *
      * @param sampler
      */
     public void bind(int sampler) {
@@ -93,13 +95,16 @@ public class Texture {
 
     /**
      * Metoda zwracjąca szerokość tekstury
+     *
      * @return szerokość
      */
     public int getWidth() {
         return width;
     }
+
     /**
      * Metoda zwracjąca wysokość tekstury
+     *
      * @return wysokość
      */
     public int getHeight() {

@@ -28,6 +28,7 @@ public class Numbers {
 
     /**
      * Metoda zwracająca szerokość pliku z numerami
+     *
      * @return szerokość ekwipunku
      */
     public static int getW() {
@@ -36,6 +37,7 @@ public class Numbers {
 
     /**
      * Metoda zwracająca wysokość pliku z numerami
+     *
      * @return wysokośc ekwipunku
      */
     public static int getH() {

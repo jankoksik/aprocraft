@@ -26,8 +26,9 @@ public abstract class Block {
 
     /**
      * Konstruktor obiektu
+     *
      * @param name nazwa bloku
-     * @param id identyfikator bloku
+     * @param id   identyfikator bloku
      */
     public Block(String name, int id) {
         this.name = name;
@@ -42,8 +43,8 @@ public abstract class Block {
 
         color = new RGB(1, 1, 1);
 
-        coordX = (id-1) % 16;
-        coordY = (id-1) / 16;
+        coordX = (id - 1) % 16;
+        coordY = (id - 1) / 16;
 
         float tx = coordX / 16.0f;
         float ty = coordY / 16.0f;
@@ -101,6 +102,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca informacje o położeniu bloku
+     *
      * @param x współrzędna x
      * @param y współrzędna y
      * @param z współrzędna z
@@ -142,6 +144,7 @@ public abstract class Block {
 
     /**
      * Metoda ustawiająca jaki przedmiot otrzymuje gracz po zniszczeniu bloku
+     *
      * @param drop otrzymywany blok
      */
     public void setDrop(int drop) {
@@ -150,6 +153,7 @@ public abstract class Block {
 
     /**
      * Metoda ustawiająca materiał bloku
+     *
      * @param material materiał bloku
      */
     public void setMaterial(int material) {
@@ -158,6 +162,7 @@ public abstract class Block {
 
     /**
      * Metoda ustawiająca wytrzymałość bloku
+     *
      * @param durability wytrzymałość bloku
      */
     public void setDurability(float durability) {
@@ -166,6 +171,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca teksturę bloku
+     *
      * @return tekstura bloku
      */
     public float[] getTextureData() {
@@ -174,6 +180,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca oświetlenie bloku
+     *
      * @return oświetlenie bloku
      */
     public float[] getLightData() {
@@ -182,6 +189,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca kolor bloku
+     *
      * @return klor wyrażony w notacji RGB
      */
     public RGB getColor() {
@@ -190,6 +198,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca materiał bloku
+     *
      * @return materiał bloku
      */
     public int getMaterial() {
@@ -198,6 +207,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca wytrzymałość bloku
+     *
      * @return wytrzxymałość
      */
     public float getDurability() {
@@ -206,6 +216,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca jaki przedmiot otrzyma gracz po zniszczeniu bloku
+     *
      * @return otrzymywany przedmiot
      */
     public int getDrop() {
@@ -214,6 +225,7 @@ public abstract class Block {
 
     /**
      * Metoda zwracająca identyfiaktor bloku
+     *
      * @return idetyfikator
      */
     public int getID() {

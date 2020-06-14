@@ -15,8 +15,9 @@ public class WorldSaveNRead {
 
     /**
      * Metoda odpowiadająca za wczytanie stanu rozgrywki, poprez wczytanie poszczególnych chunków
+     *
      * @param gameName nazwa rozgrywki, którą chcemy wczytać
-     * @param world obiekt wygnerowanego świata
+     * @param world    obiekt wygnerowanego świata
      * @throws IOException
      */
     public static void load(String gameName, World world) throws IOException {
@@ -45,11 +46,12 @@ public class WorldSaveNRead {
 
     /**
      * Metoda wczytująca konkretny chunk wczytywanej rozgrywki
+     *
      * @param gameName nazwa wczytywanej rozgrywki
-     * @param world obiekt wygnerowanego świata
-     * @param x współrzędna x chunka
-     * @param y współrzędna y chunka
-     * @param z współrzędna z chunka
+     * @param world    obiekt wygnerowanego świata
+     * @param x        współrzędna x chunka
+     * @param y        współrzędna y chunka
+     * @param z        współrzędna z chunka
      * @return ładuje wskazanego chunka
      * @throws IOException
      */
@@ -64,7 +66,7 @@ public class WorldSaveNRead {
                     for (int k = 0; k < Chunk.SIZE; k++) {
                         int id = br.read();
 
-                        if(id != 0)
+                        if (id != 0)
                             chunk.setBlock(i, j, k, Blocks.searchByID(id));
                     }
                 }
@@ -84,8 +86,9 @@ public class WorldSaveNRead {
 
     /**
      * Metoda zapisująca stan rozgrywki, zapisując poszczególne chunki
+     *
      * @param gameName nazwa pod jaką chcemy zapisać rozgrywkę
-     * @param world obiekt wygnerowanego świata
+     * @param world    obiekt wygnerowanego świata
      * @throws IOException
      */
     public static void save(String gameName, World world) throws IOException {
@@ -114,14 +117,15 @@ public class WorldSaveNRead {
 
     /**
      * Metoda zapisująca konkretny chunk
+     *
      * @param gameName nazwa pod jaką chcemy zapisać rozgrywkę
-     * @param chunk chunk który chcemy zapisać
+     * @param chunk    chunk który chcemy zapisać
      * @throws IOException
      */
     public static void saveChunk(String gameName, Chunk chunk) throws IOException {
         boolean success = (new File("./Saves/" + gameName)).mkdirs();
 
-        if(chunk == null)
+        if (chunk == null)
             return;
 
         FileWriter bw = new FileWriter("./Saves/" + gameName + "/" + chunk.getX() + "_" + chunk.getY() + "_" + chunk.getZ() + ".chk");
@@ -131,8 +135,8 @@ public class WorldSaveNRead {
                 for (int z = 0; z < Chunk.SIZE; z++) {
                     int id = 0;
 
-                    if(chunk.getBlock(x,y,z) != null)
-                        id = chunk.getBlock(x,y,z).getID();
+                    if (chunk.getBlock(x, y, z) != null)
+                        id = chunk.getBlock(x, y, z).getID();
 
                     bw.write(id);
                 }

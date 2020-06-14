@@ -5,26 +5,27 @@ package aprocraft.player;
  * W pliku JSON zawarte są informacje jaki klawisz odpowiada za jaką akcję
  */
 public abstract class Controls {
-    private static int forward =0;
-    private static int backward =0;
+    private static int forward = 0;
+    private static int backward = 0;
     private static int left = 0;
-    private static int right=0;
-    private static int up=0;
-    private static int down=0;
-    private static int jump=0;
-    private static int crouch=0;
-    private static int inventory=0;
-    private static int sprint=0;
-    private static int drop=0;
-    private static int attack=0;
-    private static int destroy=0;
-    private static int place=0;
-    private static int use=0;
-    private static int NextItemInInventory=0;
-    private static int PrevItemInInventory=0;
+    private static int right = 0;
+    private static int up = 0;
+    private static int down = 0;
+    private static int jump = 0;
+    private static int crouch = 0;
+    private static int inventory = 0;
+    private static int sprint = 0;
+    private static int drop = 0;
+    private static int attack = 0;
+    private static int destroy = 0;
+    private static int place = 0;
+    private static int use = 0;
+    private static int NextItemInInventory = 0;
+    private static int PrevItemInInventory = 0;
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do ruchu do przodu
+     *
      * @return przypisany klawisz
      */
     public static int getForward() {
@@ -33,13 +34,16 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodowął ruch do przodu
-     * @param forward  klawisz, który przypisaliśmy
+     *
+     * @param forward klawisz, który przypisaliśmy
      */
     public static void setForward(int forward) {
         Controls.forward = forward;
     }
+
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do ruchu do tyłu
+     *
      * @return przypisany klawisz
      */
     public static int getBackward() {
@@ -48,6 +52,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodowął ruch do tyłu
+     *
      * @param backward klawisz, który przypisaliśmy
      */
     public static void setBackward(int backward) {
@@ -56,6 +61,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do ruchu do lewo
+     *
      * @return przypisany klawisz
      */
     public static int getLeft() {
@@ -64,6 +70,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował ruch w lewo
+     *
      * @param left klawisz, który przypisaliśmy
      */
     public static void setLeft(int left) {
@@ -72,6 +79,7 @@ public abstract class Controls {
 
     /**
      * Mrtoda zwracająca jaki klawisz jest przypisany do ruchu w prawo
+     *
      * @return przypisany klawisz
      */
     public static int getRight() {
@@ -80,6 +88,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował ruch w prawo
+     *
      * @param right klawisz, który przypisaliśmy
      */
     public static void setRight(int right) {
@@ -104,6 +113,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do skoku
+     *
      * @return przypisany klawisz
      */
     public static int getJump() {
@@ -112,13 +122,16 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował skok
+     *
      * @param jump klawisz, który przypisaliśmy
      */
     public static void setJump(int jump) {
         Controls.jump = jump;
     }
+
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do kucania
+     *
      * @return przypisany klawisz
      */
     public static int getCrouch() {
@@ -127,6 +140,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował kucanie
+     *
      * @param crouch klawisz, który przypisaliśmy
      */
     public static void setCrouch(int crouch) {
@@ -135,6 +149,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do otwierania ekwipunku
+     *
      * @return przypisany klawisz
      */
     public static int getInventory() {
@@ -143,6 +158,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował otwarcie ekwipunku
+     *
      * @param inventory klawisz, który przypisaliśmy
      */
     public static void setInventory(int inventory) {
@@ -151,6 +167,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do sprintowania
+     *
      * @return przypisany klawisz
      */
     public static int getSprint() {
@@ -159,6 +176,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował sprint
+     *
      * @param sprint klawisz, który przypisaliśmy
      */
     public static void setSprint(int sprint) {
@@ -167,6 +185,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do wyrzucania przedmiotów
+     *
      * @return przypisany klawisz
      */
     public static int getDrop() {
@@ -175,6 +194,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodowała wyrzucenie przedmiotu
+     *
      * @param drop klawisz, który przypisaliśmy
      */
     public static void setDrop(int drop) {
@@ -183,6 +203,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do wykonania ataku
+     *
      * @return przypisany klawisz
      */
     public static int getAttack() {
@@ -191,6 +212,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował akcję ataku
+     *
      * @param attack klawisz, który przypisaliśmy
      */
     public static void setAttack(int attack) {
@@ -199,6 +221,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do wykonania akcji zniszczenia bloku
+     *
      * @return przypisany klawisz
      */
     public static int getDestroy() {
@@ -207,6 +230,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował akcję zniszczenia bloku
+     *
      * @param destroy klawisz, który przypisaliśmy
      */
     public static void setDestroy(int destroy) {
@@ -215,6 +239,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do wykonania akcji postawienia bloku
+     *
      * @return przypisany klawisz
      */
     public static int getPlace() {
@@ -223,7 +248,8 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował akcję postawienia bloku
-     * @param place  klawisz, który przypisaliśmy
+     *
+     * @param place klawisz, który przypisaliśmy
      */
     public static void setPlace(int place) {
         Controls.place = place;
@@ -231,6 +257,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do życia przedmiotu
+     *
      * @return przypisany klawisz
      */
     public static int getUse() {
@@ -239,6 +266,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca jaki klawisz będzie powodował użycie przedmiotu
+     *
      * @param use klawisz, który przypisaliśmy
      */
     public static void setUse(int use) {
@@ -247,6 +275,7 @@ public abstract class Controls {
 
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do zmiany używanego przedmiotu  o jeden w przód w ekwipunku
+     *
      * @return przypisany klawisz
      */
     public static int getNextItemInInventory() {
@@ -255,13 +284,16 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca  jaki klawisz będzie powodował zmianę używanego przedmiotu o jeden w przód w ekwipunku
+     *
      * @param nextItemInInventory klawisz, który przypisaliśmy
      */
     public static void setNextItemInInventory(int nextItemInInventory) {
         NextItemInInventory = nextItemInInventory;
     }
+
     /**
      * Metoda zwracająca jaki klawisz jest przypisany do zmiany używanego przedmiotu  o jeden w tył w ekwipunku
+     *
      * @return przypisany klawisz
      */
     public static int getPrevItemInInventory() {
@@ -270,6 +302,7 @@ public abstract class Controls {
 
     /**
      * Metoda ustawiająca  jaki klawisz będzie powodował zmianę używanego przedmiotu  o jeden w tył w ekwipunku
+     *
      * @param prevItemInInventory klawisz, który przypisaliśmy
      */
     public static void setPrevItemInInventory(int prevItemInInventory) {

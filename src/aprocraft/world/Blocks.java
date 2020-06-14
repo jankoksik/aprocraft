@@ -70,6 +70,7 @@ public abstract class Blocks {
 
     /**
      * Metoda szukająca bloku po id
+     *
      * @param id identyfikator bloku
      * @return blok o szukanym id
      */
@@ -91,6 +92,7 @@ class GrassBlock extends Block {
         setDrop(2); //DIRT
     }
 }
+
 /**
  * Implementacja bloku - ziemia
  */
@@ -99,6 +101,7 @@ class DirtBlock extends Block {
         super("Dirt", 2);
     }
 }
+
 /**
  * Implementacja bloku - kamień
  */
@@ -109,6 +112,7 @@ class StoneBlock extends Block {
         setDurability(40);
     }
 }
+
 /**
  * Implementacja bloku - stłuczony kamień
  */
@@ -118,34 +122,38 @@ class CobblestoneBlock extends Block {
         setDurability(40);
     }
 }
+
 /**
  * Implementacja bloku - kłoda
  */
 class LogBlock extends Block {
     public LogBlock(int type) {
-        super("Log", 17+type);
+        super("Log", 17 + type);
         setDurability(30);
     }
 }
+
 /**
  * Implementacja bloku - drewnian deska
  */
 class PlanksBlock extends Block {
     public PlanksBlock(int type) {
-        super("Planks", 20+type);
+        super("Planks", 20 + type);
         setDurability(28);
     }
 }
+
 /**
  * Implementacja bloku - liście
  */
 class LeavesBlock extends Block {
     public LeavesBlock(int type) {
-        super("Leaves", 23+type);
+        super("Leaves", 23 + type);
         setMaterial(Block.STICKY);
         setDurability(8);
     }
 }
+
 /**
  * Implementacja bloku - bedrock
  */
@@ -155,6 +163,7 @@ class BedrockBlock extends Block {
         setDurability(1000);
     }
 }
+
 /**
  * Implementacja bloku - chmura
  */
@@ -165,6 +174,7 @@ class CloudBlock extends Block {
         setDurability(12);
     }
 }
+
 /**
  * Implementacja bloku - piasek
  */
@@ -173,6 +183,7 @@ class SandBlock extends Block {
         super("Sand", 10);
     }
 }
+
 /**
  * Implementacja bloku - lód
  */
@@ -183,6 +194,7 @@ class IceBlock extends Block {
         setDurability(12);
     }
 }
+
 /**
  * Implementacja bloku - redstone
  */
@@ -192,6 +204,7 @@ class RedSandstoneBlock extends Block {
         setDurability(40);
     }
 }
+
 /**
  * Implementacja bloku - kaktus
  */
@@ -202,6 +215,7 @@ class CactusBlock extends Block {
         setDurability(15);
     }
 }
+
 /**
  * Implementacja bloku - ruda diamentu
  */
@@ -211,6 +225,7 @@ class DiamondOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda węgla
  */
@@ -220,6 +235,7 @@ class CoalOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda złota
  */
@@ -229,6 +245,7 @@ class GoldOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda żelaza
  */
@@ -238,6 +255,7 @@ class IronOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda miedzi
  */
@@ -247,6 +265,7 @@ class CopperOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda rubinów
  */
@@ -256,6 +275,7 @@ class RubyOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda szafirów
  */
@@ -265,6 +285,7 @@ class SapphireOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - ruda szmaragdu
  */
@@ -274,6 +295,7 @@ class EmeraldOreBlock extends Block {
         setDurability(80);
     }
 }
+
 /**
  * Implementacja bloku - welna
  */
@@ -283,6 +305,7 @@ class WoolBlock extends Block {
         setDurability(25);
     }
 }
+
 /**
  * Implementacja bloku - crafting block
  */
@@ -292,6 +315,7 @@ class CraftingboxBlock extends Block {
         setDurability(30);
     }
 }
+
 /**
  * Implementacja bloku - beton
  */

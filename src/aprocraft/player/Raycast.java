@@ -17,7 +17,7 @@ public class Raycast {
 
         points = new ArrayList<Vector3f>();
 
-        for(int i = 0; i < 16*4; i ++)
+        for (int i = 0; i < 16 * 4; i++)
             points.add(new Vector3f());
     }
 
@@ -39,29 +39,30 @@ public class Raycast {
      */
     public void update() {
         int i = 0;
-        for(Vector3f v : points) {
+        for (Vector3f v : points) {
             Vector3f pos = new Vector3f(player.getX(), player.getY(), player.getZ()).add(
-                    (float)(Math.cos(Math.toRadians(-player.getXRot()))*Math.sin(Math.toRadians(player.getYRot())))*(i/16.0f),
-                    (float)Math.sin(Math.toRadians(-player.getXRot()))*(i/16.0f),
-                    (float)(-Math.cos(Math.toRadians(player.getXRot()))*Math.cos(Math.toRadians(player.getYRot())))*(i/16.0f));
+                    (float) (Math.cos(Math.toRadians(-player.getXRot())) * Math.sin(Math.toRadians(player.getYRot()))) * (i / 16.0f),
+                    (float) Math.sin(Math.toRadians(-player.getXRot())) * (i / 16.0f),
+                    (float) (-Math.cos(Math.toRadians(player.getXRot())) * Math.cos(Math.toRadians(player.getYRot()))) * (i / 16.0f));
             v.set(pos);
-            i ++;
+            i++;
         }
     }
 
     /**
      * Metoda pobiera współrzędne bloku na, który obecnie wskazuje kursor gracza
+     *
      * @return współrzędne bloku w 3 wymiarach
      */
     public Vector3f getBlockPosition() {
-        for(Vector3f v : points) {
-            int x = (int)v.x;
-            int y = (int)v.y;
-            int z = (int)v.z;
+        for (Vector3f v : points) {
+            int x = (int) v.x;
+            int y = (int) v.y;
+            int z = (int) v.z;
 
             //System.out.println(x + " " + y + " " + z);
 
-            if(player.getWorld().getBlock(x, y, z) != null) {
+            if (player.getWorld().getBlock(x, y, z) != null) {
                 //System.out.println(player.getWorld().getBiome(x,z));
                 return new Vector3f(x, y, z);
             }
@@ -71,18 +72,19 @@ public class Raycast {
 
     /**
      * Metoda pobierająca współrzędne bloku, który znajduje sie przed blokiem, na który wskazuje kursor gracza
+     *
      * @return współrzędne bloku w 3 wymiarach
      */
     public Vector3f getNextBlockPosition() {
         Vector3f prev = new Vector3f();
-        for(Vector3f v : points) {
-            int x = (int)v.x;
-            int y = (int)v.y;
-            int z = (int)v.z;
+        for (Vector3f v : points) {
+            int x = (int) v.x;
+            int y = (int) v.y;
+            int z = (int) v.z;
 
             //System.out.println(x + " " + y + " " + z);
 
-            if(player.getWorld().getBlock(x, y, z) != null) {
+            if (player.getWorld().getBlock(x, y, z) != null) {
                 //System.out.println(player.getWorld().getBiome(x,z));
                 break;
             }

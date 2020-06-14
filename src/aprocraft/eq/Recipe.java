@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class Recipe {
     int w;
-    int [] craft;
+    int[] craft;
     int result = 0;
     int nR = 0;
 
@@ -36,10 +36,9 @@ public class Recipe {
         this.result = result;
     }
 
-    public Recipe(int width, int height)
-    {
-        if(width*height >0)
-            craft = new int[width*height];
+    public Recipe(int width, int height) {
+        if (width * height > 0)
+            craft = new int[width * height];
         w = width;
     }
 
@@ -73,7 +72,7 @@ public class Recipe {
         ja.add(jo);
         PrintWriter pw = null;
         try {
-            pw = new PrintWriter(new FileWriter("./recipes/"+file+".json", true));
+            pw = new PrintWriter(new FileWriter("./recipes/" + file + ".json", true));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,7 +87,7 @@ public class Recipe {
 
     @Override
     public boolean equals(Object o) {
-        if(o==this)
+        if (o == this)
             return true;
         if (!(o instanceof Recipe)) {
             return false;
@@ -100,4 +99,4 @@ public class Recipe {
     }
 
 
-    }
+}

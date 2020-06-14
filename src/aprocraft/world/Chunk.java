@@ -30,6 +30,7 @@ public class Chunk {
 
     /**
      * Konstruktor
+     *
      * @param x
      * @param y
      * @param z
@@ -62,13 +63,14 @@ public class Chunk {
 
     /**
      * Metoda pobierająca jaki biom występuje na danej współrzędnej
+     *
      * @param x współrzędna x
      * @param z współrzędna z
      * @return typ biomu
      */
     public Biome getBiome(int x, int z) {
         Biome biome;
-        int bbb = (int)biomeGenerator.getHeight(x, z);
+        int bbb = (int) biomeGenerator.getHeight(x, z);
 
         //int bbb = (int)(8*(Math.max(generator.getHeight(z, x)/generator.getAmplitude(), biomeGenerator.getHeight(x, z)/biomeGenerator.getAmplitude())));
         //int bbb = (int)(16*(generator.getHeight(x, z)+biomeGenerator.getHeight(x, z))/(generator.getAmplitude()+biomeGenerator.getAmplitude()));
@@ -98,7 +100,7 @@ public class Chunk {
         else
             biome = aprocraft.world.Biomes.FOREST;*/
 
-        if(bbb < 2)
+        if (bbb < 2)
             biome = Biomes.CANYON;
         else if (bbb < 3)
             biome = Biomes.DESERT;
@@ -120,6 +122,7 @@ public class Chunk {
 
     /**
      * Metoda generująca ..
+     *
      * @param height
      */
     public void generate(int height) {
@@ -127,28 +130,28 @@ public class Chunk {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
-                    int xw = SIZE*x+i;
-                    int yw = SIZE*y+j;
-                    int zw = SIZE*z+k;
-                    int h = (int)generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
+                    int xw = SIZE * x + i;
+                    int yw = SIZE * y + j;
+                    int zw = SIZE * z + k;
+                    int h = (int) generator.getHeight(xw, zw); //(biome.getAmplitude()/generator.getAmplitude()))
 
                     Biome biome = getBiome(xw, zw);
 
                     //h += (int)biomeGenerator.getHeight(xw, zw);
                     //h /= 2;
-                    h *= (biome.getAmplitude()/generator.getAmplitude());
+                    h *= (biome.getAmplitude() / generator.getAmplitude());
 
                     /*if(j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else */
-                    if(j < h+height-4) {
-                        Block b = (r.nextInt(j*2+8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
+                    if (j < h + height - 4) {
+                        Block b = (r.nextInt(j * 2 + 8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
-                    } else if(j < h+height-1) {
+                    } else if (j < h + height - 1) {
                         Block b = biome.getLayers()[1];
                         blocks[i][j][k] = b;
-                    } else if(j < h+height) {
+                    } else if (j < h + height) {
                         /*boolean hh = (i == 0 || i == SIZE-1 || k == 0 || k == SIZE-1);
                         aprocraft.world.Block b = (new Random().nextBoolean() && hh) ? aprocraft.world.Blocks.GRASS : biome.getLayers()[0];*/
                         Block b = biome.getLayers()[0];
@@ -158,23 +161,23 @@ public class Chunk {
     }
 
     /**
-     *Metoda generująca ...
+     * Metoda generująca ...
      */
     public void generateStone() {
         Random r = new Random();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
-                    int xw = SIZE*x+i;
-                    int zw = SIZE*z+k;
+                    int xw = SIZE * x + i;
+                    int zw = SIZE * z + k;
 
                     Biome biome = getBiome(xw, zw);
 
-                    if(j == 0) {
+                    if (j == 0) {
                         Block b = Blocks.BEDROCK;
                         blocks[i][j][k] = b;
                     } else {
-                        Block b = (r.nextInt(j*2+8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
+                        Block b = (r.nextInt(j * 2 + 8) == 0 && biome.getTotalOres() != 0) ? biome.chooseOre() : biome.getLayers()[2];
                         blocks[i][j][k] = b;
                     }
                 }
@@ -182,12 +185,13 @@ public class Chunk {
 
     /**
      * Metoda zwracająca maksymalną wysokość
+     *
      * @param x współrzędna x
      * @param z współrzędna y
      * @return maksymalna wysokość
      */
     public int getMaxHeight(int x, int z) {
-        for(int i = SIZE-1; i >= 0; i --)
+        for (int i = SIZE - 1; i >= 0; i--)
             if (getBlock(x, i, z) != null)
                 return i;
 
@@ -234,41 +238,44 @@ public class Chunk {
 
     /**
      * Metoda zwracająca informacje o położeniu bloku
+     *
      * @param x współrzędna x
      * @param y współrzędna y
      * @param z współrzędna z
      * @return wskazany blok
      */
     public Block getBlock(int x, int y, int z) {
-        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
+        if (x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return null;
         return blocks[x][y][z];
     }
 
     /**
      * Metoda dodająca blok
-     * @param x współrzędna x
-     * @param y współrzędna y
-     * @param z współrzędna z
+     *
+     * @param x     współrzędna x
+     * @param y     współrzędna y
+     * @param z     współrzędna z
      * @param block typ dodanego bloku
      * @param world obiekt wygnerowanego świata
      */
     public void placeBlock(int x, int y, int z, Block block, World world) {
-        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
+        if (x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
 
-        if(fb != null)
+        if (fb != null)
             updateChunk(world);
     }
 
     /**
      * Metoda ustawiająca typ bloku
-     * @param x współrzędna x
-     * @param y współrzędna y
-     * @param z współrzędna z
+     *
+     * @param x     współrzędna x
+     * @param y     współrzędna y
+     * @param z     współrzędna z
      * @param block typ bloku
      */
     public void setBlock(int x, int y, int z, Block block) {
-        if(x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
+        if (x < 0 || y < 0 || z < 0 || x >= SIZE || y >= SIZE || z >= SIZE) return;
         blocks[x][y][z] = block;
     }
 
@@ -282,26 +289,26 @@ public class Chunk {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
-                    int xw = SIZE*x+i;
-                    int yw = SIZE*y+j;
-                    int zw = SIZE*z+k;
+                    int xw = SIZE * x + i;
+                    int yw = SIZE * y + j;
+                    int zw = SIZE * z + k;
 
-                    boolean up = world.getBlock(xw, yw+1, zw) == null;
-                    boolean down = world.getBlock(xw, yw-1, zw) == null;
-                    boolean left = world.getBlock(xw-1, yw, zw) == null;
-                    boolean right = world.getBlock(xw+1, yw, zw) == null;
-                    boolean front = world.getBlock(xw, yw, zw-1) == null;
-                    boolean back = world.getBlock(xw, yw, zw+1) == null;
+                    boolean up = world.getBlock(xw, yw + 1, zw) == null;
+                    boolean down = world.getBlock(xw, yw - 1, zw) == null;
+                    boolean left = world.getBlock(xw - 1, yw, zw) == null;
+                    boolean right = world.getBlock(xw + 1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw - 1) == null;
+                    boolean back = world.getBlock(xw, yw, zw + 1) == null;
 
-                    if(!up && !down && !left && !right && !front && ! back) continue;
-                    if(blocks[i][j][k] == null) continue;
+                    if (!up && !down && !left && !right && !front && !back) continue;
+                    if (blocks[i][j][k] == null) continue;
 
                     Block b = blocks[i][j][k];
 
                     fb.put(b.getData(xw, yw, zw));
                     cb.put(b.getTextureData());
                     lb.put(b.getLightData());
-                    fbsize += 6*4;
+                    fbsize += 6 * 4;
 
                 }
 
@@ -313,6 +320,7 @@ public class Chunk {
 
     /**
      * Metoda odświerzająca chunka
+     *
      * @param world obiekt wygnerowanego świata
      */
     public void updateChunk(World world) {
@@ -323,26 +331,26 @@ public class Chunk {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++)
                 for (int k = 0; k < SIZE; k++) {
-                    int xw = SIZE*x+i;
-                    int yw = SIZE*y+j;
-                    int zw = SIZE*z+k;
+                    int xw = SIZE * x + i;
+                    int yw = SIZE * y + j;
+                    int zw = SIZE * z + k;
 
-                    boolean up = world.getBlock(xw, yw+1, zw) == null;
-                    boolean down = world.getBlock(xw, yw-1, zw) == null;
-                    boolean left = world.getBlock(xw-1, yw, zw) == null;
-                    boolean right = world.getBlock(xw+1, yw, zw) == null;
-                    boolean front = world.getBlock(xw, yw, zw-1) == null;
-                    boolean back = world.getBlock(xw, yw, zw+1) == null;
+                    boolean up = world.getBlock(xw, yw + 1, zw) == null;
+                    boolean down = world.getBlock(xw, yw - 1, zw) == null;
+                    boolean left = world.getBlock(xw - 1, yw, zw) == null;
+                    boolean right = world.getBlock(xw + 1, yw, zw) == null;
+                    boolean front = world.getBlock(xw, yw, zw - 1) == null;
+                    boolean back = world.getBlock(xw, yw, zw + 1) == null;
 
-                    if(!up && !down && !left && !right && !front && ! back) continue;
-                    if(blocks[i][j][k] == null) continue;
+                    if (!up && !down && !left && !right && !front && !back) continue;
+                    if (blocks[i][j][k] == null) continue;
 
                     Block b = blocks[i][j][k];
 
                     fb.put(b.getData(xw, yw, zw));
                     cb.put(b.getTextureData());
                     lb.put(b.getLightData());
-                    fbsize += 6*4;
+                    fbsize += 6 * 4;
 
                 }
 
@@ -398,7 +406,9 @@ public class Chunk {
         return x;
     }
 
-    public int getY() { return y; }
+    public int getY() {
+        return y;
+    }
 
     public int getZ() {
         return z;
@@ -406,6 +416,7 @@ public class Chunk {
 
     /**
      * Metoda zwracająca tablicę bloków zawarych w chunku
+     *
      * @return tablica bloków
      */
     public Block[][][] getBlocks() {

@@ -14,6 +14,7 @@ public abstract class Structure {
 
     /**
      * Konstruktor struktury
+     *
      * @param sizeX współrzędna x
      * @param sizeY współrzędna y
      * @param sizeZ współrzędna z
@@ -34,6 +35,7 @@ public abstract class Structure {
 
     /**
      * Konsturtor tworzacy strukture ze wskazanej tablicy blokow
+     *
      * @param blocks
      */
     public Structure(Block[][][] blocks) {
@@ -45,19 +47,20 @@ public abstract class Structure {
 
     /**
      * Powoduje zbudowanie struktury w wybranym swiecie na wybranych wspolrzednych
+     *
      * @param world swiat
-     * @param x pozycja x
-     * @param y pozycja y
-     * @param z pozycja z
+     * @param x     pozycja x
+     * @param y     pozycja y
+     * @param z     pozycja z
      */
     public void spawn(World world, int x, int y, int z) {
-        for(int i = 0; i < sizeX; i ++)
-            for(int j = 0; j < sizeY; j ++)
-                for(int k = 0; k < sizeZ; k ++) {
-                    int xx = x + i - (int)(sizeX / 2);
+        for (int i = 0; i < sizeX; i++)
+            for (int j = 0; j < sizeY; j++)
+                for (int k = 0; k < sizeZ; k++) {
+                    int xx = x + i - (int) (sizeX / 2);
                     int yy = y + j; //- (int)(sizeY / 2);
-                    int zz = z + k - (int)(sizeZ / 2);
-                    if(this.blocks[i][j][k] != null)
+                    int zz = z + k - (int) (sizeZ / 2);
+                    if (this.blocks[i][j][k] != null)
                         world.setBlock(xx, yy, zz, blocks[i][j][k]);
                         /*if(xx >= 0 && yy >= 0 && zz >= 0 && xx < blocks.length && yy < blocks[0].length && zz < blocks[0][0].length)
                             blocks[xx][yy][zz] = this.blocks[i][j][k];*/

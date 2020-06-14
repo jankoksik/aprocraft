@@ -11,11 +11,12 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 public class Slime extends Mob {
     /**
      * Konstruktor klasy
+     *
      * @param world obiekt wygnerowanego świata
-     * @param x współrzędna x
-     * @param y współrzędna y
-     * @param z współrzędna z
-     * @param size wielkość moba
+     * @param x     współrzędna x
+     * @param y     współrzędna y
+     * @param z     współrzędna z
+     * @param size  wielkość moba
      */
     public Slime(World world, float x, float y, float z, float size) {
         super(world);
@@ -32,7 +33,7 @@ public class Slime extends Mob {
      */
     @Override
     public void render() {
-        float s = this.s*0.5f;
+        float s = this.s * 0.5f;
 
         glColor3f(0.4f, 1, 0.4f);
         glBegin(GL_QUADS);

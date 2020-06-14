@@ -80,6 +80,7 @@ class ForestBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
+
 /**
  * Implementacja biomu - pustynia
  */
@@ -101,6 +102,7 @@ class DesertBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
+
 /**
  * Implementacja biomu - równina
  */
@@ -119,6 +121,7 @@ class PlainsBiome extends Biome {
     }
 
 }
+
 /**
  * Implementacja biomu - góra lodowa
  */
@@ -137,6 +140,7 @@ class IcebergBiome extends Biome {
         addOre(Blocks.DIAMOND_ORE, 3);
     }
 }
+
 /**
  * Implementacja biomu - kanion
  */

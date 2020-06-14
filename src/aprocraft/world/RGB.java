@@ -5,6 +5,7 @@ package aprocraft.world;
  */
 public class RGB {
     public float r, g, b;
+
     public RGB(float r, float g, float b) {
         this.r = r;
         this.g = g;

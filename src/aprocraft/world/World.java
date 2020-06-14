@@ -63,8 +63,8 @@ public class World {
 
         slimes = new ArrayList<>();
 
-        for(int i = 0; i < 200; i ++)
-            slimes.add(new Slime(this, rand.nextInt(1024), 32, rand.nextInt(1024), 1+rand.nextInt(30)*0.1f));
+        for (int i = 0; i < 200; i++)
+            slimes.add(new Slime(this, rand.nextInt(1024), 32, rand.nextInt(1024), 1 + rand.nextInt(30) * 0.1f));
 
         /*for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE; j++) {
@@ -208,6 +208,7 @@ public class World {
 
     /**
      * Metoda generująca chmury
+     *
      * @param n ilosc chmur
      */
     public void generateClouds(int n) {
@@ -241,6 +242,7 @@ public class World {
 
     /**
      * Metoda zwraca maksymalna wysokosc (y) warstwy LAND
+     *
      * @param x pozycja x
      * @param z pozycja z
      * @return maxY
@@ -256,6 +258,7 @@ public class World {
 
     /**
      * Metoda zwracajaca chunk zawierajacy blok o wskazanej pozycji
+     *
      * @param x pozycja x
      * @param y pozycja y
      * @param z pozycja z
@@ -271,6 +274,7 @@ public class World {
 
     /**
      * Metoda zwracajaca blok znajdujacy sie na wskazanej pozycji
+     *
      * @param x pozycja x
      * @param y pozycja y
      * @param z pozycja z
@@ -288,6 +292,7 @@ public class World {
 
     /**
      * Metoda sprawdzajaca jaki jest biom na wskazanej pozycji
+     *
      * @param x pozycja x
      * @param z pozycja z
      * @return
@@ -303,6 +308,7 @@ public class World {
 
     /**
      * Pozwala na zmiane wskazanego chunka na inny
+     *
      * @param x
      * @param y
      * @param z
@@ -314,6 +320,7 @@ public class World {
 
     /**
      * Ustawia blok na wskazanej pozycji
+     *
      * @param x
      * @param y
      * @param z
@@ -331,6 +338,7 @@ public class World {
 
     /**
      * Ustawia blok na wskazanej pozycji po czym odswieza bufor
+     *
      * @param x
      * @param y
      * @param z
@@ -348,6 +356,7 @@ public class World {
 
     /**
      * Metoda odświerzająca parametry swiata
+     *
      * @param player gracz o którym odśiwerzamy gracze
      */
     public void update(Player player) {
@@ -398,34 +407,35 @@ public class World {
             if (c != null)
                 c.updateChunk(this);
 
-            c = getChunk((int) player.getX()+Chunk.SIZE, (int) player.getY(), (int) player.getZ());
+            c = getChunk((int) player.getX() + Chunk.SIZE, (int) player.getY(), (int) player.getZ());
             if (c != null)
                 c.updateChunk(this);
 
-            c = getChunk((int) player.getX()-Chunk.SIZE, (int) player.getY(), (int) player.getZ());
+            c = getChunk((int) player.getX() - Chunk.SIZE, (int) player.getY(), (int) player.getZ());
             if (c != null)
                 c.updateChunk(this);
 
-            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ()+Chunk.SIZE);
+            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ() + Chunk.SIZE);
             if (c != null)
                 c.updateChunk(this);
 
-            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ()-Chunk.SIZE);
+            c = getChunk((int) player.getX(), (int) player.getY(), (int) player.getZ() - Chunk.SIZE);
             if (c != null)
                 c.updateChunk(this);
 
-            c = getChunk((int) player.getX(), (int) player.getY()-Chunk.SIZE, (int) player.getZ());
+            c = getChunk((int) player.getX(), (int) player.getY() - Chunk.SIZE, (int) player.getZ());
             if (c != null)
                 c.updateChunk(this);
         }
 
-        for(Slime slime : slimes)
-            if(Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
+        for (Slime slime : slimes)
+            if (Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
                 slime.update(this);
     }
 
     /**
      * Metoda renderujaca swiat i zamieszkujace go moby
+     *
      * @param player
      */
     public void render(Player player) {
@@ -449,26 +459,27 @@ public class World {
         Chunk c = getChunk((int) player.getX(), CAVES, (int) player.getZ());
         if (c != null)
             c.render();
-        c = getChunk((int) player.getX()+Chunk.SIZE, CAVES, (int) player.getZ());
+        c = getChunk((int) player.getX() + Chunk.SIZE, CAVES, (int) player.getZ());
         if (c != null)
             c.render();
-        c = getChunk((int) player.getX()-Chunk.SIZE, CAVES, (int) player.getZ());
+        c = getChunk((int) player.getX() - Chunk.SIZE, CAVES, (int) player.getZ());
         if (c != null)
             c.render();
-        c = getChunk((int) player.getX(), CAVES, (int) player.getZ()+Chunk.SIZE);
+        c = getChunk((int) player.getX(), CAVES, (int) player.getZ() + Chunk.SIZE);
         if (c != null)
             c.render();
-        c = getChunk((int) player.getX(), CAVES, (int) player.getZ()-Chunk.SIZE);
+        c = getChunk((int) player.getX(), CAVES, (int) player.getZ() - Chunk.SIZE);
         if (c != null)
             c.render();
 
-        for(Slime slime : slimes)
-            if(Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
+        for (Slime slime : slimes)
+            if (Vector2f.distance(player.getX(), player.getZ(), slime.getX(), slime.getZ()) <= RENDER_DISTANCE)
                 slime.render();
     }
 
     /**
      * Metoda pomocnicza redukujaca kat tak aby miescil sie w przedziale 0-360
+     *
      * @param angle kat
      * @return zredukowany kat
      */
@@ -485,6 +496,7 @@ public class World {
 
     /**
      * Wyznacza kat miedzy pozycja (x, z) gracza a punktem (x, z)
+     *
      * @param p gracz
      * @param x pozycja x
      * @param z pozycja z
@@ -504,6 +516,7 @@ public class World {
 
     /**
      * Zwraca aktualny czas swiatu
+     *
      * @return czas
      */
     public int getTime() {
@@ -512,6 +525,7 @@ public class World {
 
     /**
      * Wyznacza i zwraca mnoznik uzywany do ustalenia koloru nieba
+     *
      * @return mnoznik
      */
     public float getSkyColorMultiplier() {
@@ -520,6 +534,7 @@ public class World {
 
     /**
      * Zwraca tablice chunkow
+     *
      * @return tablica chunkow
      */
     public Chunk[][][] getChunks() {

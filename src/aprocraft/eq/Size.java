@@ -2,10 +2,11 @@ package aprocraft.eq;
 
 
 public class Size {
-    public Size(int w, int h){
-        this.w =w;
+    public Size(int w, int h) {
+        this.w = w;
         this.h = h;
     }
+
     public int getW() {
         return w;
     }
@@ -23,10 +24,10 @@ public class Size {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "w : " + w + "   | h : " + h;
     }
 
-    int w,h;
+    int w, h;
 
 }

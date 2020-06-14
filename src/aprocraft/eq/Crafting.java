@@ -61,8 +61,9 @@ public class Crafting {
 
     /**
      * Metoda odpowiadająca za przeniesienie obiektu z okna craftingu do ekwipunku gracza
-     * @param x współrzędna obiektu w oknie craftingu
-     * @param y współrzędan obiektu w oknie craftingu
+     *
+     * @param x  współrzędna obiektu w oknie craftingu
+     * @param y  współrzędan obiektu w oknie craftingu
      * @param Eq ekwipunke gracza
      */
     public void GetItemFromCrafting(int x, int y, Inventory Eq) {
@@ -73,7 +74,6 @@ public class Crafting {
     }
 
     /**
-     *
      * @return
      */
     public Size GetCurrDim() {
@@ -123,6 +123,7 @@ public class Crafting {
 
     /**
      * Metoda pozwalająca podzielić przedmioty w danym obiekcie na dwa obiekty
+     *
      * @return
      */
     public int[] getSeperated() {
@@ -213,7 +214,6 @@ public class Crafting {
     }
 
     /**
-     *
      * @param arr
      * @return
      */
@@ -230,13 +230,14 @@ public class Crafting {
 
     /**
      * Metoda weryfikująca czy dla podanego wzoru istnieje recipe
+     *
      * @return
      */
     public Recipe checkPattern() {
         if (!recipes.isEmpty()) {
             Size curr = GetCurrDim();
-            int w = curr.w ;//
-            int h = curr.h ;//
+            int w = curr.w;//
+            int h = curr.h;//
             Recipe r = new Recipe(w, h);
             int[] ready = getSeperated();
             r.setCrafting(ready);
@@ -253,9 +254,10 @@ public class Crafting {
 
     /**
      * Metoda informująca ile obietków sie z crafotwało
+     *
      * @return liczba obietków
      */
-    int getNmbrOfItems(){
+    int getNmbrOfItems() {
         Recipe r = checkPattern();
         if (r != null)
             return r.nR;
@@ -264,7 +266,6 @@ public class Crafting {
     }
 
     /**
-     *
      * @return
      */
     public int ShowPatternMatchinResult() {
@@ -282,7 +283,7 @@ public class Crafting {
      */
     public void Craft(Inventory Eq) {
 
-        for(int i=0; i< getNmbrOfItems(); i++)
+        for (int i = 0; i < getNmbrOfItems(); i++)
             Eq.addItem(ShowPatternMatchinResult());
     }
 

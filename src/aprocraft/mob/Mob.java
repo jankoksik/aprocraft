@@ -46,6 +46,7 @@ public class Mob {
 
     /**
      * Metoda zwracająca punkty żywotnośc moba
+     *
      * @return punkty życiaa
      */
     public int getHp() {
@@ -54,6 +55,7 @@ public class Mob {
 
     /**
      * Metoda ustawiająca mobowi punkty życia
+     *
      * @param hp punkty życia
      */
     public void setHp(int hp) {
@@ -62,6 +64,7 @@ public class Mob {
 
     /**
      * Metoda zwracająca punkty ataku moba
+     *
      * @return punkty ataku
      */
     public int getAttack() {
@@ -70,6 +73,7 @@ public class Mob {
 
     /**
      * Metoda ustawiająca punkty ataku mona
+     *
      * @param attack punkty ataku
      */
     public void setAttack(int attack) {
@@ -78,6 +82,7 @@ public class Mob {
 
     /**
      * Metoda zqracająca jake przedmiotu otrzymuje się po pokonaniu moba
+     *
      * @return otrzymywane przedmioty
      */
     public Item[] getDrop() {
@@ -86,6 +91,7 @@ public class Mob {
 
     /**
      * Metoda ustawiająca jake przedmiotu otrzymuje się po pokonaniu moba
+     *
      * @param drop otrzymywane przedmioty
      */
     public void setDrop(Item[] drop) {
@@ -94,6 +100,7 @@ public class Mob {
 
     /**
      * Metoda zwracająca współrzędną z moba
+     *
      * @return współrzędna x
      */
     public float getX() {
@@ -102,6 +109,7 @@ public class Mob {
 
     /**
      * Metoda ustawiająca pozycję moba
+     *
      * @param x współrzena x
      */
     public void setX(float x) {
@@ -111,16 +119,20 @@ public class Mob {
     /**
      * Metoda zwracająca współrzędną z moba
      * y@return współrzędna x
-     */public float getY() {
+     */
+    public float getY() {
         return y;
     }
+
     /**
      * Metoda ustawiająca pozycję moba
+     *
      * @param y współrzena y
      */
     public void setY(float y) {
         this.y = y;
     }
+
     /**
      * Metoda zwracająca współrzędną z moba
      * z@return współrzędna x
@@ -128,8 +140,10 @@ public class Mob {
     public float getZ() {
         return z;
     }
+
     /**
      * Metoda ustawiająca pozycję moba
+     *
      * @param z współrzena z
      */
     public void setZ(float z) {
@@ -186,7 +200,7 @@ public class Mob {
         int x = (int) player.getX();
         int y = (int) player.getY();
         int z = (int) player.getZ();
-        SetDest(x,y,z);
+        SetDest(x, y, z);
         GoTo();
         // ur code here plz
     }
@@ -195,8 +209,7 @@ public class Mob {
     public void GoTo() {
         if (route == null) {
 
-        }
-       else{
+        } else {
             Vector3f move = route.get(0);
             route.remove(0);
             MoveTox = move.x;
@@ -224,7 +237,8 @@ public class Mob {
     }
 
     /**
-     *  Metoda odświerzająca obecną pozycję moba
+     * Metoda odświerzająca obecną pozycję moba
+     *
      * @param world obiekt wygnerowanego świata
      */
     public void update(World world) {
@@ -233,7 +247,7 @@ public class Mob {
         y += ySpeed;
 
         //if(y-s < world.getMaxHeight((int)x, (int)z))
-        if(world.getBlock((int)x, (int)(y-s*0.5f), (int)z) != null)
+        if (world.getBlock((int) x, (int) (y - s * 0.5f), (int) z) != null)
             ySpeed = 0.3f;
 
         ySpeed -= 0.01f;
@@ -242,10 +256,10 @@ public class Mob {
         ySpeed *= 0.96f;
         //zSpeed *= 0.96f;
 
-        if(world.getTime()%240==0) {
+        if (world.getTime() % 240 == 0) {
             Random r = new Random();
-            xSpeed = (r.nextInt(20)-10)*0.01f;
-            zSpeed = (r.nextInt(20)-10)*0.01f;
+            xSpeed = (r.nextInt(20) - 10) * 0.01f;
+            zSpeed = (r.nextInt(20) - 10) * 0.01f;
         }
     }
 

@@ -26,7 +26,6 @@ import static org.lwjgl.opengl.GL11.*;
  * położenie kamery, prędkość przemieszczania, działające tarcie, działająca grawitacja, rotacja, szybkośc kamery,
  * prękośc skoku, czy gracz ma możliwośc lotu, czas niszczenia bloku, czas stawiania bloku,
  * inicjalne punkty żywotności, przypisany ekwipunek i GUI, raycast , trzymany przedmiot, zablokowanie myszki
- *
  */
 
 public class Player {
@@ -65,6 +64,7 @@ public class Player {
 
     /**
      * Konstruktor klasy
+     *
      * @param window
      * @param world
      */
@@ -291,8 +291,8 @@ public class Player {
                 } else if (b.getMaterial() == Block.SLIPPY) {
                     xSpeed *= 1.5f;
                     zSpeed *= 1.5f;
-                } else if(b.getMaterial() == Block.HURTING) {
-                    if(world.getTime() % 20 == 0)
+                } else if (b.getMaterial() == Block.HURTING) {
+                    if (world.getTime() % 20 == 0)
                         hp--;
                 }
 
@@ -301,8 +301,8 @@ public class Player {
 
             step += forward;
 
-            if(ySpeed <= -0.3f)
-                hp += ySpeed*2;
+            if (ySpeed <= -0.3f)
+                hp += ySpeed * 2;
         }
 
         xSpeed *= friction;
@@ -311,18 +311,20 @@ public class Player {
 
         move(xSpeed, ySpeed, zSpeed);
 
-        if(world.getTime() % 200 == 0)
+        if (world.getTime() % 200 == 0)
             hp++;
 
         //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + aprocraft.world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
         //aprocraft.world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, aprocraft.world.Blocks.AIR);
     }
-/**
- * Metoda odpiwadająca za umożliwienie graczowi przemieszcanie się
- */
+
+    /**
+     * Metoda odpiwadająca za umożliwienie graczowi przemieszcanie się
+     */
     private void move(float x, float y, float z) {
         if (!checkCollision(x, 0, 0)) xCam += x;
-        if (!checkCollision(0, y, 0)) yCam += y; else ySpeed = 0;
+        if (!checkCollision(0, y, 0)) yCam += y;
+        else ySpeed = 0;
         if (!checkCollision(0, 0, z)) zCam += z;
 
         /*if (!checkCollision(x, 0, 0) && !checkCollision(x, 0.6f, 0)) xCam += x;
@@ -410,7 +412,7 @@ public class Player {
                         System.out.println(i + ", " + j);*/
 
             if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS && !prevPressed) {
-                if(selectionX == 10 && selectionY == 7) {
+                if (selectionX == 10 && selectionY == 7) {
                     int res = crafting.ShowPatternMatchinResult();
                     if (res != -1) {
                         crafting.Craft(eq);
@@ -466,7 +468,6 @@ public class Player {
     }
 
     /**
-     *
      * @return
      */
     public boolean isStanding() {
@@ -475,6 +476,7 @@ public class Player {
 
     /**
      * Metoda sprwdzająca kolizje gracza z obiektami
+     *
      * @param x współrzędna x gracza
      * @param y współrzędna y gracza
      * @param z współrzędna z gracza
@@ -717,41 +719,52 @@ public class Player {
 
     /**
      * metoda odpowiadająca za parametr x kamery
+     *
      * @return wartość parametru x
      */
     public float getX() {
         return xCam;
     }
+
     /**
      * metoda odpowiadająca za parametr y kamery
+     *
      * @return wartość parametru y
      */
     public float getY() {
         return yCam;
     }
+
     /**
      * metoda odpowiadająca za parametr z kamery
+     *
      * @return wartość parametru z
      */
     public float getZ() {
         return zCam;
     }
+
     /**
      * Metoda pobierająca rotację ruchu myszki w płaszczyźnie x
+     *
      * @return wartość rotacji
      */
     public float getXRot() {
         return xRot;
     }
+
     /**
      * Metoda pobierająca rotację ruchu myszki w płaszczyźnie y
+     *
      * @return wartość rotacji
      */
     public float getYRot() {
         return yRot;
     }
+
     /**
      * Metoda pobierająca rotację ruchu myszki w płaszczyźnie z
+     *
      * @return wartość rotacji
      */
     public float getZRot() {
@@ -769,6 +782,7 @@ public class Player {
 
     /**
      * Metoda pobierająca obecne punkty żywotności gracza
+     *
      * @return wartość punktów życia
      */
     public int getHp() {
@@ -777,6 +791,7 @@ public class Player {
 
     /**
      * Metoda ustawiająca obecne punkty żywotności gracza
+     *
      * @param hp wartość punktów życia
      */
     public void setHp(int hp) {
@@ -793,6 +808,7 @@ public class Player {
 
     /**
      * Metoda zwracająca ewkipunek gracza
+     *
      * @return
      */
     public Inventory getEq() {
@@ -805,11 +821,11 @@ public class Player {
 
     public void AutoSave() {
 
-        Thread thread = new Thread(() -> {
+        /*Thread thread = new Thread(() -> {
             System.out.println("AutoSave_player");
             eq.saveEq(APROCraft.GAME_NAME + "_inv");
         });
         thread.setName("AutoSave_Player");
-        thread.start();
+        thread.start();*/
     }
 }

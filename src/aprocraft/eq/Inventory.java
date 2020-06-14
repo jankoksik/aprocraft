@@ -32,9 +32,10 @@ public class Inventory {
 
     /**
      * Konstruktor klasy
+     *
      * @param stack ile przedmiotów może zawierać jeden obiekt
-     * @param w szerokośc ekwipunku
-     * @param h wysokość ewkipunku
+     * @param w     szerokośc ekwipunku
+     * @param h     wysokość ewkipunku
      */
     public Inventory(int stack, int w, int h) {
         this.stack = stack;
@@ -46,6 +47,7 @@ public class Inventory {
 
     /**
      * zwraca  listę przedmiotów zawartych w ekwipunku
+     *
      * @return lista obiektów Irem
      */
     public List<Item> getEq() {
@@ -67,6 +69,7 @@ public class Inventory {
 
     /**
      * Metoda weryfikująca czyw ekwpipunku znajduje się dany obiket ( sprawdzenie po typie obiektu)
+     *
      * @param n typ obiektu
      * @return wartość boolean cy taki przedmiot został znaleziony
      */
@@ -80,6 +83,7 @@ public class Inventory {
 
     /**
      * Metoda weryfikująca czyw ekwpipunku znajduje się dany obiket ( sprawdzenie po id obiektu)
+     *
      * @param id identyfikator obiektu
      * @return wartość boolean cy taki przedmiot został znaleziony
      */
@@ -101,6 +105,7 @@ public class Inventory {
 
     /**
      * Meotda zwracająca wielkość ( pojemność ekwipunku)
+     *
      * @return wielkość ekwipunku
      */
     public int GetSpace() {
@@ -109,6 +114,7 @@ public class Inventory {
 
     /**
      * Meotda zwracająca szerokość ekwipunku
+     *
      * @return szrokość
      */
     public int GetW() {
@@ -116,7 +122,6 @@ public class Inventory {
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -139,7 +144,6 @@ public class Inventory {
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -155,6 +159,7 @@ public class Inventory {
 
     /**
      * Metoda usuwająca stack przedmiotów z ewkipunku
+     *
      * @param id identyfokator usuanwgo obiektu
      * @return wartość boolean informująca czy operacja powiodła się
      */
@@ -171,6 +176,7 @@ public class Inventory {
 
     /**
      * Metoda usuwająca pojedyńczy przedmiot z obiektu
+     *
      * @param id id obiektu
      * @return wartość boolean informująca czy operacja powiodła się
      */
@@ -208,6 +214,7 @@ public class Inventory {
 
     /**
      * Metoda zwracająca ilość przemitoów wchodzących w skałd danego obiektu w ekwipunku
+     *
      * @param id identyfikator przedmiotu
      * @return zwraca ilość przemiotów
      */
@@ -228,11 +235,11 @@ public class Inventory {
     }
 
 
-
     /**
      * Metoda odpowiadająca za usuwanie obiektów z ekwipunku
-     * @param id identyfikator obiektu
-     * @param nmbr ilość danych obiektów
+     *
+     * @param id    identyfikator obiektu
+     * @param nmbr  ilość danych obiektów
      * @param force
      * @return force -> true - usun tyle ile sie da /  false - nie usunie itemow jesli niema wystarczajacej ilosci
      */
@@ -274,9 +281,10 @@ public class Inventory {
 
     /**
      * Metoda odpowiadająca za dodawanie obiektów do ekwipunku
+     *
      * @param itemId identyfikator dodanego obiektu
      * @return wartość boolean informująca czy w ekwipunku było miejsce na dodanie przedmiotu,
-     *  tzn. czy dodanie przedmiotu zakończyło się powodzeniem
+     * tzn. czy dodanie przedmiotu zakończyło się powodzeniem
      */
     public boolean addItem(int itemId) {
         Item n = new Item(itemId);
@@ -310,9 +318,10 @@ public class Inventory {
 
     /**
      * Metoda dodająca obiekt do ekwipunku
-     * @param itemId identyfikator dodawanego obiektu
+     *
+     * @param itemId      identyfikator dodawanego obiektu
      * @param NmbrOfItems ilość przedmiotów wchodzących w skałd obiektu
-     * @param force force -> true - dodaj tyle ile sie da /  false - nie doda itemow jesli niema miejsca
+     * @param force       force -> true - dodaj tyle ile sie da /  false - nie doda itemow jesli niema miejsca
      * @return wartość boolean informująca czy operacja powiodła się
      */
     public boolean addItem(int itemId, int NmbrOfItems, boolean force) {
@@ -374,6 +383,7 @@ public class Inventory {
 
     /**
      * Metoda odpoiwadająca za zapisanie stanu ekwpiunku
+     *
      * @param filename nazwa pliku typu Json, w którym zapisana zostanie informacja o stanie ekwipunku
      * @return
      */

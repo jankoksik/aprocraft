@@ -64,7 +64,9 @@ public class Generator {
         return seed;
     }
 
-    public void setSeed(int seed) { this.seed = seed; }
+    public void setSeed(int seed) {
+        this.seed = seed;
+    }
 
     public void setOctave(int octave) {
         this.octave = octave;

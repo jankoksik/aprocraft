@@ -37,6 +37,7 @@ public class GUI {
 
     /**
      * Metoda odpowiadająca za otworzenie GUI
+     *
      * @return
      */
     public boolean isOpened() {
@@ -138,6 +139,7 @@ public class GUI {
 
     /**
      * Metoda odpowiadająca za wyśietlanie paskuy życia
+     *
      * @param health aktualny poziom życia gracza
      */
     public void RenderHealth(int health) {
@@ -214,6 +216,7 @@ public class GUI {
 
     /**
      * Metoda opdpowiadająca za odśiwrzanie stanu ekwipunku
+     *
      * @param inventory ewkipunke wskazanego gracza
      */
     public void updateEq(List<Item> inventory) {
@@ -344,8 +347,9 @@ public class GUI {
 
     /**
      * Metoda odpowiadająca za wyświtlanie  przedmiotu obecnie trzymanego przez gracza
-     * @param x współrzedna x trzymanego obiektu w ekwipunku
-     * @param y współrzedna y trzymanego obiektu w ekwipunku
+     *
+     * @param x    współrzedna x trzymanego obiektu w ekwipunku
+     * @param y    współrzedna y trzymanego obiektu w ekwipunku
      * @param item typ trzymanego biektu
      */
     public void renderGrabbedItem(int x, int y, Item item) {
@@ -361,9 +365,10 @@ public class GUI {
     /**
      * Metoda rusująca kwadraty (są ona później wykorzystywane do konstrukcji wizualnej części ekwipunku,
      * okna craftingu i obietków w ewkipunku
-     * @param x współrzędna x kwadratu
-     * @param y współrzędna y kwadratu
-     * @param size rozmiary kwadrtu
+     *
+     * @param x        współrzędna x kwadratu
+     * @param y        współrzędna y kwadratu
+     * @param size     rozmiary kwadrtu
      * @param texCords
      */
     private void DrawSquare(int x, int y, float size, float[] texCords) {
@@ -386,6 +391,7 @@ public class GUI {
 
     /**
      * Zwraca kordy textury po id
+     *
      * @param id identyfikator wskazanej tekstury
      * @return
      */
@@ -404,6 +410,7 @@ public class GUI {
 
     /**
      * Metoda wyświetlająca okno craftingu
+     *
      * @param crafting
      */
     public void renderCrafting(Crafting crafting) {
@@ -426,14 +433,14 @@ public class GUI {
         Blocks.TEXTURE_PACK.bind(0);
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                int id = crafting.craft[x+y*w];
-                if(id != 0)
-                    DrawSquare(xS + (int) QABsize * x + x + (int) QABsize / 4, yS + (int) QABsize * y + y + (int) QABsize / 4, QABsize / 2, GetTexById(id-1));
+                int id = crafting.craft[x + y * w];
+                if (id != 0)
+                    DrawSquare(xS + (int) QABsize * x + x + (int) QABsize / 4, yS + (int) QABsize * y + y + (int) QABsize / 4, QABsize / 2, GetTexById(id - 1));
             }
         }
 
         int id = crafting.ShowPatternMatchinResult();
-        if(id != -1) {
+        if (id != -1) {
             DrawSquare(xS + (int) QABsize * (w + 2) + w + (int) QABsize / 4, yS + (int) QABsize * h / 2 + h / 2 + (int) QABsize / 4, QABsize / 2, GetTexById(id - 1));
             DrawNumber(xS + (int) QABsize * (w + 2) + w + (int) QABsize / 2, yS + (int) QABsize * h / 2 + h / 2 + (int) QABsize / 4, crafting.getNmbrOfItems());
         }
@@ -444,8 +451,9 @@ public class GUI {
 
     /**
      * Metoda pozwalająca rysować numery
-     * @param x współrzędna x rysowanego numeru
-     * @param y współrzędna y rysowanego numeru
+     *
+     * @param x      współrzędna x rysowanego numeru
+     * @param y      współrzędna y rysowanego numeru
      * @param number rysowany numer
      */
     public void DrawNumber(int x, int y, int number) {
@@ -496,6 +504,7 @@ public class GUI {
 
     /**
      * Metoda odpowiadająca za zamianę oiektów miejscami w ekipunku
+     *
      * @param i indeks obiektu w ekwipunku
      * @param j indeks obiektu w ekwipunku
      */
@@ -507,6 +516,7 @@ public class GUI {
 
     /**
      * Mrtoda zamieniająca obiekry miejscami w ekwipunu
+     *
      * @param x1 współrzedna x pierwszego biektu
      * @param y1 współrzędan y pierwszego obiektu
      * @param x2 współrzedna x drugiego biektu
@@ -522,6 +532,7 @@ public class GUI {
 
     /**
      * Meotda zwracająca obiekt znajdujący się na podanej współrzędnej w ekwipunku
+     *
      * @param x współrzedna x obiektu
      * @param y współrzedna y obiektu
      * @return obiekt typu Item
@@ -535,6 +546,7 @@ public class GUI {
 
     /**
      * Metoda zwracająca które pole na pasku szybkiego wyboru jest obecnie zaznaczone
+     *
      * @return numer indeksy wybranego pola
      */
     public int GetcurrQABid() {
