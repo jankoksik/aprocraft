@@ -467,7 +467,7 @@ public class GUI {
         drawNumber(x-1, y-1, number);
         drawNumber(x-1, y+1, number);
         glColor3f(1, 1,1);
-        drawNumber(x, y, number);
+        drawNumber(x, y, number);//
     }
 
     private void drawNumber(int x, int y, int number) {
