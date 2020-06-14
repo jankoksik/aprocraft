@@ -1,6 +1,6 @@
 {
   "recipes":[
-    {"result":4,"Rn": 1,"crafting":[3],"width":1},
+    {"result":3,"Rn": 1,"crafting":[4],"width":1},
     {"result":20,"Rn": 4,"crafting":[17],"width":1},
     {"result":21,"Rn": 4,"crafting":[18],"width":1},
     {"result":22,"Rn": 4,"crafting":[19],"width":1},
