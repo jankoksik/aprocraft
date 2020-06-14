@@ -8,7 +8,6 @@ public class Item {
     private int id = 0;
     private String Name;
     private int size = 0;
-    //public int pos;
 
     /**
      * Konstruktor obiektu Item
@@ -17,18 +16,12 @@ public class Item {
      */
     public Item(int id) {
         this.id = id;
-        //pos = -1;
     }
-
-    /*public void setPosition(int pos) {
-        if(this.pos == -1)
-            this.pos = pos;
-    }*/
 
     /**
      * Metoda zwraca id danego obiektu Item
      *
-     * @return zwraca id Danrgo obiktu Item
+     * @return id Danrgo obiktu Item
      */
     public int getId() {
         return id;

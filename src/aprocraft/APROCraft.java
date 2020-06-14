@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class APROCraft {
-    public static final String VERSION = "0.6.1 alpha";
+    public static final String VERSION = "0.8.0 alpha";
     public static final String GAME_NAME = "APROCraft";
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 720;
@@ -41,6 +41,7 @@ public class APROCraft {
         GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         glfwSetWindowPos(win, (vidmode.width() - WIDTH) / 2, (vidmode.height() - HEIGHT) / 2);
 
+        /*
         //Przykladowy ekwipunek z proba przeciazenia
         TestLogLabel("Eq add test");
         Inventory eqi = new Inventory(3, 10, 1);
@@ -64,6 +65,7 @@ public class APROCraft {
             System.out.println(i.getId() + " : " + i.getSize());
         }
         TestLogLabel("Controls read");
+        */
 
         try {
             HashMap<String, Integer> cntrl = SaveNReadJson.readControls("Controls");
@@ -79,6 +81,7 @@ public class APROCraft {
             e.printStackTrace();
         }
 
+        /*
         TestLogLabel("recipe");
         Crafting craftingTable = new Crafting(3, 3, "TestRecip");
         craftingTable.LoadRecipes();
@@ -92,7 +95,7 @@ public class APROCraft {
         } else {
             System.out.println("nie znaleziono craftingu ");
         }
-
+        */
 
         glfwShowWindow(win);
         glfwMakeContextCurrent(win);
@@ -102,7 +105,6 @@ public class APROCraft {
         GL.createCapabilities();
 
         World stefan = new World();
-        //stefan.init();
         Player player = new Player(win, stefan);
 
         long timePrev = System.nanoTime();
@@ -145,8 +147,8 @@ public class APROCraft {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-                //glClearColor(0.25f*stefan.getSkyColorMultiplier(), 0.4f*stefan.getSkyColorMultiplier(), 0.8f*stefan.getSkyColorMultiplier(), 1);
-                glClearColor(0.25f, 0.4f, 0.8f, 1);
+                glClearColor(0.25f * stefan.getSkyColorMultiplier(), 0.4f * stefan.getSkyColorMultiplier(), 0.8f * stefan.getSkyColorMultiplier(), 1);
+                //glClearColor(0.25f, 0.4f, 0.8f, 1);
 
 
                 glMatrixMode(GL_PROJECTION);
@@ -157,7 +159,6 @@ public class APROCraft {
 
                 player.updateCamera();
 
-                //shader.bind();
                 stefan.render(player);
 
                 glDisable(GL_DEPTH_TEST);
@@ -169,23 +170,11 @@ public class APROCraft {
                 glPushMatrix();
                 glLoadIdentity();
 
-                //player.addItem(6,256,true);
-
                 player.getGui().RenderHealth(player.getHp());
                 player.getGui().RenderQAB();
                 player.getGui().RenderEq();
                 player.renderCrafting();
                 player.renderGrabbedItem();
-
-                //aprocraft.eq.GUI.Test();
-                //glColor3f(1f, .5f, 1f);
-
-                /*glBegin(GL_QUADS);
-                glVertex2f(100, 100);
-                glVertex2f(100 + 200, 100);
-                glVertex2f(100 + 200, 100 + 200);
-                glVertex2f(100, 100 + 200);
-                glEnd();*/
 
                 glMatrixMode(GL_PROJECTION);
                 glPopMatrix();
@@ -207,6 +196,7 @@ public class APROCraft {
         }
 
         glfwTerminate();
+        System.exit(0);
     }
 
     public static void setPerspective(float fovy, float aspect, float near, float far) {
