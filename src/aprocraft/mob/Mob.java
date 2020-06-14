@@ -10,26 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_FILL;
-
-
 /**
  * Klasa implemetująca moby - postaci niezależne od gracza zasiedlające generowany świat
- * Mob zdefiniowany jest przez: punkty żźycia, siłę ataku, przedmioty zdobywane po jego pokonaniu,
+ * Mob zdefiniowany jest przez: punkty życia, siłę ataku, przedmioty zdobywane po jego pokonaniu,
  * współrzedne jego przebywania, prędkość z którą się porusza, rozmiary moba, zacowanie
  */
 public class Mob {
     private int hp;
     private int attack;
     private Item[] Drop;
-    float x, y, z;
-    float MoveTox, MoveToy, MoveToz;
-    float s; //size
-    float xSpeed, ySpeed, zSpeed;
-    int mobH = 2;
-    World world;
-    List<Vector3f> route = new ArrayList<>();
+    private float x, y, z;
+    private float MoveTox, MoveToy, MoveToz;
+    private float s; //size
+    private float xSpeed, ySpeed, zSpeed;
+    private int mobH = 2;
+    private World world;
+    private List<Vector3f> route = new ArrayList<>();
 
     public enum Behaviour {
         Attack, Escape, Follow, Search, Idle, Goto
@@ -142,7 +138,7 @@ public class Mob {
 
 
     public void SetDest(int x, int y, int z) {
-        Thread thread = new Thread(() -> {
+        /*Thread thread = new Thread(() -> {
             Pathfind path = new Pathfind(world, mobH);
             path.setDx(x);
             path.setDy(y);
@@ -153,7 +149,7 @@ public class Mob {
             route = path.FindRoute2D();
         });
         thread.setName("Pathfind");
-        thread.start();
+        thread.start();*/
     }
 
     public void Do() {
@@ -209,15 +205,15 @@ public class Mob {
     }
 
     public void GoTo(Block block) {
-        // ur code here plz
+
     }
 
     public void Attack(Player player) {
-        //type code here
+
     }
 
     public void Attack(Mob mob) {
-        //type code here
+
     }
 
     public boolean checkCollision(float x, float y, float z) {

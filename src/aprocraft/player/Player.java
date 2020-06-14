@@ -252,6 +252,14 @@ public class Player {
             gui.updateEq(eq.getEq());
         }
 
+        if (glfwGetKey(window, GLFW_KEY_Y) == GL_TRUE) {
+            eq.addItem(Blocks.LOG.getID(), 16, false);
+            eq.addItem(Blocks.PLANKS.getID(), 16, false);
+            eq.addItem(Blocks.STONE.getID(), 16, false);
+            eq.addItem(Blocks.COBBLESTONE.getID(), 16, false);
+            gui.SetEq(eq.getEq());
+        }
+
         if (hp < 0)
             hp = 0;
         if (hp > 20)

@@ -12,7 +12,8 @@ import aprocraft.APROCraft;
 import aprocraft.io.WorldSaveNRead;
 
 /**
- * Klasa
+ * Klasa implementujaca swiat skladajacy sie z chunkow. Jest rowniez odpowiedzialna za przechowywanie i kontrolowanie
+ * mobow i obsluge czasu.
  */
 public class World {
     public static final int SIZE = 32;
@@ -207,7 +208,7 @@ public class World {
 
     /**
      * Metoda generująca chmury
-     * @param n
+     * @param n ilosc chmur
      */
     public void generateClouds(int n) {
         Random r = new Random();
@@ -238,6 +239,12 @@ public class World {
             }
     }
 
+    /**
+     * Metoda zwraca maksymalna wysokosc (y) warstwy LAND
+     * @param x pozycja x
+     * @param z pozycja z
+     * @return maxY
+     */
     public int getMaxHeight(int x, int z) {
         int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
@@ -247,6 +254,13 @@ public class World {
         return c.getMaxHeight(x % Chunk.SIZE, z % Chunk.SIZE) + LAND * Chunk.SIZE;
     }
 
+    /**
+     * Metoda zwracajaca chunk zawierajacy blok o wskazanej pozycji
+     * @param x pozycja x
+     * @param y pozycja y
+     * @param z pozycja z
+     * @return chunk
+     */
     public Chunk getChunk(int x, int y, int z) {
         int xx = x / Chunk.SIZE;
         int yy = y / Chunk.SIZE;
@@ -255,6 +269,13 @@ public class World {
         return chunks[xx][yy][zz];
     }
 
+    /**
+     * Metoda zwracajaca blok znajdujacy sie na wskazanej pozycji
+     * @param x pozycja x
+     * @param y pozycja y
+     * @param z pozycja z
+     * @return blok
+     */
     public Block getBlock(int x, int y, int z) {
         /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
@@ -265,6 +286,12 @@ public class World {
         return c.getBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE);
     }
 
+    /**
+     * Metoda sprawdzajaca jaki jest biom na wskazanej pozycji
+     * @param x pozycja x
+     * @param z pozycja z
+     * @return
+     */
     public Biome getBiome(int x, int z) {
         int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
@@ -274,10 +301,24 @@ public class World {
         return c.getBiome(x, z);
     }
 
+    /**
+     * Pozwala na zmiane wskazanego chunka na inny
+     * @param x
+     * @param y
+     * @param z
+     * @param c
+     */
     public void setChunk(int x, int y, int z, Chunk c) {
         chunks[x][y][z] = c;
     }
 
+    /**
+     * Ustawia blok na wskazanej pozycji
+     * @param x
+     * @param y
+     * @param z
+     * @param block
+     */
     public void setBlock(int x, int y, int z, Block block) {
         /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
@@ -288,6 +329,13 @@ public class World {
         c.setBlock(x % Chunk.SIZE, y % Chunk.SIZE, z % Chunk.SIZE, block);
     }
 
+    /**
+     * Ustawia blok na wskazanej pozycji po czym odswieza bufor
+     * @param x
+     * @param y
+     * @param z
+     * @param block
+     */
     public void placeBlock(int x, int y, int z, Block block) {
         /*int xx = x / Chunk.SIZE;
         int zz = z / Chunk.SIZE;
@@ -299,7 +347,7 @@ public class World {
     }
 
     /**
-     * Metoda odświerzająca parametry gracza
+     * Metoda odświerzająca parametry swiata
      * @param player gracz o którym odśiwerzamy gracze
      */
     public void update(Player player) {
@@ -377,7 +425,7 @@ public class World {
     }
 
     /**
-     *
+     * Metoda renderujaca swiat i zamieszkujace go moby
      * @param player
      */
     public void render(Player player) {
@@ -419,6 +467,11 @@ public class World {
                 slime.render();
     }
 
+    /**
+     * Metoda pomocnicza redukujaca kat tak aby miescil sie w przedziale 0-360
+     * @param angle kat
+     * @return zredukowany kat
+     */
     private float clampRot(float angle) {
         float res = angle;
         while (res < 0) {
@@ -430,6 +483,13 @@ public class World {
         return res;
     }
 
+    /**
+     * Wyznacza kat miedzy pozycja (x, z) gracza a punktem (x, z)
+     * @param p gracz
+     * @param x pozycja x
+     * @param z pozycja z
+     * @return kat
+     */
     private float getAngle(Player p, float x, float z) {
         float angle = (float) Math.toDegrees(Math.atan2(p.getZ() - z, p.getX() - x));
 
@@ -442,25 +502,37 @@ public class World {
         return angle;
     }
 
+    /**
+     * Zwraca aktualny czas swiatu
+     * @return czas
+     */
     public int getTime() {
         return time;
     }
 
+    /**
+     * Wyznacza i zwraca mnoznik uzywany do ustalenia koloru nieba
+     * @return mnoznik
+     */
     public float getSkyColorMultiplier() {
         return ((float) skyTime / 3600f);
     }
 
+    /**
+     * Zwraca tablice chunkow
+     * @return tablica chunkow
+     */
     public Chunk[][][] getChunks() {
         return chunks;
     }
 
-    public void AutoSave() {
+    /*public void AutoSave() {
 
         /*Thread thread = new Thread(() -> {
             System.out.println("AutoSave");
             WorldSaveNRead.Save(APROCraft.GAME_NAME, this.getChunks());
         });
         thread.setName("AutoSave_World");
-        thread.start();*/
-    }
+        thread.start();
+    }*/
 }
