@@ -115,7 +115,7 @@ public class Crafting {
         if(count==1 && Ly-CornerY<=0) {
             Ly= CornerY+1;
         }
-
+        //JEdno
         return new Size(LX - CornerX, Ly - CornerY);
     }
 
