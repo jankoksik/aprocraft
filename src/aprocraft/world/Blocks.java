@@ -275,7 +275,7 @@ class EmeraldOreBlock extends Block {
     }
 }
 /**
- * Implementacja bloku - drewni
+ * Implementacja bloku - welna
  */
 class WoolBlock extends Block {
     public WoolBlock(int color) {
@@ -293,7 +293,7 @@ class CraftingboxBlock extends Block {
     }
 }
 /**
- * Implementacja bloku - cement
+ * Implementacja bloku - beton
  */
 class ConcreteBlock extends Block {
     public ConcreteBlock() {

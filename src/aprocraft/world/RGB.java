@@ -1,7 +1,7 @@
 package aprocraft.world;
 
 /**
- * Klasa pomocnicza odpowiadająca za ustalanie koloru przestrzeni
+ * Klasa pomocnicza odpowiadająca za ustalanie koloru
  */
 public class RGB {
     public float r, g, b;

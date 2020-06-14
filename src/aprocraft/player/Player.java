@@ -22,10 +22,10 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * Klasa impelmentująca gracza. Obiekt gracz posiada następujące cechy:
- * położenie kamery, prędkość przemieszczania, działające tarcie, działająca grawitacja,raotacja, szybkośc kamery,
+ * Klasa impelmentująca gracza. Obiekt gracz posiada m.in. następujące cechy:
+ * położenie kamery, prędkość przemieszczania, działające tarcie, działająca grawitacja, rotacja, szybkośc kamery,
  * prękośc skoku, czy gracz ma możliwośc lotu, czas niszczenia bloku, czas stawiania bloku,
- * inicjalne punkty żywotności, przypisany ekwipunek i gui, raycast , trzymany przedmiot, zablokowanie myszki,
+ * inicjalne punkty żywotności, przypisany ekwipunek i GUI, raycast , trzymany przedmiot, zablokowanie myszki
  *
  */
 

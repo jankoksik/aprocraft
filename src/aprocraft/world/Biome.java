@@ -26,6 +26,11 @@ public abstract class Biome {
     private List<Integer> structureOccurrence;
     private int totalStructures;
 
+    /**
+     * Konstruktor klasy Biome
+     * @param name nazwa biomu
+     * @param occurrence czestotliwosc wystepowania
+     */
     public Biome(String name, int occurrence) {
         this.name = name;
 

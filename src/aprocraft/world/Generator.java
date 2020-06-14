@@ -4,6 +4,9 @@ import org.joml.Vector2f;
 
 import java.util.Random;
 
+/**
+ * Klasa implementujaca generator szumu uzywany do generacji mapy wysokosciwej swiata oraz mapy biomow
+ */
 public class Generator {
     private Random rand;
 
@@ -19,36 +22,11 @@ public class Generator {
         rand = new Random();
     }
 
-    /*public float getHeight(int x, int z) {
-        int xmin = (int)((double)x / octave);
-        int xmax = xmin + 1;
-        int zmin = (int)((double)z / octave);
-        int zmax = zmin + 1;
-
-        float tx = (x-xmin*octave)/octave;
-        float tz = (z-zmin*octave)/octave;
-
-        float tmp1 = interpolate((float)getNoise(xmin, zmin), (float)getNoise(xmax, zmin), tx);
-        float tmp2 = interpolate((float)getNoise(xmin, zmax), (float)getNoise(xmax,zmax), tx);
-
-        return interpolate(tmp1, tmp2, tz)*amplitude;
-    }
-
-    private float interpolate(float a, float b, float t) {
-        float f = (float) (1.0f - Math.cos((float)(t * Math.PI))) * 0.5f;
-        return a * (1.0f - f) + b * f;
-    }
-
-    private double getNoise(float x, float z) {
-        rand.setSeed((long) ((Math.sin(x + Math.cos(z)) + Math.tan(seed)) * 10000));
-        return rand.nextDouble();
-    }*/
-
     public float getHeight(float x, float z) {
         int xmin = (int) (double) x / octave;
-        int xmax = (int) xmin + 1;
+        int xmax = xmin + 1;
         int zmin = (int) (double) z / octave;
-        int zmax = (int) zmin + 1;
+        int zmax = zmin + 1;
 
         Vector2f a = new Vector2f(xmin, zmin);
         Vector2f b = new Vector2f(xmax, zmin);

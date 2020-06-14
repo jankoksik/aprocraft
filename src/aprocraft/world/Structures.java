@@ -13,7 +13,7 @@ public abstract class Structures {
 }
 
 /**
- * Implementacja struktury - podstawowe drewno
+ * Implementacja struktury - podstawowe drzewo
  */
 class DefaultTree extends Structure {
     public DefaultTree(Block leaves, Block log) {

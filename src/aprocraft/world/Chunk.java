@@ -9,7 +9,7 @@ import java.nio.FloatBuffer;
 import java.util.Random;
 
 /**
- * Metoda implementująca strukturę chunka
+ * Klasa implementujaca chunk
  */
 
 public class Chunk {

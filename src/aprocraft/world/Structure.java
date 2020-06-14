@@ -4,7 +4,7 @@ import aprocraft.world.Block;
 import aprocraft.world.World;
 
 /**
- * Metoda implementująca struktury
+ * Klasa implementująca struktury
  */
 
 public abstract class Structure {
@@ -26,12 +26,16 @@ public abstract class Structure {
         blocks = new Block[sizeX][sizeY][sizeZ];
     }
 
-    public Structure(String filename) {
+    /*public Structure(String filename) {
         blocks = new Block[sizeX][sizeY][sizeZ];
 
         //TODO: wczytywanie do tablicy z pliku
-    }
+    }*/
 
+    /**
+     * Konsturtor tworzacy strukture ze wskazanej tablicy blokow
+     * @param blocks
+     */
     public Structure(Block[][][] blocks) {
         this.blocks = blocks;
         sizeX = this.blocks.length;
@@ -39,6 +43,13 @@ public abstract class Structure {
         sizeZ = this.blocks[0][0].length;
     }
 
+    /**
+     * Powoduje zbudowanie struktury w wybranym swiecie na wybranych wspolrzednych
+     * @param world swiat
+     * @param x pozycja x
+     * @param y pozycja y
+     * @param z pozycja z
+     */
     public void spawn(World world, int x, int y, int z) {
         for(int i = 0; i < sizeX; i ++)
             for(int j = 0; j < sizeY; j ++)

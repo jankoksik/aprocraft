@@ -38,7 +38,7 @@ public abstract class Biomes {
 }
 
 /**
- * Implementacjia biomu bazowego
+ * Implementacjia biomu domyslnego
  */
 class DefaultBiome extends Biome {
     public DefaultBiome() {
@@ -60,7 +60,7 @@ class DefaultBiome extends Biome {
 }
 
 /**
- * Implementacja biomu - lasu
+ * Implementacja biomu - las
  */
 class ForestBiome extends Biome {
     public ForestBiome() {
@@ -81,7 +81,7 @@ class ForestBiome extends Biome {
     }
 }
 /**
- * Implementacja biomu - pustyni
+ * Implementacja biomu - pustynia
  */
 class DesertBiome extends Biome {
     public DesertBiome() {
@@ -102,7 +102,7 @@ class DesertBiome extends Biome {
     }
 }
 /**
- * Implementacja biomu - równiny
+ * Implementacja biomu - równina
  */
 class PlainsBiome extends Biome {
     public PlainsBiome() {
