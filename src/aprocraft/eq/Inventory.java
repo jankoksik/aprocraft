@@ -15,9 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
+
+/**
+ * Klasa implementująca ekwipunku gracza
+ */
 public class Inventory {
 
-    //stack - liczba blok�w w stacku
+    //stack - liczba blok�w w stacku
     // space - ilosc kratek na przedmioty
 
     private ArrayList<Item> eq = new ArrayList<>();
@@ -26,7 +30,12 @@ public class Inventory {
     private int w;
     private ArrayList<Item> map = new ArrayList<>();
 
-
+    /**
+     * Konstruktor klasy
+     * @param stack
+     * @param w szerokośc ekwipunku
+     * @param h wysokość ewkipunku
+     */
     public Inventory(int stack, int w, int h) {
         this.stack = stack;
         this.space = w * h;
@@ -51,6 +60,11 @@ public class Inventory {
         return sum;
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     private boolean contain(Item n) {
         for (Item k : map) {
             if (k.getId() == n.getId())
@@ -59,6 +73,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     private boolean contain(int id) {
         for (Item k : map) {
             if (k.getId() == id)
@@ -75,6 +94,10 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * Meotda zwracająca wielkość ( pojemność ekwipunku)
+     * @return wielkość ekwipunku
+     */
     public int GetSpace() {
         return space;
     }
@@ -101,6 +124,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     private boolean removeStack(int id) {
         for (Item k : map) {
             if (k.getId() == id) {
@@ -111,6 +139,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     private boolean removeStackEq(int id) {
         for (Item k : eq) {
             if (k.getId() == id) {
@@ -121,6 +154,12 @@ public class Inventory {
         return false;
     }
 
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean removeOne(int id) {
         for (Item k : map) {
             if (k.getId() == id) {
@@ -153,6 +192,11 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * Metoda zwracająca ilość przemitoów wchodzących w skałd danego obiektu w ekwipunku
+     * @param id identyfikator przedmiotu
+     * @return zwraca ilość przemiotów
+     */
     public int getNmbrOfItems(int id) {
         int nmbr = 0;
         for (Item i : eq) {
@@ -169,7 +213,15 @@ public class Inventory {
         return nmbr;
     }
 
-    // force -> true - usun tyle ile sie da /  false - nie usunie itemow jesli niema wystarczajacej ilosci
+
+
+    /**
+     * Metoda odpowiadająca za usuwanie obiektów z ekwipunku
+     * @param id identyfikator obiektu
+     * @param nmbr ilość danych obiektów
+     * @param force
+     * @return force -> true - usun tyle ile sie da /  false - nie usunie itemow jesli niema wystarczajacej ilosci
+     */
     public boolean remove(int id, int nmbr, boolean force) {
         if (nmbr > getNmbrOfItems(id) && !force)
             return false;
@@ -206,6 +258,12 @@ public class Inventory {
         return res;
     }*/
 
+    /**
+     * Metoda odpowiadająca za dodawanie obiektów do ekwipunku
+     * @param itemId identyfikator dodanego obiektu
+     * @return wartość boolean informująca czy w ekwipunku było miejsce na dodanie przedmiotu,
+     *  tzn. czy dodanie przedmiotu zakończyło się powodzeniem
+     */
     public boolean addItem(int itemId) {
         Item n = new Item(itemId);
         if (!map.isEmpty() && contain(n)) {
@@ -292,7 +350,11 @@ public class Inventory {
         return false;
     }
 
-
+    /**
+     * Metoda odpoiwadająca za zapisanie stanu ekwpiunku
+     * @param filename nazwa pliku typu Json, w którym zapisana zostanie informacja o stanie ekwipunku
+     * @return
+     */
     public boolean saveEq(String filename) {
         try {
             Gson gson = new Gson();

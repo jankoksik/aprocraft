@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
+
+/**
+ * Klasa implementująca przepisy wykorzystywane do towrzenia przemiotów
+ */
 public class Recipe {
     int w;
     int [] craft;

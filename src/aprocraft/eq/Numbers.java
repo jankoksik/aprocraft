@@ -2,6 +2,9 @@ package aprocraft.eq;
 
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class Numbers {
     public static HashMap<Integer, int[]> Nmbrs = new HashMap<>(); // float[] :  [0] - x, [1] - y, [2] - w, [3] - h
     public static int w = 512, h = 512;
@@ -23,10 +26,18 @@ public class Numbers {
         return Nmbrs;
     }
 
+    /**
+     * Metoda zwracająca szerokośc ekwipunku
+     * @return szerokość ekwipunku
+     */
     public static int getW() {
         return w;
     }
 
+    /**
+     * Metoda zwracająca wysokośc ekwipunku
+     * @return wysokośc ekwipunku (
+     */
     public static int getH() {
         return h;
     }

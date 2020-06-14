@@ -13,6 +13,9 @@ import java.util.HashMap;
 
 import aprocraft.player.*;
 
+/**
+ * Klasa implementująca wczytywanie i zapisywanie plików w formacje Json
+ */
 public class SaveNReadJson {
 
 
@@ -34,6 +37,13 @@ public class SaveNReadJson {
         pw.close();
 }
 
+    /**
+     * Metoda odpowiadająca za wczytanie sterowania z pliku Json
+     * @param filename nazwa pliku Json , z którego wczytane ma być sterowanie
+     * @return zwraca sterowanie i umieszcza je w HashMap'ie
+     * @throws IOException
+     * @throws ParseException
+     */
     public static HashMap<String, Integer> readControls (String filename) throws IOException, ParseException {
         HashMap<String, Integer> controls = new HashMap<>();
         Object obj = new JSONParser().parse(new FileReader("./data/"+filename+".json"));
@@ -47,6 +57,10 @@ public class SaveNReadJson {
         return  controls;
     }
 
+    /**
+     * Metoda ustawiające sterowanie wczytane wcześniej z pliku Json
+     * @param ControlsMap HashMapa zaiwerająca wczytane sterowanie
+     */
     public static void applyCOntrols(HashMap<String, Integer> ControlsMap){
         Controls.setUse(ControlsMap.get("use"));
         Controls.setDrop(ControlsMap.get("drop"));
@@ -66,6 +80,13 @@ public class SaveNReadJson {
         Controls.setPlace(ControlsMap.get("place"));
         Controls.setJump(ControlsMap.get("jump"));
     }
+
+    /**
+     * Metoda zapisująca sterowanie do pliku Json
+     * @param filename nazwa pliku Json, w którym ma zostać zapisane sterowanie
+     * @throws IllegalAccessException
+     * @throws FileNotFoundException
+     */
     public static void SaveControls(String filename) throws IllegalAccessException, FileNotFoundException {
         JSONObject jo = new JSONObject();
         Field fld[] = Controls.class.getDeclaredFields();

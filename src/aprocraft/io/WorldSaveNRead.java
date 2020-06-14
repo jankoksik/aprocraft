@@ -8,8 +8,17 @@ import aprocraft.world.Chunk;
 
 import java.io.*;
 
+/**
+ * Kalsa implemetująca możliwość wczytywania i zapisywania obecnego stanu rozgrywki
+ */
 public class WorldSaveNRead {
 
+    /**
+     * Metoda odpowiadająca za wczytanie stanu rozgrywki, poprez wczytanie poszczególnych chunków
+     * @param gameName nazwa rozgrywki, którą chcemy wczytać
+     * @param world
+     * @throws IOException
+     */
     public static void load(String gameName, World world) throws IOException {
         boolean success = (new File("./Saves/" + gameName)).mkdirs();
 
@@ -34,6 +43,16 @@ public class WorldSaveNRead {
         }
     }
 
+    /**
+     * Metoda wczytująca konkretny chunk wczytywanej rozgrywki
+     * @param gameName nazwa wczytywanej rozgrywki
+     * @param world
+     * @param x współrzędna x chunka
+     * @param y współrzędna y chunka
+     * @param z współrzędna z chunka
+     * @return
+     * @throws IOException
+     */
     public static Chunk loadChunk(String gameName, World world, int x, int y, int z) throws IOException {
         Chunk chunk = new Chunk(x, y, z, world.getGenerator(), world.getBiomeGenerator());
 
@@ -63,6 +82,12 @@ public class WorldSaveNRead {
         return chunk;
     }
 
+    /**
+     * Metoda zapisująca stan rozgrywki, zapisując poszczególne chunki
+     * @param gameName nazwa pod jaką chcemy zapisać rozgrywkę
+     * @param world
+     * @throws IOException
+     */
     public static void save(String gameName, World world) throws IOException {
         boolean success = (new File("./Saves/" + gameName)).mkdirs();
 
@@ -87,6 +112,12 @@ public class WorldSaveNRead {
         }
     }
 
+    /**
+     * Metoda zapisująca konkretny chunk
+     * @param gameName nazwa pod jaką chcemy zapisać rozgrywkę
+     * @param chunk
+     * @throws IOException
+     */
     public static void saveChunk(String gameName, Chunk chunk) throws IOException {
         boolean success = (new File("./Saves/" + gameName)).mkdirs();
 

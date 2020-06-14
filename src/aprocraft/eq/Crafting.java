@@ -59,6 +59,12 @@ public class Crafting {
         }
     }
 
+    /**
+     * Metoda odpowiadająca za przeniesienie obiektu z okna craftingu do ekwipunku gracza
+     * @param x współrzędna obiektu w oknie craftingu
+     * @param y współrzędan obiektu w oknie craftingu
+     * @param Eq ekwipunke gracza
+     */
     public void GetItemFromCrafting(int x, int y, Inventory Eq) {
         if (craft[w * y + x] != 0) {
             Eq.addItem(craft[w * y + x]);
@@ -66,6 +72,10 @@ public class Crafting {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Size GetCurrDim() {
         boolean found = false;
         int craftH = craft.length / w;
@@ -110,6 +120,11 @@ public class Crafting {
         return ret;
     }
 
+
+    /**
+     *
+     * @return
+     */
     public int[] getSeperated() {
         ArrayList<Integer> curr = new ArrayList<>();
         int craftH = craft.length / w;
@@ -197,6 +212,11 @@ public class Crafting {
         recipes.clear();
     }
 
+    /**
+     *
+     * @param arr
+     * @return
+     */
     private boolean CompareInt(int[] arr) {
         int[] cr = getSeperated();
         if (arr.length != cr.length)
@@ -208,6 +228,10 @@ public class Crafting {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public Recipe checkPattern() {
         if (!recipes.isEmpty()) {
             Size curr = GetCurrDim();
@@ -226,6 +250,11 @@ public class Crafting {
         }
         return null;
     }
+
+    /**
+     *
+     * @return
+     */
     int getNmbrOfItems(){
         Recipe r = checkPattern();
         if (r != null)
@@ -234,6 +263,10 @@ public class Crafting {
             return -1;
     }
 
+    /**
+     *
+     * @return
+     */
     public int ShowPatternMatchinResult() {
         Recipe r = checkPattern();
         if (r != null)

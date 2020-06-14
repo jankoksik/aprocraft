@@ -13,10 +13,18 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.stb.STBImage.stbi_image_free;
 import static org.lwjgl.stb.STBImage.stbi_load;
 
+/**
+ * Klasa implementująca tekstury
+ */
+
 public class Texture {
     private int id;
     private int width, height;
 
+    /**
+     * Konstruktor klasy pobierający tekstury z przygotwaneo pliku
+     * @param filename nazwa pliku przechowującego informacje o teksturach
+     */
     public Texture(String filename) {
         BufferedImage bi;
         try {

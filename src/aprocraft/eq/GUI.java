@@ -124,6 +124,10 @@ public class GUI {
         glDisable(GL_TEXTURE_2D);
     }
 
+    /**
+     * Metoda odpowiadająca za wyśietlanie paskuy życia
+     * @param health aktualny poziom życia gracza
+     */
     public void RenderHealth(int health) {
         int maxH = 20;
         if (maxH < health)
@@ -196,6 +200,10 @@ public class GUI {
         inv = a;
     }
 
+    /**
+     * Metoda opdpowiadająca za odśiwrzanie stanu ekwipunku
+     * @param inventory ewkipunke wskazanego gracza
+     */
     public void updateEq(List<Item> inventory) {
 //        for(Item i : inv) {
 //            if(!inventory.contains(i))
@@ -212,6 +220,7 @@ public class GUI {
                 inv.add(i);
         }
     }
+
 
     public void RenderEq() {
 
@@ -319,6 +328,12 @@ public class GUI {
         glDisable(GL_TEXTURE_2D);
     }
 
+    /**
+     * Metoda odpowiadająca za wyświtlanie  przedmiotu obecnie trzymanego przez gracza
+     * @param x współrzedna x trzymanego obiektu w ekwipunku
+     * @param y współrzedna y trzymanego obiektu w ekwipunku
+     * @param item typ trzymanego biektu
+     */
     public void renderGrabbedItem(int x, int y, Item item) {
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
@@ -360,6 +375,10 @@ public class GUI {
         return cords;
     }
 
+    /**
+     * Metoida wyśiwtlająca okno craftingu
+     * @param crafting
+     */
     public void renderCrafting(Crafting crafting) {
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
@@ -442,12 +461,24 @@ public class GUI {
 
     }
 
+    /**
+     * Metoda odpowiadająca za zamianę oiektów miejscami w ekipunku
+     * @param i
+     * @param j
+     */
     public void swap(int i, int j) {
         Item tmp = inv.get(i);
         inv.set(i, inv.get(j));
         inv.set(j, tmp);
     }
 
+    /**
+     * Mrtoda zamieniająca obiekry miejscami w ekwipunu
+     * @param x1 współrzedna x pierwszego biektu
+     * @param y1 współrzędan y pierwszego obiektu
+     * @param x2 współrzedna x drugiego biektu
+     * @param y2 współrzędan y drugiego obiektu
+     */
     public void swap(int x1, int y1, int x2, int y2) {
         if (!inv.isEmpty() && inv.size() > y1 * SizeOfQAB + x1 && inv.size() > y2 * SizeOfQAB + x2) {
             int i = y1 * SizeOfQAB + x1;
@@ -456,6 +487,12 @@ public class GUI {
         }
     }
 
+    /**
+     * Meotda zwracająca obiekt znajdujący się na podanej współrzędnej w ekwipunku
+     * @param x współrzedna x obiektu
+     * @param y współrzedna y obiektu
+     * @return obiekt typu Item
+     */
     public Item GetItemXY(int x, int y) {
         if (!inv.isEmpty() && inv.size() > y * SizeOfQAB + x)
             return inv.get(y * SizeOfQAB + x);
