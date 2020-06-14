@@ -24,6 +24,7 @@ Gracz może atakować napotkane istoty, zbierać surowce czy wytwarzać przedmio
 | 2          | ziemia              |
 | 3          | kamień              |
 | 4          | cobble              |
+| 5          | cobble z mchem      |
 | 6          | kamienne cegły      |
 | 9          | cegły               |
 | 10         | piach               |
