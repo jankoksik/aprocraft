@@ -457,6 +457,20 @@ public class GUI {
      * @param number rysowany numer
      */
     public void DrawNumber(int x, int y, int number) {
+        glColor3f(0, 0,0);
+        drawNumber(x+1, y, number);
+        drawNumber(x-1, y, number);
+        drawNumber(x, y-1, number);
+        drawNumber(x, y+1, number);
+        drawNumber(x+1, y+1, number);
+        drawNumber(x+1, y-1, number);
+        drawNumber(x-1, y-1, number);
+        drawNumber(x-1, y+1, number);
+        glColor3f(1, 1,1);
+        drawNumber(x, y, number);
+    }
+
+    private void drawNumber(int x, int y, int number) {
         NmbTex.bind(0);
         int scnd = number % 10;
         int fst = number / 10;
