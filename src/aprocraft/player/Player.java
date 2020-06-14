@@ -22,7 +22,11 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * Klasa impelmentująca gracza
+ * Klasa impelmentująca gracza. Obiekt gracz posiada następujące cechy:
+ * położenie kamery, prędkość przemieszczania, działające tarcie, działająca grawitacja,raotacja, szybkośc kamery,
+ * prękośc skoku, czy gracz ma możliwośc lotu, czas niszczenia bloku, czas stawiania bloku,
+ * inicjalne punkty żywotności, przypisany ekwipunek i gui, raycast , trzymany przedmiot, zablokowanie myszki,
+ *
  */
 
 public class Player {
@@ -59,6 +63,11 @@ public class Player {
 
     private World world;
 
+    /**
+     * Konstruktor klasy
+     * @param window
+     * @param world
+     */
     public Player(long window, World world) {
         xCam = 512;
         yCam = 64;
@@ -115,6 +124,9 @@ public class Player {
         this.world = world;
     }
 
+    /**
+     * Metoda odpowiedzialna za odświerzanie informacji na temat gracza.
+     */
     public void update() {
         mouseUpdate();
 
@@ -335,7 +347,7 @@ public class Player {
     private int lsx, lsy;
 
     /**
-     * Metoda odświerzająca położenie,ruch myszki ( kursora
+     * Metoda odświerzająca położenie,ruch myszki ( kursora)
      */
     private void mouseUpdate() {
 
@@ -494,6 +506,9 @@ public class Player {
         return false;
     }
 
+    /**
+     * Metoda odpwowiadająca za wyświetlanie ręki gracza i trzymanego w niej przemiotu
+     */
     public void drawHand() {
         float x = -0.5f;
         float y = -0.4f;
@@ -687,17 +702,23 @@ public class Player {
     }
 
     /**
-     *
-     * @return
+     * metoda odpowiadająca za parametr x kamery
+     * @return wartość parametru x
      */
     public float getX() {
         return xCam;
     }
-
+    /**
+     * metoda odpowiadająca za parametr y kamery
+     * @return wartość parametru y
+     */
     public float getY() {
         return yCam;
     }
-
+    /**
+     * metoda odpowiadająca za parametr z kamery
+     * @return wartość parametru z
+     */
     public float getZ() {
         return zCam;
     }
