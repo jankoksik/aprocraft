@@ -13,6 +13,12 @@ import java.util.Random;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_FILL;
 
+
+/**
+ * Klasa implemetująca moby - postaci niezależne od gracza zasiedlające generowany świat
+ * Mob zdefiniowany jest przez: punkty żźycia, siłę ataku, przedmioty zdobywane po jego pokonaniu,
+ * współrzedne jego przebywania, prędkość z którą się porusza, rozmiary moba,
+ */
 public class Mob {
     private int hp;
     private int attack;

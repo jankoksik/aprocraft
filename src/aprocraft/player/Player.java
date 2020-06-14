@@ -21,6 +21,10 @@ import java.util.Scanner;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+/**
+ * Klasa impelmentująca gracza
+ */
+
 public class Player {
     private float xCam, yCam, zCam;
     private float forward, left;
@@ -293,7 +297,9 @@ public class Player {
         //System.out.println("[" + (int)xCam + ", " + (int)yCam + ", " + (int)zCam + "] " + aprocraft.world.getBlock((int)xCam, (int)yCam+1, (int)zCam));
         //aprocraft.world.setBlock((int)-xCam, (int)-yCam, (int)-zCam, aprocraft.world.Blocks.AIR);
     }
-
+/**
+ * Metoda odpiwadająca za umożliwienie graczowi przemieszcanie się
+ */
     private void move(float x, float y, float z) {
         if (!checkCollision(x, 0, 0)) xCam += x;
         if (!checkCollision(0, y, 0)) yCam += y; else ySpeed = 0;
@@ -328,6 +334,9 @@ public class Player {
 
     private int lsx, lsy;
 
+    /**
+     * Metoda odświerzająca położenie,ruch myszki ( kursora
+     */
     private void mouseUpdate() {
 
         //if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
@@ -430,10 +439,21 @@ public class Player {
             gui.renderCrafting(crafting);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isStanding() {
         return world.getBlock((int) xCam, (int) (yCam - 2f), (int) zCam) != null;//isStanding;//
     }
 
+    /**
+     * Metoda sprwdzająca kolizje gracza z obiektami
+     * @param x współrzędna x gracza
+     * @param y współrzędna y gracza
+     * @param z współrzędna z gracza
+     * @return wartośc boolean czy nastąpiła kolizja
+     */
     public boolean checkCollision(float x, float y, float z) {
         float radius = 0.4f;
 
@@ -545,6 +565,9 @@ public class Player {
         }
     }
 
+    /**
+     * Metoda odpowiadająca za odśiwrzanie stanu kamery na podstawie ruchu myszki
+     */
     public void updateCamera() {
         glLoadIdentity();
         glRotatef(Math.sin(step / 5.0f) / 2.0f, 0, 0, 1); //Math.sin(Math.sqrt(xCam*zCam)*3)
@@ -663,6 +686,10 @@ public class Player {
         return crafting;
     }
 
+    /**
+     *
+     * @return
+     */
     public float getX() {
         return xCam;
     }
@@ -674,15 +701,24 @@ public class Player {
     public float getZ() {
         return zCam;
     }
-
+    /**
+     * Metoda pobierająca rotację ruchu myszki w płaszczyźnie x
+     * @return wartość rotacji
+     */
     public float getXRot() {
         return xRot;
     }
-
+    /**
+     * Metoda pobierająca rotację ruchu myszki w płaszczyźnie y
+     * @return wartość rotacji
+     */
     public float getYRot() {
         return yRot;
     }
-
+    /**
+     * Metoda pobierająca rotację ruchu myszki w płaszczyźnie z
+     * @return wartość rotacji
+     */
     public float getZRot() {
         return 0;
     }
@@ -696,10 +732,18 @@ public class Player {
         return eq.addItem(id);
     }
 
+    /**
+     * Metoda pobierająca obecne punkty żywotności gracza
+     * @return wartość punktów życia
+     */
     public int getHp() {
         return hp;
     }
 
+    /**
+     * Metoda ustawiająca obecne punkty żywotności gracza
+     * @param hp wartość punktów życia
+     */
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -712,6 +756,10 @@ public class Player {
         this.gui = gui;
     }
 
+    /**
+     * Metoda
+     * @return
+     */
     public Inventory getEq() {
         return eq;
     }

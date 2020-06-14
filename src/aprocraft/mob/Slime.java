@@ -5,7 +5,18 @@ import aprocraft.world.World;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glColor3f;
 
+/**
+ * Klasa mplementująca moba - slime
+ */
 public class Slime extends Mob {
+    /**
+     * Konstruktor klasy
+     * @param world
+     * @param x współrzędne
+     * @param y
+     * @param z
+     * @param size wielkość moba
+     */
     public Slime(World world, float x, float y, float z, float size) {
         super(world);
 

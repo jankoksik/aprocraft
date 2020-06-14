@@ -5,6 +5,9 @@ import aprocraft.world.World;
 
 import java.util.ArrayList;
 
+/**
+ * Klasa odpiwadając za wyznaczanie ścieżek po których wyznaczają się moby
+ */
 public class Pathfind  {
 
     World map;
@@ -39,7 +42,10 @@ public class Pathfind  {
         this.h = h;
     }
 
-
+    /**
+     * Meotda odpowiadająca za wyznaczanie ścieżek w dwóch wyiarach
+     * @return tablica zawerającawyznaczoną ścieżkę
+     */
     public ArrayList<Vector3f> FindRoute2D(){
      ArrayList<Vector3f> route = new ArrayList<>();
 
@@ -103,6 +109,14 @@ public class Pathfind  {
             return a;
         else return b;
     }
+
+    /**
+     * Metoda odpowiadająca za wykrywanie kolizji
+     * @param x współrzędna x moba
+     * @param y współrzędna y moba
+     * @param z współrzędna z moba
+     * @return wartość bolean czy na danej współrzędnej znajduje się blok
+     */
     private boolean Colision(int x, int y, int z)
     {
         for(int i=0; i<h; i++){
